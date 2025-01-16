@@ -50,16 +50,16 @@ public final class Constants {
         public static final double driveBaseRadius = Units.inchesToMeters(21.75 * Math.sqrt(2) / 2);
 
         // drive 40 amps
-        public static final int kFrontLeftDriveMotorPort = 7;
-        public static final int kBackLeftDriveMotorPort = 9;
-        public static final int kFrontRightDriveMotorPort = 1;
-        public static final int kBackRightDriveMotorPort = 14;
+        public static final int kFrontLeftDriveMotorPort = 2;
+        public static final int kBackLeftDriveMotorPort = 6;
+        public static final int kFrontRightDriveMotorPort = 4;
+        public static final int kBackRightDriveMotorPort = 8;
 
         // turning 20 amps
-        public static final int kFrontLeftTurningMotorPort = 3;
-        public static final int kBackLeftTurningMotorPort = 8;
-        public static final int kFrontRightTurningMotorPort = 2;
-        public static final int kBackRightTurningMotorPort = 17;
+        public static final int kFrontLeftTurningMotorPort = 1;
+        public static final int kBackLeftTurningMotorPort = 5;
+        public static final int kFrontRightTurningMotorPort = 3;
+        public static final int kBackRightTurningMotorPort = 7;
 
         public static final boolean kFrontLeftTurningEncoderReversed = true;
         public static final boolean kBackLeftTurningEncoderReversed = true;
