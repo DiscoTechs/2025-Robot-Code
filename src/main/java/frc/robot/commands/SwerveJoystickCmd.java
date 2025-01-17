@@ -79,7 +79,7 @@ public class SwerveJoystickCmd extends Command {
             }
         }
 
-        if (resetHeading.get()) {
+        if (resetHeading.get()) {                                                                                                                                                                       
             swerveSubsystem.resetGyro();
         }
 
