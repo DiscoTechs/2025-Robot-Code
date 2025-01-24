@@ -127,10 +127,10 @@ public class SwerveSubsystem extends SubsystemBase {
   public void periodic() {
       odometry.update(getRotation2d(), getModulePositions());
         SmartDashboard.putNumber("Robot Heading", getHeading());
-        SmartDashboard.putNumber("Absolute Encoder Left Front", frontLeft.getAbsoluteEncoderRad()); //front left
-        SmartDashboard.putNumber("Absolute Encoder Right Front", frontRight.getAbsoluteEncoderRad()); //front right
-        SmartDashboard.putNumber("Absolute Encoder Left Back", backLeft.getAbsoluteEncoderRad()); //back left
-        SmartDashboard.putNumber("Absolute Encoder Right Back", backRight.getAbsoluteEncoderRad()); //back right
+        SmartDashboard.putNumber("Absolute Encoder Left Front", frontLeft.getAbsoluteEncoderDeg()); //front left
+        SmartDashboard.putNumber("Absolute Encoder Right Front", frontRight.getAbsoluteEncoderDeg()); //front right
+        SmartDashboard.putNumber("Absolute Encoder Left Back", backLeft.getAbsoluteEncoderDeg()); //back left
+        SmartDashboard.putNumber("Absolute Encoder Right Back", backRight.getAbsoluteEncoderDeg()); //back right
         SmartDashboard.putString("Robot Location", getPose2d().getTranslation().toString());
   }
 
@@ -150,31 +150,31 @@ public class SwerveSubsystem extends SubsystemBase {
 
   public void resetPose(Pose2d pose) {
     odometry.resetPosition(gyro.getRotation2d(), getModulePositions(), pose);
-    }
+  }
     
-    public void driveRobotRelative(ChassisSpeeds robotRelativeSpeeds) {
+  public void driveRobotRelative(ChassisSpeeds robotRelativeSpeeds) {
     ChassisSpeeds targetSpeeds = ChassisSpeeds.discretize(robotRelativeSpeeds,
     0.02);
     
     SwerveModuleState[] targetStates =
     DriveConstants.kDriveKinematics.toSwerveModuleStates(targetSpeeds);
     setModuleStates(targetStates);
-    }
+  }
     
-    public void driveFieldRelative(ChassisSpeeds fieldRelativeSpeeds) {
+  public void driveFieldRelative(ChassisSpeeds fieldRelativeSpeeds) {
     driveRobotRelative(ChassisSpeeds.fromFieldRelativeSpeeds(fieldRelativeSpeeds,
     odometry.getPoseMeters().getRotation()));
-    }
+  }
     
-    public ChassisSpeeds getSpeeds() {
+  public ChassisSpeeds getSpeeds() {
     return DriveConstants.kDriveKinematics.toChassisSpeeds(frontLeft.getState(),
     frontRight.getState(), backLeft.getState(), backRight.getState());
-    }
+  }
     
-    public void resetOdometry(Pose2d pose) {
+  public void resetOdometry(Pose2d pose) {
     odometry.resetPosition(gyro.getRotation2d(), getModulePositions(),
     odometry.getPoseMeters());
-    }
+  }
 
   public void stop() {
     frontLeft.stop();

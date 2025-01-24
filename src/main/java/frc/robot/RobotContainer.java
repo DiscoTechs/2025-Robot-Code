@@ -25,7 +25,7 @@ public class RobotContainer {
   private final Joystick driverJoystick = new Joystick(OIConstants.kDriverControllerPort);
 
   private final SwerveSubsystem swerveSubsystem = new SwerveSubsystem();
-  // private final SendableChooser<Command> autoChooser;
+  private final SendableChooser<Command> autoChooser;
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -39,7 +39,7 @@ public class RobotContainer {
       () -> driverJoystick.getRawButton(OIConstants.XBX_A)
     ));
 
-    // autoChooser = AutoBuilder.buildAutoChooser();
+    autoChooser = new SendableChooser<>(); //AutoBuilder.buildAutoChooser();
     configureBindings();
   }
 
@@ -67,8 +67,8 @@ public class RobotContainer {
   //  *
   //  * @return the command to run in autonomous
   //  */
-  // public Command getAutonomousCommand() {
-  //   // An example command will be run in autonomous
-  //   return autoChooser.getSelected();
-  // }
+  public Command getAutonomousCommand() {
+    // An example command will be run in autonomous
+    return autoChooser.getSelected();
+  }
 }

@@ -105,6 +105,11 @@ public class SwerveModule {
         return angle * (absoluteEncoderInverted ? -1.0 : 1.0);
     }
 
+    public double getAbsoluteEncoderDeg() {
+
+        return getAbsoluteEncoderRad() * 180 / Math.PI;
+    }
+
     public SwerveModuleState getState() {
         return new SwerveModuleState(getDriveVelocity(), new Rotation2d(getTurningPosition()));
     }
