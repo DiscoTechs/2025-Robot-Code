@@ -83,7 +83,7 @@ public class SwerveSubsystem extends SubsystemBase {
   }
 
   public double getHeading() {
-    return Math.IEEEremainder(gyro.getYaw().getValueAsDouble(), 360);
+    return -Math.IEEEremainder(gyro.getYaw().getValueAsDouble(), 360);
   }
 
   public void resetGyro() {
@@ -127,10 +127,10 @@ public class SwerveSubsystem extends SubsystemBase {
   public void periodic() {
       odometry.update(getRotation2d(), getModulePositions());
         SmartDashboard.putNumber("Robot Heading", getHeading());
-        SmartDashboard.putNumber("Absolute Encoder Left Front", frontLeft.getAbsoluteEncoderDeg()); //front left
-        SmartDashboard.putNumber("Absolute Encoder Right Front", frontRight.getAbsoluteEncoderDeg()); //front right
-        SmartDashboard.putNumber("Absolute Encoder Left Back", backLeft.getAbsoluteEncoderDeg()); //back left
-        SmartDashboard.putNumber("Absolute Encoder Right Back", backRight.getAbsoluteEncoderDeg()); //back right
+        SmartDashboard.putNumber("Absolute Encoder Left Front", -frontLeft.getAbsoluteEncoderDeg()); //front left
+        SmartDashboard.putNumber("Absolute Encoder Right Front", -frontRight.getAbsoluteEncoderDeg()); //front right
+        SmartDashboard.putNumber("Absolute Encoder Left Back", -backLeft.getAbsoluteEncoderDeg()); //back left
+        SmartDashboard.putNumber("Absolute Encoder Right Back", -backRight.getAbsoluteEncoderDeg()); //back right
         SmartDashboard.putString("Robot Location", getPose2d().getTranslation().toString());
   }
 
