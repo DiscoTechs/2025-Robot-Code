@@ -44,12 +44,13 @@ public class RobotContainer {
     autoChooser = new SendableChooser<>(); //AutoBuilder.buildAutoChooser();
     Command auto1 = new SimpleAuto(swerveSubsystem, 1, 0, 0);
     Command auto2 = new SimpleAuto(swerveSubsystem, 0, 1, 0);
-   
     Command outAndBack = new OutAndBack(swerveSubsystem, 2);
+    Command limeLightAuto = new LimeLightAuto(swerveSubsystem, 2);
 
     autoChooser.setDefaultOption("x--", auto1);
     autoChooser.addOption("-y-", auto2);
     autoChooser.addOption("Out And Back", outAndBack);
+    autoChooser.addOption("LimeLight Auto", limeLightAuto);
     SmartDashboard.putData("Auto choices", autoChooser);
 
     configureBindings();

@@ -15,7 +15,6 @@ public class OutAndBack extends SequentialCommandGroup {
   
   /** Creates a new OutAndBack. */
   public OutAndBack(SwerveSubsystem swerve, double t) {
-
     addCommands(new SimpleAuto(swerve, .5, 0, 0).withTimeout(t));
     addCommands(new AutoTurn(swerve, 90));
     addCommands(new SimpleAuto(swerve, 0, -0.5, 0).withTimeout(t));

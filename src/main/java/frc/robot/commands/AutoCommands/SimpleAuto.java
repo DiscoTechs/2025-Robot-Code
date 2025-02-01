@@ -40,7 +40,7 @@ public class SimpleAuto extends Command {
     moduleStates = DriveConstants.kDriveKinematics.toSwerveModuleStates(discreteSpeeds);
 
     // 6. Output each module states to wheels
-    swerveSubsystem.setModuleStates(moduleStates); 
+    swerveSubsystem.setModuleStates(moduleStates);
   }
 
   // Called once the command ends or is interrupted.

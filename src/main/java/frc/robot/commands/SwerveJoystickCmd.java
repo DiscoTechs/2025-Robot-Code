@@ -60,16 +60,17 @@ public class SwerveJoystickCmd extends Command {
         ChassisSpeeds chassisSpeeds;
         ChassisSpeeds discreteSpeeds; // remove the drift yo
 
-        System.out.println(LimelightHelpers.getTV("limelight"));
         if (this.visionTurn.get() && LimelightHelpers.getTV("limelight")) {
             tx = LimelightHelpers.getTX("limelight");
-            System.out.print("TX: ");
-            System.out.println(tx);
 
             xSpeed = 0;
             ySpeed = 0;
             turningSpeed = Math.abs(turningSpeed) > OIConstants.kDeadband ? turningSpeed : 0.0;
             turningSpeed = turningLimiter.calculate(kP * tx) * 2;
+            
+            turningSpeed = -tx * .12;
+            xSpeed = -1.0 / LimelightHelpers.getTA("limelight") / 4;
+            turningSpeed = Math.abs(turningSpeed) > OIConstants.kDeadband ? turningSpeed : 0.0;
 
             chassisSpeeds = new ChassisSpeeds(xSpeed, ySpeed, turningSpeed);
             discreteSpeeds = ChassisSpeeds.discretize(chassisSpeeds, 0.02);
