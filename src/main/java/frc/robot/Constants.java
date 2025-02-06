@@ -47,6 +47,7 @@ public final class Constants {
 
         // SPARK MAXES
         public static final double driveBaseRadius = Units.inchesToMeters(21.75 * Math.sqrt(2) / 2);
+        public static final int kAlgaeEffectorMotorPort = 31;
 
         // drive 40 amps
         public static final int kFrontLeftDriveMotorPort = 7;
