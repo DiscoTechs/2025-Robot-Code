@@ -5,6 +5,7 @@ import java.util.function.Supplier;
 import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.LimelightHelpers;
 import frc.robot.Constants.DriveConstants;
@@ -16,12 +17,13 @@ public class SwerveJoystickCmd extends Command {
     private final Supplier<Double> xSpdFunction, ySpdFunction, turningSpdFunction;
     private final Supplier<Boolean> fieldOrientedFunction, resetHeading, visionTurn;
     private final SlewRateLimiter xLimiter, yLimiter, turningLimiter;
+    private final Joystick driverJoystick;
     private double tx;
     private double kP = 0.05; // change value if needed
 
     public SwerveJoystickCmd(SwerveSubsystem swerveSubsystem,
             Supplier<Double> xSpdFunction, Supplier<Double> ySpdFunction, Supplier<Double> turningSpdFunction,
-            Supplier<Boolean> fieldOrientedFunction, Supplier<Boolean> resetHeading, Supplier<Boolean> visionTurn) {
+            Supplier<Boolean> fieldOrientedFunction, Supplier<Boolean> resetHeading, Supplier<Boolean> visionTurn, Joystick driverJoystick) {
         this.swerveSubsystem = swerveSubsystem;
         this.xSpdFunction = xSpdFunction;
         this.ySpdFunction = ySpdFunction;
@@ -32,6 +34,8 @@ public class SwerveJoystickCmd extends Command {
         this.xLimiter = new SlewRateLimiter(DriveConstants.kTeleDriveMaxAccelerationUnitsPerSecond);
         this.yLimiter = new SlewRateLimiter(DriveConstants.kTeleDriveMaxAccelerationUnitsPerSecond);
         this.turningLimiter = new SlewRateLimiter(DriveConstants.kTeleDriveMaxAngularAccelerationUnitsPerSecond);
+        this.driverJoystick = driverJoystick;
+        
         addRequirements(swerveSubsystem);
     }
 
@@ -69,7 +73,13 @@ public class SwerveJoystickCmd extends Command {
             turningSpeed = turningLimiter.calculate(kP * tx) * 2;
             
             turningSpeed = -tx * .12;
-            xSpeed = -1.0 / LimelightHelpers.getTA("limelight") / 4;
+            
+            if (LimelightHelpers.getTA("limelight") < 18){
+                xSpeed = -.6; // -1.0 / LimelightHelpers.getTA("limelight") / 3;
+            }
+           
+
+
             turningSpeed = Math.abs(turningSpeed) > OIConstants.kDeadband ? turningSpeed : 0.0;
 
             chassisSpeeds = new ChassisSpeeds(xSpeed, ySpeed, turningSpeed);

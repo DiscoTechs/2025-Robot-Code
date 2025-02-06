@@ -12,8 +12,10 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Constants.OIConstants;
+import frc.robot.commands.AlgaeCommand;
 import frc.robot.commands.SwerveJoystickCmd;
 import frc.robot.commands.AutoCommands.*;
+import frc.robot.subsystems.AlgaeEffector;
 import frc.robot.subsystems.SwerveSubsystem;
 
 /**
@@ -27,6 +29,8 @@ public class RobotContainer {
   private final Joystick driverJoystick = new Joystick(OIConstants.kDriverControllerPort);
 
   private final SwerveSubsystem swerveSubsystem = new SwerveSubsystem();
+  private final AlgaeEffector algaeEffector = new AlgaeEffector();
+
   private final SendableChooser<Command> autoChooser;
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
@@ -38,8 +42,11 @@ public class RobotContainer {
       () -> -driverJoystick.getRawAxis(OIConstants.kDriverRotAxis),
       () -> !driverJoystick.getRawButton(OIConstants.RIGHT_BUMPER),
       () -> driverJoystick.getRawButton(OIConstants.XBX_B),
-      () -> driverJoystick.getRawButton(OIConstants.XBX_A)
+      () -> driverJoystick.getRawButton(OIConstants.XBX_A),
+      driverJoystick
     ));
+
+    algaeEffector.setDefaultCommand(new AlgaeCommand(algaeEffector, driverJoystick));
 
     autoChooser = new SendableChooser<>(); //AutoBuilder.buildAutoChooser();
     Command auto1 = new SimpleAuto(swerveSubsystem, 1, 0, 0);
