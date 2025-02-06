@@ -8,6 +8,7 @@ import com.revrobotics.spark.SparkLowLevel.MotorType;
 import com.revrobotics.spark.SparkMax;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 
 public class AlgaeEffector extends SubsystemBase {
 
@@ -15,9 +16,7 @@ public class AlgaeEffector extends SubsystemBase {
 
   /** Creates a new AlgaeEffector. */
   public AlgaeEffector() {
-
-    intakeMotor = new SparkMax(31, MotorType.kBrushless);
-
+    intakeMotor = new SparkMax(Constants.DriveConstants.kAlgaeEffectorMotorPort, MotorType.kBrushless);
   }
 
   public void intake() {
