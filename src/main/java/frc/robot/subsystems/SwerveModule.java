@@ -106,7 +106,6 @@ public class SwerveModule {
     }
 
     public double getAbsoluteEncoderDeg() {
-
         return getAbsoluteEncoderRad() * 180 / Math.PI;
     }
 
