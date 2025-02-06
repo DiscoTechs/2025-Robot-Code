@@ -32,6 +32,7 @@ public class RobotContainer {
   private final AlgaeEffector algaeEffector = new AlgaeEffector();
 
   private final SendableChooser<Command> autoChooser;
+  public static final SendableChooser<Integer> limelightFilterChooser = new SendableChooser<>();
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -58,8 +59,14 @@ public class RobotContainer {
     autoChooser.addOption("-y-", auto2);
     autoChooser.addOption("Out And Back", outAndBack);
     autoChooser.addOption("LimeLight Auto", limeLightAuto);
-    SmartDashboard.putData("Auto choices", autoChooser);
+    SmartDashboard.putData("Auto Choices", autoChooser);
 
+    limelightFilterChooser.setDefaultOption("None", 0);
+    for (int i = 1; i <= 15; i++) {
+      limelightFilterChooser.addOption("ID: " + i, i);
+    }
+
+    SmartDashboard.putData("April Tags Filter", limelightFilterChooser);
     configureBindings();
   }
 
@@ -90,5 +97,10 @@ public class RobotContainer {
   public Command getAutonomousCommand() {
     // An example command will be run in autonomous
     return autoChooser.getSelected();
+  }
+
+  public int getAprilTagFilter() {
+    // Returns the current April Tag Filter. Returns 0 if none.
+    return limelightFilterChooser.getSelected();
   }
 }

@@ -7,9 +7,10 @@ import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.LimelightHelpers;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.OIConstants;
+import frc.robot.LimelightHelpers;
+import frc.robot.RobotContainer;
 import frc.robot.subsystems.SwerveSubsystem;
 
 public class SwerveJoystickCmd extends Command {
@@ -64,26 +65,39 @@ public class SwerveJoystickCmd extends Command {
         ChassisSpeeds chassisSpeeds;
         ChassisSpeeds discreteSpeeds; // remove the drift yo
 
-        if (this.visionTurn.get() && LimelightHelpers.getTV("limelight")) {
-            tx = LimelightHelpers.getTX("limelight");
+        if (this.visionTurn.get()) {
+            LimelightHelpers.setPipelineIndex("limelight", 2);
+        }
 
-            xSpeed = 0;
-            ySpeed = 0;
-            turningSpeed = Math.abs(turningSpeed) > OIConstants.kDeadband ? turningSpeed : 0.0;
-            turningSpeed = turningLimiter.calculate(kP * tx) * 2;
-            
-            turningSpeed = -tx * .12;
-            
-            if (LimelightHelpers.getTA("limelight") < 18){
-                xSpeed = -.6; // -1.0 / LimelightHelpers.getTA("limelight") / 3;
+            if (this.visionTurn.get() && LimelightHelpers.getTV("limelight")) {
+                double aprilTagID = LimelightHelpers.getLimelightNTDouble("limelight", "tid");
+                if (aprilTagID == RobotContainer.limelightFilterChooser.getSelected()) {
+                    tx = LimelightHelpers.getTX("limelight");
+
+                    xSpeed = 0;
+                    ySpeed = 0;
+                    turningSpeed = Math.abs(turningSpeed) > OIConstants.kDeadband ? turningSpeed : 0.0;
+                    turningSpeed = turningLimiter.calculate(kP * tx) * 2;
+
+                    turningSpeed = -tx * .12;
+
+                    if (LimelightHelpers.getTA("limelight") < 18) {
+                        xSpeed = -.6; // -1.0 / LimelightHelpers.getTA("limelight") / 3;
+                    }
+
+                    turningSpeed = Math.abs(turningSpeed) > OIConstants.kDeadband ? turningSpeed : 0.0;
+
+                    chassisSpeeds = new ChassisSpeeds(xSpeed, ySpeed, turningSpeed);
+                    discreteSpeeds = ChassisSpeeds.discretize(chassisSpeeds, 0.02);
+            } else {
+                if (fieldOrientedFunction.get()) {
+                    chassisSpeeds = ChassisSpeeds.fromFieldRelativeSpeeds(xSpeed, ySpeed, turningSpeed, swerveSubsystem.getRotation2d());
+                    discreteSpeeds = ChassisSpeeds.discretize(chassisSpeeds, 0.02);
+                } else {
+                    chassisSpeeds = new ChassisSpeeds(xSpeed, ySpeed, turningSpeed);
+                    discreteSpeeds = ChassisSpeeds.discretize(chassisSpeeds, 0.02);
+                }
             }
-           
-
-
-            turningSpeed = Math.abs(turningSpeed) > OIConstants.kDeadband ? turningSpeed : 0.0;
-
-            chassisSpeeds = new ChassisSpeeds(xSpeed, ySpeed, turningSpeed);
-            discreteSpeeds = ChassisSpeeds.discretize(chassisSpeeds, 0.02);
         } else {
             if (fieldOrientedFunction.get()) {
                 chassisSpeeds = ChassisSpeeds.fromFieldRelativeSpeeds(xSpeed, ySpeed, turningSpeed, swerveSubsystem.getRotation2d());
