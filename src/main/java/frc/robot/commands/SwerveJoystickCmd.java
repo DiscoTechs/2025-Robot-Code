@@ -3,6 +3,7 @@ package frc.robot.commands;
 import java.util.function.Supplier;
 
 import edu.wpi.first.math.filter.SlewRateLimiter;
+import edu.wpi.first.math.geometry.Pose3d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.wpilibj.Joystick;
@@ -69,26 +70,38 @@ public class SwerveJoystickCmd extends Command {
             LimelightHelpers.setPipelineIndex("limelight", 2);
         }
 
-            if (this.visionTurn.get() && LimelightHelpers.getTV("limelight")) {
-                double aprilTagID = LimelightHelpers.getLimelightNTDouble("limelight", "tid");
-                if (aprilTagID == RobotContainer.limelightFilterChooser.getSelected()) {
-                    tx = LimelightHelpers.getTX("limelight");
+        // Pose3d pose = LimelightHelpers.getTargetPose_RobotSpace("limelight");
+        // System.out.println("POSE: " + pose.getY());
+        // System.out.println("POSE MEASURE Y: " + pose.getMeasureY());
 
-                    xSpeed = 0;
-                    ySpeed = 0;
-                    turningSpeed = Math.abs(turningSpeed) > OIConstants.kDeadband ? turningSpeed : 0.0;
-                    turningSpeed = turningLimiter.calculate(kP * tx) * 2;
+        if (this.visionTurn.get() && LimelightHelpers.getTV("limelight")) {
+            double aprilTagID = LimelightHelpers.getLimelightNTDouble("limelight", "tid");
+            if (aprilTagID == RobotContainer.limelightFilterChooser.getSelected()) {
+                tx = LimelightHelpers.getTX("limelight");
 
-                    turningSpeed = -tx * .12;
+                xSpeed = 0;
+                ySpeed = 0;
+                turningSpeed = Math.abs(turningSpeed) > OIConstants.kDeadband ? turningSpeed : 0.0;
+                turningSpeed = turningLimiter.calculate(kP * tx) * 2;
 
-                    if (LimelightHelpers.getTA("limelight") < 18) {
-                        xSpeed = -.6; // -1.0 / LimelightHelpers.getTA("limelight") / 3;
-                    }
+                turningSpeed = -tx * .12;
 
-                    turningSpeed = Math.abs(turningSpeed) > OIConstants.kDeadband ? turningSpeed : 0.0;
+                double limelightTA = LimelightHelpers.getTA("limelight");
+                int limit = 20; // 14
 
-                    chassisSpeeds = new ChassisSpeeds(xSpeed, ySpeed, turningSpeed);
-                    discreteSpeeds = ChassisSpeeds.discretize(chassisSpeeds, 0.02);
+                System.out.println("TA: " + limelightTA);
+                if (limelightTA < (limit / 2)) {
+                    xSpeed = -.6; // -1.0 / limelightTA / 3;
+                } else if (limelightTA < limit) {
+                    xSpeed = -.15; // -1.0 / limelightTA / 3;
+                }
+
+                System.out.println("xSpeed: " + xSpeed);
+
+                turningSpeed = Math.abs(turningSpeed) > OIConstants.kDeadband ? turningSpeed : 0.0;
+
+                chassisSpeeds = new ChassisSpeeds(xSpeed, ySpeed, turningSpeed);
+                discreteSpeeds = ChassisSpeeds.discretize(chassisSpeeds, 0.02);
             } else {
                 if (fieldOrientedFunction.get()) {
                     chassisSpeeds = ChassisSpeeds.fromFieldRelativeSpeeds(xSpeed, ySpeed, turningSpeed, swerveSubsystem.getRotation2d());
