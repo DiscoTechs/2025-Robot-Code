@@ -66,13 +66,12 @@ public class SwerveJoystickCmd extends Command {
         ChassisSpeeds chassisSpeeds;
         ChassisSpeeds discreteSpeeds; // remove the drift yo
 
+        Pose3d pose = LimelightHelpers.getBotPose3d_TargetSpace("limelight");
+        System.out.println("TARGET ROTATION: " + pose.getRotation().getQuaternion().getY());
+
         if (this.visionTurn.get()) {
             LimelightHelpers.setPipelineIndex("limelight", 2);
         }
-
-        // Pose3d pose = LimelightHelpers.getTargetPose_RobotSpace("limelight");
-        // System.out.println("POSE: " + pose.getY());
-        // System.out.println("POSE MEASURE Y: " + pose.getMeasureY());
 
         if (this.visionTurn.get() && LimelightHelpers.getTV("limelight") && LimelightHelpers.getLimelightNTDouble("limelight", "tid") == RobotContainer.limelightFilterChooser.getSelected()) {
             tx = LimelightHelpers.getTX("limelight");
