@@ -87,37 +87,6 @@ public class SwerveSubsystem extends SubsystemBase {
     }).start();
   }
 
-  public void configureRobot() {
-    RobotConfig config = null;
-    try {
-        config = RobotConfig.fromGUISettings();
-    } catch (Exception e) {
-        // Handle exception as needed
-        e.printStackTrace();
-    }
-
-    // Configure AutoBuilder here (if needed)
-    AutoBuilder.configure(
-        this::getPose2d,
-        this::resetPose,
-        this::getSpeeds,
-        (speeds, feedforwards) -> driveRobotRelative(speeds),
-        new PPHolonomicDriveController(
-            new PIDConstants(5.0, 0.0, 0.0), // Translation PID constants
-            new PIDConstants(5.0, 0.0, 0.0) // Rotation PID constants
-        ),
-        config,
-        () -> {
-            var alliance = DriverStation.getAlliance();
-            if (alliance.isPresent()) {
-                return alliance.get() == DriverStation.Alliance.Red;
-            }
-            return false;
-        },
-        this
-    );
-  }
-
   public double getHeading() {
     return -Math.IEEEremainder(gyro.getYaw().getValueAsDouble(), 360);
   }

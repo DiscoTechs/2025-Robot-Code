@@ -5,8 +5,17 @@
 package frc.robot;
 
 import com.pathplanner.lib.commands.PathPlannerAuto;
+import com.pathplanner.lib.config.PIDConstants;
+import com.pathplanner.lib.config.RobotConfig;
+import com.pathplanner.lib.controllers.PPHolonomicDriveController;
+import com.pathplanner.lib.controllers.PathFollowingController;
+import com.pathplanner.lib.util.DriveFeedforwards;
 
+import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.wpilibj.DriverStation;
+
+import java.util.function.BiConsumer;
+
 import com.pathplanner.lib.auto.AutoBuilder;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -42,6 +51,8 @@ public class RobotContainer {
   
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
+    configureRobot();
+
     swerveSubsystem.setDefaultCommand(new SwerveJoystickCmd(
       swerveSubsystem,
       () -> -driverJoystick.getRawAxis(OIConstants.kDriverYAxis),
@@ -54,7 +65,7 @@ public class RobotContainer {
     ));
 
     algaeEffector.setDefaultCommand(new AlgaeCommand(algaeEffector, driverJoystick));
-
+  
     autoChooser = AutoBuilder.buildAutoChooser();//new SendableChooser<>(); 
     Command auto1 = new SimpleAuto(swerveSubsystem, 1, 0, 0);
     Command auto2 = new SimpleAuto(swerveSubsystem, 0, 1, 0);
@@ -95,6 +106,35 @@ public class RobotContainer {
     // // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
     // // cancelling on release.
     // m_driverController.b().whileTrue(m_exampleSubsystem.exampleMethodCommand());
+  }
+
+  public void configureRobot() {
+    RobotConfig config = null;
+    try {
+        config = RobotConfig.fromGUISettings();
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+
+    AutoBuilder.configure(
+        swerveSubsystem::getPose2d,
+        swerveSubsystem::resetPose,
+        swerveSubsystem::getSpeeds,
+        (speeds, feedforwards) -> swerveSubsystem.driveRobotRelative(speeds),
+        new PPHolonomicDriveController(
+            new PIDConstants(5.0, 0.0, 0.0), // Translation PID constants
+            new PIDConstants(5.0, 0.0, 0.0) // Rotation PID constants
+        ),
+        config,
+        () -> {
+            var alliance = DriverStation.getAlliance();
+            if (alliance.isPresent()) {
+                return alliance.get() == DriverStation.Alliance.Red;
+            }
+            return false;
+        },
+        swerveSubsystem
+    );
   }
 
   // /**
