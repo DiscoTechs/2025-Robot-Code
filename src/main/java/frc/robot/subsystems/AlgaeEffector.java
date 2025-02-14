@@ -20,11 +20,11 @@ public class AlgaeEffector extends SubsystemBase {
   }
 
   public void intake() {
-    intakeMotor.set(0.5);
+    intakeMotor.set(0.8);
   }
 
   public void expel() {
-    intakeMotor.set(-0.5);
+    intakeMotor.set(-0.8);
   }
 
   public void stop() {
