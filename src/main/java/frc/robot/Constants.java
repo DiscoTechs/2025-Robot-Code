@@ -165,8 +165,8 @@ public final class Constants {
 
     // ------------ ALGAE CONSTANTS ------------ //
     public static final class AlgaeConstants {
-        public static final int ALGAE_INTAKE = 4;
-        public static final int ALGAE_OUTTAKE = 3;
+        public static final int ALGAE_INTAKE = 3;
+        public static final int ALGAE_OUTTAKE = 4;
     }
 
     // ------------ CORAL CONSTANTS ------------ //
