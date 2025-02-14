@@ -7,6 +7,7 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.AlgaeEffector;
+import frc.robot.Constants;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
 public class AlgaeCommand extends Command {
@@ -31,20 +32,18 @@ public class AlgaeCommand extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (stick.getRawButton(4)) {
+    if (stick.getRawButton(Constants.AlgaeConstants.ALGAE_INTAKE)) {
       algaeEffector.intake();
-    } else if (stick.getRawButton(3)) {
+    } else if (stick.getRawButton(Constants.AlgaeConstants.ALGAE_OUTTAKE)) {
       algaeEffector.expel();
     } else {
       algaeEffector.stop();
     }
-    
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {
-  }
+  public void end(boolean interrupted) {}
 
   // Returns true when the command should end.
   @Override
