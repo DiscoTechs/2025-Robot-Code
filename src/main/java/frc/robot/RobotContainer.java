@@ -42,6 +42,7 @@ import frc.robot.subsystems.SwerveSubsystem;
 public class RobotContainer {
   // private final CommandXboxController m_driverController = new CommandXboxController(OIConstants.kDriverControllerPort);
   private final Joystick driverJoystick = new Joystick(OIConstants.kDriverControllerPort);
+  private final Joystick operatorJoystick = new Joystick(OIConstants.kOperatorControllerPort);
 
   public final SwerveSubsystem swerveSubsystem = new SwerveSubsystem();
   private final AlgaeEffector algaeEffector = new AlgaeEffector();
@@ -64,7 +65,7 @@ public class RobotContainer {
       driverJoystick
     ));
 
-    algaeEffector.setDefaultCommand(new AlgaeCommand(algaeEffector, driverJoystick));
+    algaeEffector.setDefaultCommand(new AlgaeCommand(algaeEffector, operatorJoystick));
   
     autoChooser = AutoBuilder.buildAutoChooser();//new SendableChooser<>(); 
     Command auto1 = new SimpleAuto(swerveSubsystem, 1, 0, 0);
@@ -121,16 +122,14 @@ public class RobotContainer {
         swerveSubsystem::resetPose,
         swerveSubsystem::getSpeeds,
         (speeds, feedforwards) -> swerveSubsystem.driveRobotRelative(speeds),
-        new PPHolonomicDriveController(
-            new PIDConstants(5.0, 0.0, 0.0), // Translation PID constants
-            new PIDConstants(5.0, 0.0, 0.0) // Rotation PID constants
-        ),
+        Constants.AutoConstants.holonomicDriveController,
         config,
         () -> {
             var alliance = DriverStation.getAlliance();
             if (alliance.isPresent()) {
-                return alliance.get() == DriverStation.Alliance.Red;
+              return alliance.get() == DriverStation.Alliance.Red;
             }
+
             return false;
         },
         swerveSubsystem
@@ -156,7 +155,7 @@ public class RobotContainer {
     }*/
 
     try {
-        return new PathPlannerAuto("Test Auto 2");
+        return new PathPlannerAuto("Slow Auto");
     } catch (Exception e) {
         DriverStation.reportError("Error loading autonomous path: " + e.getMessage(), e.getStackTrace());
         return Commands.none();
