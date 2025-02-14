@@ -9,6 +9,8 @@ import edu.wpi.first.math.interpolation.InterpolatingDoubleTreeMap;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import edu.wpi.first.math.util.Units;
+import com.pathplanner.lib.controllers.PPHolonomicDriveController;
+import com.pathplanner.lib.config.PIDConstants;
 
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
@@ -48,6 +50,7 @@ public final class Constants {
         // SPARK MAXES
         public static final double driveBaseRadius = Units.inchesToMeters(21.75 * Math.sqrt(2) / 2);
         public static final int kAlgaeEffectorMotorPort = 31;
+        public static final int kCoralEffectorMotorPort = 32;
 
         // drive 40 amps
         public static final int kFrontLeftDriveMotorPort = 7;
@@ -99,8 +102,8 @@ public final class Constants {
     // ------------ AUTO CONSTANTS ------------ //
     public static final class AutoConstants {
         public static final double kMaxSpeedMetersPerSecond = 1.0;
-        public static final double kMaxAngularSpeedRadiansPerSecond = //
-                DriveConstants.kPhysicalMaxAngularSpeedRadiansPerSecond / 10;
+        public static final double kMaxAngularSpeedRadiansPerSecond = 
+                            DriveConstants.kPhysicalMaxAngularSpeedRadiansPerSecond / 10;
         public static final double kMaxAccelerationMetersPerSecondSquared = 3;
         public static final double kMaxAngularAccelerationRadiansPerSecondSquared = Math.PI / 4;
         public static final double kPXController = 1.5;
@@ -110,12 +113,10 @@ public final class Constants {
         public static final TrapezoidProfile.Constraints kThetaControllerConstraints = //
                 new TrapezoidProfile.Constraints(kMaxAngularSpeedRadiansPerSecond, kMaxAngularAccelerationRadiansPerSecondSquared);
 
-        //  public static final HolonomicPathFollowerConfig pathFollowerConfig = new HolonomicPathFollowerConfig(
-        //     new PIDConstants(0.05, 0, 0), // Translation constants 
-        //     new PIDConstants(0.025, 0, 0), // Rotation constants 
-        //     1.0, //kMaxSpeedMetersPerSecond, 
-        //     DriveConstants.driveBaseRadius, // Drive base radius (distance from center to furthest module) 
-        //     new ReplanningConfig());
+        public static final PPHolonomicDriveController holonomicDriveController = new PPHolonomicDriveController(
+            new PIDConstants(0.05, 0.0, 0.0), // Translation PID constants
+            new PIDConstants(0.025, 0.0, 0.0) // Rotation PID constants
+        );
     }
 
     // ------------ OI CONSTANTS ------------ //
@@ -160,5 +161,17 @@ public final class Constants {
         public static final int CLIMBER_1 = 5;
         public static final int CLIMBER_2 = 4;
         public static final int SWITCH = 10;
+    }
+
+    // ------------ ALGAE CONSTANTS ------------ //
+    public static final class AlgaeConstants {
+        public static final int ALGAE_INTAKE = 4;
+        public static final int ALGAE_OUTTAKE = 3;
+    }
+
+    // ------------ Algae CONSTANTS ------------ //
+    public static final class CoralCommand {
+        public static final int ALGAE_INTAKE = 4;
+        public static final int ALGAE_OUTTAKE = 3;
     }
 }
