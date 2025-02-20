@@ -32,6 +32,7 @@ import frc.robot.commands.AutoCommands.OutAndBack;
 import frc.robot.commands.AutoCommands.SimpleAuto;
 import frc.robot.subsystems.AlgaeEffector;
 import frc.robot.subsystems.SwerveSubsystem; 
+import frc.robot.subsystems.SensorSubsystem;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -46,6 +47,7 @@ public class RobotContainer {
 
   public final SwerveSubsystem swerveSubsystem = new SwerveSubsystem();
   private final AlgaeEffector algaeEffector = new AlgaeEffector();
+  private final SensorSubsystem sensor = new SensorSubsystem();
 
   private final SendableChooser<Command> autoChooser;
   public static final SendableChooser<Integer> limelightFilterChooser = new SendableChooser<>();

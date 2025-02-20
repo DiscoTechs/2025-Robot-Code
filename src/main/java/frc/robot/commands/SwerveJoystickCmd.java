@@ -67,7 +67,7 @@ public class SwerveJoystickCmd extends Command {
         ChassisSpeeds discreteSpeeds; // remove the drift yo
 
         Pose3d pose = LimelightHelpers.getBotPose3d_TargetSpace("limelight");
-        System.out.println("TARGET ROTATION: " + pose.getRotation().getQuaternion().getY());
+        System.out.println("TARGET ROTATION: " + (pose.getRotation().getQuaternion().getY())*180/Math.PI); //rotation calc
 
         if (this.visionTurn.get()) {
             LimelightHelpers.setPipelineIndex("limelight", 2);
