@@ -4,54 +4,48 @@
 
 package frc.robot.commands;
 
-import com.revrobotics.spark.SparkLowLevel.MotorType;
-import edu.wpi.first.wpilibj2.command.Command;
-import com.revrobotics.spark.SparkClosedLoopController;
-import com.revrobotics.spark.SparkMax;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.subsystems.AlgaeEffector;
+import frc.robot.subsystems.ElevatorEffector;
 import frc.robot.Constants;
+import edu.wpi.first.wpilibj.Joystick;
 
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
-public class DegreeMotor extends Command {
-  private final Joystick stick;
-  private final SparkMax motor;
-  private final SparkClosedLoopController PIDController;
+public class ElevatorCommand extends Command {
 
-  /** Creates a new DegreeMotor. */
-  public DegreeMotor(Joystick stick) {
-    this.motor = new SparkMax(Constants.DriveConstants.kAlgaeEffectorMotorPort, MotorType.kBrushless);
+  private final ElevatorEffector elevatorEffector;
+  private final Joystick stick;
+
+  /** Creates a new AlgaeCommand. */
+  public ElevatorCommand(ElevatorEffector elevatorEffector, Joystick stick) {
+
+    this.elevatorEffector = elevatorEffector;
     this.stick = stick;
 
-    this.PIDController = this.motor.getClosedLoopController();
-
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements();
+    addRequirements(elevatorEffector);
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {
-    this.PIDController
-
-    if (stick.getRawButton(1)) {
-      motor.(0.8);
-    } else if (stick.getRawButton(2)) {
-      motor.set(-0.8);
-    } else {
-      motor.set(0.0);
-    }
-  }
+  public void initialize() {}
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double currentAngle = getPosition();
-    PIDController.setReference
-  }
-
-  public double getPosition() {
-    return motor.getEncoder().getPosition();
+    if (stick.getRawButton(Constants.ElavatorConstants.L1)) {
+      elevatorEffector.firstLevel();
+    } else if (stick.getRawButton(Constants.ElavatorConstants.L2)) {
+      elevatorEffector.secondLevel();
+    } else if (stick.getRawButton(Constants.ElavatorConstants.L3)) {
+      elevatorEffector.thirdLevel();
+    } else if (stick.getRawButton(Constants.ElavatorConstants.L4)) {
+      elevatorEffector.fourthLevel();
+    } else {
+      elevatorEffector.stop();
+    }
   }
 
   // Called once the command ends or is interrupted.
