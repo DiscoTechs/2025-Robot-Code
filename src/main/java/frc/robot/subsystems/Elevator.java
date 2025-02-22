@@ -11,13 +11,13 @@ import com.revrobotics.spark.SparkLowLevel.MotorType;
 
 
 
-public class ElevatorEffector extends SubsystemBase {
+public class Elevator extends SubsystemBase {
     final DigitalInput sensor;
     private final SparkMax intakeMotor;
     
-    public ElevatorEffector() {
+    public Elevator() {
         sensor = new DigitalInput(Constants.ElavatorConstants.ELAVATOR_SENSOR);
-        intakeMotor = new SparkMax(Constants.DriveConstants.KElevatorEffectorMotorPort, MotorType.kBrushless);
+        intakeMotor = new SparkMax(Constants.DriveConstants.kElevatorMotorPort, MotorType.kBrushless);
     }
 
     public boolean getSensorValue() {
