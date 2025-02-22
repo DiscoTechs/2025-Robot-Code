@@ -10,27 +10,26 @@ import com.revrobotics.spark.SparkMax;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
-public class CoralEffector extends SubsystemBase {
+public class AlgaeAngle extends SubsystemBase {
 
-  private final SparkMax intakeMotor;
+  private final SparkMax angleMotor;
 
   /** Creates a new AlgaeEffector. */
-  public CoralEffector() {
-    intakeMotor = new SparkMax(Constants.DriveConstants.kCoralEffectorMotorPort, MotorType.kBrushless);
+  public AlgaeAngle() {
+    angleMotor = new SparkMax(Constants.DriveConstants.kAlgaeAngleMotorPort, MotorType.kBrushless);
   }
 
-  public void intake() {
-    intakeMotor.set(0.5);
+  public void angleUp() {
+    angleMotor.set(0.3); //temporary --> have to change to closedLoop
   }
 
-  public void expel() {
-    intakeMotor.set(-0.5);
+  public void angleDown() {
+    angleMotor.set(-0.3); //temporary --> have to change to closedLoop
   }
 
-  public void stop() {
-    intakeMotor.set(0.0);
+  public void stopAngle()  {
+    angleMotor.set(0.0);
   }
-
 
   @Override
   public void periodic() {

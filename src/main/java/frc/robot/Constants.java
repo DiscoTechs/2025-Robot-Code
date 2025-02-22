@@ -49,11 +49,20 @@ public final class Constants {
 
         // SPARK MAXES
         public static final double driveBaseRadius = Units.inchesToMeters(21.75 * Math.sqrt(2) / 2);
-        public static final int kAlgaeEffectorMotorPort = 26;
-        public static final int kCoralEffectorMotorPort =  28;
 
+        //ALGAE
+        public static final int kAlgaeEffectorMotorPort = 26;
+        public static final int kAlgaeAngleMotorPort = 27; //temporary
+
+        //CORAL
+        public static final int kCoralEffectorMotorPort =  28;
         public static final int kCoralAngleMotorPort = 33;
-        public static final int KElevatorEffectorMotorPort = 31;
+
+        //ELEVATOR
+        public static final int kElevatorMotorPort = 31;
+
+        //CLIMBER
+        public static final int kClimberMotorPort = 37;
 
         // drive 40 amps
         public static final int kFrontLeftDriveMotorPort = 7;
@@ -166,24 +175,27 @@ public final class Constants {
 
     // ------------ CLIMBER CONSTANTS ------------ //
     public static final class ClimberConstants {
-        public static final int CLIMBER_1 = 5;
-        public static final int CLIMBER_2 = 4;
-        public static final int SWITCH = 10;
+        public static final int CLIMBER_UP = 13;
+        public static final int CLIMBER_DOWN = 14;
     }
 
     // ------------ ALGAE CONSTANTS ------------ //
     public static final class AlgaeConstants {
         public static final int ALGAE_INTAKE = 7;
         public static final int ALGAE_OUTTAKE = 8;
+        public static final int ALGAE_ANGLE_UP = 10;
+        public static final int ALGAE_ANGLE_DOWN = 12;
     }
 
     // ------------ CORAL CONSTANTS ------------ //
     public static final class CoralConstants {
         public static final int CORAL_INTAKE = 5;
         public static final int CORAL_OUTTAKE = 6;
+        public static final int CORAL_ANGLE_UP = 9;
+        public static final int CORAL_ANGLE_DOWN = 11; 
     }
 
-    // ------------ Elavator CONSTANTS ------------ //
+    // ------------ ELAVATOR CONSTANTS ------------ //
     public static final class ElavatorConstants {
         public static final int ELAVATOR_SENSOR = 0;
         public static final int L1 = 1;

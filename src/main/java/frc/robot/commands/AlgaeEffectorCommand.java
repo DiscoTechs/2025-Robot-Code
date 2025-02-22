@@ -7,23 +7,22 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.AlgaeEffector;
-import frc.robot.subsystems.CoralEffector;
 import frc.robot.Constants;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
-public class CoralCommand extends Command {
+public class AlgaeEffectorCommand extends Command {
 
-  private final CoralEffector coralEffector;
+  private final AlgaeEffector algaeEffector;
   private final Joystick stick;
 
-  /** Creates a new CoralCommand. */
-  public CoralCommand(CoralEffector coralEffector, Joystick stick) {
+  /** Creates a new AlgaeCommand. */
+  public AlgaeEffectorCommand(AlgaeEffector algaeEffector, Joystick stick) {
 
-    this.coralEffector = coralEffector;
+    this.algaeEffector = algaeEffector;
     this.stick = stick;
 
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(coralEffector);
+    addRequirements(algaeEffector);
   }
 
   // Called when the command is initially scheduled.
@@ -33,12 +32,12 @@ public class CoralCommand extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (stick.getRawButton(Constants.CoralConstants.CORAL_INTAKE)) {
-      coralEffector.intake();
-    } else if (stick.getRawButton(Constants.CoralConstants.CORAL_OUTTAKE)) {
-      coralEffector.expel();
+    if (stick.getRawButton(Constants.AlgaeConstants.ALGAE_INTAKE)) {
+      algaeEffector.intake();
+    } else if (stick.getRawButton(Constants.AlgaeConstants.ALGAE_OUTTAKE)) {
+      algaeEffector.expel();
     } else {
-      coralEffector.stop();
+      algaeEffector.stopIntake();
     }
   }
 

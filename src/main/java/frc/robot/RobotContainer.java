@@ -27,14 +27,14 @@ import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Constants.OIConstants;
-import frc.robot.commands.AlgaeCommand;
+import frc.robot.commands.AlgaeEffectorCommand;
 import frc.robot.commands.ElevatorCommand;
 import frc.robot.commands.SwerveJoystickCmd;
 import frc.robot.commands.AutoCommands.LimeLightAuto;
 import frc.robot.commands.AutoCommands.OutAndBack;
 import frc.robot.commands.AutoCommands.SimpleAuto;
 import frc.robot.subsystems.AlgaeEffector;
-import frc.robot.subsystems.ElevatorEffector;
+import frc.robot.subsystems.Elevator;
 import frc.robot.subsystems.SwerveSubsystem;
 
 /**
@@ -50,7 +50,7 @@ public class RobotContainer {
 
   public final SwerveSubsystem swerveSubsystem = new SwerveSubsystem();
   private final AlgaeEffector algaeEffector = new AlgaeEffector();
-  private final ElevatorEffector elevatorEffector = new ElevatorEffector();
+  private final Elevator elevator = new Elevator();
 
   private final SendableChooser<Command> autoChooser;
   public static final SendableChooser<Integer> limelightFilterChooser = new SendableChooser<>();
@@ -71,8 +71,8 @@ public class RobotContainer {
       driverJoystick
     ));
 
-    algaeEffector.setDefaultCommand(new AlgaeCommand(algaeEffector, operatorJoystick));
-    elevatorEffector.setDefaultCommand(new ElevatorCommand(elevatorEffector, operatorJoystick));
+    algaeEffector.setDefaultCommand(new AlgaeEffectorCommand(algaeEffector, operatorJoystick));
+    elevator.setDefaultCommand(new ElevatorCommand(elevator, operatorJoystick));
   
     autoChooser = AutoBuilder.buildAutoChooser();//new SendableChooser<>(); 
     Command auto1 = new SimpleAuto(swerveSubsystem, 1, 0, 0);

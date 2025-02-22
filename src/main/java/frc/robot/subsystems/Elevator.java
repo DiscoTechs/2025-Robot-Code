@@ -25,19 +25,19 @@ public class Elevator extends SubsystemBase {
     }
 
     public void firstLevel() {
-        intakeMotor.set(0.1);
+        intakeMotor.set(0.1); //temporary --> have to change to closedLoop
     }
 
     public void secondLevel() {
-        intakeMotor.set(0.3);
+        intakeMotor.set(0.3); //temporary --> have to change to closedLoop
     }
 
     public void thirdLevel() {
-        intakeMotor.set(0.7);
+        intakeMotor.set(0.7); //temporary --> have to change to closedLoop
     }
 
     public void fourthLevel() {
-        intakeMotor.set(0.9);
+        intakeMotor.set(0.9); //temporary --> have to change to closedLoop
     }
 
     public void stop() {

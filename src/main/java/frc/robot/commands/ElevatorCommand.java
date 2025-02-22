@@ -6,8 +6,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.subsystems.AlgaeEffector;
-import frc.robot.subsystems.ElevatorEffector;
+import frc.robot.subsystems.Elevator;
 import frc.robot.Constants;
 import edu.wpi.first.wpilibj.Joystick;
 
@@ -15,17 +14,17 @@ import edu.wpi.first.wpilibj.Joystick;
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
 public class ElevatorCommand extends Command {
 
-  private final ElevatorEffector elevatorEffector;
+  private final Elevator elevator;
   private final Joystick stick;
 
   /** Creates a new AlgaeCommand. */
-  public ElevatorCommand(ElevatorEffector elevatorEffector, Joystick stick) {
+  public ElevatorCommand(Elevator elevator, Joystick stick) {
 
-    this.elevatorEffector = elevatorEffector;
+    this.elevator = elevator;
     this.stick = stick;
 
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(elevatorEffector);
+    addRequirements(elevator);
   }
 
   // Called when the command is initially scheduled.
@@ -35,18 +34,18 @@ public class ElevatorCommand extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (elevatorEffector.getSensorValue()) {
-      elevatorEffector.stop();
+    if (elevator.getSensorValue()) {
+      elevator.stop();
     } else if (stick.getRawButton(Constants.ElavatorConstants.L1)) {
-      elevatorEffector.firstLevel();
+      elevator.firstLevel();
     } else if (stick.getRawButton(Constants.ElavatorConstants.L2)) {
-      elevatorEffector.secondLevel();
+      elevator.secondLevel();
     } else if (stick.getRawButton(Constants.ElavatorConstants.L3)) {
-      elevatorEffector.thirdLevel();
+      elevator.thirdLevel();
     } else if (stick.getRawButton(Constants.ElavatorConstants.L4)) {
-      elevatorEffector.fourthLevel();
+      elevator.fourthLevel();
     } else {
-      elevatorEffector.stop();
+      elevator.stop();
     }
   }
 
