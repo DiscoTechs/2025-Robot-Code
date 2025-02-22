@@ -21,31 +21,23 @@ public class ElevatorEffector extends SubsystemBase {
     }
 
     public boolean getSensorValue() {
-        return sensor.get();
+        return !sensor.get();
     }
 
     public void firstLevel() {
-        if (getSensorValue()) {
-            intakeMotor.set(0.1);
-        }
+        intakeMotor.set(0.1);
     }
 
     public void secondLevel() {
-        if (getSensorValue()) {
-            intakeMotor.set(0.3);
-        }
+        intakeMotor.set(0.3);
     }
 
     public void thirdLevel() {
-        if (getSensorValue()) {
-            intakeMotor.set(0.7);
-        }
+        intakeMotor.set(0.7);
     }
 
     public void fourthLevel() {
-        if (getSensorValue()) {
-            intakeMotor.set(0.9);
-        }
+        intakeMotor.set(0.9);
     }
 
     public void stop() {

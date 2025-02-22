@@ -16,6 +16,8 @@ import edu.wpi.first.wpilibj.DriverStation;
 
 import java.util.function.BiConsumer;
 
+import com.ctre.phoenix6.swerve.SwerveModule;
+import com.ctre.phoenix6.swerve.SwerveDrivetrain.SwerveControlParameters;
 import com.pathplanner.lib.auto.AutoBuilder;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -56,7 +58,8 @@ public class RobotContainer {
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     configureRobot();
-
+    //printAbsoluteEncoder();
+    
     swerveSubsystem.setDefaultCommand(new SwerveJoystickCmd(
       swerveSubsystem,
       () -> driverJoystick.getRawAxis(OIConstants.kDriverYAxis),
@@ -113,6 +116,13 @@ public class RobotContainer {
     // m_driverController.b().whileTrue(m_exampleSubsystem.exampleMethodCommand());
   }
 
+  /*public void printAbsoluteEncoder() {
+    System.out.println("Absolute Encoder Left Front: " + frontLeft.getAbsoluteEncoderDeg());
+    System.out.println("Absolute Encoder Right Front: " + frontRight.getAbsoluteEncoderDeg());
+    System.out.println("Absolute Encoder Left Back" + backLeft.getAbsoluteEncoderDeg());
+    System.out.println("Absolute Encoder Right Back" + backRight.getAbsoluteEncoderDeg());
+  }*/
+
   public void configureRobot() {
     RobotConfig config = null;
     try {
@@ -139,6 +149,7 @@ public class RobotContainer {
         swerveSubsystem
     );
   }
+
 
   // /**
   //  * Use this to pass the autonomous command to the main {@link Robot} class.

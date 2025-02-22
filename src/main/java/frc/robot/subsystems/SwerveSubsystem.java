@@ -19,6 +19,7 @@ import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 import frc.robot.Constants.DriveConstants;
 
 
@@ -111,6 +112,13 @@ public class SwerveSubsystem extends SubsystemBase {
     return new SwerveModulePosition(backRight.getDrivePosition(), gyro.getRotation2d());
   }
 
+  /*public void printAbsoluteEncoder() {
+    System.out.println("Absolute Encoder Left Front: " + frontLeft.getAbsoluteEncoderDeg());
+    System.out.println("Absolute Encoder Right Front: " + frontRight.getAbsoluteEncoderDeg());
+    System.out.println("Absolute Encoder Left Back" + backLeft.getAbsoluteEncoderDeg());
+    System.out.println("Absolute Encoder Right Back" + backRight.getAbsoluteEncoderDeg());
+  }*/
+
   public Rotation2d getRotation2d() {
     return gyro.getRotation2d();
   }
@@ -147,10 +155,10 @@ public class SwerveSubsystem extends SubsystemBase {
   public void setModuleStates(SwerveModuleState[] desiredStates) {
     SwerveDriveKinematics.desaturateWheelSpeeds(desiredStates,
     DriveConstants.kPhysicalMaxSpeedMetersPerSecond);
-    frontLeft.setDesiredState(desiredStates[1]); //1
-    frontRight.setDesiredState(desiredStates[0]); //041
-    backLeft.setDesiredState(desiredStates[3]); //3
-    backRight.setDesiredState(desiredStates[2]); //2
+    frontLeft.setDesiredState(desiredStates[Constants.DriveConstants.kLeftFrontModule]); //1
+    frontRight.setDesiredState(desiredStates[Constants.DriveConstants.kRightFrontModule]); //041
+    backLeft.setDesiredState(desiredStates[Constants.DriveConstants.kLeftBackModule]); //3
+    backRight.setDesiredState(desiredStates[Constants.DriveConstants.kRightBackModule]); //2
   }
 
   public void resetPose(Pose2d pose) {
