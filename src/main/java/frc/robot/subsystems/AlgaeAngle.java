@@ -20,11 +20,11 @@ public class AlgaeAngle extends SubsystemBase {
   }
 
   public void angleUp() {
-    angleMotor.set(0.3); //temporary --> have to change to closedLoop
+    angleMotor.set(0.3); //temporary --> have to change to closedLoop/on-axel encoder
   }
 
   public void angleDown() {
-    angleMotor.set(-0.3); //temporary --> have to change to closedLoop
+    angleMotor.set(-0.3); //temporary --> have to change to closedLoop/on-axel encoder
   }
 
   public void stopAngle()  {

@@ -166,15 +166,6 @@ public final class Constants {
 
     }
 
-    // ------------ VISION CONSTANTS ------------ //
-    public static final class VisionConstants {
-        public static final InterpolatingDoubleTreeMap DISTANCE_TO_ANGLE_MAP = new InterpolatingDoubleTreeMap();
-
-        static { DISTANCE_TO_ANGLE_MAP.put(30.0, .75); }
-        public static final InterpolatingDoubleTreeMap DISTANCE_TO_SHOOT_MAP = new InterpolatingDoubleTreeMap();
-        static { DISTANCE_TO_SHOOT_MAP.put(30.0, 4000.0); }
-    }
-
     // ------------ CLIMBER CONSTANTS ------------ //
     public static final class ClimberConstants {
         public static final int CLIMBER_UP = 13;
@@ -206,4 +197,12 @@ public final class Constants {
         public static final int L4 = 4;
     }
 
+    // ------------ VISION CONSTANTS ------------ //
+    public static final class VisionConstants {
+        public static final InterpolatingDoubleTreeMap DISTANCE_TO_ANGLE_MAP = new InterpolatingDoubleTreeMap();
+
+        static { DISTANCE_TO_ANGLE_MAP.put(30.0, .75); }
+        public static final InterpolatingDoubleTreeMap DISTANCE_TO_SHOOT_MAP = new InterpolatingDoubleTreeMap();
+        static { DISTANCE_TO_SHOOT_MAP.put(30.0, 4000.0); }
+    }
 }

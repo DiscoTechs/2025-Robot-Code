@@ -18,14 +18,13 @@ public class CoralAngle extends SubsystemBase {
   public CoralAngle() {
     angleMotor = new SparkMax(Constants.DriveConstants.kCoralAngleMotorPort, MotorType.kBrushless);
   }
-
-//Possibly make a new SubSystem for algaeAngle 
+ 
   public void angleUp() {
-    angleMotor.set(0.3); //temporary --> have to change to closedLoop
+    angleMotor.set(0.3); //temporary --> have to change to closedLoop/on-axel encoder
   }
 
   public void angleDown() {
-    angleMotor.set(-0.3); //temporary --> have to change to closedLoop
+    angleMotor.set(-0.3); //temporary --> have to change to closedLoop/on-axel encoder
   }
 
   public void stopAngle()  {
