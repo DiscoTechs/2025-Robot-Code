@@ -51,11 +51,13 @@ public final class Constants {
         public static final double driveBaseRadius = Units.inchesToMeters(21.75 * Math.sqrt(2) / 2);
 
         //ALGAE
-        public static final int kAlgaeEffectorMotorPort = 26;
-        public static final int kAlgaeAngleMotorPort = 27; //temporary
+        public static final int kLeftAlgaeEffectorMotorPort = 26;
+        public static final int kRightAlgaeEffectorMotorPort = 39; //temporary CAN ID
+        public static final int kAlgaeAngleMotorPort = 27; //temporary CAN ID
 
         //CORAL
-        public static final int kCoralEffectorMotorPort =  28;
+        public static final int kLeftCoralEffectorMotorPort =  28;
+        public static final int kRightCoralEffectorMotorPort =  41; //temporary CAN ID
         public static final int kCoralAngleMotorPort = 33;
 
         //ELEVATOR

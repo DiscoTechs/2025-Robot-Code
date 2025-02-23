@@ -12,24 +12,31 @@ import frc.robot.Constants;
 
 public class CoralEffector extends SubsystemBase {
 
-  private final SparkMax intakeMotor;
+  private final SparkMax leftIntakeMotor;
+  private final SparkMax rightIntakeMotor;
 
   /** Creates a new AlgaeEffector. */
   public CoralEffector() {
-    intakeMotor = new SparkMax(Constants.DriveConstants.kCoralEffectorMotorPort, MotorType.kBrushless);
+    leftIntakeMotor = new SparkMax(Constants.DriveConstants.kLeftCoralEffectorMotorPort, MotorType.kBrushless);
+    rightIntakeMotor = new SparkMax(Constants.DriveConstants.kRightCoralEffectorMotorPort, MotorType.kBrushless);
   }
 
   public void intake() {
-    intakeMotor.set(0.5);
+    leftIntakeMotor.set(0.5);
+    rightIntakeMotor.set(0.5);
   }
 
   public void expel() {
-    intakeMotor.set(-0.5);
+    leftIntakeMotor.set(-0.5);
+    rightIntakeMotor.set(-0.5);
   }
 
   public void stop() {
-    intakeMotor.set(0.0);
+    leftIntakeMotor.set(0.0);
+    rightIntakeMotor.set(0.0);
   }
+
+  //rightIntakeMotor.follow(leftIntakeMotor);
 
 
   @Override

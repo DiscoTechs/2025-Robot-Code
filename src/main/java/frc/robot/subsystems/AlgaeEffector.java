@@ -12,37 +12,28 @@ import frc.robot.Constants;
 
 public class AlgaeEffector extends SubsystemBase {
 
-  private final SparkMax intakeMotor;
-  private final SparkMax angleMotor;
+  private final SparkMax leftIntakeMotor;
+  private final SparkMax rightIntakeMotor;
 
   /** Creates a new AlgaeEffector. */
   public AlgaeEffector() {
-    intakeMotor = new SparkMax(Constants.DriveConstants.kAlgaeEffectorMotorPort, MotorType.kBrushless);
-    angleMotor = new SparkMax(Constants.DriveConstants.kAlgaeAngleMotorPort, MotorType.kBrushless);
+    leftIntakeMotor = new SparkMax(Constants.DriveConstants.kLeftAlgaeEffectorMotorPort, MotorType.kBrushless);
+    rightIntakeMotor = new SparkMax(Constants.DriveConstants.kRightAlgaeEffectorMotorPort, MotorType.kBrushless);
   }
 
   public void intake() {
-    intakeMotor.set(0.8);
+    leftIntakeMotor.set(0.8);
+    rightIntakeMotor.set(0.8);
   }
 
   public void expel() {
-    intakeMotor.set(-0.8);
+    leftIntakeMotor.set(-0.8);
+    rightIntakeMotor.set(-0.8);
   }
 
   public void stopIntake() {
-    intakeMotor.set(0.0);
-  }
-//Possibly make a new SubSystem for algaeAngle 
-  public void angleUp() {
-    angleMotor.set(0.3); //temporary --> have to change to closedLoop
-  }
-
-  public void angleDown() {
-    angleMotor.set(-0.3); //temporary --> have to change to closedLoop
-  }
-
-  public void stopAngle()  {
-    angleMotor.set(0.0);
+    leftIntakeMotor.set(0.0);
+    rightIntakeMotor.set(0.0);
   }
 
   @Override
