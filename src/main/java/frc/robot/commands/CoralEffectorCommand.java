@@ -6,18 +6,17 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.subsystems.AlgaeEffector;
 import frc.robot.subsystems.CoralEffector;
 import frc.robot.Constants;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
-public class CoralCommand extends Command {
+public class CoralEffectorCommand extends Command {
 
   private final CoralEffector coralEffector;
   private final Joystick stick;
 
   /** Creates a new CoralCommand. */
-  public CoralCommand(CoralEffector coralEffector, Joystick stick) {
+  public CoralEffectorCommand(CoralEffector coralEffector, Joystick stick) {
 
     this.coralEffector = coralEffector;
     this.stick = stick;

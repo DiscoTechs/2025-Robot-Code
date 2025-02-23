@@ -27,13 +27,21 @@ import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Constants.OIConstants;
+import frc.robot.commands.AlgaeAngleCommand;
 import frc.robot.commands.AlgaeEffectorCommand;
+import frc.robot.commands.CoralEffectorCommand;
+import frc.robot.commands.CoralAngleCommand;
+import frc.robot.commands.ClimberCommand;
 import frc.robot.commands.ElevatorCommand;
 import frc.robot.commands.SwerveJoystickCmd;
 import frc.robot.commands.AutoCommands.LimeLightAuto;
 import frc.robot.commands.AutoCommands.OutAndBack;
 import frc.robot.commands.AutoCommands.SimpleAuto;
+import frc.robot.subsystems.AlgaeAngle;
 import frc.robot.subsystems.AlgaeEffector;
+import frc.robot.subsystems.Climber;
+import frc.robot.subsystems.CoralAngle;
+import frc.robot.subsystems.CoralEffector;
 import frc.robot.subsystems.Elevator;
 import frc.robot.subsystems.SwerveSubsystem;
 
@@ -49,7 +57,19 @@ public class RobotContainer {
   private final Joystick operatorJoystick = new Joystick(OIConstants.kOperatorControllerPort);
 
   public final SwerveSubsystem swerveSubsystem = new SwerveSubsystem();
+
+  //ALGAE
   private final AlgaeEffector algaeEffector = new AlgaeEffector();
+  private final AlgaeAngle algaeAngle = new AlgaeAngle();
+
+  //CORAL
+  private final CoralEffector coralEffector = new CoralEffector();
+  private final CoralAngle coralAngle = new CoralAngle();
+
+  //CLIMBER
+  private final Climber climber = new Climber();
+
+  //ELEVATOR
   private final Elevator elevator = new Elevator();
 
   private final SendableChooser<Command> autoChooser;
@@ -72,6 +92,13 @@ public class RobotContainer {
     ));
 
     algaeEffector.setDefaultCommand(new AlgaeEffectorCommand(algaeEffector, operatorJoystick));
+    algaeAngle.setDefaultCommand(new AlgaeAngleCommand(algaeAngle, operatorJoystick));
+
+    coralEffector.setDefaultCommand(new CoralEffectorCommand(coralEffector, operatorJoystick));
+    coralAngle.setDefaultCommand(new CoralAngleCommand(coralAngle, operatorJoystick));
+
+    climber.setDefaultCommand(new ClimberCommand(climber, operatorJoystick));
+
     elevator.setDefaultCommand(new ElevatorCommand(elevator, operatorJoystick));
   
     autoChooser = AutoBuilder.buildAutoChooser();//new SendableChooser<>(); 
