@@ -182,6 +182,7 @@ public final class Constants {
         public static final int CORAL_OUTTAKE = 6;
         public static final int CORAL_PLATE_ANGLE_UP = 15;
         public static final int CORAL_PLATE_ANGLE_DOWN = 16; 
+        public static final int CORAL_PLATE_ANGLE_DEFAULT = 17;
 
     }
 

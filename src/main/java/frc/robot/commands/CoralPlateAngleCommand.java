@@ -32,12 +32,31 @@ public class CoralPlateAngleCommand extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(stick.getRawButton(Constants.CoralConstants.CORAL_PLATE_ANGLE_UP)) {
+    //if the button is pressed, then it will move motor so that it is at default value
+    if (stick.getRawButton(Constants.CoralConstants.CORAL_PLATE_ANGLE_DEFAULT)) {
+        if (coralPlateAngle.getEncoder() < 0) {
+            coralPlateAngle.angleUpToDefault();
+        }
+        else if (coralPlateAngle.getEncoder() > 0) { //constant in replacement with zero here
+            coralPlateAngle.angleDownToDefault(); // ^ need to fix this by adding a small range/delta around 0 (add under constants.java), as encoder will like not be exactly zero
+        }
+        else {
+            coralPlateAngle.stopAngle();
+        }
+    } else if(stick.getRawButton(Constants.CoralConstants.CORAL_PLATE_ANGLE_UP)) { //if the button is pressed, then the plate will angle up. This is used to get coral unstuck.
       coralPlateAngle.angleUp();
-    } else if (stick.getRawButton(Constants.CoralConstants.CORAL_PLATE_ANGLE_DOWN)) {
+    } else if (stick.getRawButton(Constants.CoralConstants.CORAL_PLATE_ANGLE_DOWN)) { //if the button is pressed, then the plate will angle down. This is used to get coral unstuck.
         coralPlateAngle.angleDown();
-    } else {
-        coralPlateAngle.stopAngle();
+    } else { //the code under this else statement is what the plate angler will be doing most of the time: adjusting a bit up and down to counter gravity and robot movement to stay at the same default angle
+        if (coralPlateAngle.getEncoder() < 0) {
+            coralPlateAngle.angleUpToDefault();
+        }
+        else if (coralPlateAngle.getEncoder() > 0) { //constant in replacement with zero here
+            coralPlateAngle.angleDownToDefault(); // ^ need to fix this by adding a range around 0, as encoder will like not be exactly zero
+        }
+        else {
+            coralPlateAngle.stopAngle();
+        }
     }
   }
 

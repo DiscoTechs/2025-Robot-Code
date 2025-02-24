@@ -21,6 +21,7 @@ public class CoralPlateAngle extends SubsystemBase {
   public CoralPlateAngle() {
     angleMotor = new SparkMax(Constants.DriveConstants.kCoralPlateAngleMotorPort, MotorType.kBrushless);
     encoder = new DutyCycleEncoder(0, 2*Math.PI, 0.0); // change according to this specification: https://github.wpilib.org/allwpilib/docs/release/java/edu/wpi/first/wpilibj/DutyCycleEncoder.html
+    // also, make a constant for default encoder value so I don't have to keep being changed
   }
  
   public void angleUp() {
@@ -37,6 +38,18 @@ public class CoralPlateAngle extends SubsystemBase {
 
   public double getEncoder() {
     return encoder.get();
+  }
+
+  public void angleUpToDefault() {
+    while(encoder.get() != 0) {
+      angleMotor.set(0.5); //adjust SIGN (espcially) and speed and needed
+    }
+  }
+
+  public void angleDownToDefault() {
+    while(encoder.get() != 0) {
+      angleMotor.set(-0.5); //adjust SIGN (espcially) and speed and needed
+    }
   }
 
   @Override
