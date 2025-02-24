@@ -58,10 +58,9 @@ public final class Constants {
         //CORAL CAN IDS
         public static final int kLeftCoralEffectorMotorPort =  28;
         public static final int kRightCoralEffectorMotorPort =  41; //temporary CAN ID
-        public static final int kCoralAngleMotorPort = 33;
         public static final int kCoralPlateAngleMotorPort = 42; //temporary CAN ID
 
-        //ELEVATOR CAN IDS
+        //ELEVATOR CAN IDS - NEED TO ADD MORE AS ELEVATOR HAS MORE MOTORS
         public static final int kElevatorMotorPort = 31;
 
         //CLIMBER CAN IDS
@@ -168,7 +167,7 @@ public final class Constants {
     }
 
     // CONSTANTS BELOW ARE TEMPORARY AND NEED TO BE CHANGED TO MATCH JOYSTICK/BUTTON BOX
-    
+
     // ------------ ALGAE BUTTON ID CONSTANTS ------------ //
     public static final class AlgaeConstants {
         public static final int ALGAE_INTAKE = 7;
@@ -181,8 +180,6 @@ public final class Constants {
     public static final class CoralConstants {
         public static final int CORAL_INTAKE = 5;
         public static final int CORAL_OUTTAKE = 6;
-        public static final int CORAL_ANGLE_UP = 9;
-        public static final int CORAL_ANGLE_DOWN = 11;
         public static final int CORAL_PLATE_ANGLE_UP = 15;
         public static final int CORAL_PLATE_ANGLE_DOWN = 16; 
 

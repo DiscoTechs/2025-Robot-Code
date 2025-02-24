@@ -30,7 +30,6 @@ import frc.robot.Constants.OIConstants;
 import frc.robot.commands.AlgaeAngleCommand;
 import frc.robot.commands.AlgaeEffectorCommand;
 import frc.robot.commands.CoralEffectorCommand;
-import frc.robot.commands.CoralAngleCommand;
 import frc.robot.commands.ClimberCommand;
 import frc.robot.commands.ElevatorCommand;
 import frc.robot.commands.SwerveJoystickCmd;
@@ -40,7 +39,6 @@ import frc.robot.commands.AutoCommands.SimpleAuto;
 import frc.robot.subsystems.AlgaeAngle;
 import frc.robot.subsystems.AlgaeEffector;
 import frc.robot.subsystems.Climber;
-import frc.robot.subsystems.CoralAngle;
 import frc.robot.subsystems.CoralEffector;
 import frc.robot.subsystems.Elevator;
 import frc.robot.subsystems.SwerveSubsystem;
@@ -67,7 +65,6 @@ public class RobotContainer {
 
   //CORAL
   private final CoralEffector coralEffector = new CoralEffector();
-  private final CoralAngle coralAngle = new CoralAngle();
   private final CoralPlateAngle coralPlateAngle = new CoralPlateAngle();
 
   //CLIMBER
@@ -99,7 +96,6 @@ public class RobotContainer {
     algaeAngle.setDefaultCommand(new AlgaeAngleCommand(algaeAngle, operatorJoystick));
 
     coralEffector.setDefaultCommand(new CoralEffectorCommand(coralEffector, operatorJoystick));
-    coralAngle.setDefaultCommand(new CoralAngleCommand(coralAngle, operatorJoystick));
     coralPlateAngle.setDefaultCommand(new CoralPlateAngleCommand(coralPlateAngle, operatorJoystick)); //here, for example, I think I can change to button box after it's configed
 
     climber.setDefaultCommand(new ClimberCommand(climber, operatorJoystick));

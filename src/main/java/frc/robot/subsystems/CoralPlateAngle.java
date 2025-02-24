@@ -9,14 +9,18 @@ import com.revrobotics.spark.SparkMax;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import edu.wpi.first.wpilibj.DutyCycle;
+import edu.wpi.first.wpilibj.DutyCycleEncoder; //on-shaft encoder/through bore encoder
 
 public class CoralPlateAngle extends SubsystemBase {
 
   private final SparkMax angleMotor;
+  private final DutyCycleEncoder encoder;
 
   /** Creates a new CoralAngle. */
   public CoralPlateAngle() {
     angleMotor = new SparkMax(Constants.DriveConstants.kCoralPlateAngleMotorPort, MotorType.kBrushless);
+    encoder = new DutyCycleEncoder(0, 2*Math.PI, 0.0); // change according to this specification: https://github.wpilib.org/allwpilib/docs/release/java/edu/wpi/first/wpilibj/DutyCycleEncoder.html
   }
  
   public void angleUp() {
@@ -29,6 +33,10 @@ public class CoralPlateAngle extends SubsystemBase {
 
   public void stopAngle()  {
     angleMotor.set(0.0);
+  }
+
+  public double getEncoder() {
+    return encoder.get();
   }
 
   @Override
