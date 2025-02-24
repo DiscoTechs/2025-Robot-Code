@@ -9,6 +9,7 @@ import com.revrobotics.spark.SparkMax;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import frc.robot.Constants.DriveConstants;
 import edu.wpi.first.wpilibj.DutyCycle;
 import edu.wpi.first.wpilibj.DutyCycleEncoder; //on-shaft encoder/through bore encoder
 
@@ -41,13 +42,13 @@ public class CoralPlateAngle extends SubsystemBase {
   }
 
   public void angleUpToDefault() {
-    while(encoder.get() != 0) {
+    while(!((encoder.get() >= Constants.DriveConstants.kDefaultEncoder - Constants.DriveConstants.kDelta) && (encoder.get() <= Constants.DriveConstants.kDefaultEncoder + Constants.DriveConstants.kDelta))) { //just means while not within the range (default - delta, default + delta) [centered around default], then angle up the plate
       angleMotor.set(0.5); //adjust SIGN (espcially) and speed and needed
     }
   }
 
   public void angleDownToDefault() {
-    while(encoder.get() != 0) {
+    while(!((encoder.get() >= Constants.DriveConstants.kDefaultEncoder - Constants.DriveConstants.kDelta) && (encoder.get() <= Constants.DriveConstants.kDefaultEncoder + Constants.DriveConstants.kDelta))) { //just means while not within the range (default - delta, default + delta) [centered around default], then angle down the plate
       angleMotor.set(-0.5); //adjust SIGN (espcially) and speed and needed
     }
   }

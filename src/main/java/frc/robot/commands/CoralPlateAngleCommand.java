@@ -34,11 +34,11 @@ public class CoralPlateAngleCommand extends Command {
   public void execute() {
     //if the button is pressed, then it will move motor so that it is at default value
     if (stick.getRawButton(Constants.CoralConstants.CORAL_PLATE_ANGLE_DEFAULT)) {
-        if (coralPlateAngle.getEncoder() < 0) {
+        if (coralPlateAngle.getEncoder() < Constants.DriveConstants.kDefaultEncoder) { //if below default value (current zero), then will angle up
             coralPlateAngle.angleUpToDefault();
         }
-        else if (coralPlateAngle.getEncoder() > 0) { //constant in replacement with zero here
-            coralPlateAngle.angleDownToDefault(); // ^ need to fix this by adding a small range/delta around 0 (add under constants.java), as encoder will like not be exactly zero
+        else if (coralPlateAngle.getEncoder() > Constants.DriveConstants.kDefaultEncoder) { //if above default value (current zero), then will angle down
+            coralPlateAngle.angleDownToDefault();
         }
         else {
             coralPlateAngle.stopAngle();
@@ -48,11 +48,11 @@ public class CoralPlateAngleCommand extends Command {
     } else if (stick.getRawButton(Constants.CoralConstants.CORAL_PLATE_ANGLE_DOWN)) { //if the button is pressed, then the plate will angle down. This is used to get coral unstuck.
         coralPlateAngle.angleDown();
     } else { //the code under this else statement is what the plate angler will be doing most of the time: adjusting a bit up and down to counter gravity and robot movement to stay at the same default angle
-        if (coralPlateAngle.getEncoder() < 0) {
+        if (coralPlateAngle.getEncoder() < Constants.DriveConstants.kDefaultEncoder) { //if below default value (current zero), then will angle up
             coralPlateAngle.angleUpToDefault();
         }
-        else if (coralPlateAngle.getEncoder() > 0) { //constant in replacement with zero here
-            coralPlateAngle.angleDownToDefault(); // ^ need to fix this by adding a range around 0, as encoder will like not be exactly zero
+        else if (coralPlateAngle.getEncoder() > Constants.DriveConstants.kDefaultEncoder) { //if above default value (current zero), then will angle down
+            coralPlateAngle.angleDownToDefault();
         }
         else {
             coralPlateAngle.stopAngle();
