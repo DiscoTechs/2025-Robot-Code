@@ -44,6 +44,9 @@ import frc.robot.subsystems.CoralAngle;
 import frc.robot.subsystems.CoralEffector;
 import frc.robot.subsystems.Elevator;
 import frc.robot.subsystems.SwerveSubsystem;
+import frc.robot.commands.CoralPlateAngleCommand;
+import frc.robot.subsystems.CoralPlateAngle;
+
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -65,6 +68,7 @@ public class RobotContainer {
   //CORAL
   private final CoralEffector coralEffector = new CoralEffector();
   private final CoralAngle coralAngle = new CoralAngle();
+  private final CoralPlateAngle coralPlateAngle = new CoralPlateAngle();
 
   //CLIMBER
   private final Climber climber = new Climber();
@@ -96,6 +100,7 @@ public class RobotContainer {
 
     coralEffector.setDefaultCommand(new CoralEffectorCommand(coralEffector, operatorJoystick));
     coralAngle.setDefaultCommand(new CoralAngleCommand(coralAngle, operatorJoystick));
+    coralPlateAngle.setDefaultCommand(new CoralPlateAngleCommand(coralPlateAngle, operatorJoystick)); //here, for example, I think I can change to button box after it's configed
 
     climber.setDefaultCommand(new ClimberCommand(climber, operatorJoystick));
 

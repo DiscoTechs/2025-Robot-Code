@@ -10,6 +10,8 @@ import com.revrobotics.spark.SparkMax;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
+//import edu.wpi.first.wpilibj.DutyCycleEncoder;
+
 public class CoralEffector extends SubsystemBase {
 
   private final SparkMax leftIntakeMotor;
@@ -22,19 +24,23 @@ public class CoralEffector extends SubsystemBase {
   }
 
   public void intake() {
-    leftIntakeMotor.set(0.5);
-    rightIntakeMotor.set(0.5);
+    leftIntakeMotor.set(0.5); //update sign/speed accordingly
+    rightIntakeMotor.set(0.5); //update sign/speed accordingly
   }
 
   public void expel() {
-    leftIntakeMotor.set(-0.5);
-    rightIntakeMotor.set(-0.5);
+    leftIntakeMotor.set(-0.5); //update sign/speed accordingly
+    rightIntakeMotor.set(-0.5); //update sign/speed accordingly
   }
 
   public void stop() {
     leftIntakeMotor.set(0.0);
     rightIntakeMotor.set(0.0);
   }
+
+  /*public void getLeftEncoderValue() {
+    
+  }*/
 
   //rightIntakeMotor.follow(leftIntakeMotor);
 

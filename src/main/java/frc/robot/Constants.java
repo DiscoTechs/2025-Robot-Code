@@ -50,20 +50,21 @@ public final class Constants {
         // SPARK MAXES
         public static final double driveBaseRadius = Units.inchesToMeters(21.75 * Math.sqrt(2) / 2);
 
-        //ALGAE
+        //ALGAE CAN IDS
         public static final int kLeftAlgaeEffectorMotorPort = 26;
         public static final int kRightAlgaeEffectorMotorPort = 39; //temporary CAN ID
         public static final int kAlgaeAngleMotorPort = 27; //temporary CAN ID
 
-        //CORAL
+        //CORAL CAN IDS
         public static final int kLeftCoralEffectorMotorPort =  28;
         public static final int kRightCoralEffectorMotorPort =  41; //temporary CAN ID
         public static final int kCoralAngleMotorPort = 33;
+        public static final int kCoralPlateAngleMotorPort = 42; //temporary CAN ID
 
-        //ELEVATOR
+        //ELEVATOR CAN IDS
         public static final int kElevatorMotorPort = 31;
 
-        //CLIMBER
+        //CLIMBER CAN IDS
         public static final int kClimberMotorPort = 37;
 
         // drive 40 amps
@@ -166,13 +167,9 @@ public final class Constants {
 
     }
 
-    // ------------ CLIMBER CONSTANTS ------------ //
-    public static final class ClimberConstants {
-        public static final int CLIMBER_UP = 13;
-        public static final int CLIMBER_DOWN = 14;
-    }
-
-    // ------------ ALGAE CONSTANTS ------------ //
+    // CONSTANTS BELOW ARE TEMPORARY AND NEED TO BE CHANGED TO MATCH JOYSTICK/BUTTON BOX
+    
+    // ------------ ALGAE BUTTON ID CONSTANTS ------------ //
     public static final class AlgaeConstants {
         public static final int ALGAE_INTAKE = 7;
         public static final int ALGAE_OUTTAKE = 8;
@@ -180,15 +177,18 @@ public final class Constants {
         public static final int ALGAE_ANGLE_DOWN = 12;
     }
 
-    // ------------ CORAL CONSTANTS ------------ //
+    // ------------ CORAL BUTTON ID CONSTANTS ------------ //
     public static final class CoralConstants {
         public static final int CORAL_INTAKE = 5;
         public static final int CORAL_OUTTAKE = 6;
         public static final int CORAL_ANGLE_UP = 9;
-        public static final int CORAL_ANGLE_DOWN = 11; 
+        public static final int CORAL_ANGLE_DOWN = 11;
+        public static final int CORAL_PLATE_ANGLE_UP = 15;
+        public static final int CORAL_PLATE_ANGLE_DOWN = 16; 
+
     }
 
-    // ------------ ELAVATOR CONSTANTS ------------ //
+    // ------------ ELAVATOR BUTTON ID CONSTANTS ------------ //
     public static final class ElavatorConstants {
         public static final int ELAVATOR_SENSOR = 0;
         public static final int L1 = 1;
@@ -196,6 +196,15 @@ public final class Constants {
         public static final int L3 = 3;
         public static final int L4 = 4;
     }
+
+    // ------------ CLIMBER BUTTON ID CONSTANTS ------------ //
+    public static final class ClimberConstants {
+        public static final int CLIMBER_UP = 13;
+        public static final int CLIMBER_DOWN = 14;
+    }
+
+
+
 
     // ------------ VISION CONSTANTS ------------ //
     public static final class VisionConstants {
