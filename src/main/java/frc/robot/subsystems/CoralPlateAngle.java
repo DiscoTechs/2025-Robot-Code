@@ -41,14 +41,18 @@ public class CoralPlateAngle extends SubsystemBase {
     return encoder.get();
   }
 
+  public boolean inRange() {
+    return ((encoder.get() >= Constants.DriveConstants.kDefaultEncoder - Constants.DriveConstants.kDelta) && (encoder.get() <= Constants.DriveConstants.kDefaultEncoder + Constants.DriveConstants.kDelta));
+  }
+
   public void angleUpToDefault() {
-    while(!((encoder.get() >= Constants.DriveConstants.kDefaultEncoder - Constants.DriveConstants.kDelta) && (encoder.get() <= Constants.DriveConstants.kDefaultEncoder + Constants.DriveConstants.kDelta))) { //just means while not within the range (default - delta, default + delta) [centered around default], then angle up the plate
+    while(!inRange()) { //just means while not within the range (default - delta, default + delta) [centered around default], then angle up the plate
       angleMotor.set(Constants.DriveConstants.kAngleSpeed); //adjust SIGN (espcially) and speed (now in constants for ease) as needed
     }
   }
 
   public void angleDownToDefault() {
-    while(!((encoder.get() >= Constants.DriveConstants.kDefaultEncoder - Constants.DriveConstants.kDelta) && (encoder.get() <= Constants.DriveConstants.kDefaultEncoder + Constants.DriveConstants.kDelta))) { //just means while not within the range (default - delta, default + delta) [centered around default], then angle down the plate
+    while(!inRange()) { //just means while not within the range (default - delta, default + delta) [centered around default], then angle down the plate
       angleMotor.set(-Constants.DriveConstants.kAngleSpeed); //adjust SIGN (espcially) and speed (now in constants for ease) as needed
     }
   }
