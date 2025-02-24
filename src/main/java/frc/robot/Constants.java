@@ -60,10 +60,11 @@ public final class Constants {
         public static final int kRightCoralEffectorMotorPort =  41; //temporary CAN ID
         public static final int kCoralPlateAngleMotorPort = 42; //temporary CAN ID
 
-        //CORAL DELTA AND DEFAULT ENCODER VALUES FOR CORALPLATEANGLE
+        //CORAL DELTA, DEFAULT, SPEED ENCODER VALUES FOR CORALPLATEANGLE
 
         public static final double kDelta = 0.01; //small value that can be adjusted
         public static final double kDefaultEncoder = 0; //default through-bore encoder value
+        public static final double kAngleSpeed = 0.5; //default through-bore encoder value
 
         //ELEVATOR CAN IDS - NEED TO ADD MORE AS ELEVATOR HAS MORE MOTORS
         public static final int kElevatorMotorPort = 31;
