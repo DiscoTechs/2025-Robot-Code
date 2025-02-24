@@ -50,28 +50,6 @@ public final class Constants {
         // SPARK MAXES
         public static final double driveBaseRadius = Units.inchesToMeters(21.75 * Math.sqrt(2) / 2);
 
-        //ALGAE CAN IDS
-        public static final int kLeftAlgaeEffectorMotorPort = 26;
-        public static final int kRightAlgaeEffectorMotorPort = 39; //temporary CAN ID
-        public static final int kAlgaeAngleMotorPort = 27; //temporary CAN ID
-
-        //CORAL CAN IDS
-        public static final int kLeftCoralEffectorMotorPort =  28;
-        public static final int kRightCoralEffectorMotorPort =  41; //temporary CAN ID
-        public static final int kCoralPlateAngleMotorPort = 42; //temporary CAN ID
-
-        //CORAL DELTA, DEFAULT, SPEED ENCODER VALUES FOR CORALPLATEANGLE
-
-        public static final double kDelta = 0.01; //small value that can be adjusted
-        public static final double kDefaultEncoder = 0; //default through-bore encoder value
-        public static final double kAngleSpeed = 0.5; //default through-bore encoder value
-
-        //ELEVATOR CAN IDS - NEED TO ADD MORE AS ELEVATOR HAS MORE MOTORS
-        public static final int kElevatorMotorPort = 31;
-
-        //CLIMBER CAN IDS
-        public static final int kClimberMotorPort = 37;
-
         // drive 40 amps
         public static final int kFrontLeftDriveMotorPort = 7;
         public static final int kBackLeftDriveMotorPort = 9;
@@ -174,37 +152,54 @@ public final class Constants {
 
     // CONSTANTS BELOW ARE TEMPORARY AND NEED TO BE CHANGED TO MATCH JOYSTICK/BUTTON BOX
 
-    // ------------ ALGAE BUTTON ID CONSTANTS ------------ //
+    // ------------ ALGAE CONSTANTS (CAN IDS AND RESPECTIVE BUTTONS TO CONTROL THEM) ------------ //
     public static final class AlgaeConstants {
-        public static final int ALGAE_INTAKE = 7;
-        public static final int ALGAE_OUTTAKE = 8;
-        public static final int ALGAE_ANGLE_UP = 10;
-        public static final int ALGAE_ANGLE_DOWN = 12;
+        //ALGAE CAN IDS
+        public static final int kLeftAlgaeEffectorMotorPort = 26; public static final int kRightAlgaeEffectorMotorPort = 39; //temporary CAN ID
+            public static final int ALGAE_INTAKE = 7;
+            public static final int ALGAE_OUTTAKE = 8;
+        public static final int kAlgaeAngleMotorPort = 27; //temporary CAN ID
+            public static final int ALGAE_ANGLE_UP = 10;
+            public static final int ALGAE_ANGLE_DOWN = 12;
     }
 
-    // ------------ CORAL BUTTON ID CONSTANTS ------------ //
+    // ------------ CORAL CONSTANTS (CAN IDS AND RESPECTIVE BUTTONS TO CONTROL THEM) ------------ //
     public static final class CoralConstants {
-        public static final int CORAL_INTAKE = 5;
-        public static final int CORAL_OUTTAKE = 6;
-        public static final int CORAL_PLATE_ANGLE_UP = 15;
-        public static final int CORAL_PLATE_ANGLE_DOWN = 16; 
-        public static final int CORAL_PLATE_ANGLE_DEFAULT = 17;
+        //CORAL CAN IDS
+        public static final int kLeftCoralEffectorMotorPort =  28; public static final int kRightCoralEffectorMotorPort =  41; //temporary CAN ID
+            public static final int CORAL_INTAKE = 5;
+            public static final int CORAL_OUTTAKE = 6;
+        public static final int kCoralPlateAngleMotorPort = 42; //temporary CAN ID
+            public static final int CORAL_PLATE_ANGLE_UP = 15;
+            public static final int CORAL_PLATE_ANGLE_DOWN = 16; 
+            public static final int CORAL_PLATE_ANGLE_DEFAULT = 17;
+
+        //CORAL DELTA, DEFAULT, SPEED ENCODER VALUES FOR CORALPLATEANGLE
+        public static final double kDelta = 0.01; //small value that can be adjusted
+        public static final double kDefaultEncoder = 0; //default through-bore encoder value
+        public static final double kAngleSpeed = 0.5; //default through-bore encoder value
 
     }
 
-    // ------------ ELAVATOR BUTTON ID CONSTANTS ------------ //
+    // ------------ ELEVATOR CONSTANTS (CAN IDS AND RESPECTIVE BUTTONS TO CONTROL THEM) ------------ //
     public static final class ElavatorConstants {
+        //ELEVATOR CAN IDS - NEED TO ADD MORE AS ELEVATOR HAS MORE MOTORS
+        public static final int kElevatorMotorPort = 31;
+            public static final int L1 = 1;
+            public static final int L2 = 2;
+            public static final int L3 = 3;
+            public static final int L4 = 4;
+        
+        //SENSOR PORT
         public static final int ELAVATOR_SENSOR = 0;
-        public static final int L1 = 1;
-        public static final int L2 = 2;
-        public static final int L3 = 3;
-        public static final int L4 = 4;
     }
 
-    // ------------ CLIMBER BUTTON ID CONSTANTS ------------ //
+    // ------------ CLIMBER CONSTANTS (CAN IDS AND RESPECTIVE BUTTONS TO CONTROL THEM) ------------ //
     public static final class ClimberConstants {
-        public static final int CLIMBER_UP = 13;
-        public static final int CLIMBER_DOWN = 14;
+        //CLIMBER CAN IDS
+        public static final int kClimberMotorPort = 37;
+            public static final int CLIMBER_UP = 13;
+            public static final int CLIMBER_DOWN = 14;
     }
 
 

@@ -12,7 +12,7 @@ public class Climber extends SubsystemBase{
     private final SparkMax climbMotor;
     
     public Climber() {
-        climbMotor = new SparkMax(Constants.DriveConstants.kClimberMotorPort, MotorType.kBrushless);
+        climbMotor = new SparkMax(Constants.ClimberConstants.kClimberMotorPort, MotorType.kBrushless);
     }
 
     public void climberUp() {

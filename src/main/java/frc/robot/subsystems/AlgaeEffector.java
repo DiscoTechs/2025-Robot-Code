@@ -17,8 +17,8 @@ public class AlgaeEffector extends SubsystemBase {
 
   /** Creates a new AlgaeEffector. */
   public AlgaeEffector() {
-    leftIntakeMotor = new SparkMax(Constants.DriveConstants.kLeftAlgaeEffectorMotorPort, MotorType.kBrushless);
-    rightIntakeMotor = new SparkMax(Constants.DriveConstants.kRightAlgaeEffectorMotorPort, MotorType.kBrushless);
+    leftIntakeMotor = new SparkMax(Constants.AlgaeConstants.kLeftAlgaeEffectorMotorPort, MotorType.kBrushless);
+    rightIntakeMotor = new SparkMax(Constants.AlgaeConstants.kRightAlgaeEffectorMotorPort, MotorType.kBrushless);
   }
 
   public void intake() {

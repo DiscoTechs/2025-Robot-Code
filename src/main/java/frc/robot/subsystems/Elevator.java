@@ -15,7 +15,7 @@ public class Elevator extends SubsystemBase {
     
     public Elevator() {
         sensor = new DigitalInput(Constants.ElavatorConstants.ELAVATOR_SENSOR);
-        intakeMotor = new SparkMax(Constants.DriveConstants.kElevatorMotorPort, MotorType.kBrushless);
+        intakeMotor = new SparkMax(Constants.ElavatorConstants.kElevatorMotorPort, MotorType.kBrushless);
     }
 
     public boolean getSensorValue() {

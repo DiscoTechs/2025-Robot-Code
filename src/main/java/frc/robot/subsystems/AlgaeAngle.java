@@ -16,7 +16,7 @@ public class AlgaeAngle extends SubsystemBase {
 
   /** Creates a new AlgaeEffector. */
   public AlgaeAngle() {
-    angleMotor = new SparkMax(Constants.DriveConstants.kAlgaeAngleMotorPort, MotorType.kBrushless);
+    angleMotor = new SparkMax(Constants.AlgaeConstants.kAlgaeAngleMotorPort, MotorType.kBrushless);
   }
 
   public void angleUp() {

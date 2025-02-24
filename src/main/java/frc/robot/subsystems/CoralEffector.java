@@ -19,8 +19,8 @@ public class CoralEffector extends SubsystemBase {
 
   /** Creates a new AlgaeEffector. */
   public CoralEffector() {
-    leftIntakeMotor = new SparkMax(Constants.DriveConstants.kLeftCoralEffectorMotorPort, MotorType.kBrushless);
-    rightIntakeMotor = new SparkMax(Constants.DriveConstants.kRightCoralEffectorMotorPort, MotorType.kBrushless);
+    leftIntakeMotor = new SparkMax(Constants.CoralConstants.kLeftCoralEffectorMotorPort, MotorType.kBrushless);
+    rightIntakeMotor = new SparkMax(Constants.CoralConstants.kRightCoralEffectorMotorPort, MotorType.kBrushless);
   }
 
   public void intake() {

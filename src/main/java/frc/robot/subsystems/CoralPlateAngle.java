@@ -20,7 +20,7 @@ public class CoralPlateAngle extends SubsystemBase {
 
   /** Creates a new CoralAngle. */
   public CoralPlateAngle() {
-    angleMotor = new SparkMax(Constants.DriveConstants.kCoralPlateAngleMotorPort, MotorType.kBrushless);
+    angleMotor = new SparkMax(Constants.CoralConstants.kCoralPlateAngleMotorPort, MotorType.kBrushless);
     encoder = new DutyCycleEncoder(0, 2*Math.PI, 0.0); // change according to this specification: https://github.wpilib.org/allwpilib/docs/release/java/edu/wpi/first/wpilibj/DutyCycleEncoder.html
     // also, make a constant for default encoder value so I don't have to keep being changed
   }
@@ -42,18 +42,18 @@ public class CoralPlateAngle extends SubsystemBase {
   }
 
   public boolean inRange() {
-    return ((encoder.get() >= Constants.DriveConstants.kDefaultEncoder - Constants.DriveConstants.kDelta) && (encoder.get() <= Constants.DriveConstants.kDefaultEncoder + Constants.DriveConstants.kDelta));
+    return ((encoder.get() >= Constants.CoralConstants.kDefaultEncoder - Constants.CoralConstants.kDelta) && (encoder.get() <= Constants.CoralConstants.kDefaultEncoder + Constants.CoralConstants.kDelta));
   }
 
   public void angleUpToDefault() {
     while(!inRange()) { //just means while not within the range (default - delta, default + delta) [centered around default], then angle up the plate
-      angleMotor.set(Constants.DriveConstants.kAngleSpeed); //adjust SIGN (espcially) and speed (now in constants for ease) as needed
+      angleMotor.set(Constants.CoralConstants.kAngleSpeed); //adjust SIGN (espcially) and speed (now in constants for ease) as needed
     }
   }
 
   public void angleDownToDefault() {
     while(!inRange()) { //just means while not within the range (default - delta, default + delta) [centered around default], then angle down the plate
-      angleMotor.set(-Constants.DriveConstants.kAngleSpeed); //adjust SIGN (espcially) and speed (now in constants for ease) as needed
+      angleMotor.set(-Constants.CoralConstants.kAngleSpeed); //adjust SIGN (espcially) and speed (now in constants for ease) as needed
     }
   }
 
