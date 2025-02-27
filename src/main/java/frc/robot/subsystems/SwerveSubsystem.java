@@ -128,15 +128,12 @@ public class SwerveSubsystem extends SubsystemBase {
   }
 
   public SwerveModulePosition[] getModulePositions() {
-
-    SwerveModulePosition[] mods = new SwerveModulePosition[4];
-
-    mods[Constants.DriveConstants.kLeftFrontModule] = getFrontLeftModulePosition();
-    mods[Constants.DriveConstants.kRightFrontModule] = getFrontRightModulePosition();
-    mods[Constants.DriveConstants.kLeftBackModule] = getBackLeftModulePosition();
-    mods[Constants.DriveConstants.kRightBackModule] = getBackRightModulePosition();
-
-    return mods;
+    return new SwerveModulePosition[] {
+      getFrontLeftModulePosition(),
+      getFrontRightModulePosition(),
+      getBackLeftModulePosition(),
+      getBackRightModulePosition()
+    };
   }
 
   @Override
@@ -158,10 +155,12 @@ public class SwerveSubsystem extends SubsystemBase {
   public void setModuleStates(SwerveModuleState[] desiredStates) {
     SwerveDriveKinematics.desaturateWheelSpeeds(desiredStates,
     DriveConstants.kPhysicalMaxSpeedMetersPerSecond);
-    frontLeft.setDesiredState(desiredStates[Constants.DriveConstants.kLeftFrontModule]); //1
-    frontRight.setDesiredState(desiredStates[Constants.DriveConstants.kRightFrontModule]); //0
-    backLeft.setDesiredState(desiredStates[Constants.DriveConstants.kLeftBackModule]); //3
-    backRight.setDesiredState(desiredStates[Constants.DriveConstants.kRightBackModule]); //2
+    frontRight.setDesiredState(desiredStates[0]); //041
+    frontLeft.setDesiredState(desiredStates[1]); //1
+    backLeft.setDesiredState(desiredStates[3]); //3
+    backRight.setDesiredState(desiredStates[2]); //2
+
+    
   }
 
   public void resetPose(Pose2d pose) {
