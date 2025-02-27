@@ -27,23 +27,23 @@ import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Constants.OIConstants;
-// import frc.robot.commands.AlgaeAngleCommand;
-// import frc.robot.commands.AlgaeEffectorCommand;
-// import frc.robot.commands.CoralEffectorCommand;
-// import frc.robot.commands.ClimberCommand;
-// import frc.robot.commands.ElevatorCommand;
+import frc.robot.commands.AlgaeAngleCommand;
+import frc.robot.commands.AlgaeEffectorCommand;
+import frc.robot.commands.CoralEffectorCommand;
+import frc.robot.commands.ClimberCommand;
+import frc.robot.commands.ElevatorCommand;
 import frc.robot.commands.SwerveJoystickCmd;
 import frc.robot.commands.AutoCommands.LimeLightAuto;
 import frc.robot.commands.AutoCommands.OutAndBack;
 import frc.robot.commands.AutoCommands.SimpleAuto;
-// import frc.robot.subsystems.AlgaeAngle;
-// import frc.robot.subsystems.AlgaeEffector;
-// import frc.robot.subsystems.Climber;
-// import frc.robot.subsystems.CoralEffector;
-// import frc.robot.subsystems.Elevator;
+import frc.robot.subsystems.AlgaeAngle;
+import frc.robot.subsystems.AlgaeEffector;
+import frc.robot.subsystems.Climber;
+import frc.robot.subsystems.CoralEffector;
+import frc.robot.subsystems.Elevator;
 import frc.robot.subsystems.SwerveSubsystem;
-// import frc.robot.commands.CoralPlateAngleCommand;
-// import frc.robot.subsystems.CoralPlateAngle;
+import frc.robot.commands.CoralPlateAngleCommand;
+import frc.robot.subsystems.CoralPlateAngle;
 
 
 /**
@@ -59,19 +59,19 @@ public class RobotContainer {
 
   public final SwerveSubsystem swerveSubsystem = new SwerveSubsystem();
 
-  // //ALGAE
-  // private final AlgaeEffector algaeEffector = new AlgaeEffector();
-  // private final AlgaeAngle algaeAngle = new AlgaeAngle();
+  //ALGAE
+  private final AlgaeEffector algaeEffector = new AlgaeEffector();
+  private final AlgaeAngle algaeAngle = new AlgaeAngle();
 
-  // //CORAL
-  // private final CoralEffector coralEffector = new CoralEffector();
-  // private final CoralPlateAngle coralPlateAngle = new CoralPlateAngle();
+  //CORAL
+  private final CoralEffector coralEffector = new CoralEffector();
+  private final CoralPlateAngle coralPlateAngle = new CoralPlateAngle();
 
-  // //CLIMBER
-  // private final Climber climber = new Climber();
+  //CLIMBER
+  private final Climber climber = new Climber();
 
-  // //ELEVATOR
-  // private final Elevator elevator = new Elevator();
+  //ELEVATOR
+  private final Elevator elevator = new Elevator();
 
   private final SendableChooser<Command> autoChooser;
   public static final SendableChooser<Integer> limelightFilterChooser = new SendableChooser<>();
@@ -92,15 +92,15 @@ public class RobotContainer {
       driverJoystick
     ));
 
-    // algaeEffector.setDefaultCommand(new AlgaeEffectorCommand(algaeEffector, operatorJoystick));
-    // algaeAngle.setDefaultCommand(new AlgaeAngleCommand(algaeAngle, operatorJoystick));
+    algaeEffector.setDefaultCommand(new AlgaeEffectorCommand(algaeEffector, operatorJoystick));
+    algaeAngle.setDefaultCommand(new AlgaeAngleCommand(algaeAngle, operatorJoystick));
 
-    // coralEffector.setDefaultCommand(new CoralEffectorCommand(coralEffector, operatorJoystick));
-    // coralPlateAngle.setDefaultCommand(new CoralPlateAngleCommand(coralPlateAngle, operatorJoystick)); //here, for example, I think I can change to button box after it's configed
+    coralEffector.setDefaultCommand(new CoralEffectorCommand(coralEffector, operatorJoystick));
+    coralPlateAngle.setDefaultCommand(new CoralPlateAngleCommand(coralPlateAngle, operatorJoystick)); //here, for example, I think I can change to button box after it's configed
 
-    // climber.setDefaultCommand(new ClimberCommand(climber, operatorJoystick));
+    climber.setDefaultCommand(new ClimberCommand(climber, operatorJoystick));
 
-    // elevator.setDefaultCommand(new ElevatorCommand(elevator, operatorJoystick));
+    elevator.setDefaultCommand(new ElevatorCommand(elevator, operatorJoystick));
   
     autoChooser = AutoBuilder.buildAutoChooser();//new SendableChooser<>(); 
     Command auto1 = new SimpleAuto(swerveSubsystem, 1, 0, 0);
