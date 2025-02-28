@@ -56,19 +56,20 @@ public class RobotContainer {
   // private final CommandXboxController m_driverController = new CommandXboxController(OIConstants.kDriverControllerPort);
   private final Joystick driverJoystick = new Joystick(OIConstants.kDriverControllerPort);
   private final Joystick operatorJoystick = new Joystick(OIConstants.kOperatorControllerPort);
+  private final Joystick buttonBox = new Joystick(OIConstants.kButtonBoxPort);
 
   public final SwerveSubsystem swerveSubsystem = new SwerveSubsystem();
 
   //ALGAE
   private final AlgaeEffector algaeEffector = new AlgaeEffector();
-  private final AlgaeAngle algaeAngle = new AlgaeAngle();
+  // private final AlgaeAngle algaeAngle = new AlgaeAngle();
 
-  //CORAL
-  private final CoralEffector coralEffector = new CoralEffector();
-  private final CoralPlateAngle coralPlateAngle = new CoralPlateAngle();
+  // //CORAL
+  // private final CoralEffector coralEffector = new CoralEffector();
+  // private final CoralPlateAngle coralPlateAngle = new CoralPlateAngle();
 
-  //CLIMBER
-  private final Climber climber = new Climber();
+  // //CLIMBER
+  // private final Climber climber = new Climber();
 
   //ELEVATOR
   private final Elevator elevator = new Elevator();
@@ -93,12 +94,12 @@ public class RobotContainer {
     ));
 
     algaeEffector.setDefaultCommand(new AlgaeEffectorCommand(algaeEffector, operatorJoystick));
-    algaeAngle.setDefaultCommand(new AlgaeAngleCommand(algaeAngle, operatorJoystick));
+    // algaeAngle.setDefaultCommand(new AlgaeAngleCommand(algaeAngle, operatorJoystick));
 
-    coralEffector.setDefaultCommand(new CoralEffectorCommand(coralEffector, operatorJoystick));
-    coralPlateAngle.setDefaultCommand(new CoralPlateAngleCommand(coralPlateAngle, operatorJoystick)); //here, for example, I think I can change to button box after it's configed
+    // coralEffector.setDefaultCommand(new CoralEffectorCommand(coralEffector, operatorJoystick));
+    // coralPlateAngle.setDefaultCommand(new CoralPlateAngleCommand(coralPlateAngle, operatorJoystick)); //here, for example, I think I can change to button box after it's configed
 
-    climber.setDefaultCommand(new ClimberCommand(climber, operatorJoystick));
+    // climber.setDefaultCommand(new ClimberCommand(climber, operatorJoystick));
 
     elevator.setDefaultCommand(new ElevatorCommand(elevator, operatorJoystick));
   
