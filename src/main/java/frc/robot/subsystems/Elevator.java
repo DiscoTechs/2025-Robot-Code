@@ -15,6 +15,7 @@ public class Elevator extends SubsystemBase {
     
     public Elevator() {
         sensor = new DigitalInput(Constants.ElavatorConstants.ELAVATOR_SENSOR);
+        System.out.println(sensor);
         intakeMotor = new SparkMax(Constants.ElavatorConstants.kElevatorMotorPort, MotorType.kBrushless);
     }
 
@@ -44,6 +45,7 @@ public class Elevator extends SubsystemBase {
 
     @Override
     public void periodic() {
+        System.out.println(getSensorValue());
         // This method will be called once per scheduler run
         SmartDashboard.putBoolean("Sensor", getSensorValue());
     }
