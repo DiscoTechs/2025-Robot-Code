@@ -126,6 +126,7 @@ public final class Constants {
     public static final class OIConstants {
         public static final int kDriverControllerPort = 0;
         public static final int kOperatorControllerPort = 1;
+        public static final int kButtonBoxPort = 2;
 
         public static final int kDriverYAxis = 1;
         public static final int kDriverXAxis = 0;
@@ -166,7 +167,7 @@ public final class Constants {
     // ------------ CORAL CONSTANTS (CAN IDS AND RESPECTIVE BUTTONS TO CONTROL THEM) ------------ //
     public static final class CoralConstants {
         //CORAL CAN IDS
-        public static final int kLeftCoralEffectorMotorPort =  28; public static final int kRightCoralEffectorMotorPort =  41; //temporary CAN ID
+        public static final int kLeftCoralEffectorMotorPort =  31; public static final int kRightCoralEffectorMotorPort =  41; //temporary CAN ID
             public static final int CORAL_INTAKE = 5;
             public static final int CORAL_OUTTAKE = 6;
         public static final int kCoralPlateAngleMotorPort = 42; //temporary CAN ID
@@ -184,7 +185,7 @@ public final class Constants {
     // ------------ ELEVATOR CONSTANTS (CAN IDS AND RESPECTIVE BUTTONS TO CONTROL THEM) ------------ //
     public static final class ElavatorConstants {
         //ELEVATOR CAN IDS - NEED TO ADD MORE AS ELEVATOR HAS MORE MOTORS
-        public static final int kElevatorMotorPort = 31;
+        public static final int kElevatorMotorPort = 28;
             public static final int L1 = 1;
             public static final int L2 = 2;
             public static final int L3 = 3;
