@@ -10,43 +10,117 @@ import com.revrobotics.spark.SparkLowLevel.MotorType;
 
 
 public class Elevator extends SubsystemBase {
-    final DigitalInput sensor;
-    private final SparkMax intakeMotor;
+    final DigitalInput sensor1;
+    final DigitalInput sensor2;
+    final DigitalInput sensor3;
+    final DigitalInput sensor4;
+    int currentLevel = 1;
+    private final SparkMax rightMotor;
+    private final SparkMax leftMotor;
     
     public Elevator() {
-        sensor = new DigitalInput(Constants.ElavatorConstants.ELAVATOR_SENSOR);
-        System.out.println(sensor);
-        intakeMotor = new SparkMax(Constants.ElavatorConstants.kElevatorMotorPort, MotorType.kBrushless);
+        sensor1 = new DigitalInput(Constants.ElavatorConstants.ELAVATOR_SENSOR_1);
+        System.out.println(sensor1);
+
+        sensor2 = new DigitalInput(Constants.ElavatorConstants.ELAVATOR_SENSOR_2);
+        sensor3 = new DigitalInput(Constants.ElavatorConstants.ELAVATOR_SENSOR_3);
+        sensor4 = new DigitalInput(Constants.ElavatorConstants.ELAVATOR_SENSOR_4);
+
+        rightMotor = new SparkMax(Constants.ElavatorConstants.kRightElevatorMotorPort, MotorType.kBrushless);
+        leftMotor = new SparkMax(Constants.ElavatorConstants.kLeftElevatorMotorPort, MotorType.kBrushless);
     }
 
-    public boolean getSensorValue() {
-        return !sensor.get();
+    public boolean L1getSensorValue() {
+        return !sensor1.get();
+    }
+
+    public boolean L2getSensorValue() {
+        return !sensor2.get();
+    }
+
+    public boolean L3getSensorValue() {
+        return !sensor3.get();
+    }
+
+    public boolean L4getSensorValue() {
+        return !sensor4.get();
+    }
+
+    public int CurrentLevel() {
+        return currentLevel;
+    }
+
+    public void moveUp(){
+        rightMotor.set(0.5);
+        leftMotor.set(-0.5);
+    }
+
+    public void moveDown(){
+        rightMotor.set(-0.5);
+        leftMotor.set(0.5);
     }
 
     public void firstLevel() {
-        intakeMotor.set(0.1); //temporary --> HAVE to change to closedLoop/on-axel encoder
+        
+        if(CurrentLevel() > 1){
+            while(!L1getSensorValue()){
+                moveDown();
+            }
+            currentLevel = 1;
+        }
     }
 
     public void secondLevel() {
-        intakeMotor.set(0.3); //temporary --> HAVE to change to closedLoop/on-axel encoder
+        if(CurrentLevel() > 2){
+            while(!L2getSensorValue()){
+                moveDown();
+            }
+            currentLevel = 2;
+        }
+        else if(CurrentLevel() < 2){
+            while(!L2getSensorValue()){
+                moveUp();
+            }
+            currentLevel = 2;
+        }
     }
 
     public void thirdLevel() {
-        intakeMotor.set(0.7); //temporary --> HAVE to change to closedLoop/on-axel encoder
+        if(CurrentLevel() > 3){
+            while(!L3getSensorValue()){
+                moveDown();
+            }
+            currentLevel = 3;
+        }
+        else if(CurrentLevel() < 3){
+            while(!L3getSensorValue()){
+                moveUp();
+            }
+            currentLevel = 3;
+        }
     }
 
     public void fourthLevel() {
-        intakeMotor.set(0.9); //temporary --> HAVE to change to closedLoop//on-axel encoder
+        if(CurrentLevel() < 4){
+            while(!L4getSensorValue()){
+                moveUp();
+            }
+            currentLevel = 4;
+        }
     }
 
     public void stop() {
-        intakeMotor.set(0.0);
+        rightMotor.set(0.0);
+        leftMotor.set(0.0);
     }
 
     @Override
     public void periodic() {
-        System.out.println(getSensorValue());
+        //System.out.println(L1getSensorValue());
         // This method will be called once per scheduler run
-        SmartDashboard.putBoolean("Sensor", getSensorValue());
+        SmartDashboard.putBoolean("Sensor 1", L1getSensorValue());
+        SmartDashboard.putBoolean("Sensor 2", L2getSensorValue());
+        SmartDashboard.putBoolean("Sensor 3", L3getSensorValue());
+        SmartDashboard.putBoolean("Sensor 4", L4getSensorValue());
     }
 }

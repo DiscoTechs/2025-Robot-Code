@@ -185,14 +185,18 @@ public final class Constants {
     // ------------ ELEVATOR CONSTANTS (CAN IDS AND RESPECTIVE BUTTONS TO CONTROL THEM) ------------ //
     public static final class ElavatorConstants {
         //ELEVATOR CAN IDS - NEED TO ADD MORE AS ELEVATOR HAS MORE MOTORS
-        public static final int kElevatorMotorPort = 28;
+        public static final int kRightElevatorMotorPort = 28;
+        public static final int kLeftElevatorMotorPort = 29;
             public static final int L1 = 1;
             public static final int L2 = 2;
             public static final int L3 = 3;
             public static final int L4 = 4;
         
         //SENSOR PORT
-        public static final int ELAVATOR_SENSOR = 0;
+        public static final int ELAVATOR_SENSOR_1 = 0;
+        public static final int ELAVATOR_SENSOR_2 = 1;
+        public static final int ELAVATOR_SENSOR_3 = 2;
+        public static final int ELAVATOR_SENSOR_4 = 3;
     }
 
     // ------------ CLIMBER CONSTANTS (CAN IDS AND RESPECTIVE BUTTONS TO CONTROL THEM) ------------ //

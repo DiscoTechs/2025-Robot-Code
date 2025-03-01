@@ -34,9 +34,7 @@ public class ElevatorCommand extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (elevator.getSensorValue()) {
-      elevator.stop();
-    } else if (stick.getRawButton(Constants.ElavatorConstants.L1)) {
+    if (stick.getRawButton(Constants.ElavatorConstants.L1)) {
       elevator.firstLevel();
     } else if (stick.getRawButton(Constants.ElavatorConstants.L2)) {
       elevator.secondLevel();
