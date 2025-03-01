@@ -9,27 +9,48 @@ import com.revrobotics.spark.SparkMax;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
 
 
-public class Elevator extends SubsystemBase {
+public class ShooterElevator extends SubsystemBase {
+    final DigitalInput coralSensor;
+    final DigitalInput sensor0;
     final DigitalInput sensor1;
     final DigitalInput sensor2;
     final DigitalInput sensor3;
     final DigitalInput sensor4;
+    final DigitalInput sensor5;
     int currentLevel = 1;
+    boolean coralPrevBlocked = false;
     private final SparkMax rightMotor;
     private final SparkMax leftMotor;
     
-    public Elevator() {
+    private final SparkMax leftIntakeMotor;
+    private final SparkMax rightIntakeMotor;
+    
+    public ShooterElevator() { 
+        sensor0 = new DigitalInput(Constants.ElavatorConstants.ELAVATOR_SENSOR_0);
         sensor1 = new DigitalInput(Constants.ElavatorConstants.ELAVATOR_SENSOR_1);
         System.out.println(sensor1);
 
         sensor2 = new DigitalInput(Constants.ElavatorConstants.ELAVATOR_SENSOR_2);
         sensor3 = new DigitalInput(Constants.ElavatorConstants.ELAVATOR_SENSOR_3);
         sensor4 = new DigitalInput(Constants.ElavatorConstants.ELAVATOR_SENSOR_4);
+        sensor5 = new DigitalInput(Constants.ElavatorConstants.ELAVATOR_SENSOR_5);
 
         rightMotor = new SparkMax(Constants.ElavatorConstants.kRightElevatorMotorPort, MotorType.kBrushless);
         leftMotor = new SparkMax(Constants.ElavatorConstants.kLeftElevatorMotorPort, MotorType.kBrushless);
+
+        //CORAL EFFECTOR
+        coralSensor = new DigitalInput(Constants.ElavatorConstants.CORAL_SENSOR);
+        leftIntakeMotor = new SparkMax(Constants.CoralConstants.kLeftCoralEffectorMotorPort, MotorType.kBrushless);
+        rightIntakeMotor = new SparkMax(Constants.CoralConstants.kRightCoralEffectorMotorPort, MotorType.kBrushless);
     }
 
+    public boolean detectCoral() {
+        if (!coralSensor.get() == false) { //change true/false after understanding what the sensor truely outputs
+            coralPrevBlocked = true;
+        }
+        return !coralSensor.get();
+    }
+    
     public boolean L1getSensorValue() {
         return !sensor1.get();
     }
@@ -44,6 +65,10 @@ public class Elevator extends SubsystemBase {
 
     public boolean L4getSensorValue() {
         return !sensor4.get();
+    }
+
+    public boolean reachedLimit() {
+        return !sensor5.get(); //change sign here after learning what sensor outputs
     }
 
     public int CurrentLevel() {
@@ -108,11 +133,34 @@ public class Elevator extends SubsystemBase {
             currentLevel = 4;
         }
     }
+    
+    public void stopWhenCrossed() {
+        if (coralPrevBlocked && (!detectCoral())) { //again, potnetially add explamation point after understanding what sensor truly outputs
+            stopShooter();
+            coralPrevBlocked = false;
+        }
+    }
 
-    public void stop() {
+    public void intake() {
+        leftIntakeMotor.set(0.5); //update sign/speed accordingly
+        rightIntakeMotor.set(-0.5); //update sign/speed accordingly
+    }
+
+    public void outtake() {
+        leftIntakeMotor.set(-0.5); //update sign/speed accordingly
+        rightIntakeMotor.set(0.5); //update sign/speed accordingly
+    }
+
+    public void stopElevator() {
         rightMotor.set(0.0);
         leftMotor.set(0.0);
     }
+
+    public void stopShooter() {
+        leftIntakeMotor.set(0.0);
+        rightIntakeMotor.set(0.0);
+    }
+
 
     @Override
     public void periodic() {
