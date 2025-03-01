@@ -84,8 +84,8 @@ public class RobotContainer {
     
     swerveSubsystem.setDefaultCommand(new SwerveJoystickCmd(
       swerveSubsystem,
-      () -> driverJoystick.getRawAxis(OIConstants.kDriverYAxis),
-      () -> driverJoystick.getRawAxis(OIConstants.kDriverXAxis),
+      () -> -driverJoystick.getRawAxis(OIConstants.kDriverYAxis),
+      () -> -driverJoystick.getRawAxis(OIConstants.kDriverXAxis),
       () -> -driverJoystick.getRawAxis(OIConstants.kDriverRotAxis),
       () -> !driverJoystick.getRawButton(OIConstants.RIGHT_BUMPER),
       () -> driverJoystick.getRawButton(OIConstants.XBX_B),
@@ -199,7 +199,7 @@ public class RobotContainer {
     }*/
 
     try {
-        return new PathPlannerAuto("Slow Auto");
+        return new PathPlannerAuto("Blue 2 To Reef Auto");
     } catch (Exception e) {
         DriverStation.reportError("Error loading autonomous path: " + e.getMessage(), e.getStackTrace());
         return Commands.none();
