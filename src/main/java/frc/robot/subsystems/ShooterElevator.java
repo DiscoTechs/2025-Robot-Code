@@ -45,10 +45,17 @@ public class ShooterElevator extends SubsystemBase {
     }
 
     public boolean detectCoral() {
-        if (!coralSensor.get() == false) { //change true/false after understanding what the sensor truely outputs
+        return !coralSensor.get();
+    }
+
+    public void changeCoralBlockedStatus() {
+        if (detectCoral()) { //change true/false after understanding what the sensor truely outputs
             coralPrevBlocked = true;
         }
-        return !coralSensor.get();
+    }
+
+    public boolean getCoralPrevBlocked() {
+        return coralPrevBlocked;
     }
     
     public boolean L1getSensorValue() {
@@ -134,11 +141,12 @@ public class ShooterElevator extends SubsystemBase {
         }
     }
     
-    public void stopWhenCrossed() {
-        if (coralPrevBlocked && (!detectCoral())) { //again, potnetially add explamation point after understanding what sensor truly outputs
-            stopShooter();
+    public boolean coralCrossed() {
+        boolean temp = getCoralPrevBlocked();
+        if (getCoralPrevBlocked() && (!detectCoral())) {
             coralPrevBlocked = false;
         }
+        return (temp && (!detectCoral())); //again, potnetially add explamation point after understanding what sensor truly outputs
     }
 
     public void intake() {

@@ -26,11 +26,11 @@ public class CoralPlateAngle extends SubsystemBase {
   }
  
   public void angleUp() {
-    angleMotor.set(0.3); //temporary --> have to change to closedLoop/on-axel encoder
+    angleMotor.set(0.2); //temporary --> have to change to closedLoop/on-axel encoder
   }
 
   public void angleDown() {
-    angleMotor.set(-0.3); //temporary --> have to change to closedLoop/on-axel encoder
+    angleMotor.set(-0.2); //temporary --> have to change to closedLoop/on-axel encoder
   }
 
   public void stopAngle()  {
@@ -47,13 +47,13 @@ public class CoralPlateAngle extends SubsystemBase {
 
   public void angleUpToDefault() {
     while(!inRange()) { //just means while not within the range (default - delta, default + delta) [centered around default], then angle up the plate
-      angleMotor.set(Constants.CoralConstants.kAngleSpeed); //adjust SIGN (espcially) and speed (now in constants for ease) as needed
+      angleMotor.set(-Constants.CoralConstants.kAngleSpeed); //adjust SIGN (espcially) and speed (now in constants for ease) as needed
     }
   }
 
   public void angleDownToDefault() {
     while(!inRange()) { //just means while not within the range (default - delta, default + delta) [centered around default], then angle down the plate
-      angleMotor.set(-Constants.CoralConstants.kAngleSpeed); //adjust SIGN (espcially) and speed (now in constants for ease) as needed
+      angleMotor.set(Constants.CoralConstants.kAngleSpeed); //adjust SIGN (espcially) and speed (now in constants for ease) as needed
     }
   }
 

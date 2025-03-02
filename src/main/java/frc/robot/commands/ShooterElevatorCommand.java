@@ -29,12 +29,16 @@ public class ShooterElevatorCommand extends Command {
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    shooterElevator.stopWhenCrossed();
+    if (shooterElevator.coralCrossed()) {
+      shooterElevator.stopShooter();
+    }
+    
     if (shooterElevator.detectCoral() || shooterElevator.reachedLimit()) { 
       shooterElevator.stopElevator();
     } else if (stick.getRawButton(Constants.ElavatorConstants.L1)) {
@@ -57,6 +61,20 @@ public class ShooterElevatorCommand extends Command {
     } else {
       shooterElevator.stopShooter();
     }
+
+    //manual control of elevator
+    double speed = -stick.getRawAxis(Constants.ElavatorConstants.MANUAL_CONTROL_AXIS); //potnetially change sign from psotive to negative
+    if (shooterElevator.detectCoral() || shooterElevator.reachedLimit()) { 
+      shooterElevator.stopElevator();
+    } else if(speed < 0 && (!shooterElevator.L1getSensorValue())) {
+      shooterElevator.moveDown();
+    } else if (speed > 0) {
+      shooterElevator.moveUp();
+    }
+    else {
+      shooterElevator.stopElevator();
+    }
+    
   }
 
   // Called once the command ends or is interrupted.

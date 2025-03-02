@@ -32,8 +32,9 @@ public class CoralPlateAngleCommand extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    System.out.println(coralPlateAngle.getEncoder());
     //if the button is pressed, then it will move motor so that it is at default value
-    if (stick.getRawButton(Constants.CoralConstants.CORAL_PLATE_ANGLE_DEFAULT)) {
+    /*if (stick.getRawButton(Constants.CoralConstants.CORAL_PLATE_ANGLE_DEFAULT)) {
         if (coralPlateAngle.getEncoder() < Constants.CoralConstants.kDefaultEncoder) { //if below default value (current zero), then will angle up
             coralPlateAngle.angleUpToDefault();
         }
@@ -57,7 +58,21 @@ public class CoralPlateAngleCommand extends Command {
         else {
             coralPlateAngle.stopAngle();
         }
+    }*/
+
+    if ((coralPlateAngle.getEncoder() >= Constants.CoralConstants.MAX_ENCODER_VALUE) || (coralPlateAngle.getEncoder() <= Constants.CoralConstants.MIN_ENCODER_VALUE)) {
+      coralPlateAngle.stopAngle();
     }
+    else if (stick.getRawButton(Constants.CoralConstants.CORAL_PLATE_ANGLE_UP)) {
+      coralPlateAngle.angleUp();
+    }
+    else if (stick.getRawButton(Constants.CoralConstants.CORAL_PLATE_ANGLE_DOWN)) {
+      coralPlateAngle.angleDown();
+    }
+    else {
+      coralPlateAngle.stopAngle();
+    }
+    
   }
 
   // Called once the command ends or is interrupted.

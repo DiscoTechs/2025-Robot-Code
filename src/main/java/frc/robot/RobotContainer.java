@@ -19,6 +19,8 @@ import java.util.function.BiConsumer;
 import com.ctre.phoenix6.swerve.SwerveModule;
 import com.ctre.phoenix6.swerve.SwerveDrivetrain.SwerveControlParameters;
 import com.pathplanner.lib.auto.AutoBuilder;
+import com.pathplanner.lib.auto.NamedCommands;
+
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -77,7 +79,25 @@ public class RobotContainer {
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     configureRobot();
+
+
     //printAbsoluteEncoder();
+
+    //FOR PUTTING COMMANDS AS DROP-DOWN OPTIONS IN UI:
+
+    //swerve = new Swerve();
+    //exampleSubsystem = new ExampleSubsystem();
+
+    // Register Named Commands
+    //NamedCommands.registerCommand("autoBalance", swerve.autoBalanceCommand());
+    //NamedCommands.registerCommand("exampleCommand", exampleSubsystem.exampleCommand());
+    //NamedCommands.registerCommand("someOtherCommand", new SomeOtherCommand());
+
+    // Do all other initialization
+
+    //configureButtonBindings();
+
+    // ...
     
     swerveSubsystem.setDefaultCommand(new SwerveJoystickCmd(
       swerveSubsystem,

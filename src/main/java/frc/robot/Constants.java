@@ -170,15 +170,19 @@ public final class Constants {
         public static final int kLeftCoralEffectorMotorPort =  31; public static final int kRightCoralEffectorMotorPort =  41; //temporary CAN ID
             public static final int CORAL_INTAKE = 5;
             public static final int CORAL_OUTTAKE = 6;
-        public static final int kCoralPlateAngleMotorPort = 42; //temporary CAN ID
-            public static final int CORAL_PLATE_ANGLE_UP = 15;
-            public static final int CORAL_PLATE_ANGLE_DOWN = 16; 
-            public static final int CORAL_PLATE_ANGLE_DEFAULT = 17;
+        public static final int kCoralPlateAngleMotorPort = 32; //final CAN ID
+            public static final int CORAL_PLATE_ANGLE_UP = 1; //15
+            public static final int CORAL_PLATE_ANGLE_DOWN = 2; //16
+            public static final int CORAL_PLATE_ANGLE_DEFAULT = 3; //17
 
         //CORAL DELTA, DEFAULT, SPEED ENCODER VALUES FOR CORALPLATEANGLE
         public static final double kDelta = 0.01; //small value that can be adjusted
-        public static final double kDefaultEncoder = 0; //default through-bore encoder value
-        public static final double kAngleSpeed = 0.5; //default through-bore encoder value
+        public static final double kDefaultEncoder = 0.2; //default through-bore encoder value
+        public static final double kAngleSpeed = 0.2; //default through-bore encoder value
+
+        public static final double MIN_ENCODER_VALUE = 0;
+        public static final double MAX_ENCODER_VALUE = 1;
+        
 
     }
 
@@ -191,6 +195,7 @@ public final class Constants {
             public static final int L2 = 2;
             public static final int L3 = 3;
             public static final int L4 = 4;
+            public static final int MANUAL_CONTROL_AXIS = 1;
         
         //SENSOR PORT
         public static final int CORAL_SENSOR = 7;
