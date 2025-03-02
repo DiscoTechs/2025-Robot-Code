@@ -156,7 +156,7 @@ public final class Constants {
     // ------------ ALGAE CONSTANTS (CAN IDS AND RESPECTIVE BUTTONS TO CONTROL THEM) ------------ //
     public static final class AlgaeConstants {
         //ALGAE CAN IDS
-        public static final int kLeftAlgaeEffectorMotorPort = 26; public static final int kRightAlgaeEffectorMotorPort = 39; //temporary CAN ID
+        public static final int kLeftAlgaeEffectorMotorPort = 28; public static final int kRightAlgaeEffectorMotorPort = 39; //temporary CAN ID
             public static final int ALGAE_INTAKE = 7;
             public static final int ALGAE_OUTTAKE = 8;
         public static final int kAlgaeAngleMotorPort = 27; //temporary CAN ID
@@ -185,14 +185,21 @@ public final class Constants {
     // ------------ ELEVATOR CONSTANTS (CAN IDS AND RESPECTIVE BUTTONS TO CONTROL THEM) ------------ //
     public static final class ElavatorConstants {
         //ELEVATOR CAN IDS - NEED TO ADD MORE AS ELEVATOR HAS MORE MOTORS
-        public static final int kElevatorMotorPort = 28;
+        public static final int kRightElevatorMotorPort = 26;
+        public static final int kLeftElevatorMotorPort = 29;
             public static final int L1 = 1;
             public static final int L2 = 2;
             public static final int L3 = 3;
             public static final int L4 = 4;
         
         //SENSOR PORT
-        public static final int ELAVATOR_SENSOR = 0;
+        public static final int CORAL_SENSOR = 7;
+        public static final int ELAVATOR_SENSOR_0 = 0;
+        public static final int ELAVATOR_SENSOR_1 = 1;
+        public static final int ELAVATOR_SENSOR_2 = 2;
+        public static final int ELAVATOR_SENSOR_3 = 3;
+        public static final int ELAVATOR_SENSOR_4 = 5;
+        public static final int ELAVATOR_SENSOR_5 = 6;
     }
 
     // ------------ CLIMBER CONSTANTS (CAN IDS AND RESPECTIVE BUTTONS TO CONTROL THEM) ------------ //
