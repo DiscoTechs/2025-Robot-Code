@@ -9,14 +9,17 @@ import com.revrobotics.spark.SparkMax;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import edu.wpi.first.wpilibj.DutyCycleEncoder; //on-shaft encoder/through bore encoder
 
 public class AlgaeAngle extends SubsystemBase {
 
   private final SparkMax angleMotor;
+  private final DutyCycleEncoder encoder;
 
   /** Creates a new AlgaeEffector. */
   public AlgaeAngle() {
     angleMotor = new SparkMax(Constants.AlgaeConstants.kAlgaeAngleMotorPort, MotorType.kBrushless);
+    encoder = new DutyCycleEncoder(5, 2*Math.PI, 0.0); // change according to this specification: https://github.wpilib.org/allwpilib/docs/release/java/edu/wpi/first/wpilibj/DutyCycleEncoder.html
   }
 
   public void angleUp() {
@@ -29,6 +32,22 @@ public class AlgaeAngle extends SubsystemBase {
 
   public void stopAngle()  {
     angleMotor.set(0.0);
+  }
+
+  public double getEncoder() {
+    return encoder.get();
+  }
+
+  public void setHighAngle() {
+    while(!(getEncoder() >= Constants.AlgaeConstants.kHighEncoderValue)) {
+      angleUp();
+    }
+  }
+
+  public void setLowAngle() {
+    while(!(getEncoder() <= Constants.AlgaeConstants.kLowEncoderValue)) {
+      angleDown();
+    }
   }
 
   @Override

@@ -162,6 +162,12 @@ public final class Constants {
         public static final int kAlgaeAngleMotorPort = 27; //temporary CAN ID
             public static final int ALGAE_ANGLE_UP = 10;
             public static final int ALGAE_ANGLE_DOWN = 12;
+        
+        public static final int kHighEncoderValue = 1;
+        public static final int kLowEncoderValue = 0;
+
+        public static final int kMaxEncoderValue = 2;
+        public static final int kMinEncoderValue = -1;
     }
 
     // ------------ CORAL CONSTANTS (CAN IDS AND RESPECTIVE BUTTONS TO CONTROL THEM) ------------ //

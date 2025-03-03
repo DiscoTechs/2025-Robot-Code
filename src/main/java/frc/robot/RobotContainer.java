@@ -4,23 +4,11 @@
 
 package frc.robot;
 
-import com.pathplanner.lib.commands.PathPlannerAuto;
-import com.pathplanner.lib.config.PIDConstants;
-import com.pathplanner.lib.config.RobotConfig;
-import com.pathplanner.lib.controllers.PPHolonomicDriveController;
-import com.pathplanner.lib.controllers.PathFollowingController;
-import com.pathplanner.lib.util.DriveFeedforwards;
-
-import edu.wpi.first.math.kinematics.ChassisSpeeds;
-import edu.wpi.first.wpilibj.DriverStation;
-
-import java.util.function.BiConsumer;
-
-import com.ctre.phoenix6.swerve.SwerveModule;
-import com.ctre.phoenix6.swerve.SwerveDrivetrain.SwerveControlParameters;
 import com.pathplanner.lib.auto.AutoBuilder;
-import com.pathplanner.lib.auto.NamedCommands;
+import com.pathplanner.lib.commands.PathPlannerAuto;
+import com.pathplanner.lib.config.RobotConfig;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -29,21 +17,13 @@ import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Constants.OIConstants;
-import frc.robot.commands.AlgaeAngleCommand;
 import frc.robot.commands.AlgaeEffectorCommand;
-import frc.robot.commands.ClimberCommand;
-import frc.robot.commands.ShooterElevatorCommand;
 import frc.robot.commands.SwerveJoystickCmd;
 import frc.robot.commands.AutoCommands.LimeLightAuto;
 import frc.robot.commands.AutoCommands.OutAndBack;
 import frc.robot.commands.AutoCommands.SimpleAuto;
-import frc.robot.subsystems.AlgaeAngle;
 import frc.robot.subsystems.AlgaeEffector;
-import frc.robot.subsystems.Climber;
-import frc.robot.subsystems.ShooterElevator;
 import frc.robot.subsystems.SwerveSubsystem;
-import frc.robot.commands.CoralPlateAngleCommand;
-import frc.robot.subsystems.CoralPlateAngle;
 
 
 /**
@@ -85,13 +65,42 @@ public class RobotContainer {
 
     //FOR PUTTING COMMANDS AS DROP-DOWN OPTIONS IN UI:
 
+    //SAMPLE: KEEP COMMENTED
     //swerve = new Swerve();
     //exampleSubsystem = new ExampleSubsystem();
 
-    // Register Named Commands
+    //CHANGE TO UNCOMMENTED
+    //algaeAngle = new AlgaeAngle();
+    //algaeEffector = new AlgaeEffector();
+    //climber = new Climber();
+    //coralPlateAngle = new CoralPlateAngle();
+    //shooterElevator = new ShooterElevator();
+    //swerveModule = new SwerveModule(); //--> likely keep this commented?
+    //swerveSubsystem = new SwerveSubsystem();
+
+    //SAMPLE: KEEP COMMENTED
     //NamedCommands.registerCommand("autoBalance", swerve.autoBalanceCommand());
     //NamedCommands.registerCommand("exampleCommand", exampleSubsystem.exampleCommand());
     //NamedCommands.registerCommand("someOtherCommand", new SomeOtherCommand());
+    
+    // Register Named Commands: CHANGE TO UNCOMMENTED
+    //NamedCommands.registerCommand("algaeHighAngle", algaeAngle.setHighAngle());
+    //NamedCommands.registerCommand("algaeLowAngle", algaeAngle.setLowAngle());
+    //NamedCommands.registerCommand("algaeIntake", algaeEffector.intake());
+    //NamedCommands.registerCommand("algaeOuttake", algaeEffector.expel());
+
+    //NamedCommands.registerCommand("coralPlateAngleUp", coralPlateAngle.AngleUp());
+    //NamedCommands.registerCommand("coralPlateAngleDown", coralPlateAngle.AngleDown());
+
+    //NamedCommands.registerCommand("coralIntake", shooterElevator.coralIntake());
+    //NamedCommands.registerCommand("coralOuttake", shooterElevator.coralOuttake());
+    
+    //NamedCommands.registerCommand("firstLevel", shooterElevator.firstLevel());
+    //NamedCommands.registerCommand("secondLevel", shooterElevator.secondLevel());
+    //NamedCommands.registerCommand("thirdLevel", shooterElevator.thirdLevel());
+    //NamedCommands.registerCommand("fourthLevel", shooterElevator.fourthLevel());
+    
+
 
     // Do all other initialization
 
