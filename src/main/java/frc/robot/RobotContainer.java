@@ -4,7 +4,9 @@
 
 package frc.robot;
 
+import com.ctre.phoenix6.swerve.SwerveModule;
 import com.pathplanner.lib.auto.AutoBuilder;
+import com.pathplanner.lib.auto.NamedCommands;
 import com.pathplanner.lib.commands.PathPlannerAuto;
 import com.pathplanner.lib.config.RobotConfig;
 
@@ -18,11 +20,16 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Constants.OIConstants;
 import frc.robot.commands.AlgaeEffectorCommand;
+import frc.robot.commands.ShooterElevatorCommand;
 import frc.robot.commands.SwerveJoystickCmd;
 import frc.robot.commands.AutoCommands.LimeLightAuto;
 import frc.robot.commands.AutoCommands.OutAndBack;
 import frc.robot.commands.AutoCommands.SimpleAuto;
+import frc.robot.subsystems.AlgaeAngle;
 import frc.robot.subsystems.AlgaeEffector;
+import frc.robot.subsystems.Climber;
+import frc.robot.subsystems.CoralPlateAngle;
+import frc.robot.subsystems.ShooterElevator;
 import frc.robot.subsystems.SwerveSubsystem;
 
 
@@ -59,46 +66,43 @@ public class RobotContainer {
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     configureRobot();
+    printAbsoluteEncoder();
 
+    // FOR PUTTING COMMANDS AS DROP-DOWN OPTIONS IN UI:
+    // SAMPLE: KEEP COMMENTED
+    // swerve = new Swerve();
+    // exampleSubsystem = new ExampleSubsystem();
 
-    //printAbsoluteEncoder();
+    // CHANGE TO UNCOMMENTED
+    AlgaeAngle algaeAngle = new AlgaeAngle();
+    AlgaeEffector algaeEffector = new AlgaeEffector();
+    Climber climber = new Climber();
+    CoralPlateAngle coralPlateAngle = new CoralPlateAngle();
+    ShooterElevator shooterElevator = new ShooterElevator();
+    // SwerveModule swerveModule = new SwerveModule(); //--> likely keep this commented?
+    swerveSubsystem = new SwerveSubsystem();
 
-    //FOR PUTTING COMMANDS AS DROP-DOWN OPTIONS IN UI:
-
-    //SAMPLE: KEEP COMMENTED
-    //swerve = new Swerve();
-    //exampleSubsystem = new ExampleSubsystem();
-
-    //CHANGE TO UNCOMMENTED
-    //algaeAngle = new AlgaeAngle();
-    //algaeEffector = new AlgaeEffector();
-    //climber = new Climber();
-    //coralPlateAngle = new CoralPlateAngle();
-    //shooterElevator = new ShooterElevator();
-    //swerveModule = new SwerveModule(); //--> likely keep this commented?
-    //swerveSubsystem = new SwerveSubsystem();
-
-    //SAMPLE: KEEP COMMENTED
-    //NamedCommands.registerCommand("autoBalance", swerve.autoBalanceCommand());
-    //NamedCommands.registerCommand("exampleCommand", exampleSubsystem.exampleCommand());
-    //NamedCommands.registerCommand("someOtherCommand", new SomeOtherCommand());
+    // SAMPLE: KEEP COMMENTED
+    // NamedCommands.registerCommand("autoBalance", swerve.autoBalanceCommand());
+    // NamedCommands.registerCommand("exampleCommand", exampleSubsystem.exampleCommand());
+    // NamedCommands.registerCommand("someOtherCommand", new SomeOtherCommand());
     
     // Register Named Commands: CHANGE TO UNCOMMENTED
-    //NamedCommands.registerCommand("algaeHighAngle", algaeAngle.setHighAngle());
-    //NamedCommands.registerCommand("algaeLowAngle", algaeAngle.setLowAngle());
-    //NamedCommands.registerCommand("algaeIntake", algaeEffector.intake());
-    //NamedCommands.registerCommand("algaeOuttake", algaeEffector.expel());
+    // NamedCommands.registerCommand("algaeHighAngle", algaeAngle.setHighAngle());
+    // NamedCommands.registerCommand("algaeLowAngle", algaeAngle.setLowAngle());
+    // NamedCommands.registerCommand("algaeIntake", algaeEffector.intake());
+    // NamedCommands.registerCommand("algaeOuttake", algaeEffector.expel());
 
-    //NamedCommands.registerCommand("coralPlateAngleUp", coralPlateAngle.AngleUp());
-    //NamedCommands.registerCommand("coralPlateAngleDown", coralPlateAngle.AngleDown());
+    NamedCommands.registerCommand("coralPlateAngleUp", new CoralPlateAngle.PlateAngleUp());
+    NamedCommands.registerCommand("coralPlateAngleDown", coralPlateAngle.AngleDown());
 
-    //NamedCommands.registerCommand("coralIntake", shooterElevator.coralIntake());
-    //NamedCommands.registerCommand("coralOuttake", shooterElevator.coralOuttake());
+    NamedCommands.registerCommand("coralIntake", shooterElevator.coralIntake());
+    NamedCommands.registerCommand("coralOuttake", shooterElevator.coralOuttake());
     
-    //NamedCommands.registerCommand("firstLevel", shooterElevator.firstLevel());
-    //NamedCommands.registerCommand("secondLevel", shooterElevator.secondLevel());
-    //NamedCommands.registerCommand("thirdLevel", shooterElevator.thirdLevel());
-    //NamedCommands.registerCommand("fourthLevel", shooterElevator.fourthLevel());
+    NamedCommands.registerCommand("firstLevel", new ShooterElevatorCommand.ElevatorLevelOne());
+    // NamedCommands.registerCommand("secondLevel", new ShooterElevatorCommand.ElevatorLevelTwo());
+    // NamedCommands.registerCommand("thirdLevel", new ShooterElevatorCommand.ElevatorLevelThird());
+    NamedCommands.registerCommand("fourthLevel", new ShooterElevatorCommand.ElevatorLevelForth());
     
 
 

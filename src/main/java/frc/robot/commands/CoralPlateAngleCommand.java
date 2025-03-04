@@ -84,4 +84,6 @@ public class CoralPlateAngleCommand extends Command {
   public boolean isFinished() {
     return false;
   }
+
+  // Add the subcommand here jake
 }

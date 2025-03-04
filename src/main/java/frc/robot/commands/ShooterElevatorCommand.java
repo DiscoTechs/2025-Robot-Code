@@ -6,10 +6,8 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.subsystems.ShooterElevator;
 import frc.robot.Constants;
-import edu.wpi.first.wpilibj.Joystick;
-
+import frc.robot.subsystems.ShooterElevator;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
 public class ShooterElevatorCommand extends Command {
@@ -36,14 +34,14 @@ public class ShooterElevatorCommand extends Command {
   @Override
   public void execute() {
     if (shooterElevator.detectCoral()) {
-      while(shooterElevator.detectCoral()) {
+      while (shooterElevator.detectCoral()) {
         shooterElevator.outtake();
         shooterElevator.stopElevator();
       }
       shooterElevator.stopShooter();
     }
 
-    if (shooterElevator.detectCoral() || shooterElevator.reachedLimit()) { 
+    if (shooterElevator.detectCoral() || shooterElevator.reachedLimit()) {
       shooterElevator.stopElevator();
     } else if (stick.getRawButton(Constants.ElavatorConstants.L1)) {
       shooterElevator.firstLevel();
@@ -57,7 +55,7 @@ public class ShooterElevatorCommand extends Command {
       shooterElevator.stopElevator();
     }
 
-    //CORAL SHOOTER
+    // CORAL SHOOTER
     if (stick.getRawButton(Constants.CoralConstants.CORAL_INTAKE)) {
       shooterElevator.intake();
     } else if (stick.getRawButton(Constants.CoralConstants.CORAL_OUTTAKE)) {
@@ -66,28 +64,85 @@ public class ShooterElevatorCommand extends Command {
       shooterElevator.stopShooter();
     }
 
-    //manual control of elevator
-    double speed = -stick.getRawAxis(Constants.ElavatorConstants.MANUAL_CONTROL_AXIS); //potnetially change sign from psotive to negative
-    if (shooterElevator.detectCoral() || shooterElevator.reachedLimit()) { 
+    // manual control of elevator
+    double speed = -stick.getRawAxis(Constants.ElavatorConstants.MANUAL_CONTROL_AXIS); // potnetially change sign from
+                                                                                       // psotive to negative
+    if (shooterElevator.detectCoral() || shooterElevator.reachedLimit()) {
       shooterElevator.stopElevator();
-    } else if(speed < 0 && (!shooterElevator.L1getSensorValue())) {
+    } else if (speed < 0 && (!shooterElevator.L1getSensorValue())) {
       shooterElevator.moveDown();
     } else if (speed > 0) {
       shooterElevator.moveUp();
-    }
-    else {
+    } else {
       shooterElevator.stopElevator();
     }
-    
+
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+  }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
     return false;
+  }
+
+  public class ElevatorLevelOne extends Command {
+    public ElevatorLevelOne() {
+      addRequirements();
+    }
+
+    @Override
+    public void initialize() {}
+
+    @Override
+    public void execute() {
+      shooterElevator.firstLevel();
+    }
+  }
+
+  // public class ElevatorLevelTwo extends Command {
+  //   public ElevatorLevelTwo() {
+  //     addRequirements();
+  //   }
+
+  //   @Override
+  //   public void initialize() {}
+
+  //   @Override
+  //   public void execute() {
+  //     shooterElevator.secondLevel();
+  //   }
+  // }
+
+  // public class ElevatorLevelThird extends Command {
+  //   public ElevatorLevelThird() {
+  //     addRequirements();
+  //   }
+
+  //   @Override
+  //   public void initialize() {}
+
+  //   @Override
+  //   public void execute() {
+  //     shooterElevator.thirdLevel();
+  //   }
+  // }
+
+  public class ElevatorLevelForth extends Command {
+    public ElevatorLevelForth() {
+      addRequirements();
+    }
+
+    @Override
+    public void initialize() {}
+
+    @Override
+    public void execute() {
+      shooterElevator.fourthLevel();
+    }
   }
 }

@@ -7,9 +7,9 @@ package frc.robot.subsystems;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
 import com.revrobotics.spark.SparkMax;
 
+import edu.wpi.first.wpilibj.DutyCycleEncoder; //on-shaft encoder/through bore encoder
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
-import edu.wpi.first.wpilibj.DutyCycleEncoder; //on-shaft encoder/through bore encoder
 
 public class AlgaeAngle extends SubsystemBase {
 
@@ -39,13 +39,13 @@ public class AlgaeAngle extends SubsystemBase {
   }
 
   public void setHighAngle() {
-    while(!(getEncoder() >= Constants.AlgaeConstants.kHighEncoderValue)) {
+    while (!(getEncoder() >= Constants.AlgaeConstants.kHighEncoderValue)) {
       angleUp();
     }
   }
 
   public void setLowAngle() {
-    while(!(getEncoder() <= Constants.AlgaeConstants.kLowEncoderValue)) {
+    while (!(getEncoder() <= Constants.AlgaeConstants.kLowEncoderValue)) {
       angleDown();
     }
   }
