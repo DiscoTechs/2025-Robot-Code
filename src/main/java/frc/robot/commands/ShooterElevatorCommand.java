@@ -34,10 +34,11 @@ public class ShooterElevatorCommand extends Command {
   @Override
   public void execute() {
     if (stick.getRawButton(Constants.CoralConstants.keepGoing)) {
-      while (!shooterElevator.detectCoral()) {
+      shooterElevator.firstLevel();
+      while (!shooterElevator.detectCoral() && !stick.getRawButton(Constants.CoralConstants.ESCAPE)) {
         shooterElevator.outtake();
       }
-      while (shooterElevator.detectCoral()) {
+      while (shooterElevator.detectCoral() && !stick.getRawButton(Constants.CoralConstants.ESCAPE)) {
         shooterElevator.outtake();
         shooterElevator.stopElevator();
       }

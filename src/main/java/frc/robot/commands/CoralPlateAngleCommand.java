@@ -59,20 +59,24 @@ public class CoralPlateAngleCommand extends Command {
             coralPlateAngle.stopAngle();
         }
     }*/
-
-    if ((coralPlateAngle.getEncoder() >= Constants.CoralConstants.MAX_ENCODER_VALUE) || (coralPlateAngle.getEncoder() <= Constants.CoralConstants.MIN_ENCODER_VALUE)) {
-      coralPlateAngle.stopAngle();
+    while (!(stick.getRawButton(Constants.CoralConstants.CORAL_PLATE_ANGLE_UP) || stick.getRawButton(Constants.CoralConstants.CORAL_PLATE_ANGLE_DOWN))) {
+      coralPlateAngle.setDefaultAngle();
     }
-    else if (stick.getRawButton(Constants.CoralConstants.CORAL_PLATE_ANGLE_UP)) {
-      coralPlateAngle.angleUp();
+    while (!stick.getRawButton(Constants.CoralConstants.CORAL_PLATE_ANGLE_DEFAULT)) {
+      //code inside is simple and can be placed outside if while loop logic doesn't work
+      if ((coralPlateAngle.getEncoder() >= Constants.CoralConstants.MAX_ENCODER_VALUE) || (coralPlateAngle.getEncoder() <= Constants.CoralConstants.MIN_ENCODER_VALUE)) {
+        coralPlateAngle.stopAngle();
+      }
+      else if (stick.getRawButton(Constants.CoralConstants.CORAL_PLATE_ANGLE_UP)) {
+        coralPlateAngle.angleUp();
+      }
+      else if (stick.getRawButton(Constants.CoralConstants.CORAL_PLATE_ANGLE_DOWN)) {
+        coralPlateAngle.angleDown();
+      }
+      else {
+        coralPlateAngle.stopAngle();
+      }
     }
-    else if (stick.getRawButton(Constants.CoralConstants.CORAL_PLATE_ANGLE_DOWN)) {
-      coralPlateAngle.angleDown();
-    }
-    else {
-      coralPlateAngle.stopAngle();
-    }
-    
   }
 
   // Called once the command ends or is interrupted.

@@ -157,10 +157,10 @@ public final class Constants {
     public static final class AlgaeConstants {
         //ALGAE CAN IDS
         public static final int kLeftAlgaeEffectorMotorPort = 28; public static final int kRightAlgaeEffectorMotorPort = 39; //temporary CAN ID
-            public static final int ALGAE_INTAKE = 8;
-            public static final int ALGAE_OUTTAKE = 9;
+            public static final int ALGAE_INTAKE = 9;
+            public static final int ALGAE_OUTTAKE = 10;
         public static final int kAlgaeAngleMotorPort = 27; //temporary CAN ID
-            public static final int ALGAE_ANGLE_UP = 10;
+            public static final int ALGAE_ANGLE_UP = 11;
             public static final int ALGAE_ANGLE_DOWN = 12;
         
         public static final int kHighEncoderValue = 1;
@@ -177,6 +177,7 @@ public final class Constants {
             public static final int CORAL_INTAKE = 5;
             public static final int CORAL_OUTTAKE = 6;
             public static final int keepGoing = 7;
+            public static final int ESCAPE = 8;
         public static final int kCoralPlateAngleMotorPort = 32; //final CAN ID
             public static final int CORAL_PLATE_ANGLE_UP = 1; //15
             public static final int CORAL_PLATE_ANGLE_DOWN = 2; //16
