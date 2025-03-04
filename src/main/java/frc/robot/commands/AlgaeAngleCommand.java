@@ -52,4 +52,78 @@ public class AlgaeAngleCommand extends Command {
   public boolean isFinished() {
     return false;
   }
+
+  public class AlgaeUpAngle extends Command {
+    public AlgaeUpAngle() {
+      addRequirements();
+    }
+
+    @Override
+    public void initialize() {}
+
+    @Override
+    public void execute() {
+      algaeAngle.angleUp();
+    }
+  }
+
+  public class AlgaeDownAngle extends Command {
+    public AlgaeDownAngle() {
+      addRequirements();
+    }
+
+    @Override
+    public void initialize() {}
+
+    @Override
+    public void execute() {
+      algaeAngle.angleDown();
+    }
+  }
+
+  public class AlgaeHighSet extends Command {
+    public AlgaeHighSet() {
+      addRequirements();
+    }
+
+    @Override
+    public void initialize() {}
+
+    @Override
+    public void execute() {
+      algaeAngle.setHighAngle();
+    }
+  }
+
+  public class AlgaeLowSet extends Command {
+    public AlgaeLowSet() {
+      addRequirements();
+    }
+
+    @Override
+    public void initialize() {}
+
+    @Override
+    public void execute() {
+      algaeAngle.setLowAngle();
+    }
+  }
+
+  public class AlgaeAngleStop extends Command {
+    public AlgaeAngleStop() {
+      addRequirements();
+    }
+
+    @Override
+    public void initialize() {}
+
+    @Override
+    public void execute() {
+      algaeAngle.stopAngle();
+    }
+  }
+
+
+
+
 }

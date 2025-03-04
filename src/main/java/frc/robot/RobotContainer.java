@@ -19,6 +19,7 @@ import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Constants.OIConstants;
+import frc.robot.commands.AlgaeAngleCommand;
 import frc.robot.commands.AlgaeEffectorCommand;
 import frc.robot.commands.CoralPlateAngleCommand;
 import frc.robot.commands.ShooterElevatorCommand;
@@ -50,16 +51,16 @@ public class RobotContainer {
 
   //ALGAE
   private final AlgaeEffector algaeEffector = new AlgaeEffector();
-  //private final AlgaeAngle algaeAngle = new AlgaeAngle();
+  private final AlgaeAngle algaeAngle = new AlgaeAngle();
 
   // //CORAL
-  //private final CoralPlateAngle coralPlateAngle = new CoralPlateAngle();
+  private final CoralPlateAngle coralPlateAngle = new CoralPlateAngle();
 
   // //CLIMBER
-  //private final Climber climber = new Climber();
+  private final Climber climber = new Climber();
 
   //SHOOTER-ELEVATOR
-  //private final ShooterElevator shooterElevator = new ShooterElevator();
+  private final ShooterElevator shooterElevator = new ShooterElevator();
 
   private final SendableChooser<Command> autoChooser;
   public static final SendableChooser<Integer> limelightFilterChooser = new SendableChooser<>();
@@ -96,20 +97,31 @@ public class RobotContainer {
 
     //FIX CODE BELOW TO REFLECT CODE IN EXTENDED COMMANDS BELOW
 
-    NamedCommands.registerCommand("coralPlateAngleUp", new CoralPlateAngleCommand.UpAngle()); //weird error happens for every first NamedCommands --> maybe have to change the commands to be under the subsystems, as sample code above suggest
-    NamedCommands.registerCommand("coralPlateAngleDown", new CoralPlateAngleCommand.DownAngle());
-    NamedCommands.registerCommand("coralPlateDefault", new CoralPlateAngleCommand.DefaultAngle());
+    CoralPlateAngleCommand coralPlateAngleCommand = new CoralPlateAngleCommand(coralPlateAngle, operatorJoystick);
+    NamedCommands.registerCommand("coralPlateAngleUp", coralPlateAngleCommand.new UpAngle());
+    NamedCommands.registerCommand("coralPlateAngleDown", coralPlateAngleCommand.new DownAngle());
+    NamedCommands.registerCommand("coralPlateDefault", coralPlateAngleCommand.new DefaultAngle());
 
-    NamedCommands.registerCommand("coralIntake", new ShooterElevatorCommand.IntakeCoral());
-    NamedCommands.registerCommand("coralOuttake", new ShooterElevatorCommand.OuttakeCoral());
-    NamedCommands.registerCommand("coralIntakeSequence", new ShooterElevatorCommand.SequenceIntake());
-    
-    NamedCommands.registerCommand("firstLevel", new ShooterElevatorCommand.ElevatorLevelOne());
-    NamedCommands.registerCommand("secondLevel", new ShooterElevatorCommand.ElevatorLevelTwo());
-    NamedCommands.registerCommand("thirdLevel", new ShooterElevatorCommand.ElevatorLevelThird());
-    NamedCommands.registerCommand("fourthLevel", new ShooterElevatorCommand.ElevatorLevelForth());
-    
+    ShooterElevatorCommand shooterElevatorCommand = new ShooterElevatorCommand(shooterElevator, operatorJoystick);
+    NamedCommands.registerCommand("coralIntake", shooterElevatorCommand.new IntakeCoral());
+    NamedCommands.registerCommand("coralOuttake", shooterElevatorCommand.new OuttakeCoral());
+    NamedCommands.registerCommand("coralIntakeSequence", shooterElevatorCommand.new SequenceIntake());
+    NamedCommands.registerCommand("firstLevel", shooterElevatorCommand.new ElevatorLevelOne());
+    NamedCommands.registerCommand("secondLevel", shooterElevatorCommand.new ElevatorLevelTwo());
+    NamedCommands.registerCommand("thirdLevel", shooterElevatorCommand.new ElevatorLevelThird());
+    NamedCommands.registerCommand("fourthLevel", shooterElevatorCommand.new ElevatorLevelForth());
 
+    AlgaeAngleCommand algaeAngleCommand = new AlgaeAngleCommand(algaeAngle, operatorJoystick);
+    NamedCommands.registerCommand("algaeHighAngle", algaeAngleCommand.new AlgaeHighSet());
+    NamedCommands.registerCommand("algaeLowAngle", algaeAngleCommand.new AlgaeLowSet());
+    NamedCommands.registerCommand("algaeAngleUp", algaeAngleCommand.new AlgaeUpAngle());
+    NamedCommands.registerCommand("algaeAngleDown", algaeAngleCommand.new AlgaeDownAngle());
+    NamedCommands.registerCommand("algaeAngleStop", algaeAngleCommand.new AlgaeAngleStop());
+
+    AlgaeEffectorCommand algaeEffectorCommand = new AlgaeEffectorCommand(algaeEffector, operatorJoystick);
+    NamedCommands.registerCommand("algaeIntake", algaeEffectorCommand.new IntakeAlgae());
+    NamedCommands.registerCommand("algaeOuttake", algaeEffectorCommand.new OuttakeAlgae());
+    NamedCommands.registerCommand("algaeIntakeStop", algaeEffectorCommand.new StopIntakeAlgae());
 
     // Do all other initialization
 

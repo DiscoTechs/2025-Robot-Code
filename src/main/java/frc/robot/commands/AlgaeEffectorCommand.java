@@ -50,4 +50,46 @@ public class AlgaeEffectorCommand extends Command {
   public boolean isFinished() {
     return false;
   }
+
+  public class IntakeAlgae extends Command {
+    public IntakeAlgae() {
+      addRequirements();
+    }
+
+    @Override
+    public void initialize() {}
+
+    @Override
+    public void execute() {
+      algaeEffector.intake();
+    }
+  }
+
+  public class OuttakeAlgae extends Command {
+    public OuttakeAlgae() {
+      addRequirements();
+    }
+
+    @Override
+    public void initialize() {}
+
+    @Override
+    public void execute() {
+      algaeEffector.expel();
+    }
+  }
+
+  public class StopIntakeAlgae extends Command {
+    public StopIntakeAlgae() {
+      addRequirements();
+    }
+
+    @Override
+    public void initialize() {}
+
+    @Override
+    public void execute() {
+      algaeEffector.stopIntake();
+    }
+  }
 }
