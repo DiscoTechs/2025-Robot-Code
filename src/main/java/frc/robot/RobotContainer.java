@@ -75,13 +75,13 @@ public class RobotContainer {
     // exampleSubsystem = new ExampleSubsystem();
 
     // CHANGE TO UNCOMMENTED
-    // AlgaeAngle algaeAngle = new AlgaeAngle();
-    // AlgaeEffector algaeEffector = new AlgaeEffector();
-    // Climber climber = new Climber();
-    // CoralPlateAngle coralPlateAngle = new CoralPlateAngle();
-    // ShooterElevator shooterElevator = new ShooterElevator();
-    // SwerveModule swerveModule = new SwerveModule(); //--> likely keep this commented?
-    //SwerveSubsystem swerveSubsystem = new SwerveSubsystem();
+    AlgaeAngle algaeAngle = new AlgaeAngle();
+    AlgaeEffector algaeEffector = new AlgaeEffector();
+    Climber climber = new Climber();
+    CoralPlateAngle coralPlateAngle = new CoralPlateAngle();
+    ShooterElevator shooterElevator = new ShooterElevator();
+    //SwerveModule swerveModule = new SwerveModule(); //--> likely keep this commented?
+    SwerveSubsystem swerveSubsystem = new SwerveSubsystem();
 
     // SAMPLE: KEEP COMMENTED
     // NamedCommands.registerCommand("autoBalance", swerve.autoBalanceCommand());
@@ -96,7 +96,7 @@ public class RobotContainer {
 
     //FIX CODE BELOW TO REFLECT CODE IN EXTENDED COMMANDS BELOW
 
-    NamedCommands.registerCommand("coralPlateAngleUp", new CoralPlateAngleCommand.UpAngle()); //weird error happens for every first NamedCommands
+    NamedCommands.registerCommand("coralPlateAngleUp", new CoralPlateAngleCommand.UpAngle()); //weird error happens for every first NamedCommands --> maybe have to change the commands to be under the subsystems, as sample code above suggest
     NamedCommands.registerCommand("coralPlateAngleDown", new CoralPlateAngleCommand.DownAngle());
     NamedCommands.registerCommand("coralPlateDefault", new CoralPlateAngleCommand.DefaultAngle());
 
