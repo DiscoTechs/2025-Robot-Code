@@ -18,7 +18,6 @@ public class ShooterElevator extends SubsystemBase {
     final DigitalInput sensor4;
     final DigitalInput sensor5;
     int currentLevel = 1;
-    boolean coralPrevBlocked = false;
     private final SparkMax rightMotor;
     private final SparkMax leftMotor;
     
@@ -48,15 +47,6 @@ public class ShooterElevator extends SubsystemBase {
         return !coralSensor.get();
     }
 
-    public void changeCoralBlockedStatus() {
-        if (detectCoral()) { //change true/false after understanding what the sensor truely outputs
-            coralPrevBlocked = true;
-        }
-    }
-
-    public boolean getCoralPrevBlocked() {
-        return coralPrevBlocked;
-    }
     
     public boolean L1getSensorValue() {
         return !sensor1.get();
@@ -139,14 +129,6 @@ public class ShooterElevator extends SubsystemBase {
             }
             currentLevel = 4;
         }
-    }
-    
-    public boolean coralCrossed() {
-        boolean temp = getCoralPrevBlocked();
-        if (getCoralPrevBlocked() && (!detectCoral())) {
-            coralPrevBlocked = false;
-        }
-        return (temp && (!detectCoral())); //again, potnetially add explamation point after understanding what sensor truly outputs
     }
 
     public double speedSetter() {

@@ -33,15 +33,18 @@ public class ShooterElevatorCommand extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (shooterElevator.detectCoral()) {
+    if (stick.getRawButton(Constants.CoralConstants.keepGoing)) {
+      while (!shooterElevator.detectCoral()) {
+        shooterElevator.outtake();
+      }
       while (shooterElevator.detectCoral()) {
         shooterElevator.outtake();
         shooterElevator.stopElevator();
       }
       shooterElevator.stopShooter();
     }
-
-    if (shooterElevator.detectCoral() || shooterElevator.reachedLimit()) {
+   
+    if (shooterElevator.detectCoral() || shooterElevator.reachedLimit()) { 
       shooterElevator.stopElevator();
     } else if (stick.getRawButton(Constants.ElavatorConstants.L1)) {
       shooterElevator.firstLevel();
