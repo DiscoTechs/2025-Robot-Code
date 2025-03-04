@@ -96,7 +96,7 @@ public class RobotContainer {
 
     //FIX CODE BELOW TO REFLECT CODE IN EXTENDED COMMANDS BELOW
 
-    NamedCommands.registerCommand("coralPlateAngleUp", new CoralPlateAngleCommand.UpAngle()); //weird error happens
+    NamedCommands.registerCommand("coralPlateAngleUp", new CoralPlateAngleCommand.UpAngle()); //weird error happens for every first NamedCommands
     NamedCommands.registerCommand("coralPlateAngleDown", new CoralPlateAngleCommand.DownAngle());
     NamedCommands.registerCommand("coralPlateDefault", new CoralPlateAngleCommand.DefaultAngle());
 
