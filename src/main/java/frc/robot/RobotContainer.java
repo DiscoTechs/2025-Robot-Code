@@ -66,7 +66,7 @@ public class RobotContainer {
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     configureRobot();
-    printAbsoluteEncoder();
+    //printAbsoluteEncoder();
 
     // FOR PUTTING COMMANDS AS DROP-DOWN OPTIONS IN UI:
     // SAMPLE: KEEP COMMENTED
@@ -92,6 +92,8 @@ public class RobotContainer {
     // NamedCommands.registerCommand("algaeLowAngle", algaeAngle.setLowAngle());
     // NamedCommands.registerCommand("algaeIntake", algaeEffector.intake());
     // NamedCommands.registerCommand("algaeOuttake", algaeEffector.expel());
+
+    //FIX CODE BELOW TO REFLECT CODE IN EXTENDED COMMANDS BELOW
 
     NamedCommands.registerCommand("coralPlateAngleUp", new CoralPlateAngle.PlateAngleUp());
     NamedCommands.registerCommand("coralPlateAngleDown", coralPlateAngle.AngleDown());
