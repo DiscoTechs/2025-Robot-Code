@@ -33,6 +33,7 @@ public class ShooterElevatorCommand extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    //intake sequence
     if (stick.getRawButton(Constants.CoralConstants.keepGoing)) {
       shooterElevator.firstLevel();
       while (!shooterElevator.detectCoral() && !stick.getRawButton(Constants.CoralConstants.ESCAPE)) {
@@ -44,7 +45,8 @@ public class ShooterElevatorCommand extends Command {
       }
       shooterElevator.stopShooter();
     }
-   
+
+    //elevator movement
     if (shooterElevator.detectCoral() || shooterElevator.reachedLimit()) { 
       shooterElevator.stopElevator();
     } else if (stick.getRawButton(Constants.ElavatorConstants.L1)) {
@@ -59,7 +61,7 @@ public class ShooterElevatorCommand extends Command {
       shooterElevator.stopElevator();
     }
 
-    // CORAL SHOOTER
+    // coral shooter
     if (stick.getRawButton(Constants.CoralConstants.CORAL_INTAKE)) {
       shooterElevator.intake();
     } else if (stick.getRawButton(Constants.CoralConstants.CORAL_OUTTAKE)) {
@@ -175,6 +177,20 @@ public class ShooterElevatorCommand extends Command {
     @Override
     public void execute() {
       shooterElevator.outtake();
+    }
+  }
+
+  public class SequenceIntake extends Command {
+    public SequenceIntake() {
+      addRequirements();
+    }
+
+    @Override
+    public void initialize() {}
+
+    @Override
+    public void execute() {
+      shooterElevator.intakeSequence();
     }
   }
 }

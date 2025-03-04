@@ -101,7 +101,8 @@ public class RobotContainer {
     NamedCommands.registerCommand("coralPlateDefault", new CoralPlateAngleCommand.DefaultAngle());
 
     NamedCommands.registerCommand("coralIntake", new ShooterElevatorCommand.IntakeCoral());
-    NamedCommands.registerCommand("coralOuttake",new ShooterElevatorCommand.OuttakeCoral());
+    NamedCommands.registerCommand("coralOuttake", new ShooterElevatorCommand.OuttakeCoral());
+    NamedCommands.registerCommand("coralIntakeSequence", new ShooterElevatorCommand.SequenceIntake());
     
     NamedCommands.registerCommand("firstLevel", new ShooterElevatorCommand.ElevatorLevelOne());
     NamedCommands.registerCommand("secondLevel", new ShooterElevatorCommand.ElevatorLevelTwo());

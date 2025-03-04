@@ -47,6 +47,17 @@ public class ShooterElevator extends SubsystemBase {
         return !coralSensor.get();
     }
 
+    public void intakeSequence() {
+        firstLevel();
+        while (!detectCoral()) {
+            outtake();
+        }
+        while (detectCoral()) {
+            outtake();
+            stopElevator();
+        }
+        stopShooter();
+    }
     
     public boolean L1getSensorValue() {
         return !sensor1.get();
