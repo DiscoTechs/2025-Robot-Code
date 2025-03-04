@@ -149,14 +149,35 @@ public class ShooterElevator extends SubsystemBase {
         return (temp && (!detectCoral())); //again, potnetially add explamation point after understanding what sensor truly outputs
     }
 
+    public double speedSetter() {
+        double shootingSpeed = 0.5;
+        
+        if (CurrentLevel() == 1) {
+            shootingSpeed = Constants.CoralConstants.l1Speed;
+        }
+        else if (CurrentLevel() == 2){
+            shootingSpeed = Constants.CoralConstants.l2speed;
+        }
+        else if (CurrentLevel() == 3) {
+            shootingSpeed = Constants.CoralConstants.l3speed;
+        }
+        else if (CurrentLevel() == 4) {
+            shootingSpeed = Constants.CoralConstants.l4speed;
+        }
+        else {
+            shootingSpeed = Constants.CoralConstants.defaultSpeed;
+        }
+        return shootingSpeed;
+    }
+
     public void intake() {
-        leftIntakeMotor.set(0.5); //update sign/speed accordingly
-        rightIntakeMotor.set(-0.5); //update sign/speed accordingly
+        leftIntakeMotor.set(speedSetter()); //update sign/speed accordingly
+        rightIntakeMotor.set(-speedSetter()); //update sign/speed accordingly
     }
 
     public void outtake() {
-        leftIntakeMotor.set(-0.5); //update sign/speed accordingly
-        rightIntakeMotor.set(0.5); //update sign/speed accordingly
+        leftIntakeMotor.set(-speedSetter()); //update sign/speed accordingly
+        rightIntakeMotor.set(speedSetter()); //update sign/speed accordingly
     }
 
     public void stopElevator() {

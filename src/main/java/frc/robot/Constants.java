@@ -189,7 +189,12 @@ public final class Constants {
         public static final double MIN_ENCODER_VALUE = 0;
         public static final double MAX_ENCODER_VALUE = 1;
         
+        public static final double l1Speed = 0.3;
+        public static final double l2speed = 0.5;
+        public static final double l3speed = 0.5;
+        public static final double l4speed = 0.3;
 
+        public static final double defaultSpeed = 0.5;
     }
 
     // ------------ ELEVATOR CONSTANTS (CAN IDS AND RESPECTIVE BUTTONS TO CONTROL THEM) ------------ //
