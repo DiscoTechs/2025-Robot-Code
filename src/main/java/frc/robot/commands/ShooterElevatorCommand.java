@@ -35,14 +35,17 @@ public class ShooterElevatorCommand extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (shooterElevator.detectCoral()) {
-      while(shooterElevator.detectCoral()) {
+    if (stick.getRawButton(Constants.CoralConstants.keepGoing)) {
+      while (!shooterElevator.detectCoral()) {
+        shooterElevator.outtake();
+      }
+      while (shooterElevator.detectCoral()) {
         shooterElevator.outtake();
         shooterElevator.stopElevator();
       }
       shooterElevator.stopShooter();
     }
-
+   
     if (shooterElevator.detectCoral() || shooterElevator.reachedLimit()) { 
       shooterElevator.stopElevator();
     } else if (stick.getRawButton(Constants.ElavatorConstants.L1)) {
@@ -70,7 +73,7 @@ public class ShooterElevatorCommand extends Command {
     double speed = -stick.getRawAxis(Constants.ElavatorConstants.MANUAL_CONTROL_AXIS); //potnetially change sign from psotive to negative
     if (shooterElevator.detectCoral() || shooterElevator.reachedLimit()) { 
       shooterElevator.stopElevator();
-    } else if(speed < 0 && (!shooterElevator.L1getSensorValue())) {
+    } else if (speed < 0 && (!shooterElevator.L1getSensorValue())) {
       shooterElevator.moveDown();
     } else if (speed > 0) {
       shooterElevator.moveUp();
