@@ -57,6 +57,15 @@ public class CoralPlateAngle extends SubsystemBase {
     }
   }
 
+  public void setDefaultAngle() {
+    if (getEncoder() <= Constants.CoralConstants.kDefaultEncoder) {
+      angleUpToDefault();
+    }
+    else if (getEncoder() >= Constants.CoralConstants.kDefaultEncoder) {
+      angleDownToDefault();
+    }
+  }
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run

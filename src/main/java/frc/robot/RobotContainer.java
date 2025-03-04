@@ -20,6 +20,7 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Constants.OIConstants;
 import frc.robot.commands.AlgaeEffectorCommand;
+import frc.robot.commands.CoralPlateAngleCommand;
 import frc.robot.commands.ShooterElevatorCommand;
 import frc.robot.commands.SwerveJoystickCmd;
 import frc.robot.commands.AutoCommands.LimeLightAuto;
@@ -74,13 +75,13 @@ public class RobotContainer {
     // exampleSubsystem = new ExampleSubsystem();
 
     // CHANGE TO UNCOMMENTED
-    AlgaeAngle algaeAngle = new AlgaeAngle();
-    AlgaeEffector algaeEffector = new AlgaeEffector();
-    Climber climber = new Climber();
-    CoralPlateAngle coralPlateAngle = new CoralPlateAngle();
-    ShooterElevator shooterElevator = new ShooterElevator();
+    // AlgaeAngle algaeAngle = new AlgaeAngle();
+    // AlgaeEffector algaeEffector = new AlgaeEffector();
+    // Climber climber = new Climber();
+    // CoralPlateAngle coralPlateAngle = new CoralPlateAngle();
+    // ShooterElevator shooterElevator = new ShooterElevator();
     // SwerveModule swerveModule = new SwerveModule(); //--> likely keep this commented?
-    swerveSubsystem = new SwerveSubsystem();
+    //SwerveSubsystem swerveSubsystem = new SwerveSubsystem();
 
     // SAMPLE: KEEP COMMENTED
     // NamedCommands.registerCommand("autoBalance", swerve.autoBalanceCommand());
@@ -95,15 +96,16 @@ public class RobotContainer {
 
     //FIX CODE BELOW TO REFLECT CODE IN EXTENDED COMMANDS BELOW
 
-    NamedCommands.registerCommand("coralPlateAngleUp", new CoralPlateAngle.PlateAngleUp());
-    NamedCommands.registerCommand("coralPlateAngleDown", coralPlateAngle.AngleDown());
+    NamedCommands.registerCommand("coralPlateAngleDown", new CoralPlateAngleCommand.UpAngle()); //weird error happens
+    NamedCommands.registerCommand("coralPlateAngleDown", new CoralPlateAngleCommand.DownAngle());
+    NamedCommands.registerCommand("coralPlateAngleUp", new CoralPlateAngleCommand.DefaultAngle());
 
-    NamedCommands.registerCommand("coralIntake", shooterElevator.coralIntake());
-    NamedCommands.registerCommand("coralOuttake", shooterElevator.coralOuttake());
+    NamedCommands.registerCommand("coralIntake", new ShooterElevatorCommand.IntakeCoral());
+    NamedCommands.registerCommand("coralOuttake",new ShooterElevatorCommand.OuttakeCoral());
     
     NamedCommands.registerCommand("firstLevel", new ShooterElevatorCommand.ElevatorLevelOne());
-    // NamedCommands.registerCommand("secondLevel", new ShooterElevatorCommand.ElevatorLevelTwo());
-    // NamedCommands.registerCommand("thirdLevel", new ShooterElevatorCommand.ElevatorLevelThird());
+    NamedCommands.registerCommand("secondLevel", new ShooterElevatorCommand.ElevatorLevelTwo());
+    NamedCommands.registerCommand("thirdLevel", new ShooterElevatorCommand.ElevatorLevelThird());
     NamedCommands.registerCommand("fourthLevel", new ShooterElevatorCommand.ElevatorLevelForth());
     
 

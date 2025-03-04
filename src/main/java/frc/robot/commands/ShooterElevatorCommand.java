@@ -107,33 +107,33 @@ public class ShooterElevatorCommand extends Command {
     }
   }
 
-  // public class ElevatorLevelTwo extends Command {
-  //   public ElevatorLevelTwo() {
-  //     addRequirements();
-  //   }
+  public class ElevatorLevelTwo extends Command {
+    public ElevatorLevelTwo() {
+      addRequirements();
+    }
 
-  //   @Override
-  //   public void initialize() {}
+    @Override
+    public void initialize() {}
 
-  //   @Override
-  //   public void execute() {
-  //     shooterElevator.secondLevel();
-  //   }
-  // }
+    @Override
+    public void execute() {
+      shooterElevator.secondLevel();
+    }
+  }
 
-  // public class ElevatorLevelThird extends Command {
-  //   public ElevatorLevelThird() {
-  //     addRequirements();
-  //   }
+  public class ElevatorLevelThird extends Command {
+    public ElevatorLevelThird() {
+      addRequirements();
+    }
 
-  //   @Override
-  //   public void initialize() {}
+    @Override
+    public void initialize() {}
 
-  //   @Override
-  //   public void execute() {
-  //     shooterElevator.thirdLevel();
-  //   }
-  // }
+    @Override
+    public void execute() {
+      shooterElevator.thirdLevel();
+    }
+  }
 
   public class ElevatorLevelForth extends Command {
     public ElevatorLevelForth() {
@@ -146,6 +146,34 @@ public class ShooterElevatorCommand extends Command {
     @Override
     public void execute() {
       shooterElevator.fourthLevel();
+    }
+  }
+
+  public class IntakeCoral extends Command {
+    public IntakeCoral() {
+      addRequirements();
+    }
+
+    @Override
+    public void initialize() {}
+
+    @Override
+    public void execute() {
+      shooterElevator.intake();
+    }
+  }
+
+  public class OuttakeCoral extends Command {
+    public OuttakeCoral() {
+      addRequirements();
+    }
+
+    @Override
+    public void initialize() {}
+
+    @Override
+    public void execute() {
+      shooterElevator.outtake();
     }
   }
 }

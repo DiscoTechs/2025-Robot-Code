@@ -86,4 +86,45 @@ public class CoralPlateAngleCommand extends Command {
   }
 
   // Add the subcommand here jake
+  public class UpAngle extends Command {
+    public UpAngle() {
+      addRequirements();
+    }
+
+    @Override
+    public void initialize() {}
+
+    @Override
+    public void execute() {
+      coralPlateAngle.angleUp();
+    }
+  }
+
+  public class DownAngle extends Command {
+    public DownAngle() {
+      addRequirements();
+    }
+
+    @Override
+    public void initialize() {}
+
+    @Override
+    public void execute() {
+      coralPlateAngle.angleDown();
+    }
+  }
+
+  public class DefaultAngle extends Command {
+    public DefaultAngle() {
+      addRequirements();
+    }
+
+    @Override
+    public void initialize() {}
+
+    @Override
+    public void execute() {
+      coralPlateAngle.setDefaultAngle();
+    }
+  }
 }
