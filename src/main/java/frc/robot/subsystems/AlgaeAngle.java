@@ -20,14 +20,19 @@ public class AlgaeAngle extends SubsystemBase {
   public AlgaeAngle() {
     angleMotor = new SparkMax(Constants.AlgaeConstants.kAlgaeAngleMotorPort, MotorType.kBrushless);
     encoder = new DutyCycleEncoder(5, 2*Math.PI, 0.0); // change according to this specification: https://github.wpilib.org/allwpilib/docs/release/java/edu/wpi/first/wpilibj/DutyCycleEncoder.html
+   //^ Adjust this according to testing
   }
 
   public void angleUp() {
-    angleMotor.set(0.3); //temporary --> have to change to closedLoop/on-axel encoder
+    while (getEncoder() <= Constants.AlgaeConstants.kMaxEncoderValue) {
+      angleMotor.set(Constants.AlgaeConstants.kAlgaeAngleSpeed); //temporary --> have to change to closedLoop/on-axel encoder AND maybe sign
+    }
   }
 
   public void angleDown() {
-    angleMotor.set(-0.3); //temporary --> have to change to closedLoop/on-axel encoder
+    while (getEncoder() >= Constants.AlgaeConstants.kMinEncoderValue) {
+      angleMotor.set(-Constants.AlgaeConstants.kAlgaeAngleSpeed); //temporary --> have to change to closedLoop/on-axel encoder AND maybe sign
+    }
   }
 
   public void stopAngle()  {
@@ -38,16 +43,18 @@ public class AlgaeAngle extends SubsystemBase {
     return encoder.get();
   }
 
-  public void setHighAngle() {
-    while (!(getEncoder() >= Constants.AlgaeConstants.kHighEncoderValue)) {
-      angleUp();
+  public void setDefaultAngle() {
+    if (getEncoder() <= Constants.AlgaeConstants.kDefaultEncoderValue) {
+      while (!(getEncoder() <= Constants.AlgaeConstants.kDefaultEncoderValue)) { //maybe chnage greater than/less than sign according to how the encoder is reading values
+        angleUp();
+      }
     }
-  }
-
-  public void setLowAngle() {
-    while (!(getEncoder() <= Constants.AlgaeConstants.kLowEncoderValue)) {
-      angleDown();
+    else if (getEncoder() >= Constants.AlgaeConstants.kDefaultEncoderValue) {
+      while (!(getEncoder() >= Constants.AlgaeConstants.kDefaultEncoderValue)) { //maybe chnage greater than/less than sign according to how the encoder is reading values
+        angleDown();
+      }
     }
+    
   }
 
   @Override

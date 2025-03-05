@@ -112,8 +112,7 @@ public class RobotContainer {
     NamedCommands.registerCommand("fourthLevel", shooterElevatorCommand.new ElevatorLevelForth());
 
     AlgaeAngleCommand algaeAngleCommand = new AlgaeAngleCommand(algaeAngle, operatorJoystick);
-    NamedCommands.registerCommand("algaeHighAngle", algaeAngleCommand.new AlgaeHighSet());
-    NamedCommands.registerCommand("algaeLowAngle", algaeAngleCommand.new AlgaeLowSet());
+    NamedCommands.registerCommand("algaeDefaultAngle", algaeAngleCommand.new AlgaeDefaultSet());
     NamedCommands.registerCommand("algaeAngleUp", algaeAngleCommand.new AlgaeUpAngle());
     NamedCommands.registerCommand("algaeAngleDown", algaeAngleCommand.new AlgaeDownAngle());
     NamedCommands.registerCommand("algaeAngleStop", algaeAngleCommand.new AlgaeAngleStop());

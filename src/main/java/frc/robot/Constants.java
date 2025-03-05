@@ -163,11 +163,12 @@ public final class Constants {
             public static final int ALGAE_ANGLE_UP = 11;
             public static final int ALGAE_ANGLE_DOWN = 12;
         
-        public static final int kHighEncoderValue = 1;
-        public static final int kLowEncoderValue = 0;
+        public static final double kDefaultEncoderValue = 1;
 
-        public static final int kMaxEncoderValue = 2;
-        public static final int kMinEncoderValue = -1;
+        public static final double kMaxEncoderValue = 2;
+        public static final double kMinEncoderValue = -1;
+
+        public static final double kAlgaeAngleSpeed = 0.2;
     }
 
     // ------------ CORAL CONSTANTS (CAN IDS AND RESPECTIVE BUTTONS TO CONTROL THEM) ------------ //
@@ -182,11 +183,12 @@ public final class Constants {
             public static final int CORAL_PLATE_ANGLE_UP = 1; //15
             public static final int CORAL_PLATE_ANGLE_DOWN = 2; //16
             public static final int CORAL_PLATE_ANGLE_DEFAULT = 3; //17
+        
 
         //CORAL DELTA, DEFAULT, SPEED ENCODER VALUES FOR CORALPLATEANGLE
         public static final double kDelta = 0.01; //small value that can be adjusted
         public static final double kDefaultEncoder = 0.2; //default through-bore encoder value
-        public static final double kAngleSpeed = 0.2; //default through-bore encoder value
+        public static final double kAngleSpeed = 0.05; //default through-bore encoder value --> Angle Speed To Adjust the Plate
 
         public static final double MIN_ENCODER_VALUE = 0;
         public static final double MAX_ENCODER_VALUE = 1;

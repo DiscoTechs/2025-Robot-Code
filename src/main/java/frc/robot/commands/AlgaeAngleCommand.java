@@ -81,8 +81,8 @@ public class AlgaeAngleCommand extends Command {
     }
   }
 
-  public class AlgaeHighSet extends Command {
-    public AlgaeHighSet() {
+  public class AlgaeDefaultSet extends Command {
+    public AlgaeDefaultSet() {
       addRequirements();
     }
 
@@ -91,21 +91,7 @@ public class AlgaeAngleCommand extends Command {
 
     @Override
     public void execute() {
-      algaeAngle.setHighAngle();
-    }
-  }
-
-  public class AlgaeLowSet extends Command {
-    public AlgaeLowSet() {
-      addRequirements();
-    }
-
-    @Override
-    public void initialize() {}
-
-    @Override
-    public void execute() {
-      algaeAngle.setLowAngle();
+      algaeAngle.setDefaultAngle();
     }
   }
 

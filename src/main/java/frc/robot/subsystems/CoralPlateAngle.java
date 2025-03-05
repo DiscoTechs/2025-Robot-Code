@@ -23,14 +23,15 @@ public class CoralPlateAngle extends SubsystemBase {
     angleMotor = new SparkMax(Constants.CoralConstants.kCoralPlateAngleMotorPort, MotorType.kBrushless);
     encoder = new DutyCycleEncoder(4, 2*Math.PI, 0.0); // change according to this specification: https://github.wpilib.org/allwpilib/docs/release/java/edu/wpi/first/wpilibj/DutyCycleEncoder.html
     // also, make a constant for default encoder value so I don't have to keep being changed
+    //^ Adjust this according to testing
   }
  
   public void angleUp() {
-    angleMotor.set(0.2); //temporary --> have to change to closedLoop/on-axel encoder
+    angleMotor.set(Constants.CoralConstants.kAngleSpeed); //temporary --> have to change to closedLoop/on-axel encoder
   }
 
   public void angleDown() {
-    angleMotor.set(-0.2); //temporary --> have to change to closedLoop/on-axel encoder
+    angleMotor.set(-Constants.CoralConstants.kAngleSpeed); //temporary --> have to change to closedLoop/on-axel encoder
   }
 
   public void stopAngle()  {
