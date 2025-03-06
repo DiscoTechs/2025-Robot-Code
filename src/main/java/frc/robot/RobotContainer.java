@@ -98,7 +98,7 @@ public class RobotContainer {
 
     //FIX CODE BELOW TO REFLECT CODE IN EXTENDED COMMANDS BELOW
 
-    CoralPlateAngleCommand coralPlateAngleCommand = new CoralPlateAngleCommand(coralPlateAngle, operatorJoystick);
+    CoralPlateAngleCommand coralPlateAngleCommand = new CoralPlateAngleCommand(coralPlateAngle, buttonBox);
     NamedCommands.registerCommand("coralPlateAngleUp", coralPlateAngleCommand.new UpAngle());
     NamedCommands.registerCommand("coralPlateAngleDown", coralPlateAngleCommand.new DownAngle());
     NamedCommands.registerCommand("coralPlateDefault", coralPlateAngleCommand.new DefaultAngle());
@@ -143,7 +143,7 @@ public class RobotContainer {
     algaeEffector.setDefaultCommand(new AlgaeEffectorCommand(algaeEffector, operatorJoystick));
     algaeAngle.setDefaultCommand(new AlgaeAngleCommand(algaeAngle, operatorJoystick));
 
-    coralPlateAngle.setDefaultCommand(new CoralPlateAngleCommand(coralPlateAngle, operatorJoystick)); //here, for example, I think I can change to button box after it's configed
+    coralPlateAngle.setDefaultCommand(new CoralPlateAngleCommand(coralPlateAngle, buttonBox)); //here, for example, I think I can change to button box after it's configed
 
     climber.setDefaultCommand(new ClimberCommand(climber, operatorJoystick));
 

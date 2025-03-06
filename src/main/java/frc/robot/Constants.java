@@ -156,10 +156,10 @@ public final class Constants {
     // ------------ ALGAE CONSTANTS (CAN IDS AND RESPECTIVE BUTTONS TO CONTROL THEM) ------------ //
     public static final class AlgaeConstants {
         //ALGAE CAN IDS
-        public static final int kLeftAlgaeEffectorMotorPort = 28; public static final int kRightAlgaeEffectorMotorPort = 39; //temporary CAN ID
+        public static final int kLeftAlgaeEffectorMotorPort = 25; public static final int kRightAlgaeEffectorMotorPort = 26;
             public static final int ALGAE_INTAKE = 6;
             public static final int ALGAE_OUTTAKE = 5;
-        public static final int kAlgaeAngleMotorPort = 27; //temporary CAN ID
+        public static final int kAlgaeAngleMotorPort = 24;
             public static final int ALGAE_ANGLE_UP = 8;
             public static final int ALGAE_ANGLE_DOWN = 7;
             public static final int ALGAE_ANGLE_DEFAULT = 3;
@@ -181,7 +181,7 @@ public final class Constants {
     // ------------ CORAL CONSTANTS (CAN IDS AND RESPECTIVE BUTTONS TO CONTROL THEM) ------------ //
     public static final class CoralConstants {
         //CORAL CAN IDS
-        public static final int kLeftCoralEffectorMotorPort =  31; public static final int kRightCoralEffectorMotorPort =  41; //temporary CAN ID
+        public static final int kCoralEffectorMotorPort = 28;
             public static final int CORAL_INTAKE = 6;
             public static final int CORAL_OUTTAKE = 2;
             public static final int keepGoing = 8;
@@ -213,8 +213,8 @@ public final class Constants {
     // ------------ ELEVATOR CONSTANTS (CAN IDS AND RESPECTIVE BUTTONS TO CONTROL THEM) ------------ //
     public static final class ElavatorConstants {
         //ELEVATOR CAN IDS - NEED TO ADD MORE AS ELEVATOR HAS MORE MOTORS
-        public static final int kRightElevatorMotorPort = 26;
-        public static final int kLeftElevatorMotorPort = 29;
+        public static final int kRightElevatorMotorPort = 22;
+        public static final int kLeftElevatorMotorPort = 21;
             public static final int L1 = 5;
             public static final int L2 = 4;
             public static final int L3 = 1;

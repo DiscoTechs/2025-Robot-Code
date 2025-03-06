@@ -27,14 +27,20 @@ public class CoralPlateAngle extends SubsystemBase {
   }
  
   public void angleUp() {
-    while(!(getEncoder() >= Constants.CoralConstants.MAX_ENCODER_VALUE)) {
-      angleMotor.set(Constants.CoralConstants.kAngleSpeed); //temporary --> have to change to closedLoop/on-axel encoder
+    if (!(getEncoder() >= Constants.CoralConstants.MAX_ENCODER_VALUE)) {
+      angleMotor.set(Constants.CoralConstants.kAngleSpeed);
+    }
+    else{ 
+      stopAngle();
     }
   }
 
   public void angleDown() {
-    while(!(getEncoder() <= Constants.CoralConstants.MIN_ENCODER_VALUE)) {
+    if (!(getEncoder() <= Constants.CoralConstants.MIN_ENCODER_VALUE)) {
       angleMotor.set(-Constants.CoralConstants.kAngleSpeed); //temporary --> have to change to closedLoop/on-axel encoder
+    }
+    else {
+      stopAngle();
     }
   }
 

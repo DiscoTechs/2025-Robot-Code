@@ -24,14 +24,20 @@ public class AlgaeAngle extends SubsystemBase {
   }
 
   public void angleUp() {
-    while(!(getEncoder() >= Constants.AlgaeConstants.kMaxEncoderValue - Constants.AlgaeConstants.kAlgaeDelta)) {
-      angleMotor.set(-Constants.AlgaeConstants.kAlgaeAngleSpeed); //temporary --> have to change to closedLoop/on-axel encoder
+    if (!(getEncoder() >= Constants.AlgaeConstants.kMaxEncoderValue - Constants.AlgaeConstants.kAlgaeDelta)) {
+      angleMotor.set(Constants.AlgaeConstants.kAlgaeAngleSpeed);
+    }
+    else {
+      stopAngle();
     }
   }
 
   public void angleDown() {
-    while(!(getEncoder() <= Constants.AlgaeConstants.kMinEncoderValue + Constants.AlgaeConstants.kAlgaeDelta)) {
-      angleMotor.set(Constants.AlgaeConstants.kAlgaeAngleSpeed); //temporary --> have to change to closedLoop/on-axel encoder
+    if (!(getEncoder() <= Constants.AlgaeConstants.kMinEncoderValue + Constants.AlgaeConstants.kAlgaeDelta)) {
+      angleMotor.set(-Constants.AlgaeConstants.kAlgaeAngleSpeed);
+    }
+    else {
+      stopAngle(); 
     }
   }
 

@@ -21,8 +21,7 @@ public class ShooterElevator extends SubsystemBase {
     private final SparkMax rightMotor;
     private final SparkMax leftMotor;
     
-    private final SparkMax leftIntakeMotor;
-    private final SparkMax rightIntakeMotor;
+    private final SparkMax intakeMotor;
     
     public ShooterElevator() { 
         sensor0 = new DigitalInput(Constants.ElavatorConstants.ELAVATOR_SENSOR_0);
@@ -39,8 +38,7 @@ public class ShooterElevator extends SubsystemBase {
 
         //CORAL EFFECTOR
         coralSensor = new DigitalInput(Constants.ElavatorConstants.CORAL_SENSOR);
-        leftIntakeMotor = new SparkMax(Constants.CoralConstants.kLeftCoralEffectorMotorPort, MotorType.kBrushless);
-        rightIntakeMotor = new SparkMax(Constants.CoralConstants.kRightCoralEffectorMotorPort, MotorType.kBrushless);
+        intakeMotor = new SparkMax(Constants.CoralConstants.kCoralEffectorMotorPort, MotorType.kBrushless);
     }
 
     public boolean detectCoral() {
@@ -164,13 +162,11 @@ public class ShooterElevator extends SubsystemBase {
     }
 
     public void intake() {
-        leftIntakeMotor.set(speedSetter()); //update sign/speed accordingly
-        rightIntakeMotor.set(-speedSetter()); //update sign/speed accordingly
+        intakeMotor.set(-speedSetter()); //update sign/speed accordingly
     }
 
     public void outtake() {
-        leftIntakeMotor.set(-speedSetter()); //update sign/speed accordingly
-        rightIntakeMotor.set(speedSetter()); //update sign/speed accordingly
+        intakeMotor.set(speedSetter()); //update sign/speed accordingly
     }
 
     public void stopElevator() {
@@ -179,8 +175,7 @@ public class ShooterElevator extends SubsystemBase {
     }
 
     public void stopShooter() {
-        leftIntakeMotor.set(0.0);
-        rightIntakeMotor.set(0.0);
+        intakeMotor.set(0.0);
     }
 
 
