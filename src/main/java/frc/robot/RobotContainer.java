@@ -21,6 +21,7 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Constants.OIConstants;
 import frc.robot.commands.AlgaeAngleCommand;
 import frc.robot.commands.AlgaeEffectorCommand;
+import frc.robot.commands.ClimberCommand;
 import frc.robot.commands.CoralPlateAngleCommand;
 import frc.robot.commands.ShooterElevatorCommand;
 import frc.robot.commands.SwerveJoystickCmd;
@@ -102,7 +103,7 @@ public class RobotContainer {
     NamedCommands.registerCommand("coralPlateAngleDown", coralPlateAngleCommand.new DownAngle());
     NamedCommands.registerCommand("coralPlateDefault", coralPlateAngleCommand.new DefaultAngle());
 
-    ShooterElevatorCommand shooterElevatorCommand = new ShooterElevatorCommand(shooterElevator, operatorJoystick);
+    ShooterElevatorCommand shooterElevatorCommand = new ShooterElevatorCommand(shooterElevator, buttonBox);
     NamedCommands.registerCommand("coralIntake", shooterElevatorCommand.new IntakeCoral());
     NamedCommands.registerCommand("coralOuttake", shooterElevatorCommand.new OuttakeCoral());
     NamedCommands.registerCommand("coralIntakeSequence", shooterElevatorCommand.new SequenceIntake());
@@ -140,13 +141,13 @@ public class RobotContainer {
     ));
 
     algaeEffector.setDefaultCommand(new AlgaeEffectorCommand(algaeEffector, operatorJoystick));
-    //algaeAngle.setDefaultCommand(new AlgaeAngleCommand(algaeAngle, operatorJoystick));
+    algaeAngle.setDefaultCommand(new AlgaeAngleCommand(algaeAngle, operatorJoystick));
 
-    //coralPlateAngle.setDefaultCommand(new CoralPlateAngleCommand(coralPlateAngle, operatorJoystick)); //here, for example, I think I can change to button box after it's configed
+    coralPlateAngle.setDefaultCommand(new CoralPlateAngleCommand(coralPlateAngle, operatorJoystick)); //here, for example, I think I can change to button box after it's configed
 
-    //climber.setDefaultCommand(new ClimberCommand(climber, operatorJoystick));
+    climber.setDefaultCommand(new ClimberCommand(climber, operatorJoystick));
 
-    //shooterElevator.setDefaultCommand(new ShooterElevatorCommand(shooterElevator, operatorJoystick));
+    shooterElevator.setDefaultCommand(new ShooterElevatorCommand(shooterElevator, buttonBox));
   
     autoChooser = AutoBuilder.buildAutoChooser();//new SendableChooser<>(); 
     Command auto1 = new SimpleAuto(swerveSubsystem, 1, 0, 0);

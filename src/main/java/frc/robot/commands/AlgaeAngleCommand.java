@@ -32,14 +32,33 @@ public class AlgaeAngleCommand extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (algaeAngle.getEncoder() >= Constants.AlgaeConstants.kMaxEncoderValue || algaeAngle.getEncoder() <= Constants.AlgaeConstants.kMinEncoderValue) {
-      algaeAngle.stopAngle();
-    } else if(stick.getRawButton(Constants.AlgaeConstants.ALGAE_ANGLE_UP)) {
+    while (!(stick.getRawButton(Constants.AlgaeConstants.ALGAE_ANGLE_DEFAULT) || stick.getRawButton(Constants.AlgaeConstants.ALGAE_ANGLE_DOWN) || stick.getRawButton(Constants.AlgaeConstants.ALGAE_ANGLE_UP) )) {
       algaeAngle.angleUp();
-    } else if (stick.getRawButton(Constants.AlgaeConstants.ALGAE_ANGLE_DOWN)) {
-      algaeAngle.angleDown();
-    } else {
-      algaeAngle.stopAngle();
+    }
+    while (!(stick.getRawButton(Constants.CoralConstants.CORAL_PLATE_STAY_MAX))) {
+      //code inside is simple and can be placed outside if while loop logic doesn't work
+      if ((algaeAngle.getEncoder() >= Constants.AlgaeConstants.kMaxEncoderValue) || (algaeAngle.getEncoder() <= Constants.AlgaeConstants.kMaxEncoderValue)) {
+        algaeAngle.stopAngle();
+      }
+      else if (stick.getRawButton(Constants.AlgaeConstants.ALGAE_ANGLE_UP)) {
+        algaeAngle.angleUp();
+      }
+      else if (stick.getRawButton(Constants.AlgaeConstants.ALGAE_ANGLE_DEFAULT)) {
+        while(!stick.getRawButton(Constants.AlgaeConstants.ALGAE_ANGLE_ESCAPE)) {
+          algaeAngle.setDefaultAngle();
+        }
+      }
+      else if (stick.getRawButton(Constants.AlgaeConstants.ALGAE_ANGLE_DOWN)) {
+        algaeAngle.angleDown();
+      }
+      else if (stick.getRawButton(Constants.AlgaeConstants.ALGAE_ANGLE_STAY_MIN)) {
+        while(!stick.getRawButton(Constants.AlgaeConstants.ALGAE_ANGLE_ESCAPE)) {
+          algaeAngle.angleUp();
+        }
+      }
+      else {
+        algaeAngle.stopAngle();
+      }
     }
   }
 

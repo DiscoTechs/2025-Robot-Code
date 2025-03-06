@@ -157,13 +157,20 @@ public final class Constants {
     public static final class AlgaeConstants {
         //ALGAE CAN IDS
         public static final int kLeftAlgaeEffectorMotorPort = 28; public static final int kRightAlgaeEffectorMotorPort = 39; //temporary CAN ID
-            public static final int ALGAE_INTAKE = 9;
-            public static final int ALGAE_OUTTAKE = 10;
+            public static final int ALGAE_INTAKE = 6;
+            public static final int ALGAE_OUTTAKE = 5;
         public static final int kAlgaeAngleMotorPort = 27; //temporary CAN ID
-            public static final int ALGAE_ANGLE_UP = 11;
-            public static final int ALGAE_ANGLE_DOWN = 12;
+            public static final int ALGAE_ANGLE_UP = 8;
+            public static final int ALGAE_ANGLE_DOWN = 7;
+            public static final int ALGAE_ANGLE_DEFAULT = 3;
+            public static final int ALGAE_ANGLE_STAY_MAX = 4;
+            public static final int ALGAE_ANGLE_STAY_MIN = 1;
+            public static final int ALGAE_ANGLE_ESCAPE = 2;
+
         
         public static final double kDefaultEncoderValue = 1;
+
+        public static final double kAlgaeDelta = 0.2;
 
         public static final double kMaxEncoderValue = 2;
         public static final double kMinEncoderValue = -1;
@@ -176,15 +183,15 @@ public final class Constants {
         //CORAL CAN IDS
         public static final int kLeftCoralEffectorMotorPort =  31; public static final int kRightCoralEffectorMotorPort =  41; //temporary CAN ID
             public static final int CORAL_INTAKE = 6;
-            public static final int CORAL_OUTTAKE = 7;
+            public static final int CORAL_OUTTAKE = 2;
             public static final int keepGoing = 8;
-            public static final int ESCAPE = 9;
+            public static final int ESCAPE = 10;
         public static final int kCoralPlateAngleMotorPort = 32; //final CAN ID
-            public static final int CORAL_PLATE_ANGLE_UP = 1; //15
-            public static final int CORAL_PLATE_ANGLE_DOWN = 2; //16
+            public static final int CORAL_PLATE_ANGLE_UP = 12; //15
+            public static final int CORAL_PLATE_ANGLE_DOWN = 11; //16
             public static final int CORAL_PLATE_ANGLE_DEFAULT = 3; //17
-            public static final int CORAL_PLATE_STAY_MAX = 4;
-            public static final int CORAL_PLATE_STAY_MIN = 5;
+            public static final int CORAL_PLATE_STAY_MAX = 9;
+            public static final int CORAL_PLATE_STAY_MIN = 7;
         
 
         //CORAL_PLATE_ANGLE
@@ -208,10 +215,10 @@ public final class Constants {
         //ELEVATOR CAN IDS - NEED TO ADD MORE AS ELEVATOR HAS MORE MOTORS
         public static final int kRightElevatorMotorPort = 26;
         public static final int kLeftElevatorMotorPort = 29;
-            public static final int L1 = 1;
-            public static final int L2 = 2;
-            public static final int L3 = 3;
-            public static final int L4 = 4;
+            public static final int L1 = 5;
+            public static final int L2 = 4;
+            public static final int L3 = 1;
+            public static final int L4 = 6;
             public static final int MANUAL_CONTROL_AXIS = 1;
         
         //SENSOR PORT

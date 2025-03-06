@@ -59,7 +59,7 @@ public class CoralPlateAngleCommand extends Command {
             coralPlateAngle.stopAngle();
         }
     }*/
-    while (!(stick.getRawButton(Constants.CoralConstants.CORAL_PLATE_ANGLE_UP) || stick.getRawButton(Constants.CoralConstants.CORAL_PLATE_ANGLE_DOWN) || stick.getRawButton(Constants.CoralConstants.CORAL_PLATE_STAY_MAX) || stick.getRawButton(Constants.CoralConstants.CORAL_PLATE_STAY_MIN) )) {
+    while (!(stick.getRawButton(Constants.CoralConstants.CORAL_PLATE_ANGLE_UP) || stick.getRawButton(Constants.CoralConstants.CORAL_PLATE_ANGLE_DOWN) || stick.getRawButton(Constants.CoralConstants.CORAL_PLATE_STAY_MAX))) {
       coralPlateAngle.setDefaultAngle();
     }
     while (!(stick.getRawButton(Constants.CoralConstants.CORAL_PLATE_ANGLE_DEFAULT) || stick.getRawButton(Constants.CoralConstants.keepGoing))) {
@@ -77,11 +77,6 @@ public class CoralPlateAngleCommand extends Command {
       }
       else if (stick.getRawButton(Constants.CoralConstants.CORAL_PLATE_ANGLE_DOWN)) {
         coralPlateAngle.angleDown();
-      }
-      else if (stick.getRawButton(Constants.CoralConstants.CORAL_PLATE_STAY_MIN)) {
-        while(!stick.getRawButton(Constants.CoralConstants.ESCAPE)) {
-          coralPlateAngle.angleUp();
-        }
       }
       else {
         coralPlateAngle.stopAngle();
