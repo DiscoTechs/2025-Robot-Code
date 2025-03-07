@@ -158,14 +158,9 @@ public final class Constants {
         //ALGAE CAN IDS
         public static final int kLeftAlgaeEffectorMotorPort = 25;
         public static final int kRightAlgaeEffectorMotorPort = 26;
-            public static final int ALGAE_INTAKE = 6;
-            public static final int ALGAE_OUTTAKE = 5;
         public static final int kAlgaeAngleMotorPort = 29;
             public static final int ALGAE_ANGLE_UP = 8;
             public static final int ALGAE_ANGLE_DOWN = 7;
-            public static final int ALGAE_ANGLE_SCORING = 3;
-            public static final int ALGAE_ANGLE_STAY_MAX = 4;
-            public static final int ALGAE_ANGLE_STAY_MIN = 1;
             public static final int ALGAE_ANGLE_ESCAPE = 2;
 
         
@@ -176,19 +171,21 @@ public final class Constants {
         public static final double kAlgaeDelta = 0.03;
 
         public static final double kAlgaeAngleSpeed = 0.2;
+
+        //BUTTONS (XBOX Joytick)
+        public static final int ALGAE_INTAKE = 6;
+        public static final int ALGAE_OUTTAKE = 5;
+
+        public static final int ALGAE_ANGLE_STAY_MAX = 4;
+        public static final int ALGAE_ANGLE_STAY_MIN = 1;
+        public static final int ALGAE_ANGLE_SCORING = 3;
     }
 
     // ------------ CORAL CONSTANTS (CAN IDS AND RESPECTIVE BUTTONS TO CONTROL THEM) ------------ //
     public static final class CoralConstants {
         //CORAL CAN IDS
         public static final int kCoralEffectorMotorPort = 28;
-            public static final int CORAL_INTAKE = 7;
-            public static final int CORAL_OUTTAKE = 2;
-            public static final int INITIATE_HUMAN_PLAYER_SEQUENCE = 8;
-            public static final int ESCAPE = 10;
         public static final int kCoralPlateAngleMotorPort = 32; //final CAN ID
-            public static final int CORAL_PLATE_ANGLE_UP = 12; //15
-            public static final int CORAL_PLATE_ANGLE_DOWN = 11; //16
             public static final int CORAL_PLATE_ANGLE_DEFAULT = 3; //17
             public static final int CORAL_PLATE_STAY_MAX = 9;
             public static final int CORAL_PLATE_STAY_MIN = 7;
@@ -208,6 +205,16 @@ public final class Constants {
         public static final double l4speed = 0.3;
 
         public static final double defaultSpeed = 0.5;
+
+        //BUTTONS (BUTTON BOX)
+        public static final int CORAL_PLATE_ANGLE_UP = 12;
+        public static final int CORAL_PLATE_ANGLE_DOWN = 11;
+
+        public static final int CORAL_INTAKE = 7;
+        public static final int CORAL_OUTTAKE = 2;
+
+        public static final int INITIATE_HUMAN_PLAYER_SEQUENCE = 8;
+        public static final int ESCAPE = 10;
     }
 
     // ------------ ELEVATOR CONSTANTS (CAN IDS AND RESPECTIVE BUTTONS TO CONTROL THEM) ------------ //
@@ -215,11 +222,6 @@ public final class Constants {
         //ELEVATOR CAN IDS
         public static final int kRightElevatorMotorPort = 22;
         public static final int kLeftElevatorMotorPort = 21;
-            public static final int LEVEL_1 = 5;
-            public static final int LEVEL_2 = 4;
-            public static final int LEVEL_3 = 1;
-            public static final int LEVEL_4 = 6;
-            public static final int USE_MANUAL_CONTROL_JOYSTICK = 0; //TEMPPPPPPP NEED TO CHANGE BUTTON ID
         
         public static final int MANUAL_CONTROL_AXIS = 1;
         
@@ -230,6 +232,13 @@ public final class Constants {
         public static final int ELAVATOR_SENSOR_3 = 7;
         public static final int ELAVATOR_SENSOR_4 = 4;
         public static final int ELAVATOR_LIMIT_SENSOR = 3;
+
+        //BUTTONS (BUTTON BOX)
+        public static final int LEVEL_1 = 5;
+        public static final int LEVEL_2 = 4;
+        public static final int LEVEL_3 = 1;
+        public static final int LEVEL_4 = 6;
+        public static final int USE_MANUAL_CONTROL_JOYSTICK = 0; //TEMPPPPPPP NEED TO CHANGE BUTTON ID
     }
 
     // ------------ CLIMBER CONSTANTS (CAN IDS AND RESPECTIVE BUTTONS TO CONTROL THEM) ------------ //

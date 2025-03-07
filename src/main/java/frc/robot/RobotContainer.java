@@ -55,7 +55,7 @@ public class RobotContainer {
   private final AlgaeAngle algaeAngle = new AlgaeAngle();
 
   // //CORAL
-  //private final CoralPlateAngle coralPlateAngle = new CoralPlateAngle();
+  private final CoralPlateAngle coralPlateAngle = new CoralPlateAngle();
 
   // //CLIMBER
   // private final Climber climber = new Climber();
@@ -142,10 +142,10 @@ public class RobotContainer {
       driverJoystick
     ));
 
-     algaeEffector.setDefaultCommand(new AlgaeEffectorCommand(algaeEffector, operatorJoystick));
-     algaeAngle.setDefaultCommand(new AlgaeAngleCommand(algaeAngle, operatorJoystick));
+    algaeEffector.setDefaultCommand(new AlgaeEffectorCommand(algaeEffector, operatorJoystick));
+    algaeAngle.setDefaultCommand(new AlgaeAngleCommand(algaeAngle, operatorJoystick));
 
-    // coralPlateAngle.setDefaultCommand(new CoralPlateAngleCommand(coralPlateAngle, buttonBox)); //here, for example, I think I can change to button box after it's configed
+    coralPlateAngle.setDefaultCommand(new CoralPlateAngleCommand(coralPlateAngle, buttonBox));
 
     // // climber.setDefaultCommand(new ClimberCommand(climber, operatorJoystick));
 

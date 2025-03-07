@@ -54,7 +54,7 @@ public class ShooterElevatorCommand extends Command {
 
         shooterElevator.stopShooter();
       }
-      
+
       shooterElevator.stopShooter();
     }
     //intake and outtake coral
@@ -67,39 +67,39 @@ public class ShooterElevatorCommand extends Command {
     else {
       shooterElevator.stopShooter();
     }
-    //pre-set button controls for elevator
+    //stop elevator if coral blocked or reached top limit
     if (shooterElevator.isTopLimitReached() || shooterElevator.isSensorDetected(shooterElevator.coralSensor)) {
       shooterElevator.stopElevator();
     }
-
+    //level 1
     else if (stick.getRawButton(Constants.ElavatorConstants.LEVEL_1)) {
       shooterElevator.goToFirstLevel();
       if (!stick.getRawButton(Constants.AlgaeConstants.ALGAE_INTAKE)) {
         shooterElevator.outtakeCoral();
       }
     }
-
+    //level 2
     else if (stick.getRawButton(Constants.ElavatorConstants.LEVEL_2)) {
       shooterElevator.goToSecondLevel();
       if (!stick.getRawButton(Constants.AlgaeConstants.ALGAE_INTAKE)) {
         shooterElevator.outtakeCoral();
       }
     }
-
+    //level 3
     else if (stick.getRawButton(Constants.ElavatorConstants.LEVEL_3)) {
       shooterElevator.goToThirdLevel();
       if (!stick.getRawButton(Constants.AlgaeConstants.ALGAE_INTAKE)) {
         shooterElevator.outtakeCoral();
       }
     }
-
+    //level 4
     else if (stick.getRawButton(Constants.ElavatorConstants.LEVEL_4)) {
       shooterElevator.goToFourthLevel();
       if (!stick.getRawButton(Constants.AlgaeConstants.ALGAE_INTAKE)) {
         shooterElevator.outtakeCoral();
       }
     }
-
+    //manual control
     else if (stick.getRawButton(Constants.ElavatorConstants.USE_MANUAL_CONTROL_JOYSTICK)) {
       double speed = -stick.getRawAxis(Constants.ElavatorConstants.MANUAL_CONTROL_AXIS);
 
@@ -129,10 +129,10 @@ public class ShooterElevatorCommand extends Command {
         shooterElevator.stopElevator();
       }
     }
-
+    //default to first level
     else {
       shooterElevator.goToFirstLevel();
-    } 
+    }
   }
 
   // Called once the command ends or is interrupted.
