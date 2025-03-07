@@ -34,9 +34,13 @@ public class AlgaeEffectorCommand extends Command {
   public void execute() {
     if (stick.getRawButton(Constants.AlgaeConstants.ALGAE_INTAKE)) {
       algaeEffector.intake();
-    } else if (stick.getRawButton(Constants.AlgaeConstants.ALGAE_OUTTAKE)) {
+    }
+
+    else if (stick.getRawButton(Constants.AlgaeConstants.ALGAE_OUTTAKE)) {
       algaeEffector.expel();
-    } else {
+    } 
+    
+    else {
       algaeEffector.stopIntake();
     }
   }

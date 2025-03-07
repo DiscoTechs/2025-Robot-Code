@@ -32,54 +32,22 @@ public class AlgaeAngleCommand extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    /*if (!(stick.getRawButton(Constants.AlgaeConstants.ALGAE_ANGLE_DEFAULT) || stick.getRawButton(Constants.AlgaeConstants.ALGAE_ANGLE_DOWN) || stick.getRawButton(Constants.AlgaeConstants.ALGAE_ANGLE_UP) )) {
-      algaeAngle.angleUp();
-    }
-    if (!(stick.getRawButton(Constants.AlgaeConstants.ALGAE_ANGLE_STAY_MAX))) {
-      //code inside is simple and can be placed outside if while loop logic doesn't work
-      if ((algaeAngle.getEncoder() >= Constants.AlgaeConstants.kMaxEncoderValue) || (algaeAngle.getEncoder() <= Constants.AlgaeConstants.kMaxEncoderValue)) {
-        algaeAngle.stopAngle();
-      }
-      else if (stick.getRawButton(Constants.AlgaeConstants.ALGAE_ANGLE_UP)) {
+    if (stick.getRawButton(Constants.AlgaeConstants.ALGAE_ANGLE_STAY_MAX)) {
         algaeAngle.angleUp();
-      }
-      else if (stick.getRawButton(Constants.AlgaeConstants.ALGAE_ANGLE_DEFAULT)) {
-        if(!stick.getRawButton(Constants.AlgaeConstants.ALGAE_ANGLE_ESCAPE)) {
-          algaeAngle.setDefaultAngle();
-        }
-      }
-      else if (stick.getRawButton(Constants.AlgaeConstants.ALGAE_ANGLE_DOWN)) {
-        algaeAngle.angleDown();
-      }
-      else if (stick.getRawButton(Constants.AlgaeConstants.ALGAE_ANGLE_STAY_MIN)) {
-        if(!stick.getRawButton(Constants.AlgaeConstants.ALGAE_ANGLE_ESCAPE)) {
-          algaeAngle.angleUp();
-        }
-      }
-      else {
-        algaeAngle.stopAngle();
-      }
-    }*/
+    }
 
-    if (stick.getRawButton(Constants.AlgaeConstants.ALGAE_ANGLE_UP)) {
-      if (algaeAngle.getEncoder() <= Constants.AlgaeConstants.kDefaultEncoderValue) {
-        algaeAngle.angleUp();
-      }
-      else {
-        algaeAngle.stopAngle();
-      }
-    }
-    else if (stick.getRawButton(Constants.AlgaeConstants.ALGAE_ANGLE_DOWN)) {
-      if (algaeAngle.getEncoder() >= Constants.AlgaeConstants.kMinEncoderValue) {
+    else if (stick.getRawButton(Constants.AlgaeConstants.ALGAE_ANGLE_STAY_MIN)) {
         algaeAngle.angleDown();
-      }
-      else {
-        algaeAngle.stopAngle();
-      }
     }
-      
 
+    else if (stick.getRawButton(Constants.AlgaeConstants.ALGAE_ANGLE_SCORING)) {
+      algaeAngle.goToScoringAngle();
     }
+
+    else {
+      algaeAngle.stopAngle();
+    }
+  }
 
 
   // Called once the command ends or is interrupted.
@@ -130,7 +98,7 @@ public class AlgaeAngleCommand extends Command {
 
     @Override
     public void execute() {
-      //algaeAngle.setDefaultAngle();
+      algaeAngle.goToScoringAngle();
     }
   }
 

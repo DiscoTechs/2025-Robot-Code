@@ -80,14 +80,14 @@ public class AlgaeAngle extends SubsystemBase {
   //   }
   // }
 
-  // public void setDefaultAngle() {
-  //   if (getEncoder() <= Constants.AlgaeConstants.kDefaultEncoderValue) {
-  //     angleUpToDefault();
-  //   }
-  //   else if (getEncoder() >= Constants.AlgaeConstants.kDefaultEncoderValue) {
-  //     angleDownToDefault();
-  //   }
-  // }
+  public void goToScoringAngle() {
+    if (getEncoder() <= Constants.AlgaeConstants.kScoringEncoderValue) {
+      angleUp();
+    }
+    else if (getEncoder() >= Constants.AlgaeConstants.kScoringEncoderValue) {
+      angleDown();
+    }
+  }
 
   @Override
   public void periodic() {

@@ -151,27 +151,27 @@ public final class Constants {
 
     }
 
-    // CONSTANTS BELOW ARE TEMPORARY AND NEED TO BE CHANGED TO MATCH JOYSTICK/BUTTON BOX
+    // DOUBLE CECK ALL BUTTON IDS BELOW
 
     // ------------ ALGAE CONSTANTS (CAN IDS AND RESPECTIVE BUTTONS TO CONTROL THEM) ------------ //
     public static final class AlgaeConstants {
         //ALGAE CAN IDS
         public static final int kLeftAlgaeEffectorMotorPort = 25;
         public static final int kRightAlgaeEffectorMotorPort = 26;
-        public static final int ALGAE_INTAKE = 6;
-        public static final int ALGAE_OUTTAKE = 5;
+            public static final int ALGAE_INTAKE = 6;
+            public static final int ALGAE_OUTTAKE = 5;
         public static final int kAlgaeAngleMotorPort = 29;
-        public static final int ALGAE_ANGLE_UP = 8;
-        public static final int ALGAE_ANGLE_DOWN = 7;
-        public static final int ALGAE_ANGLE_DEFAULT = 3;
-        public static final int ALGAE_ANGLE_STAY_MAX = 4;
-        public static final int ALGAE_ANGLE_STAY_MIN = 1;
-        public static final int ALGAE_ANGLE_ESCAPE = 2;
+            public static final int ALGAE_ANGLE_UP = 8;
+            public static final int ALGAE_ANGLE_DOWN = 7;
+            public static final int ALGAE_ANGLE_SCORING = 3;
+            public static final int ALGAE_ANGLE_STAY_MAX = 4;
+            public static final int ALGAE_ANGLE_STAY_MIN = 1;
+            public static final int ALGAE_ANGLE_ESCAPE = 2;
 
         
-        public static final double kDefaultEncoderValue = 3.8;//1.978;
-        public static final double kMaxEncoderValue = 3.9;
-        public static final double kMinEncoderValue = 1.8;
+        public static final double kScoringEncoderValue = 2.7;//1.978;
+        public static final double kMaxEncoderValue = 3.8;
+        public static final double kMinEncoderValue = 2.1;
 
         public static final double kAlgaeDelta = 0.03;
 
@@ -212,16 +212,18 @@ public final class Constants {
 
     // ------------ ELEVATOR CONSTANTS (CAN IDS AND RESPECTIVE BUTTONS TO CONTROL THEM) ------------ //
     public static final class ElavatorConstants {
-        //ELEVATOR CAN IDS - NEED TO ADD MORE AS ELEVATOR HAS MORE MOTORS
+        //ELEVATOR CAN IDS
         public static final int kRightElevatorMotorPort = 22;
         public static final int kLeftElevatorMotorPort = 21;
             public static final int LEVEL_1 = 5;
             public static final int LEVEL_2 = 4;
             public static final int LEVEL_3 = 1;
             public static final int LEVEL_4 = 6;
-            public static final int MANUAL_CONTROL_AXIS = 1;
+            public static final int USE_MANUAL_CONTROL_JOYSTICK = 0; //TEMPPPPPPP NEED TO CHANGE BUTTON ID
         
-        //SENSOR PORT
+        public static final int MANUAL_CONTROL_AXIS = 1;
+        
+        //SENSOR PORT --> I Have A SUSPICION THAT LEVEL TWO IS SWITCHED WITH EITHER LEVEL 1 OR LIMIT SENSOR
         public static final int CORAL_SENSOR = 2;
         public static final int ELAVATOR_SENSOR_1 = 5;
         public static final int ELAVATOR_SENSOR_2 = 6;

@@ -34,23 +34,27 @@ public class ShooterElevatorCommand extends Command {
   @Override
   public void execute() {
     //intake sequence
+    boolean exitOuterIf = false;
     if (stick.getRawButton(Constants.CoralConstants.INITIATE_HUMAN_PLAYER_SEQUENCE)) {
       shooterElevator.goToFirstLevel();
 
       while (!shooterElevator.isSensorDetected(shooterElevator.coralSensor)) {
         if (stick.getRawButton(Constants.CoralConstants.ESCAPE)) {
-          break; //where does this BREAK break out of? does it even register the if-statement due to the outside while loop?
+          exitOuterIf = true;
+          break;
         }
         shooterElevator.outtakeCoral();
       }
 
-      while (shooterElevator.isSensorDetected(shooterElevator.coralSensor)) {
-        if (stick.getRawButton(Constants.CoralConstants.ESCAPE)) {
-          break; //where does this BREAK break out of? does it even register the if-statement due to the outside while loop? why do I need to have this break statement twice to exit the outer if-statement, and how can I prevent this?
+      if (!exitOuterIf) {
+        while (shooterElevator.isSensorDetected(shooterElevator.coralSensor)) {
+          shooterElevator.outtakeCoral();
+          shooterElevator.stopElevator();
         }
-        shooterElevator.outtakeCoral();
-        shooterElevator.stopElevator();
+
+        shooterElevator.stopShooter();
       }
+      
       shooterElevator.stopShooter();
     }
     //intake and outtake coral
@@ -67,43 +71,68 @@ public class ShooterElevatorCommand extends Command {
     if (shooterElevator.isTopLimitReached() || shooterElevator.isSensorDetected(shooterElevator.coralSensor)) {
       shooterElevator.stopElevator();
     }
+
     else if (stick.getRawButton(Constants.ElavatorConstants.LEVEL_1)) {
       shooterElevator.goToFirstLevel();
+      if (!stick.getRawButton(Constants.AlgaeConstants.ALGAE_INTAKE)) {
+        shooterElevator.outtakeCoral();
+      }
     }
+
     else if (stick.getRawButton(Constants.ElavatorConstants.LEVEL_2)) {
       shooterElevator.goToSecondLevel();
+      if (!stick.getRawButton(Constants.AlgaeConstants.ALGAE_INTAKE)) {
+        shooterElevator.outtakeCoral();
+      }
     }
+
     else if (stick.getRawButton(Constants.ElavatorConstants.LEVEL_3)) {
       shooterElevator.goToThirdLevel();
+      if (!stick.getRawButton(Constants.AlgaeConstants.ALGAE_INTAKE)) {
+        shooterElevator.outtakeCoral();
+      }
     }
+
     else if (stick.getRawButton(Constants.ElavatorConstants.LEVEL_4)) {
       shooterElevator.goToFourthLevel();
-    }
-    else {
-      shooterElevator.stopElevator();
-    }
-    // button box joystick manual control of elevator
-    double speed = -stick.getRawAxis(Constants.ElavatorConstants.MANUAL_CONTROL_AXIS);                                                                            // psotive to negative
-    if (shooterElevator.isTopLimitReached() || shooterElevator.isSensorDetected(shooterElevator.coralSensor)) {
-      shooterElevator.stopElevator();
-    }
-    else if (speed < 0) {
-      if (shooterElevator.isSensorDetected(shooterElevator.Level1Sensor) || shooterElevator.isSensorDetected(shooterElevator.coralSensor)) {
-        shooterElevator.stopElevator();
+      if (!stick.getRawButton(Constants.AlgaeConstants.ALGAE_INTAKE)) {
+        shooterElevator.outtakeCoral();
       }
-      else {
-        shooterElevator.moveElevatorDown();
-      }
-    } else if (speed > 0) {
+    }
+
+    else if (stick.getRawButton(Constants.ElavatorConstants.USE_MANUAL_CONTROL_JOYSTICK)) {
+      double speed = -stick.getRawAxis(Constants.ElavatorConstants.MANUAL_CONTROL_AXIS);
+
       if (shooterElevator.isTopLimitReached() || shooterElevator.isSensorDetected(shooterElevator.coralSensor)) {
         shooterElevator.stopElevator();
       }
-      else {
-        shooterElevator.moveElevatorUp();
+
+      else if (speed < 0) {
+        if (shooterElevator.isSensorDetected(shooterElevator.Level1Sensor) || shooterElevator.isSensorDetected(shooterElevator.coralSensor)) {
+          shooterElevator.stopElevator();
+        }
+        else {
+          shooterElevator.moveElevatorDown();
+        }
+      } 
+
+      else if (speed > 0) {
+        if (shooterElevator.isTopLimitReached() || shooterElevator.isSensorDetected(shooterElevator.coralSensor)) {
+          shooterElevator.stopElevator();
+        }
+        else {
+          shooterElevator.moveElevatorUp();
+        }
       }
-    } else {
-      shooterElevator.stopElevator();
+
+      else {
+        shooterElevator.stopElevator();
+      }
     }
+
+    else {
+      shooterElevator.goToFirstLevel();
+    } 
   }
 
   // Called once the command ends or is interrupted.

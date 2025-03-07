@@ -16,77 +16,26 @@ import edu.wpi.first.wpilibj.DutyCycleEncoder; //on-shaft encoder/through bore e
 public class CoralPlateAngle extends SubsystemBase {
 
   private final SparkMax angleMotor;
-  private final DutyCycleEncoder encoder;
+  //private final DutyCycleEncoder encoder;
 
   /** Creates a new CoralAngle. */
   public CoralPlateAngle() {
     angleMotor = new SparkMax(Constants.CoralConstants.kCoralPlateAngleMotorPort, MotorType.kBrushless);
-    encoder = new DutyCycleEncoder(4, 2*Math.PI, 0.0); // change according to this specification: https://github.wpilib.org/allwpilib/docs/release/java/edu/wpi/first/wpilibj/DutyCycleEncoder.html
+    //encoder = new DutyCycleEncoder(4, 2*Math.PI, 0.0); // change according to this specification: https://github.wpilib.org/allwpilib/docs/release/java/edu/wpi/first/wpilibj/DutyCycleEncoder.html
     // also, make a constant for default encoder value so I don't have to keep being changed
     //^ Adjust this according to testing
   }
  
   public void angleUp() {
-    if (!(getEncoder() >= Constants.CoralConstants.MAX_ENCODER_VALUE)) {
-      angleMotor.set(Constants.CoralConstants.kAngleSpeed);
-    }
-    else{ 
-      stopAngle();
-    }
+    angleMotor.set(Constants.CoralConstants.kAngleSpeed);
   }
 
   public void angleDown() {
-    if (!(getEncoder() <= Constants.CoralConstants.MIN_ENCODER_VALUE)) {
-      angleMotor.set(-Constants.CoralConstants.kAngleSpeed); //temporary --> have to change to closedLoop/on-axel encoder
-    }
-    else {
-      stopAngle();
-    }
+    angleMotor.set(-Constants.CoralConstants.kAngleSpeed);
   }
 
-  public void stopAngle()  {
+  public void stopAngle() {
     angleMotor.set(0.0);
-  }
-
-  public double getEncoder() {
-    return encoder.get();
-  }
-
-  public boolean inRange() {
-    return ((encoder.get() >= Constants.CoralConstants.kDefaultEncoder - Constants.CoralConstants.kDelta) && (encoder.get() <= Constants.CoralConstants.kDefaultEncoder + Constants.CoralConstants.kDelta));
-  }
-
-  public void angleUpToDefault() {
-    while(!inRange()) { //just means while not within the range (default - delta, default + delta) [centered around default], then angle up the plate
-      angleMotor.set(-Constants.CoralConstants.kAngleSpeed); //adjust SIGN (espcially) and speed (now in constants for ease) as needed
-    }
-  }
-
-  public void angleDownToDefault() {
-    while(!inRange()) { //just means while not within the range (default - delta, default + delta) [centered around default], then angle down the plate
-      angleMotor.set(Constants.CoralConstants.kAngleSpeed); //adjust SIGN (espcially) and speed (now in constants for ease) as needed
-    }
-  }
-
-  public void angleMinSet() {
-    while(getEncoder() >= Constants.CoralConstants.MIN_ENCODER_VALUE) {
-      angleDown();
-    }
-  }
-
-  public void angleMaxSet() {
-    while(getEncoder() <= Constants.CoralConstants.MAX_ENCODER_VALUE) {
-      angleUp();
-    }
-  }
-
-  public void setDefaultAngle() {
-    if (getEncoder() <= Constants.CoralConstants.kDefaultEncoder) {
-      angleUpToDefault();
-    }
-    else if (getEncoder() >= Constants.CoralConstants.kDefaultEncoder) {
-      angleDownToDefault();
-    }
   }
 
   @Override

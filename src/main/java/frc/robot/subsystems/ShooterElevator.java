@@ -51,7 +51,7 @@ public class ShooterElevator extends SubsystemBase {
     }
 
     public void goToSecondLevel() {
-        goToFirstLevel();
+        //goToFirstLevel();
         
         while (!isSensorDetected(Level2Sensor)) {
             if (isTopLimitReached()) {
@@ -66,7 +66,7 @@ public class ShooterElevator extends SubsystemBase {
     }
 
     public void goToThirdLevel() {
-        goToFirstLevel();
+        //goToFirstLevel();
 
         while (!isSensorDetected(Level3Sensor)) {
             if (isTopLimitReached()) {
@@ -81,7 +81,7 @@ public class ShooterElevator extends SubsystemBase {
     }
 
     public void goToFourthLevel() {
-        goToFirstLevel();
+        //goToFirstLevel();
 
         while (!isSensorDetected(Level4Sensor)) {
             if (isTopLimitReached()) {
