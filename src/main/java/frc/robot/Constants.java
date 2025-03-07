@@ -184,7 +184,7 @@ public final class Constants {
         public static final int kCoralEffectorMotorPort = 28;
             public static final int CORAL_INTAKE = 7;
             public static final int CORAL_OUTTAKE = 2;
-            public static final int keepGoing = 8;
+            public static final int INITIATE_HUMAN_PLAYER_SEQUENCE = 8;
             public static final int ESCAPE = 10;
         public static final int kCoralPlateAngleMotorPort = 32; //final CAN ID
             public static final int CORAL_PLATE_ANGLE_UP = 12; //15
@@ -215,10 +215,10 @@ public final class Constants {
         //ELEVATOR CAN IDS - NEED TO ADD MORE AS ELEVATOR HAS MORE MOTORS
         public static final int kRightElevatorMotorPort = 22;
         public static final int kLeftElevatorMotorPort = 21;
-            public static final int L1 = 5;
-            public static final int L2 = 4;
-            public static final int L3 = 1;
-            public static final int L4 = 6;
+            public static final int LEVEL_1 = 5;
+            public static final int LEVEL_2 = 4;
+            public static final int LEVEL_3 = 1;
+            public static final int LEVEL_4 = 6;
             public static final int MANUAL_CONTROL_AXIS = 1;
         
         //SENSOR PORT
@@ -227,7 +227,7 @@ public final class Constants {
         public static final int ELAVATOR_SENSOR_2 = 6;
         public static final int ELAVATOR_SENSOR_3 = 7;
         public static final int ELAVATOR_SENSOR_4 = 4;
-        public static final int ELAVATOR_SENSOR_5 = 3;
+        public static final int ELAVATOR_LIMIT_SENSOR = 3;
     }
 
     // ------------ CLIMBER CONSTANTS (CAN IDS AND RESPECTIVE BUTTONS TO CONTROL THEM) ------------ //

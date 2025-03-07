@@ -62,7 +62,7 @@ public class CoralPlateAngleCommand extends Command {
     while (!(stick.getRawButton(Constants.CoralConstants.CORAL_PLATE_ANGLE_UP) || stick.getRawButton(Constants.CoralConstants.CORAL_PLATE_ANGLE_DOWN) || stick.getRawButton(Constants.CoralConstants.CORAL_PLATE_STAY_MAX))) {
       coralPlateAngle.setDefaultAngle();
     }
-    while (!(stick.getRawButton(Constants.CoralConstants.CORAL_PLATE_ANGLE_DEFAULT) || stick.getRawButton(Constants.CoralConstants.keepGoing))) {
+    while (!(stick.getRawButton(Constants.CoralConstants.CORAL_PLATE_ANGLE_DEFAULT) || stick.getRawButton(Constants.CoralConstants.INITIATE_HUMAN_PLAYER_SEQUENCE))) {
       //code inside is simple and can be placed outside if while loop logic doesn't work
       if ((coralPlateAngle.getEncoder() >= Constants.CoralConstants.MAX_ENCODER_VALUE) || (coralPlateAngle.getEncoder() <= Constants.CoralConstants.MIN_ENCODER_VALUE)) {
         coralPlateAngle.stopAngle();

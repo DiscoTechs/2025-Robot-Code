@@ -34,55 +34,76 @@ public class ShooterElevatorCommand extends Command {
   @Override
   public void execute() {
     //intake sequence
-    if (stick.getRawButton(Constants.CoralConstants.keepGoing)) {
-      shooterElevator.firstLevel();
-      while (!shooterElevator.detectCoral() && !stick.getRawButton(Constants.CoralConstants.ESCAPE)) {
-        shooterElevator.outtake();
+    if (stick.getRawButton(Constants.CoralConstants.INITIATE_HUMAN_PLAYER_SEQUENCE)) {
+      shooterElevator.goToFirstLevel();
+
+      while (!shooterElevator.isSensorDetected(shooterElevator.coralSensor)) {
+        if (stick.getRawButton(Constants.CoralConstants.ESCAPE)) {
+          break; //where does this BREAK break out of? does it even register the if-statement due to the outside while loop?
+        }
+        shooterElevator.outtakeCoral();
       }
-      while (shooterElevator.detectCoral() && !stick.getRawButton(Constants.CoralConstants.ESCAPE)) {
-        shooterElevator.outtake();
+
+      while (shooterElevator.isSensorDetected(shooterElevator.coralSensor)) {
+        if (stick.getRawButton(Constants.CoralConstants.ESCAPE)) {
+          break; //where does this BREAK break out of? does it even register the if-statement due to the outside while loop? why do I need to have this break statement twice to exit the outer if-statement, and how can I prevent this?
+        }
+        shooterElevator.outtakeCoral();
         shooterElevator.stopElevator();
       }
       shooterElevator.stopShooter();
     }
-
-    //elevator movement
-    // if (shooterElevator.detectCoral() || shooterElevator.reachedLimit()) { 
-    //   shooterElevator.stopElevator();
-    // } else if (stick.getRawButton(Constants.ElavatorConstants.L1)) {
-    //   shooterElevator.firstLevel();
-    // } else if (stick.getRawButton(Constants.ElavatorConstants.L2)) {
-    //   shooterElevator.secondLevel();
-    // } else if (stick.getRawButton(Constants.ElavatorConstants.L3)) {
-    //   shooterElevator.thirdLevel();
-    // } else if (stick.getRawButton(Constants.ElavatorConstants.L4)) {
-    //   shooterElevator.fourthLevel();
-    // } else {
-    //   shooterElevator.stopElevator();
-    // }
-
-    // coral shooter
+    //intake and outtake coral
     if (stick.getRawButton(Constants.CoralConstants.CORAL_INTAKE)) {
-      shooterElevator.intake();
-    } else if (stick.getRawButton(Constants.CoralConstants.CORAL_OUTTAKE)) {
-      shooterElevator.outtake();
-    } else {
+      shooterElevator.intakeCoral();
+    }
+    else if (stick.getRawButton(Constants.CoralConstants.CORAL_OUTTAKE)) {
+      shooterElevator.outtakeCoral();
+    }
+    else {
       shooterElevator.stopShooter();
     }
-
-    // manual control of elevator
-    double speed = (-stick.getRawAxis(Constants.ElavatorConstants.MANUAL_CONTROL_AXIS)); // potnetially change sign from
-                                                                                       // psotive to negative
-    if (shooterElevator.detectCoral() || shooterElevator.reachedLimit()) {
+    //pre-set button controls for elevator
+    if (shooterElevator.isTopLimitReached() || shooterElevator.isSensorDetected(shooterElevator.coralSensor)) {
       shooterElevator.stopElevator();
-    } else if (speed < 0 && (!shooterElevator.L1getSensorValue())) {
-      shooterElevator.moveDown();
+    }
+    else if (stick.getRawButton(Constants.ElavatorConstants.LEVEL_1)) {
+      shooterElevator.goToFirstLevel();
+    }
+    else if (stick.getRawButton(Constants.ElavatorConstants.LEVEL_2)) {
+      shooterElevator.goToSecondLevel();
+    }
+    else if (stick.getRawButton(Constants.ElavatorConstants.LEVEL_3)) {
+      shooterElevator.goToThirdLevel();
+    }
+    else if (stick.getRawButton(Constants.ElavatorConstants.LEVEL_4)) {
+      shooterElevator.goToFourthLevel();
+    }
+    else {
+      shooterElevator.stopElevator();
+    }
+    // button box joystick manual control of elevator
+    double speed = -stick.getRawAxis(Constants.ElavatorConstants.MANUAL_CONTROL_AXIS);                                                                            // psotive to negative
+    if (shooterElevator.isTopLimitReached() || shooterElevator.isSensorDetected(shooterElevator.coralSensor)) {
+      shooterElevator.stopElevator();
+    }
+    else if (speed < 0) {
+      if (shooterElevator.isSensorDetected(shooterElevator.Level1Sensor) || shooterElevator.isSensorDetected(shooterElevator.coralSensor)) {
+        shooterElevator.stopElevator();
+      }
+      else {
+        shooterElevator.moveElevatorDown();
+      }
     } else if (speed > 0) {
-      shooterElevator.moveUp();
+      if (shooterElevator.isTopLimitReached() || shooterElevator.isSensorDetected(shooterElevator.coralSensor)) {
+        shooterElevator.stopElevator();
+      }
+      else {
+        shooterElevator.moveElevatorUp();
+      }
     } else {
       shooterElevator.stopElevator();
     }
-
   }
 
   // Called once the command ends or is interrupted.
@@ -106,7 +127,7 @@ public class ShooterElevatorCommand extends Command {
 
     @Override
     public void execute() {
-      shooterElevator.firstLevel();
+      shooterElevator.goToFirstLevel();
     }
   }
 
@@ -120,7 +141,7 @@ public class ShooterElevatorCommand extends Command {
 
     @Override
     public void execute() {
-      shooterElevator.secondLevel();
+      shooterElevator.goToSecondLevel();
     }
   }
 
@@ -134,7 +155,7 @@ public class ShooterElevatorCommand extends Command {
 
     @Override
     public void execute() {
-      shooterElevator.thirdLevel();
+      shooterElevator.goToThirdLevel();
     }
   }
 
@@ -148,7 +169,7 @@ public class ShooterElevatorCommand extends Command {
 
     @Override
     public void execute() {
-      shooterElevator.fourthLevel();
+      shooterElevator.goToFourthLevel();
     }
   }
 
@@ -162,7 +183,7 @@ public class ShooterElevatorCommand extends Command {
 
     @Override
     public void execute() {
-      shooterElevator.intake();
+      shooterElevator.intakeCoral();
     }
   }
 
@@ -176,7 +197,7 @@ public class ShooterElevatorCommand extends Command {
 
     @Override
     public void execute() {
-      shooterElevator.outtake();
+      shooterElevator.outtakeCoral();
     }
   }
 

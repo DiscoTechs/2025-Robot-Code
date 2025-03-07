@@ -10,180 +10,156 @@ import com.revrobotics.spark.SparkLowLevel.MotorType;
 
 
 public class ShooterElevator extends SubsystemBase {
-    final DigitalInput coralSensor;
-    final DigitalInput sensor1;
-    final DigitalInput sensor2;
-    final DigitalInput sensor3;
-    final DigitalInput sensor4;
-    final DigitalInput sensor5;
-    int currentLevel = 1;
-    private final SparkMax rightMotor;
-    private final SparkMax leftMotor;
-    
-    private final SparkMax intakeMotor;
+    public DigitalInput coralSensor;
+    public final SparkMax shooterMotor;
+    public final DigitalInput Level1Sensor;
+    public final DigitalInput Level2Sensor;
+    public final DigitalInput Level3Sensor;
+    public final DigitalInput Level4Sensor;
+    public final DigitalInput LimitSensor;
+    public final SparkMax rightElevatorMotor;
+    public final SparkMax leftElevatorMotor;
     
     public ShooterElevator() { 
-        sensor1 = new DigitalInput(Constants.ElavatorConstants.ELAVATOR_SENSOR_1);
-        System.out.println(sensor1);
-
-        sensor2 = new DigitalInput(Constants.ElavatorConstants.ELAVATOR_SENSOR_2);
-        sensor3 = new DigitalInput(Constants.ElavatorConstants.ELAVATOR_SENSOR_3);
-        sensor4 = new DigitalInput(Constants.ElavatorConstants.ELAVATOR_SENSOR_4);
-        sensor5 = new DigitalInput(Constants.ElavatorConstants.ELAVATOR_SENSOR_5);
-
-        rightMotor = new SparkMax(Constants.ElavatorConstants.kRightElevatorMotorPort, MotorType.kBrushless);
-        leftMotor = new SparkMax(Constants.ElavatorConstants.kLeftElevatorMotorPort, MotorType.kBrushless);
-
         //CORAL EFFECTOR
         coralSensor = new DigitalInput(Constants.ElavatorConstants.CORAL_SENSOR);
-        intakeMotor = new SparkMax(Constants.CoralConstants.kCoralEffectorMotorPort, MotorType.kBrushless);
+        shooterMotor = new SparkMax(Constants.CoralConstants.kCoralEffectorMotorPort, MotorType.kBrushless);
+
+        //ELEVATOR
+        Level1Sensor = new DigitalInput(Constants.ElavatorConstants.ELAVATOR_SENSOR_1);
+        Level2Sensor = new DigitalInput(Constants.ElavatorConstants.ELAVATOR_SENSOR_2);
+        Level3Sensor = new DigitalInput(Constants.ElavatorConstants.ELAVATOR_SENSOR_3);
+        Level4Sensor = new DigitalInput(Constants.ElavatorConstants.ELAVATOR_SENSOR_4);
+        LimitSensor = new DigitalInput(Constants.ElavatorConstants.ELAVATOR_LIMIT_SENSOR);
+
+        rightElevatorMotor = new SparkMax(Constants.ElavatorConstants.kRightElevatorMotorPort, MotorType.kBrushless);
+        leftElevatorMotor = new SparkMax(Constants.ElavatorConstants.kLeftElevatorMotorPort, MotorType.kBrushless);  
     }
 
-    public boolean detectCoral() {
-        return !coralSensor.get();
-    }
-
-    public void intakeSequence() {
-        firstLevel();
-        while (!detectCoral()) {
-            outtake();
+    public void goToFirstLevel() {
+        stopElevatorIfLimitReached();
+        if (isSensorDetected(Level1Sensor)) {
+            stopElevator();
         }
-        while (detectCoral()) {
-            outtake();
+        
+        else {
+            while (!isSensorDetected(Level1Sensor)) {
+                moveElevatorDown();
+            }
+            stopElevator();
+        }
+    }
+
+    public void goToSecondLevel() {
+        goToFirstLevel();
+        
+        while (!isSensorDetected(Level2Sensor)) {
+            if (isTopLimitReached()) {
+                stopElevator();
+                break; //where does this BREAK break out of?
+            }
+            else {
+                moveElevatorUp();
+            }  
+        }
+        stopElevator();
+    }
+
+    public void goToThirdLevel() {
+        goToFirstLevel();
+
+        while (!isSensorDetected(Level3Sensor)) {
+            if (isTopLimitReached()) {
+                stopElevator();
+                break; //where does this BREAK break out of?
+            }
+            else {
+                moveElevatorUp();
+            }  
+        }
+        stopElevator();
+    }
+
+    public void goToFourthLevel() {
+        goToFirstLevel();
+
+        while (!isSensorDetected(Level4Sensor)) {
+            if (isTopLimitReached()) {
+                stopElevator();
+                break; //where does this BREAK break out of?
+            }
+            else {
+                moveElevatorUp();
+            }  
+        }
+        stopElevator();
+    }
+
+    public void moveElevatorUp() {
+        leftElevatorMotor.set(-0.4);
+        rightElevatorMotor.set(0.4);
+    }
+
+    public void moveElevatorDown() {
+        leftElevatorMotor.set(0.4);
+        rightElevatorMotor.set(-0.4);
+    }
+
+    public void stopElevator() {
+        leftElevatorMotor.set(0);
+        rightElevatorMotor.set(0);
+    }
+
+    public void intakeCoral() {
+        shooterMotor.set(-0.5);
+    }
+
+    public void outtakeCoral() {
+        shooterMotor.set(0.5);
+    }
+
+    public void stopShooter() {
+        shooterMotor.set(0.0);
+    }
+
+    public boolean isSensorDetected(DigitalInput x) {
+        return !x.get();
+    }
+
+    public boolean isTopLimitReached() {
+        if (isSensorDetected(LimitSensor)) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+    //maybe delete stopElevatorIfLimitReached()
+    public void stopElevatorIfLimitReached() {
+        if (isTopLimitReached()) {
+            stopElevator();
+        }
+    }
+    //intakeSequence() is purely for auto
+    public void intakeSequence() {
+        goToFirstLevel();
+        while (!isSensorDetected(coralSensor)) {
+            outtakeCoral();
+        }
+        while (isSensorDetected(coralSensor)) {
+            outtakeCoral();
             stopElevator();
         }
         stopShooter();
     }
-    
-    public boolean L1getSensorValue() {
-        return !sensor1.get();
-    }
-
-    public boolean L2getSensorValue() {
-        return !sensor2.get();
-    }
-
-    public boolean L3getSensorValue() {
-        return !sensor3.get();
-    }
-
-    public boolean L4getSensorValue() {
-        return !sensor4.get();
-    }
-
-    public boolean reachedLimit() {
-        return !sensor5.get(); //change sign here after learning what sensor outputs
-    }
-
-    public int CurrentLevel() {
-        return currentLevel;
-    }
-
-    public void moveUp(){
-        rightMotor.set(0.4);
-        leftMotor.set(-0.4);
-    }
-
-    public void moveDown(){
-        rightMotor.set(-0.4);
-        leftMotor.set(0.4);
-    }
-
-    public void firstLevel() {
-        
-        if(CurrentLevel() > 1){
-            while(!L1getSensorValue()){
-                moveDown();
-            }
-            currentLevel = 1;
-        }
-    }
-
-    public void secondLevel() {
-        if(CurrentLevel() > 2){
-            while(!L2getSensorValue()){
-                moveDown();
-            }
-            currentLevel = 2;
-        }
-        else if(CurrentLevel() < 2){
-            while(!L2getSensorValue()){
-                moveUp();
-            }
-            currentLevel = 2;
-        }
-    }
-
-    public void thirdLevel() {
-        if(CurrentLevel() > 3){
-            while(!L3getSensorValue()){
-                moveDown();
-            }
-            currentLevel = 3;
-        }
-        else if(CurrentLevel() < 3){
-            while(!L3getSensorValue()){
-                moveUp();
-            }
-            currentLevel = 3;
-        }
-    }
-
-    public void fourthLevel() {
-        if(CurrentLevel() < 4){
-            while(!L4getSensorValue()){
-                moveUp();
-            }
-            currentLevel = 4;
-        }
-    }
-
-    public double speedSetter() {
-        double shootingSpeed = 0.5;
-        
-        // if (CurrentLevel() == 1) {
-        //     shootingSpeed = Constants.CoralConstants.l1Speed;
-        // }
-        // else if (CurrentLevel() == 2){
-        //     shootingSpeed = Constants.CoralConstants.l2speed;
-        // }
-        // else if (CurrentLevel() == 3) {
-        //     shootingSpeed = Constants.CoralConstants.l3speed;
-        // }
-        // else if (CurrentLevel() == 4) {
-        //     shootingSpeed = Constants.CoralConstants.l4speed;
-        // }
-        // else {
-        //     shootingSpeed = Constants.CoralConstants.defaultSpeed;
-        //}
-        return shootingSpeed;
-    }
-
-    public void intake() {
-        intakeMotor.set(-speedSetter()); //update sign/speed accordingly
-    }
-
-    public void outtake() {
-        intakeMotor.set(speedSetter()); //update sign/speed accordingly
-    }
-
-    public void stopElevator() {
-        rightMotor.set(0.0);
-        leftMotor.set(0.0);
-    }
-
-    public void stopShooter() {
-        intakeMotor.set(0.0);
-    }
-
 
     @Override
     public void periodic() {
         //System.out.println(L1getSensorValue());
         // This method will be called once per scheduler run
-        SmartDashboard.putBoolean("Sensor 1", L1getSensorValue());
-        SmartDashboard.putBoolean("Sensor 2", L2getSensorValue());
-        SmartDashboard.putBoolean("Sensor 3", L3getSensorValue());
-        SmartDashboard.putBoolean("Sensor 4", L4getSensorValue());
+        SmartDashboard.putBoolean("Sensor 1", isSensorDetected(Level1Sensor));
+        SmartDashboard.putBoolean("Sensor 2", isSensorDetected(Level2Sensor));
+        SmartDashboard.putBoolean("Sensor 3", isSensorDetected(Level3Sensor));
+        SmartDashboard.putBoolean("Sensor 4", isSensorDetected(Level4Sensor));
     }
 }
