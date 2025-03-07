@@ -37,52 +37,35 @@ public class ShooterElevator extends SubsystemBase {
     }
 
     public void goToFirstLevel() {
-        if (isSensorDetected(Level1Sensor)) {
-            stopElevator();
-        }
-        
-        else {
-            if (!isSensorDetected(Level1Sensor)) {
-                moveElevatorDown();
-            }
+        if (!isSensorDetected(Level1Sensor)) {
+            moveElevatorDown();
+        } else {
             stopElevator();
         }
     }
 
     public void goToSecondLevel() {
         if (!isSensorDetected(Level2Sensor)) {
-            if (isTopLimitReached()) {
-                stopElevator(); 
-            }
-            else {
-                moveElevatorUp();
-            }  
+            moveElevatorUp();
+        } else {
+            stopElevator();
         }
-        stopElevator();
     }
 
     public void goToThirdLevel() {
         if (!isSensorDetected(Level3Sensor)) {
-            if (isTopLimitReached()) {
-                stopElevator();
-            }
-            else {
-                moveElevatorUp();
-            }
+            moveElevatorUp();
+        } else {
+            stopElevator();
         }
-        stopElevator();
     }
 
     public void goToFourthLevel() {
         if (!isSensorDetected(Level4Sensor)) {
-            if (isTopLimitReached()) {
-                stopElevator();
-            }
-            else {
-                moveElevatorUp();
-            }  
+            moveElevatorUp();
+        } else {
+            stopElevator();
         }
-        stopElevator();
     }
 
     public void moveElevatorUp() {
@@ -133,10 +116,10 @@ public class ShooterElevator extends SubsystemBase {
     //intakeSequence() is purely for auto
     public void intakeSequence() {
         goToFirstLevel();
-        while (!isSensorDetected(coralSensor)) {
+        if (!isSensorDetected(coralSensor)) {
             outtakeCoral();
         }
-        while (isSensorDetected(coralSensor)) {
+        if (isSensorDetected(coralSensor)) {
             outtakeCoral();
             stopElevator();
         }

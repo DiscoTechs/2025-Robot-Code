@@ -37,17 +37,15 @@ public class ShooterElevatorCommand extends Command {
     boolean exitOuterIf = false;
     if (stick.getRawButton(Constants.CoralConstants.INITIATE_HUMAN_PLAYER_SEQUENCE)) {
       shooterElevator.goToFirstLevel();
-
-      while (!shooterElevator.isSensorDetected(shooterElevator.coralSensor)) {
+      if (!shooterElevator.isSensorDetected(shooterElevator.coralSensor)) {
         if (stick.getRawButton(Constants.CoralConstants.ESCAPE)) {
           exitOuterIf = true;
-          break;
         }
         shooterElevator.outtakeCoral();
       }
 
       if (!exitOuterIf) {
-        while (shooterElevator.isSensorDetected(shooterElevator.coralSensor)) {
+        if (shooterElevator.isSensorDetected(shooterElevator.coralSensor)) {
           shooterElevator.outtakeCoral();
           shooterElevator.stopElevator();
         }
