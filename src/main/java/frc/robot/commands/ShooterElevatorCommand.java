@@ -47,19 +47,19 @@ public class ShooterElevatorCommand extends Command {
     }
 
     //elevator movement
-    if (shooterElevator.detectCoral() || shooterElevator.reachedLimit()) { 
-      shooterElevator.stopElevator();
-    } else if (stick.getRawButton(Constants.ElavatorConstants.L1)) {
-      shooterElevator.firstLevel();
-    } else if (stick.getRawButton(Constants.ElavatorConstants.L2)) {
-      shooterElevator.secondLevel();
-    } else if (stick.getRawButton(Constants.ElavatorConstants.L3)) {
-      shooterElevator.thirdLevel();
-    } else if (stick.getRawButton(Constants.ElavatorConstants.L4)) {
-      shooterElevator.fourthLevel();
-    } else {
-      shooterElevator.stopElevator();
-    }
+    // if (shooterElevator.detectCoral() || shooterElevator.reachedLimit()) { 
+    //   shooterElevator.stopElevator();
+    // } else if (stick.getRawButton(Constants.ElavatorConstants.L1)) {
+    //   shooterElevator.firstLevel();
+    // } else if (stick.getRawButton(Constants.ElavatorConstants.L2)) {
+    //   shooterElevator.secondLevel();
+    // } else if (stick.getRawButton(Constants.ElavatorConstants.L3)) {
+    //   shooterElevator.thirdLevel();
+    // } else if (stick.getRawButton(Constants.ElavatorConstants.L4)) {
+    //   shooterElevator.fourthLevel();
+    // } else {
+    //   shooterElevator.stopElevator();
+    // }
 
     // coral shooter
     if (stick.getRawButton(Constants.CoralConstants.CORAL_INTAKE)) {
@@ -71,7 +71,7 @@ public class ShooterElevatorCommand extends Command {
     }
 
     // manual control of elevator
-    double speed = -stick.getRawAxis(Constants.ElavatorConstants.MANUAL_CONTROL_AXIS); // potnetially change sign from
+    double speed = (-stick.getRawAxis(Constants.ElavatorConstants.MANUAL_CONTROL_AXIS)); // potnetially change sign from
                                                                                        // psotive to negative
     if (shooterElevator.detectCoral() || shooterElevator.reachedLimit()) {
       shooterElevator.stopElevator();

@@ -138,6 +138,7 @@ public class SwerveSubsystem extends SubsystemBase {
 
   @Override
   public void periodic() {
+       // System.out.println("SWERVE PERIODIC " + (int)(System.currentTimeMillis() / 1000 - 17413019) );
       odometry.update(getRotation2d(), getModulePositions());
         SmartDashboard.putNumber("Robot Heading", getHeading());
         SmartDashboard.putNumber("Absolute Encoder Left Front", -frontLeft.getAbsoluteEncoderDeg()); //front left

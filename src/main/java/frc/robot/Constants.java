@@ -51,16 +51,16 @@ public final class Constants {
         public static final double driveBaseRadius = Units.inchesToMeters(21.75 * Math.sqrt(2) / 2);
 
         // drive 40 amps
-        public static final int kFrontLeftDriveMotorPort = 7;
-        public static final int kBackLeftDriveMotorPort = 9;
-        public static final int kFrontRightDriveMotorPort = 1;
-        public static final int kBackRightDriveMotorPort = 14;
+        public static final int kFrontLeftDriveMotorPort = 2;
+        public static final int kBackLeftDriveMotorPort = 6;
+        public static final int kFrontRightDriveMotorPort = 4;
+        public static final int kBackRightDriveMotorPort = 8;
 
         // turning 20 amps
-        public static final int kFrontLeftTurningMotorPort = 3;
-        public static final int kBackLeftTurningMotorPort = 8;
-        public static final int kFrontRightTurningMotorPort = 2;
-        public static final int kBackRightTurningMotorPort = 17;
+        public static final int kFrontLeftTurningMotorPort = 1;
+        public static final int kBackLeftTurningMotorPort = 5;
+        public static final int kFrontRightTurningMotorPort = 3;
+        public static final int kBackRightTurningMotorPort = 7;
 
         public static final boolean kFrontLeftTurningEncoderReversed = true;
         public static final boolean kBackLeftTurningEncoderReversed = true;
@@ -87,10 +87,10 @@ public final class Constants {
         public static final int kLeftBackModule = 2;
         public static final int kRightBackModule = 3;
 
-        public static final double kFrontLeftDriveAbsoluteEncoderOffsetRad = 0.383;//3.545944; //2.76; //2.75762;
-        public static final double kBackLeftDriveAbsoluteEncoderOffsetRad = 4.294;//1.175327; //1.91; //1.97222;
-        public static final double kFrontRightDriveAbsoluteEncoderOffsetRad = 6.150;//3.021143;// 0.49; //0.488692;
-        public static final double kBackRightDriveAbsoluteEncoderOffsetRad =5.255; //2.095080; // 4.61; //4.64258;
+        public static final double kFrontLeftDriveAbsoluteEncoderOffsetRad = -121 * Math.PI / 180;
+        public static final double kBackLeftDriveAbsoluteEncoderOffsetRad = (45 - 90) * Math.PI / 180;
+        public static final double kFrontRightDriveAbsoluteEncoderOffsetRad = (314 - 90) * Math.PI / 180;
+        public static final double kBackRightDriveAbsoluteEncoderOffsetRad = (33 + 180) * Math.PI / 180;
 
         public static final double kPhysicalMaxSpeedMetersPerSecond = 4.60248;
         public static final double kPhysicalMaxAngularSpeedRadiansPerSecond = 2 * 2 * Math.PI;
@@ -156,24 +156,24 @@ public final class Constants {
     // ------------ ALGAE CONSTANTS (CAN IDS AND RESPECTIVE BUTTONS TO CONTROL THEM) ------------ //
     public static final class AlgaeConstants {
         //ALGAE CAN IDS
-        public static final int kLeftAlgaeEffectorMotorPort = 25; public static final int kRightAlgaeEffectorMotorPort = 26;
-            public static final int ALGAE_INTAKE = 6;
-            public static final int ALGAE_OUTTAKE = 5;
-        public static final int kAlgaeAngleMotorPort = 24;
-            public static final int ALGAE_ANGLE_UP = 8;
-            public static final int ALGAE_ANGLE_DOWN = 7;
-            public static final int ALGAE_ANGLE_DEFAULT = 3;
-            public static final int ALGAE_ANGLE_STAY_MAX = 4;
-            public static final int ALGAE_ANGLE_STAY_MIN = 1;
-            public static final int ALGAE_ANGLE_ESCAPE = 2;
+        public static final int kLeftAlgaeEffectorMotorPort = 25;
+        public static final int kRightAlgaeEffectorMotorPort = 26;
+        public static final int ALGAE_INTAKE = 6;
+        public static final int ALGAE_OUTTAKE = 5;
+        public static final int kAlgaeAngleMotorPort = 29;
+        public static final int ALGAE_ANGLE_UP = 8;
+        public static final int ALGAE_ANGLE_DOWN = 7;
+        public static final int ALGAE_ANGLE_DEFAULT = 3;
+        public static final int ALGAE_ANGLE_STAY_MAX = 4;
+        public static final int ALGAE_ANGLE_STAY_MIN = 1;
+        public static final int ALGAE_ANGLE_ESCAPE = 2;
 
         
-        public static final double kDefaultEncoderValue = 1;
+        public static final double kDefaultEncoderValue = 3.8;//1.978;
+        public static final double kMaxEncoderValue = 3.9;
+        public static final double kMinEncoderValue = 1.8;
 
-        public static final double kAlgaeDelta = 0.2;
-
-        public static final double kMaxEncoderValue = 2;
-        public static final double kMinEncoderValue = -1;
+        public static final double kAlgaeDelta = 0.03;
 
         public static final double kAlgaeAngleSpeed = 0.2;
     }
@@ -182,7 +182,7 @@ public final class Constants {
     public static final class CoralConstants {
         //CORAL CAN IDS
         public static final int kCoralEffectorMotorPort = 28;
-            public static final int CORAL_INTAKE = 6;
+            public static final int CORAL_INTAKE = 7;
             public static final int CORAL_OUTTAKE = 2;
             public static final int keepGoing = 8;
             public static final int ESCAPE = 10;
@@ -197,8 +197,8 @@ public final class Constants {
         //CORAL_PLATE_ANGLE
         public static final double kAngleSpeed = 0.05; //default through-bore encoder value --> Angle Speed To Adjust the Plate
         public static final double kDelta = 0.01; //small value that can be adjusted
+
         public static final double kDefaultEncoder = 0.2; //default through-bore encoder value
-        
         public static final double MIN_ENCODER_VALUE = 0; //SET TO BE LARGER THAN ACTUAL MIN
         public static final double MAX_ENCODER_VALUE = 1; //SET TO BE SMALLER THAN ACTUAL MAX
         
@@ -222,13 +222,12 @@ public final class Constants {
             public static final int MANUAL_CONTROL_AXIS = 1;
         
         //SENSOR PORT
-        public static final int CORAL_SENSOR = 7;
-        public static final int ELAVATOR_SENSOR_0 = 0;
-        public static final int ELAVATOR_SENSOR_1 = 1;
-        public static final int ELAVATOR_SENSOR_2 = 2;
-        public static final int ELAVATOR_SENSOR_3 = 3;
-        public static final int ELAVATOR_SENSOR_4 = 5;
-        public static final int ELAVATOR_SENSOR_5 = 6;
+        public static final int CORAL_SENSOR = 2;
+        public static final int ELAVATOR_SENSOR_1 = 5;
+        public static final int ELAVATOR_SENSOR_2 = 6;
+        public static final int ELAVATOR_SENSOR_3 = 7;
+        public static final int ELAVATOR_SENSOR_4 = 4;
+        public static final int ELAVATOR_SENSOR_5 = 3;
     }
 
     // ------------ CLIMBER CONSTANTS (CAN IDS AND RESPECTIVE BUTTONS TO CONTROL THEM) ------------ //

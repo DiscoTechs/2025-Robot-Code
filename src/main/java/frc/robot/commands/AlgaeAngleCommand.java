@@ -32,10 +32,10 @@ public class AlgaeAngleCommand extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    while (!(stick.getRawButton(Constants.AlgaeConstants.ALGAE_ANGLE_DEFAULT) || stick.getRawButton(Constants.AlgaeConstants.ALGAE_ANGLE_DOWN) || stick.getRawButton(Constants.AlgaeConstants.ALGAE_ANGLE_UP) )) {
+    /*if (!(stick.getRawButton(Constants.AlgaeConstants.ALGAE_ANGLE_DEFAULT) || stick.getRawButton(Constants.AlgaeConstants.ALGAE_ANGLE_DOWN) || stick.getRawButton(Constants.AlgaeConstants.ALGAE_ANGLE_UP) )) {
       algaeAngle.angleUp();
     }
-    while (!(stick.getRawButton(Constants.CoralConstants.CORAL_PLATE_STAY_MAX))) {
+    if (!(stick.getRawButton(Constants.AlgaeConstants.ALGAE_ANGLE_STAY_MAX))) {
       //code inside is simple and can be placed outside if while loop logic doesn't work
       if ((algaeAngle.getEncoder() >= Constants.AlgaeConstants.kMaxEncoderValue) || (algaeAngle.getEncoder() <= Constants.AlgaeConstants.kMaxEncoderValue)) {
         algaeAngle.stopAngle();
@@ -44,7 +44,7 @@ public class AlgaeAngleCommand extends Command {
         algaeAngle.angleUp();
       }
       else if (stick.getRawButton(Constants.AlgaeConstants.ALGAE_ANGLE_DEFAULT)) {
-        while(!stick.getRawButton(Constants.AlgaeConstants.ALGAE_ANGLE_ESCAPE)) {
+        if(!stick.getRawButton(Constants.AlgaeConstants.ALGAE_ANGLE_ESCAPE)) {
           algaeAngle.setDefaultAngle();
         }
       }
@@ -52,15 +52,35 @@ public class AlgaeAngleCommand extends Command {
         algaeAngle.angleDown();
       }
       else if (stick.getRawButton(Constants.AlgaeConstants.ALGAE_ANGLE_STAY_MIN)) {
-        while(!stick.getRawButton(Constants.AlgaeConstants.ALGAE_ANGLE_ESCAPE)) {
+        if(!stick.getRawButton(Constants.AlgaeConstants.ALGAE_ANGLE_ESCAPE)) {
           algaeAngle.angleUp();
         }
       }
       else {
         algaeAngle.stopAngle();
       }
+    }*/
+
+    if (stick.getRawButton(Constants.AlgaeConstants.ALGAE_ANGLE_UP)) {
+      if (algaeAngle.getEncoder() <= Constants.AlgaeConstants.kDefaultEncoderValue) {
+        algaeAngle.angleUp();
+      }
+      else {
+        algaeAngle.stopAngle();
+      }
     }
-  }
+    else if (stick.getRawButton(Constants.AlgaeConstants.ALGAE_ANGLE_DOWN)) {
+      if (algaeAngle.getEncoder() >= Constants.AlgaeConstants.kMinEncoderValue) {
+        algaeAngle.angleDown();
+      }
+      else {
+        algaeAngle.stopAngle();
+      }
+    }
+      
+
+    }
+
 
   // Called once the command ends or is interrupted.
   @Override
@@ -110,7 +130,7 @@ public class AlgaeAngleCommand extends Command {
 
     @Override
     public void execute() {
-      algaeAngle.setDefaultAngle();
+      //algaeAngle.setDefaultAngle();
     }
   }
 

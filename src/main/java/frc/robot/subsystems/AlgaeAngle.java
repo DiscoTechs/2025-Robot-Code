@@ -4,6 +4,8 @@
 
 package frc.robot.subsystems;
 
+import com.revrobotics.spark.SparkBase;
+import com.revrobotics.spark.SparkClosedLoopController;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
 import com.revrobotics.spark.SparkMax;
 
@@ -15,16 +17,21 @@ public class AlgaeAngle extends SubsystemBase {
 
   private final SparkMax angleMotor;
   private final DutyCycleEncoder encoder;
+  private final SparkClosedLoopController pidController;
 
   /** Creates a new AlgaeEffector. */
   public AlgaeAngle() {
     angleMotor = new SparkMax(Constants.AlgaeConstants.kAlgaeAngleMotorPort, MotorType.kBrushless);
-    encoder = new DutyCycleEncoder(5, 2*Math.PI, 0.0); // change according to this specification: https://github.wpilib.org/allwpilib/docs/release/java/edu/wpi/first/wpilibj/DutyCycleEncoder.html
-   //^ Adjust this according to testing
+    encoder = new DutyCycleEncoder(1, 2*Math.PI, 0.0); // change according to this specification: https://github.wpilib.org/allwpilib/docs/release/java/edu/wpi/first/wpilibj/DutyCycleEncoder.html
+    
+    // first pass at PID
+    pidController = angleMotor.getClosedLoopController();
+
+    //^ Adjust this according to testing
   }
 
   public void angleUp() {
-    if (!(getEncoder() >= Constants.AlgaeConstants.kMaxEncoderValue - Constants.AlgaeConstants.kAlgaeDelta)) {
+    if (getEncoder() <= (Constants.AlgaeConstants.kMaxEncoderValue - Constants.AlgaeConstants.kAlgaeDelta)) {
       angleMotor.set(Constants.AlgaeConstants.kAlgaeAngleSpeed);
     }
     else {
@@ -33,7 +40,7 @@ public class AlgaeAngle extends SubsystemBase {
   }
 
   public void angleDown() {
-    if (!(getEncoder() <= Constants.AlgaeConstants.kMinEncoderValue + Constants.AlgaeConstants.kAlgaeDelta)) {
+    if (getEncoder() >= (Constants.AlgaeConstants.kMinEncoderValue + Constants.AlgaeConstants.kAlgaeDelta)) {
       angleMotor.set(-Constants.AlgaeConstants.kAlgaeAngleSpeed);
     }
     else {
@@ -49,45 +56,49 @@ public class AlgaeAngle extends SubsystemBase {
     return encoder.get();
   }
 
-  public boolean inRange() {
-    return ((encoder.get() >= Constants.AlgaeConstants.kDefaultEncoderValue - Constants.AlgaeConstants.kAlgaeDelta) && (encoder.get() <= Constants.AlgaeConstants.kDefaultEncoderValue + Constants.AlgaeConstants.kAlgaeDelta));
-  }
+  // public void angleUpToDefault() {
+  //   while(encoder.get() <= (Constants.AlgaeConstants.kDefaultEncoderValue - Constants.AlgaeConstants.kAlgaeDelta)) { //just means while not within the range (default - delta, default + delta) [centered around default], then angle up the plate
+  //     angleMotor.set(-Constants.AlgaeConstants.kAlgaeAngleSpeed); //adjust SIGN (espcially) and speed (now in constants for ease) as needed
+  //   }
+  // }
 
-  public void angleUpToDefault() {
-    while(!inRange()) { //just means while not within the range (default - delta, default + delta) [centered around default], then angle up the plate
-      angleMotor.set(-Constants.AlgaeConstants.kAlgaeAngleSpeed); //adjust SIGN (espcially) and speed (now in constants for ease) as needed
-    }
-  }
+  // public void angleDownToDefault() {
+  //   while(encoder.get() >= (Constants.AlgaeConstants.kDefaultEncoderValue - Constants.AlgaeConstants.kAlgaeDelta)) { //just means while not within the range (default - delta, default + delta) [centered around default], then angle down the plate
+  //     angleMotor.set(Constants.AlgaeConstants.kAlgaeAngleSpeed); //adjust SIGN (espcially) and speed (now in constants for ease) as needed
+  //   } 
+  // }
 
-  public void angleDownToDefault() {
-    while(!inRange()) { //just means while not within the range (default - delta, default + delta) [centered around default], then angle down the plate
-      angleMotor.set(Constants.AlgaeConstants.kAlgaeAngleSpeed); //adjust SIGN (espcially) and speed (now in constants for ease) as needed
-    }
-  }
+  // public void angleMinSet() {
+  //   while(getEncoder() >= Constants.AlgaeConstants.kMinEncoderValue) {
+  //     angleDown();
+  //   }
+  // }
 
-  public void angleMinSet() {
-    while(getEncoder() >= Constants.AlgaeConstants.kMinEncoderValue) {
-      angleDown();
-    }
-  }
+  // public void angleMaxSet() {
+  //   while(getEncoder() <= Constants.AlgaeConstants.kMaxEncoderValue) {
+  //     angleUp();
+  //   }
+  // }
 
-  public void angleMaxSet() {
-    while(getEncoder() <= Constants.AlgaeConstants.kMaxEncoderValue) {
-      angleUp();
-    }
-  }
-
-  public void setDefaultAngle() {
-    if (getEncoder() <= Constants.AlgaeConstants.kDefaultEncoderValue) {
-      angleUpToDefault();
-    }
-    else if (getEncoder() >= Constants.AlgaeConstants.kDefaultEncoderValue) {
-      angleDownToDefault();
-    }
-  }
+  // public void setDefaultAngle() {
+  //   if (getEncoder() <= Constants.AlgaeConstants.kDefaultEncoderValue) {
+  //     angleUpToDefault();
+  //   }
+  //   else if (getEncoder() >= Constants.AlgaeConstants.kDefaultEncoderValue) {
+  //     angleDownToDefault();
+  //   }
+  // }
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
   }
+
+  double pos = 2.4;
+
+  public void positionDrive() {
+    // Working on this - Mr. Z
+    pidController.setReference(pos, SparkBase.ControlType.kPosition);
+  }
+
 }

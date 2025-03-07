@@ -11,7 +11,6 @@ import com.revrobotics.spark.SparkLowLevel.MotorType;
 
 public class ShooterElevator extends SubsystemBase {
     final DigitalInput coralSensor;
-    final DigitalInput sensor0;
     final DigitalInput sensor1;
     final DigitalInput sensor2;
     final DigitalInput sensor3;
@@ -24,7 +23,6 @@ public class ShooterElevator extends SubsystemBase {
     private final SparkMax intakeMotor;
     
     public ShooterElevator() { 
-        sensor0 = new DigitalInput(Constants.ElavatorConstants.ELAVATOR_SENSOR_0);
         sensor1 = new DigitalInput(Constants.ElavatorConstants.ELAVATOR_SENSOR_1);
         System.out.println(sensor1);
 
@@ -82,13 +80,13 @@ public class ShooterElevator extends SubsystemBase {
     }
 
     public void moveUp(){
-        rightMotor.set(0.5);
-        leftMotor.set(-0.5);
+        rightMotor.set(0.4);
+        leftMotor.set(-0.4);
     }
 
     public void moveDown(){
-        rightMotor.set(-0.5);
-        leftMotor.set(0.5);
+        rightMotor.set(-0.4);
+        leftMotor.set(0.4);
     }
 
     public void firstLevel() {
@@ -143,21 +141,21 @@ public class ShooterElevator extends SubsystemBase {
     public double speedSetter() {
         double shootingSpeed = 0.5;
         
-        if (CurrentLevel() == 1) {
-            shootingSpeed = Constants.CoralConstants.l1Speed;
-        }
-        else if (CurrentLevel() == 2){
-            shootingSpeed = Constants.CoralConstants.l2speed;
-        }
-        else if (CurrentLevel() == 3) {
-            shootingSpeed = Constants.CoralConstants.l3speed;
-        }
-        else if (CurrentLevel() == 4) {
-            shootingSpeed = Constants.CoralConstants.l4speed;
-        }
-        else {
-            shootingSpeed = Constants.CoralConstants.defaultSpeed;
-        }
+        // if (CurrentLevel() == 1) {
+        //     shootingSpeed = Constants.CoralConstants.l1Speed;
+        // }
+        // else if (CurrentLevel() == 2){
+        //     shootingSpeed = Constants.CoralConstants.l2speed;
+        // }
+        // else if (CurrentLevel() == 3) {
+        //     shootingSpeed = Constants.CoralConstants.l3speed;
+        // }
+        // else if (CurrentLevel() == 4) {
+        //     shootingSpeed = Constants.CoralConstants.l4speed;
+        // }
+        // else {
+        //     shootingSpeed = Constants.CoralConstants.defaultSpeed;
+        //}
         return shootingSpeed;
     }
 

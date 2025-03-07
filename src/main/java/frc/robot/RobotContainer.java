@@ -55,10 +55,10 @@ public class RobotContainer {
   private final AlgaeAngle algaeAngle = new AlgaeAngle();
 
   // //CORAL
-  private final CoralPlateAngle coralPlateAngle = new CoralPlateAngle();
+  //private final CoralPlateAngle coralPlateAngle = new CoralPlateAngle();
 
   // //CLIMBER
-  private final Climber climber = new Climber();
+  // private final Climber climber = new Climber();
 
   //SHOOTER-ELEVATOR
   private final ShooterElevator shooterElevator = new ShooterElevator();
@@ -69,6 +69,7 @@ public class RobotContainer {
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     configureRobot();
+
     //printAbsoluteEncoder();
 
     // FOR PUTTING COMMANDS AS DROP-DOWN OPTIONS IN UI:
@@ -77,13 +78,14 @@ public class RobotContainer {
     // exampleSubsystem = new ExampleSubsystem();
 
     // CHANGE TO UNCOMMENTED
-    AlgaeAngle algaeAngle = new AlgaeAngle();
-    AlgaeEffector algaeEffector = new AlgaeEffector();
-    Climber climber = new Climber();
-    CoralPlateAngle coralPlateAngle = new CoralPlateAngle();
-    ShooterElevator shooterElevator = new ShooterElevator();
+    // AlgaeAngle algaeAngle = new AlgaeAngle();
+    // AlgaeEffector algaeEffector = new AlgaeEffector();
+    
+    //Climber climber = new Climber();
+    // CoralPlateAngle coralPlateAngle = new CoralPlateAngle();
+    // ShooterElevator shooterElevator = new ShooterElevator();
     //SwerveModule swerveModule = new SwerveModule(); //--> likely keep this commented?
-    SwerveSubsystem swerveSubsystem = new SwerveSubsystem();
+    // SwerveSubsystem swerveSubsystem = new SwerveSubsystem();
 
     // SAMPLE: KEEP COMMENTED
     // NamedCommands.registerCommand("autoBalance", swerve.autoBalanceCommand());
@@ -98,30 +100,30 @@ public class RobotContainer {
 
     //FIX CODE BELOW TO REFLECT CODE IN EXTENDED COMMANDS BELOW
 
-    CoralPlateAngleCommand coralPlateAngleCommand = new CoralPlateAngleCommand(coralPlateAngle, buttonBox);
-    NamedCommands.registerCommand("coralPlateAngleUp", coralPlateAngleCommand.new UpAngle());
-    NamedCommands.registerCommand("coralPlateAngleDown", coralPlateAngleCommand.new DownAngle());
-    NamedCommands.registerCommand("coralPlateDefault", coralPlateAngleCommand.new DefaultAngle());
+    //CoralPlateAngleCommand coralPlateAngleCommand = new CoralPlateAngleCommand(coralPlateAngle, buttonBox);
+    //NamedCommands.registerCommand("coralPlateAngleUp", coralPlateAngleCommand.new UpAngle());
+    //NamedCommands.registerCommand("coralPlateAngleDown", coralPlateAngleCommand.new DownAngle());
+    //NamedCommands.registerCommand("coralPlateDefault", coralPlateAngleCommand.new DefaultAngle());
 
-    ShooterElevatorCommand shooterElevatorCommand = new ShooterElevatorCommand(shooterElevator, buttonBox);
-    NamedCommands.registerCommand("coralIntake", shooterElevatorCommand.new IntakeCoral());
-    NamedCommands.registerCommand("coralOuttake", shooterElevatorCommand.new OuttakeCoral());
-    NamedCommands.registerCommand("coralIntakeSequence", shooterElevatorCommand.new SequenceIntake());
-    NamedCommands.registerCommand("firstLevel", shooterElevatorCommand.new ElevatorLevelOne());
-    NamedCommands.registerCommand("secondLevel", shooterElevatorCommand.new ElevatorLevelTwo());
-    NamedCommands.registerCommand("thirdLevel", shooterElevatorCommand.new ElevatorLevelThird());
-    NamedCommands.registerCommand("fourthLevel", shooterElevatorCommand.new ElevatorLevelForth());
+    // ShooterElevatorCommand shooterElevatorCommand = new ShooterElevatorCommand(shooterElevator, buttonBox);
+    // NamedCommands.registerCommand("coralIntake", shooterElevatorCommand.new IntakeCoral());
+    // NamedCommands.registerCommand("coralOuttake", shooterElevatorCommand.new OuttakeCoral());
+    // NamedCommands.registerCommand("coralIntakeSequence", shooterElevatorCommand.new SequenceIntake());
+    // NamedCommands.registerCommand("firstLevel", shooterElevatorCommand.new ElevatorLevelOne());
+    // NamedCommands.registerCommand("secondLevel", shooterElevatorCommand.new ElevatorLevelTwo());
+    // NamedCommands.registerCommand("thirdLevel", shooterElevatorCommand.new ElevatorLevelThird());
+    // NamedCommands.registerCommand("fourthLevel", shooterElevatorCommand.new ElevatorLevelForth());
 
-    AlgaeAngleCommand algaeAngleCommand = new AlgaeAngleCommand(algaeAngle, operatorJoystick);
-    NamedCommands.registerCommand("algaeDefaultAngle", algaeAngleCommand.new AlgaeDefaultSet());
-    NamedCommands.registerCommand("algaeAngleUp", algaeAngleCommand.new AlgaeUpAngle());
-    NamedCommands.registerCommand("algaeAngleDown", algaeAngleCommand.new AlgaeDownAngle());
-    NamedCommands.registerCommand("algaeAngleStop", algaeAngleCommand.new AlgaeAngleStop());
+    // AlgaeAngleCommand algaeAngleCommand = new AlgaeAngleCommand(algaeAngle, operatorJoystick);
+    // NamedCommands.registerCommand("algaeDefaultAngle", algaeAngleCommand.new AlgaeDefaultSet());
+    // NamedCommands.registerCommand("algaeAngleUp", algaeAngleCommand.new AlgaeUpAngle());
+    // NamedCommands.registerCommand("algaeAngleDown", algaeAngleCommand.new AlgaeDownAngle());
+    // NamedCommands.registerCommand("algaeAngleStop", algaeAngleCommand.new AlgaeAngleStop());
 
-    AlgaeEffectorCommand algaeEffectorCommand = new AlgaeEffectorCommand(algaeEffector, operatorJoystick);
-    NamedCommands.registerCommand("algaeIntake", algaeEffectorCommand.new IntakeAlgae());
-    NamedCommands.registerCommand("algaeOuttake", algaeEffectorCommand.new OuttakeAlgae());
-    NamedCommands.registerCommand("algaeIntakeStop", algaeEffectorCommand.new StopIntakeAlgae());
+    // AlgaeEffectorCommand algaeEffectorCommand = new AlgaeEffectorCommand(algaeEffector, operatorJoystick);
+    // NamedCommands.registerCommand("algaeIntake", algaeEffectorCommand.new IntakeAlgae());
+    // NamedCommands.registerCommand("algaeOuttake", algaeEffectorCommand.new OuttakeAlgae());
+    // NamedCommands.registerCommand("algaeIntakeStop", algaeEffectorCommand.new StopIntakeAlgae());
 
     // Do all other initialization
 
@@ -140,12 +142,12 @@ public class RobotContainer {
       driverJoystick
     ));
 
-    algaeEffector.setDefaultCommand(new AlgaeEffectorCommand(algaeEffector, operatorJoystick));
-    algaeAngle.setDefaultCommand(new AlgaeAngleCommand(algaeAngle, operatorJoystick));
+     algaeEffector.setDefaultCommand(new AlgaeEffectorCommand(algaeEffector, operatorJoystick));
+     algaeAngle.setDefaultCommand(new AlgaeAngleCommand(algaeAngle, operatorJoystick));
 
-    coralPlateAngle.setDefaultCommand(new CoralPlateAngleCommand(coralPlateAngle, buttonBox)); //here, for example, I think I can change to button box after it's configed
+    // coralPlateAngle.setDefaultCommand(new CoralPlateAngleCommand(coralPlateAngle, buttonBox)); //here, for example, I think I can change to button box after it's configed
 
-    climber.setDefaultCommand(new ClimberCommand(climber, operatorJoystick));
+    // // climber.setDefaultCommand(new ClimberCommand(climber, operatorJoystick));
 
     shooterElevator.setDefaultCommand(new ShooterElevatorCommand(shooterElevator, buttonBox));
   
