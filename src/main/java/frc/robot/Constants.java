@@ -173,12 +173,12 @@ public final class Constants {
         public static final double kAlgaeAngleSpeed = 0.2;
 
         //BUTTONS (XBOX Joytick)
-        public static final int ALGAE_INTAKE = 6;
-        public static final int ALGAE_OUTTAKE = 5;
+        public static final int ALGAE_INTAKE = 6; //good
+        public static final int ALGAE_OUTTAKE = 5; //good
 
-        public static final int ALGAE_ANGLE_STAY_MAX = 4;
-        public static final int ALGAE_ANGLE_STAY_MIN = 1;
-        public static final int ALGAE_ANGLE_SCORING = 3;
+        public static final int ALGAE_ANGLE_STAY_MAX = 4; //good
+        public static final int ALGAE_ANGLE_STAY_MIN = 1; //good
+        public static final int ALGAE_ANGLE_SCORING = 3; //good
     }
 
     // ------------ CORAL CONSTANTS (CAN IDS AND RESPECTIVE BUTTONS TO CONTROL THEM) ------------ //
@@ -207,14 +207,14 @@ public final class Constants {
         public static final double defaultSpeed = 0.5;
 
         //BUTTONS (BUTTON BOX)
-        public static final int CORAL_PLATE_ANGLE_UP = 12;
-        public static final int CORAL_PLATE_ANGLE_DOWN = 11;
+        public static final int CORAL_PLATE_ANGLE_UP = 12; //good
+        public static final int CORAL_PLATE_ANGLE_DOWN = 11; //good
 
-        public static final int CORAL_INTAKE = 7;
-        public static final int CORAL_OUTTAKE = 2;
-
-        public static final int INITIATE_HUMAN_PLAYER_SEQUENCE = 8;
-        public static final int ESCAPE = 10;
+        public static final int CORAL_OUTTAKE = 2; //good
+        public static final int CORAL_INTAKE = 3; //good
+        
+        public static final int INITIATE_HUMAN_PLAYER_SEQUENCE = 8; //good
+        public static final int ESCAPE = 10; //good
     }
 
     // ------------ ELEVATOR CONSTANTS (CAN IDS AND RESPECTIVE BUTTONS TO CONTROL THEM) ------------ //
@@ -234,11 +234,11 @@ public final class Constants {
         public static final int ELAVATOR_LIMIT_SENSOR = 3;
 
         //BUTTONS (BUTTON BOX)
-        public static final int LEVEL_1 = 5;
-        public static final int LEVEL_2 = 4;
-        public static final int LEVEL_3 = 1;
-        public static final int LEVEL_4 = 6;
-        public static final int USE_MANUAL_CONTROL_JOYSTICK = 0; //TEMPPPPPPP NEED TO CHANGE BUTTON ID
+        public static final int LEVEL_1 = 5; //good
+        public static final int LEVEL_2 = 4; //good
+        public static final int LEVEL_3 = 1; //good
+        public static final int LEVEL_4 = 6; //good
+        public static final int USE_MANUAL_CONTROL_JOYSTICK = 7; //good
     }
 
     // ------------ CLIMBER CONSTANTS (CAN IDS AND RESPECTIVE BUTTONS TO CONTROL THEM) ------------ //
