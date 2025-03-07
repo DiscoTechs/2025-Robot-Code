@@ -171,6 +171,7 @@ public final class Constants {
         public static final double kAlgaeDelta = 0.03;
 
         public static final double kAlgaeAngleSpeed = 0.2;
+        public static final double kSlowAlgaeAngleSpeed = 0.07;
 
         //BUTTONS (XBOX Joytick)
         public static final int ALGAE_INTAKE = 6; //good

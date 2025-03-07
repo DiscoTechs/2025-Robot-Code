@@ -39,9 +39,27 @@ public class AlgaeAngle extends SubsystemBase {
     }
   }
 
+  public void slowAngleUp() {
+    if (getEncoder() <= (Constants.AlgaeConstants.kMaxEncoderValue - Constants.AlgaeConstants.kAlgaeDelta)) {
+      angleMotor.set(Constants.AlgaeConstants.kSlowAlgaeAngleSpeed);
+    }
+    else {
+      stopAngle();
+    }
+  }
+
   public void angleDown() {
     if (getEncoder() >= (Constants.AlgaeConstants.kMinEncoderValue + Constants.AlgaeConstants.kAlgaeDelta)) {
       angleMotor.set(-Constants.AlgaeConstants.kAlgaeAngleSpeed);
+    }
+    else {
+      stopAngle(); 
+    }
+  }
+
+  public void slowAngleDown() {
+    if (getEncoder() >= (Constants.AlgaeConstants.kMinEncoderValue + Constants.AlgaeConstants.kAlgaeDelta)) {
+      angleMotor.set(-Constants.AlgaeConstants.kSlowAlgaeAngleSpeed);
     }
     else {
       stopAngle(); 
@@ -82,10 +100,10 @@ public class AlgaeAngle extends SubsystemBase {
 
   public void goToScoringAngle() {
     if (getEncoder() <= Constants.AlgaeConstants.kScoringEncoderValue) {
-      angleUp();
+      slowAngleUp();
     }
     else if (getEncoder() >= Constants.AlgaeConstants.kScoringEncoderValue) {
-      angleDown();
+      slowAngleDown();
     }
   }
 

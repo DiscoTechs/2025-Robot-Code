@@ -37,13 +37,12 @@ public class ShooterElevator extends SubsystemBase {
     }
 
     public void goToFirstLevel() {
-        stopElevatorIfLimitReached();
         if (isSensorDetected(Level1Sensor)) {
             stopElevator();
         }
         
         else {
-            while (!isSensorDetected(Level1Sensor)) {
+            if (!isSensorDetected(Level1Sensor)) {
                 moveElevatorDown();
             }
             stopElevator();
@@ -51,12 +50,9 @@ public class ShooterElevator extends SubsystemBase {
     }
 
     public void goToSecondLevel() {
-        //goToFirstLevel();
-        
-        while (!isSensorDetected(Level2Sensor)) {
+        if (!isSensorDetected(Level2Sensor)) {
             if (isTopLimitReached()) {
-                stopElevator();
-                break; //where does this BREAK break out of?
+                stopElevator(); 
             }
             else {
                 moveElevatorUp();
@@ -66,27 +62,21 @@ public class ShooterElevator extends SubsystemBase {
     }
 
     public void goToThirdLevel() {
-        //goToFirstLevel();
-
-        while (!isSensorDetected(Level3Sensor)) {
+        if (!isSensorDetected(Level3Sensor)) {
             if (isTopLimitReached()) {
                 stopElevator();
-                break; //where does this BREAK break out of?
             }
             else {
                 moveElevatorUp();
-            }  
+            }
         }
         stopElevator();
     }
 
     public void goToFourthLevel() {
-        //goToFirstLevel();
-
-        while (!isSensorDetected(Level4Sensor)) {
+        if (!isSensorDetected(Level4Sensor)) {
             if (isTopLimitReached()) {
                 stopElevator();
-                break; //where does this BREAK break out of?
             }
             else {
                 moveElevatorUp();
