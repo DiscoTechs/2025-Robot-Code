@@ -27,11 +27,11 @@ public class CoralPlateAngle extends SubsystemBase {
   }
  
   public void angleUp() {
-    angleMotor.set(Constants.CoralConstants.kAngleSpeed);
+    angleMotor.set(-Constants.CoralConstants.kAngleSpeed);
   }
 
   public void angleDown() {
-    angleMotor.set(-Constants.CoralConstants.kAngleSpeed);
+    angleMotor.set(Constants.CoralConstants.kAngleSpeed);
   }
 
   public void stopAngle() {

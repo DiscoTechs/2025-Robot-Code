@@ -55,6 +55,7 @@ public class ShooterElevatorCommand extends Command {
 
       shooterElevator.stopShooter();
     }
+
     //intake and outtake coral
     if (stick.getRawButton(Constants.CoralConstants.CORAL_INTAKE)) {
       shooterElevator.intakeCoral();
@@ -65,68 +66,81 @@ public class ShooterElevatorCommand extends Command {
     else {
       shooterElevator.stopShooter();
     }
+
     //stop elevator if coral blocked or reached top limit
     if (shooterElevator.isTopLimitReached() || shooterElevator.isSensorDetected(shooterElevator.coralSensor)) {
+      System.out.println("Sensor Limit STOPPED");
       shooterElevator.stopElevator();
     }
-    //level 1
-    else if (stick.getRawButton(Constants.ElavatorConstants.LEVEL_1)) {
-      shooterElevator.goToFirstLevel();
-      if (!stick.getRawButton(Constants.AlgaeConstants.ALGAE_INTAKE)) {
-        shooterElevator.outtakeCoral();
-      }
-    }
-    //level 2
-    else if (stick.getRawButton(Constants.ElavatorConstants.LEVEL_2)) {
-      shooterElevator.goToSecondLevel();
-      if (!stick.getRawButton(Constants.AlgaeConstants.ALGAE_INTAKE)) {
-        shooterElevator.outtakeCoral();
-      }
-    }
-    //level 3
-    else if (stick.getRawButton(Constants.ElavatorConstants.LEVEL_3)) {
-      shooterElevator.goToThirdLevel();
-      if (!stick.getRawButton(Constants.AlgaeConstants.ALGAE_INTAKE)) {
-        shooterElevator.outtakeCoral();
-      }
-    }
-    //level 4
-    else if (stick.getRawButton(Constants.ElavatorConstants.LEVEL_4)) {
-      shooterElevator.goToFourthLevel();
-      if (!stick.getRawButton(Constants.AlgaeConstants.ALGAE_INTAKE)) {
-        shooterElevator.outtakeCoral();
-      }
-    }
-    //manual control
-    else if (stick.getRawButton(Constants.ElavatorConstants.USE_MANUAL_CONTROL_JOYSTICK)) {
-      double speed = -stick.getRawAxis(Constants.ElavatorConstants.MANUAL_CONTROL_AXIS);
 
+    else if (stick.getRawButton(Constants.ElavatorConstants.USE_MANUAL_CONTROL_JOYSTICK)) {
+
+      double speed = -stick.getRawAxis(Constants.ElavatorConstants.MANUAL_CONTROL_AXIS);
+      
       if (shooterElevator.isTopLimitReached() || shooterElevator.isSensorDetected(shooterElevator.coralSensor)) {
         shooterElevator.stopElevator();
+
+        System.out.println("STOPPING ELEVATOR");
       }
 
       else if (speed < 0) {
-        if (shooterElevator.isSensorDetected(shooterElevator.Level1Sensor) || shooterElevator.isSensorDetected(shooterElevator.coralSensor)) {
-          shooterElevator.stopElevator();
-        }
-        else {
-          shooterElevator.moveElevatorDown();
-        }
-      } 
+          if (shooterElevator.isSensorDetected(shooterElevator.Level1Sensor) || shooterElevator.isSensorDetected(shooterElevator.coralSensor)) {
+            shooterElevator.stopElevator();
+            System.out.println("STOPPING ELEVATOR");
+          } 
+          else {
+            shooterElevator.moveElevatorDown();
+            System.out.println("GOING DOWN");
+          }
+      }
 
       else if (speed > 0) {
-        if (shooterElevator.isTopLimitReached() || shooterElevator.isSensorDetected(shooterElevator.coralSensor)) {
-          shooterElevator.stopElevator();
-        }
-        else {
-          shooterElevator.moveElevatorUp();
-        }
+          if (shooterElevator.isTopLimitReached() || shooterElevator.isSensorDetected(shooterElevator.coralSensor)) {
+            shooterElevator.stopElevator();
+            System.out.println("STOPPING ELEVATOR");
+          } 
+          else {
+            shooterElevator.moveElevatorUp();
+            System.out.println("GOING UP");
+          }
       }
 
       else {
         shooterElevator.stopElevator();
+        System.out.println("STOPPING ELEVATOR");
       }
-    }
+   }
+
+    // //level 1
+    // else if (stick.getRawButton(Constants.ElavatorConstants.LEVEL_1)) {
+    //   shooterElevator.goToFirstLevel();
+    //   if (!stick.getRawButton(Constants.AlgaeConstants.ALGAE_INTAKE)) {
+    //     shooterElevator.outtakeCoral();
+    //   }
+    // }
+    // //level 2
+    // else if (stick.getRawButton(Constants.ElavatorConstants.LEVEL_2)) {
+    //   shooterElevator.goToSecondLevel();
+    //   if (!stick.getRawButton(Constants.AlgaeConstants.ALGAE_INTAKE)) {
+    //     shooterElevator.outtakeCoral();
+    //   }
+    // }
+    // //level 3
+    // else if (stick.getRawButton(Constants.ElavatorConstants.LEVEL_3)) {
+    //   shooterElevator.goToThirdLevel();
+    //   if (!stick.getRawButton(Constants.AlgaeConstants.ALGAE_INTAKE)) {
+    //     shooterElevator.outtakeCoral();
+    //   }
+    // }
+    // //level 4
+    // else if (stick.getRawButton(Constants.ElavatorConstants.LEVEL_4)) {
+    //   shooterElevator.goToFourthLevel();
+    //   if (!stick.getRawButton(Constants.AlgaeConstants.ALGAE_INTAKE)) {
+    //     shooterElevator.outtakeCoral();
+    //   }
+
+    // } 
+
     //default to first level
     else {
       shooterElevator.goToFirstLevel();

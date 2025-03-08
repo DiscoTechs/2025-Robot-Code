@@ -55,13 +55,13 @@ public class RobotContainer {
   private final AlgaeAngle algaeAngle = new AlgaeAngle();
 
   // //CORAL
-  //private final CoralPlateAngle coralPlateAngle = new CoralPlateAngle();
+  private final CoralPlateAngle coralPlateAngle = new CoralPlateAngle();
 
   // //CLIMBER
-  // private final Climber climber = new Climber();
+  //private final Climber climber = new Climber();
 
   //SHOOTER-ELEVATOR
-  //private final ShooterElevator shooterElevator = new ShooterElevator();
+  private final ShooterElevator shooterElevator = new ShooterElevator();
 
   private final SendableChooser<Command> autoChooser;
   public static final SendableChooser<Integer> limelightFilterChooser = new SendableChooser<>();
@@ -145,11 +145,11 @@ public class RobotContainer {
     algaeEffector.setDefaultCommand(new AlgaeEffectorCommand(algaeEffector, operatorJoystick));
     algaeAngle.setDefaultCommand(new AlgaeAngleCommand(algaeAngle, operatorJoystick));
 
-    //coralPlateAngle.setDefaultCommand(new CoralPlateAngleCommand(coralPlateAngle, buttonBox));
+    coralPlateAngle.setDefaultCommand(new CoralPlateAngleCommand(coralPlateAngle, buttonBox));
 
     // // climber.setDefaultCommand(new ClimberCommand(climber, operatorJoystick));
 
-    //shooterElevator.setDefaultCommand(new ShooterElevatorCommand(shooterElevator, buttonBox));
+    shooterElevator.setDefaultCommand(new ShooterElevatorCommand(shooterElevator, buttonBox));
   
     autoChooser = AutoBuilder.buildAutoChooser();//new SendableChooser<>(); 
     Command auto1 = new SimpleAuto(swerveSubsystem, 1, 0, 0);

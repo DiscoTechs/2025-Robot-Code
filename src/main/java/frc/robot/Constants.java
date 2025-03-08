@@ -193,7 +193,7 @@ public final class Constants {
         
 
         //CORAL_PLATE_ANGLE
-        public static final double kAngleSpeed = 0.05; //default through-bore encoder value --> Angle Speed To Adjust the Plate
+        public static final double kAngleSpeed = 0.1; //default through-bore encoder value --> Angle Speed To Adjust the Plate
         public static final double kDelta = 0.01; //small value that can be adjusted
 
         public static final double kDefaultEncoder = 0.2; //default through-bore encoder value
@@ -221,7 +221,7 @@ public final class Constants {
     // ------------ ELEVATOR CONSTANTS (CAN IDS AND RESPECTIVE BUTTONS TO CONTROL THEM) ------------ //
     public static final class ElavatorConstants {
         //ELEVATOR CAN IDS
-        public static final int kRightElevatorMotorPort = 22;
+        public static final int kRightElevatorMotorPort = 23;
         public static final int kLeftElevatorMotorPort = 21;
         
         public static final int MANUAL_CONTROL_AXIS = 1;

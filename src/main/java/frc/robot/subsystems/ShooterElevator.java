@@ -68,19 +68,23 @@ public class ShooterElevator extends SubsystemBase {
         }
     }
 
+    public void moveElevator(double speed) {
+        leftElevatorMotor.set(-speed);
+        rightElevatorMotor.set(speed);
+    }
+
     public void moveElevatorUp() {
-        leftElevatorMotor.set(-0.4);
-        rightElevatorMotor.set(0.4);
+        leftElevatorMotor.set(-0.2);
+        rightElevatorMotor.set(0.2);
     }
 
     public void moveElevatorDown() {
-        leftElevatorMotor.set(0.4);
-        rightElevatorMotor.set(-0.4);
+        leftElevatorMotor.set(0.2);
+        rightElevatorMotor.set(-0.2);
     }
 
     public void stopElevator() {
-        leftElevatorMotor.set(0);
-        rightElevatorMotor.set(0);
+        moveElevator(0.1);
     }
 
     public void intakeCoral() {
