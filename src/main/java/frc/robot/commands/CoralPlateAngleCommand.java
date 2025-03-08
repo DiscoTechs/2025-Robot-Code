@@ -32,10 +32,11 @@ public class CoralPlateAngleCommand extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (stick.getRawButton(Constants.CoralConstants.CORAL_PLATE_ANGLE_UP)) {
+  
+    if (stick.getPOV() == 0) {
       coralPlateAngle.angleUp();
     }
-    else if (stick.getRawButton(Constants.CoralConstants.CORAL_PLATE_ANGLE_DOWN)) {
+    else if (stick.getPOV() == 180) {
       coralPlateAngle.angleDown();
     }
     else {
