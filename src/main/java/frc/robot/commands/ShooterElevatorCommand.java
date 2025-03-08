@@ -33,6 +33,9 @@ public class ShooterElevatorCommand extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+
+    // System.out.println("Elevator Executing" + shooterElevator.getEncoder());
+
     //intake sequence
     boolean exitOuterIf = false;
     if (stick.getRawButton(Constants.CoralConstants.INITIATE_HUMAN_PLAYER_SEQUENCE)) {
@@ -57,59 +60,72 @@ public class ShooterElevatorCommand extends Command {
     }
 
     //intake and outtake coral
-    if (stick.getRawButton(Constants.CoralConstants.CORAL_INTAKE)) {
-      shooterElevator.intakeCoral();
+    if (stick.getRawAxis(3) > 0.3) {
+      shooterElevator.shoot(stick.getRawAxis(3));
     }
-    else if (stick.getRawButton(Constants.CoralConstants.CORAL_OUTTAKE)) {
-      shooterElevator.outtakeCoral();
+    else if (stick.getRawAxis(2) > 0.3 && shooterElevator.isSensorDetected(shooterElevator.coralSensor)) {
+      shooterElevator.shoot(stick.getRawAxis(2)/3);
     }
     else {
       shooterElevator.stopShooter();
     }
 
+    
     //stop elevator if coral blocked or reached top limit
-    if (shooterElevator.isTopLimitReached() || shooterElevator.isSensorDetected(shooterElevator.coralSensor)) {
-      System.out.println("Sensor Limit STOPPED");
-      shooterElevator.stopElevator();
+    double spd = -stick.getRawAxis(1);
+
+    if (spd > .3) {
+      shooterElevator.moveElevator(spd / 4);
+    } else if (spd < -.3) {
+    shooterElevator.moveElevator(spd / 8);
+    } else {
+      shooterElevator.moveElevator(0.04);
     }
 
-    else if (stick.getRawButton(Constants.ElavatorConstants.USE_MANUAL_CONTROL_JOYSTICK)) {
 
-      double speed = -stick.getRawAxis(Constants.ElavatorConstants.MANUAL_CONTROL_AXIS);
+    // if (shooterElevator.isTopLimitReached() || shooterElevator.isSensorDetected(shooterElevator.coralSensor)) {
+    //   System.out.println("Sensor Limit STOPPED" + System.currentTimeMillis());
+    //   shooterElevator.stopElevator();
+    // }
+
+    // else if (stick.getRawButton(7)) {
+
+    //   double speed = -stick.getRawAxis(Constants.ElavatorConstants.MANUAL_CONTROL_AXIS);
+    //   System.out.println("Manual Control " + shooterElevator.getEncoder());
       
-      if (shooterElevator.isTopLimitReached() || shooterElevator.isSensorDetected(shooterElevator.coralSensor)) {
-        shooterElevator.stopElevator();
+    //   if (shooterElevator.isTopLimitReached() || shooterElevator.isSensorDetected(shooterElevator.coralSensor)) {
+    //     shooterElevator.stopElevator();
 
-        System.out.println("STOPPING ELEVATOR");
-      }
+    //     System.out.println("STOPPING: CORAL OR TOP");
+    //   }
 
-      else if (speed < 0) {
-          if (shooterElevator.isSensorDetected(shooterElevator.Level1Sensor) || shooterElevator.isSensorDetected(shooterElevator.coralSensor)) {
-            shooterElevator.stopElevator();
-            System.out.println("STOPPING ELEVATOR");
-          } 
-          else {
-            shooterElevator.moveElevatorDown();
-            System.out.println("GOING DOWN");
-          }
-      }
+    //   else if (speed < 0) {
+    //       if (shooterElevator.isSensorDetected(shooterElevator.Level1Sensor) || shooterElevator.isSensorDetected(shooterElevator.coralSensor)) {
+    //         shooterElevator.stopElevator();
+    //         System.out.println("STOPPING ELEVATOR: BOTTOM");
+    //       } 
+    //       else {
+    //         shooterElevator.moveElevatorDown();
+    //         System.out.println("GOING DOWN");
+    //       }
+    //   }
 
-      else if (speed > 0) {
-          if (shooterElevator.isTopLimitReached() || shooterElevator.isSensorDetected(shooterElevator.coralSensor)) {
-            shooterElevator.stopElevator();
-            System.out.println("STOPPING ELEVATOR");
-          } 
-          else {
-            shooterElevator.moveElevatorUp();
-            System.out.println("GOING UP");
-          }
-      }
+    //   else if (speed > 0) {
+    //       if (shooterElevator.isTopLimitReached() || shooterElevator.isSensorDetected(shooterElevator.coralSensor)) {
+    //         shooterElevator.stopElevator();
+    //         System.out.println("STOPPING ELEVATOR: TOP OR CORAL");
+    //       } 
+    //       else {
+    //         shooterElevator.moveElevatorUp();
+    //         System.out.println("GOING UP");
+    //       }
+    //   }
 
-      else {
-        shooterElevator.stopElevator();
-        System.out.println("STOPPING ELEVATOR");
-      }
-   }
+    //   else {
+    //     shooterElevator.stopElevator();
+    //     System.out.println("STOP");
+    //   }
+   // }
 
     // //level 1
     // else if (stick.getRawButton(Constants.ElavatorConstants.LEVEL_1)) {
@@ -141,10 +157,11 @@ public class ShooterElevatorCommand extends Command {
 
     // } 
 
-    //default to first level
-    else {
-      shooterElevator.goToFirstLevel();
-    }
+    // //default to first level
+    // else {
+    //   shooterElevator.goToFirstLevel();
+    // }
+  
   }
 
   // Called once the command ends or is interrupted.
@@ -155,6 +172,7 @@ public class ShooterElevatorCommand extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
+    System.out.println("Elevator finished?");
     return false;
   }
 

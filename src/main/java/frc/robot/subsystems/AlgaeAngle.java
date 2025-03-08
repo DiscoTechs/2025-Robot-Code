@@ -48,6 +48,15 @@ public class AlgaeAngle extends SubsystemBase {
     }
   }
 
+  public void angleUp(double speed) {
+    if (getEncoder() <= (Constants.AlgaeConstants.kMaxEncoderValue - Constants.AlgaeConstants.kAlgaeDelta)) {
+      angleMotor.set(speed);
+    }
+    else {
+      stopAngle();
+    }
+  }
+
   public void angleDown() {
     if (getEncoder() >= (Constants.AlgaeConstants.kMinEncoderValue + Constants.AlgaeConstants.kAlgaeDelta)) {
       angleMotor.set(-Constants.AlgaeConstants.kAlgaeAngleSpeed);
@@ -67,7 +76,23 @@ public class AlgaeAngle extends SubsystemBase {
   }
 
   public void stopAngle()  {
-    angleMotor.set(0.0);
+
+    double angle = getEncoder();
+
+    // gravity pulled below min
+    if (angle < Constants.AlgaeConstants.kMinEncoderValue) {
+      angleMotor.set(0.02);
+    }
+
+    // Stay at top
+    else if (angle > 3.5 && angle < Constants.AlgaeConstants.kMaxEncoderValue) {
+      angleMotor.set(0.02);
+    }
+    
+    // otherwise, just stop
+    else {
+      angleMotor.set(0);
+    }
   }
 
   public double getEncoder() {
@@ -99,12 +124,21 @@ public class AlgaeAngle extends SubsystemBase {
   // }
 
   public void goToScoringAngle() {
-    if (getEncoder() <= Constants.AlgaeConstants.kScoringEncoderValue) {
-      slowAngleUp();
+    // really hit
+    if (getEncoder() <= Constants.AlgaeConstants.kScoringEncoderValue - 0.05) {
+
+      angleMotor.set(Constants.AlgaeConstants.kSlowAlgaeAngleSpeed);
+    } 
+
+    else if (getEncoder() <= Constants.AlgaeConstants.kScoringEncoderValue + .1) {
+      angleMotor.set(0.02);
     }
-    else if (getEncoder() >= Constants.AlgaeConstants.kScoringEncoderValue) {
-      slowAngleDown();
+
+    else {
+      angleMotor.set(-Constants.AlgaeConstants.kSlowAlgaeAngleSpeed);
     }
+    
+
   }
 
   @Override

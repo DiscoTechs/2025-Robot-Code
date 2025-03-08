@@ -74,17 +74,15 @@ public class ShooterElevator extends SubsystemBase {
     }
 
     public void moveElevatorUp() {
-        leftElevatorMotor.set(-0.2);
-        rightElevatorMotor.set(0.2);
+        moveElevator(0.2);
     }
 
     public void moveElevatorDown() {
-        leftElevatorMotor.set(0.2);
-        rightElevatorMotor.set(-0.2);
+        moveElevator(-0.1);
     }
 
     public void stopElevator() {
-        moveElevator(0.1);
+        moveElevator(0.02);
     }
 
     public void intakeCoral() {
@@ -93,6 +91,10 @@ public class ShooterElevator extends SubsystemBase {
 
     public void outtakeCoral() {
         shooterMotor.set(0.5);
+    }
+
+    public void shoot(double speed) {
+        shooterMotor.set(speed);
     }
 
     public void stopShooter() {
@@ -138,5 +140,9 @@ public class ShooterElevator extends SubsystemBase {
         SmartDashboard.putBoolean("Sensor 2", isSensorDetected(Level2Sensor));
         SmartDashboard.putBoolean("Sensor 3", isSensorDetected(Level3Sensor));
         SmartDashboard.putBoolean("Sensor 4", isSensorDetected(Level4Sensor));
+    }
+
+    public double getEncoder() {
+        return rightElevatorMotor.getEncoder().getPosition();
     }
 }
