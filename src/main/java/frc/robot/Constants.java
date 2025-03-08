@@ -164,7 +164,7 @@ public final class Constants {
             public static final int ALGAE_ANGLE_ESCAPE = 2;
 
         
-        public static final double kScoringEncoderValue = 2.7;//1.978;
+        public static final double kScoringEncoderValue = 2.4;//1.978;
         public static final double kMaxEncoderValue = 3.8;
         public static final double kMinEncoderValue = 2.1;
 
