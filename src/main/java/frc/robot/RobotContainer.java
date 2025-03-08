@@ -145,11 +145,11 @@ public class RobotContainer {
     algaeEffector.setDefaultCommand(new AlgaeEffectorCommand(algaeEffector, operatorJoystick));
     algaeAngle.setDefaultCommand(new AlgaeAngleCommand(algaeAngle, operatorJoystick));
 
-    coralPlateAngle.setDefaultCommand(new CoralPlateAngleCommand(coralPlateAngle, buttonBox));
+    coralPlateAngle.setDefaultCommand(new CoralPlateAngleCommand(coralPlateAngle, operatorJoystick));
 
     // // climber.setDefaultCommand(new ClimberCommand(climber, operatorJoystick));
 
-    shooterElevator.setDefaultCommand(new ShooterElevatorCommand(shooterElevator, buttonBox));
+    shooterElevator.setDefaultCommand(new ShooterElevatorCommand(shooterElevator, operatorJoystick));
   
     autoChooser = AutoBuilder.buildAutoChooser();//new SendableChooser<>(); 
     Command auto1 = new SimpleAuto(swerveSubsystem, 1, 0, 0);
@@ -247,7 +247,7 @@ public class RobotContainer {
     }*/
 
     try {
-        return new PathPlannerAuto("Blue 2 To Reef Auto");
+        return new PathPlannerAuto("Slow Auto");
     } catch (Exception e) {
         DriverStation.reportError("Error loading autonomous path: " + e.getMessage(), e.getStackTrace());
         return Commands.none();
