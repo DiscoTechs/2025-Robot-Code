@@ -54,7 +54,7 @@ public final class Constants {
         public static final int kFrontLeftDriveMotorPort = 2;
         public static final int kBackLeftDriveMotorPort = 6;
         public static final int kFrontRightDriveMotorPort = 4;
-        public static final int kBackRightDriveMotorPort = 8;
+        public static final int kBackRightDriveMotorPort = 15;
 
         // turning 20 amps
         public static final int kFrontLeftTurningMotorPort = 1;
@@ -87,8 +87,8 @@ public final class Constants {
         public static final int kLeftBackModule = 2;
         public static final int kRightBackModule = 3;
 
-        public static final double kFrontLeftDriveAbsoluteEncoderOffsetRad = -121 * Math.PI / 180;
-        public static final double kBackLeftDriveAbsoluteEncoderOffsetRad = (45 - 90) * Math.PI / 180;
+        public static final double kFrontLeftDriveAbsoluteEncoderOffsetRad = (-301+180) * Math.PI / 180;
+        public static final double kBackLeftDriveAbsoluteEncoderOffsetRad = (-52.6+6) * Math.PI / 180;
         public static final double kFrontRightDriveAbsoluteEncoderOffsetRad = (314 - 90) * Math.PI / 180;
         public static final double kBackRightDriveAbsoluteEncoderOffsetRad = (33 + 180) * Math.PI / 180;
 
@@ -158,17 +158,17 @@ public final class Constants {
         //ALGAE CAN IDS
         public static final int kLeftAlgaeEffectorMotorPort = 25;
         public static final int kRightAlgaeEffectorMotorPort = 26;
-        public static final int kAlgaeAngleMotorPort = 29;
+        public static final int kAlgaeAngleMotorPort = 24;
             public static final int ALGAE_ANGLE_UP = 8;
             public static final int ALGAE_ANGLE_DOWN = 7;
             public static final int ALGAE_ANGLE_ESCAPE = 2;
 
         
-        public static final double kScoringEncoderValue = 2.4;//1.978;
-        public static final double kMaxEncoderValue = 3.8;
-        public static final double kMinEncoderValue = 2.1;
+        public static final double kScoringEncoderValue = -14;//1.978;
+        public static final double kMaxEncoderValue = -0.3;
+        public static final double kMinEncoderValue = -19;
 
-        public static final double kAlgaeDelta = 0.03;
+        public static final double kAlgaeDelta = 0.3;
 
         public static final double kAlgaeAngleSpeed = 0.2;
         public static final double kSlowAlgaeAngleSpeed = 0.07;
@@ -221,7 +221,7 @@ public final class Constants {
     // ------------ ELEVATOR CONSTANTS (CAN IDS AND RESPECTIVE BUTTONS TO CONTROL THEM) ------------ //
     public static final class ElavatorConstants {
         //ELEVATOR CAN IDS
-        public static final int kRightElevatorMotorPort = 23;
+        public static final int kRightElevatorMotorPort = 19;
         public static final int kLeftElevatorMotorPort = 21;
         
         public static final int MANUAL_CONTROL_AXIS = 1;

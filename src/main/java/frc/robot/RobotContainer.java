@@ -25,6 +25,8 @@ import frc.robot.commands.ClimberCommand;
 import frc.robot.commands.CoralPlateAngleCommand;
 import frc.robot.commands.ShooterElevatorCommand;
 import frc.robot.commands.SwerveJoystickCmd;
+import frc.robot.commands.AutoCommands.AutoDrop;
+import frc.robot.commands.AutoCommands.CoralDrop;
 import frc.robot.commands.AutoCommands.LimeLightAuto;
 import frc.robot.commands.AutoCommands.OutAndBack;
 import frc.robot.commands.AutoCommands.SimpleAuto;
@@ -152,17 +154,18 @@ public class RobotContainer {
     shooterElevator.setDefaultCommand(new ShooterElevatorCommand(shooterElevator, operatorJoystick));
   
     autoChooser = AutoBuilder.buildAutoChooser();//new SendableChooser<>(); 
-    Command auto1 = new SimpleAuto(swerveSubsystem, 1, 0, 0);
+    Command auto1 = new SimpleAuto(swerveSubsystem, 0.4, 0, 0).withTimeout(1.5);
     Command auto2 = new SimpleAuto(swerveSubsystem, 0, 1, 0);
     Command outAndBack = new OutAndBack(swerveSubsystem, 2);
+
     Command limeLightAuto = new LimeLightAuto(swerveSubsystem, 2);
     //PathPlannerAuto testAuto = new PathPlannerAuto("Test Auto 2.auto");
 
     autoChooser.setDefaultOption("x--", auto1);
     autoChooser.addOption("-y-", auto2);
-    autoChooser.addOption("Out And Back", outAndBack);
+    autoChooser.addOption("Coral Only", new CoralDrop(shooterElevator).withTimeout(1));
     autoChooser.addOption("LimeLight Auto", limeLightAuto);
-    //autoChooser.addOption("Test Auto", testAuto);
+    autoChooser.addOption("Coral Drop", new AutoDrop(swerveSubsystem, shooterElevator));
     SmartDashboard.putData("Auto Choices", autoChooser);
 
     limelightFilterChooser.setDefaultOption("None", 0);
@@ -246,12 +249,14 @@ public class RobotContainer {
         return Commands.none();
     }*/
 
-    try {
-        return new PathPlannerAuto("Slow Auto");
-    } catch (Exception e) {
-        DriverStation.reportError("Error loading autonomous path: " + e.getMessage(), e.getStackTrace());
-        return Commands.none();
-    }    //return autoChooser.getSelected();
+    // try {
+    //     return new PathPlannerAuto("Slow Auto");
+    // } catch (Exception e) {
+    //     DriverStation.reportError("Error loading autonomous path: " + e.getMessage(), e.getStackTrace());
+    //     return Commands.none();
+    // } 
+    
+    return autoChooser.getSelected();
   }
 
   public int getAprilTagFilter() {

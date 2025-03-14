@@ -37,34 +37,34 @@ public class ShooterElevatorCommand extends Command {
     // System.out.println("Elevator Executing" + shooterElevator.getEncoder());
 
     //intake sequence
-    boolean exitOuterIf = false;
-    if (stick.getRawButton(Constants.CoralConstants.INITIATE_HUMAN_PLAYER_SEQUENCE)) {
-      shooterElevator.goToFirstLevel();
-      if (!shooterElevator.isSensorDetected(shooterElevator.coralSensor)) {
-        if (stick.getRawButton(Constants.CoralConstants.ESCAPE)) {
-          exitOuterIf = true;
-        }
-        shooterElevator.outtakeCoral();
-      }
+    // boolean exitOuterIf = false;
+    // if (stick.getRawButton(Constants.CoralConstants.INITIATE_HUMAN_PLAYER_SEQUENCE)) {
+    //   shooterElevator.goToFirstLevel();
+    //   if (!shooterElevator.isSensorDetected(shooterElevator.coralSensor)) {
+    //     if (stick.getRawButton(Constants.CoralConstants.ESCAPE)) {
+    //       exitOuterIf = true;
+    //     }
+    //     shooterElevator.outtakeCoral();
+    //   }
 
-      if (!exitOuterIf) {
-        if (shooterElevator.isSensorDetected(shooterElevator.coralSensor)) {
-          shooterElevator.outtakeCoral();
-          shooterElevator.stopElevator();
-        }
+    //   if (!exitOuterIf) {
+    //     if (shooterElevator.isSensorDetected(shooterElevator.coralSensor)) {
+    //       shooterElevator.outtakeCoral();
+    //       shooterElevator.stopElevator();
+    //     }
 
-        shooterElevator.stopShooter();
-      }
+    //     shooterElevator.stopShooter();
+    //   }
 
-      shooterElevator.stopShooter();
-    }
+    //   shooterElevator.stopShooter();
+    // }
 
     //intake and outtake coral
-    if (stick.getRawAxis(3) > 0.3) {
-      shooterElevator.shoot(stick.getRawAxis(3));
+    if (stick.getRawAxis(2) > 0.3) {
+      shooterElevator.shoot(stick.getRawAxis(2)/2);
     }
-    else if (stick.getRawAxis(2) > 0.3 && shooterElevator.isSensorDetected(shooterElevator.coralSensor)) {
-      shooterElevator.shoot(stick.getRawAxis(2)/3);
+    else if (stick.getRawAxis(3) > 0.3 && shooterElevator.isSensorDetected(shooterElevator.coralSensor)) {
+      shooterElevator.shoot(stick.getRawAxis(3)/4);
     }
     else {
       shooterElevator.stopShooter();
@@ -73,15 +73,16 @@ public class ShooterElevatorCommand extends Command {
     
     //stop elevator if coral blocked or reached top limit
     double spd = -stick.getRawAxis(1);
-
-    if (spd > .3) {
-      shooterElevator.moveElevator(spd / 4);
-    } else if (spd < -.3) {
+    
+    if (spd > .1 && shooterElevator.getEncoder() < 55) {
+      shooterElevator.moveElevator(spd / 4); //
+    } else if (spd < -.1 && shooterElevator.getEncoder() > 1.5) {
     shooterElevator.moveElevator(spd / 8);
     } else {
       shooterElevator.moveElevator(0.04);
     }
-
+  }
+}
 
     // if (shooterElevator.isTopLimitReached() || shooterElevator.isSensorDetected(shooterElevator.coralSensor)) {
     //   System.out.println("Sensor Limit STOPPED" + System.currentTimeMillis());
@@ -162,115 +163,115 @@ public class ShooterElevatorCommand extends Command {
     //   shooterElevator.goToFirstLevel();
     // }
   
-  }
+  // }
 
-  // Called once the command ends or is interrupted.
-  @Override
-  public void end(boolean interrupted) {
-  }
+  // // Called once the command ends or is interrupted.
+  // @Override
+  // public void end(boolean interrupted) {
+  // }
 
-  // Returns true when the command should end.
-  @Override
-  public boolean isFinished() {
-    System.out.println("Elevator finished?");
-    return false;
-  }
+  // // Returns true when the command should end.
+  // @Override
+  // public boolean isFinished() {
+  //   System.out.println("Elevator finished?");
+  //   return false;
+  // }
 
-  public class ElevatorLevelOne extends Command {
-    public ElevatorLevelOne() {
-      addRequirements();
-    }
+  // // public class ElevatorLevelOne extends Command {
+  // //   public ElevatorLevelOne() {
+  // //     addRequirements();
+  // //   }
 
-    @Override
-    public void initialize() {}
+  // //   @Override
+  // //   public void initialize() {}
 
-    @Override
-    public void execute() {
-      shooterElevator.goToFirstLevel();
-    }
-  }
+  // //   @Override
+  // //   public void execute() {
+  // //     shooterElevator.goToFirstLevel();
+  // //   }
+  // // }
 
-  public class ElevatorLevelTwo extends Command {
-    public ElevatorLevelTwo() {
-      addRequirements();
-    }
+  // // public class ElevatorLevelTwo extends Command {
+  // //   public ElevatorLevelTwo() {
+  // //     addRequirements();
+  // //   }
 
-    @Override
-    public void initialize() {}
+  // //   @Override
+  // //   public void initialize() {}
 
-    @Override
-    public void execute() {
-      shooterElevator.goToSecondLevel();
-    }
-  }
+  // //   @Override
+  // //   public void execute() {
+  // //     shooterElevator.goToSecondLevel();
+  // //   }
+  // // }
 
-  public class ElevatorLevelThird extends Command {
-    public ElevatorLevelThird() {
-      addRequirements();
-    }
+  // // public class ElevatorLevelThird extends Command {
+  // //   public ElevatorLevelThird() {
+  // //     addRequirements();
+  // //   }
 
-    @Override
-    public void initialize() {}
+  // //   @Override
+  // //   public void initialize() {}
 
-    @Override
-    public void execute() {
-      shooterElevator.goToThirdLevel();
-    }
-  }
+  // //   @Override
+  // //   public void execute() {
+  // //     shooterElevator.goToThirdLevel();
+  // //   }
+  // // }
 
-  public class ElevatorLevelForth extends Command {
-    public ElevatorLevelForth() {
-      addRequirements();
-    }
+  // // public class ElevatorLevelForth extends Command {
+  // //   public ElevatorLevelForth() {
+  // //     addRequirements();
+  // //   }
 
-    @Override
-    public void initialize() {}
+  // //   @Override
+  // //   public void initialize() {}
 
-    @Override
-    public void execute() {
-      shooterElevator.goToFourthLevel();
-    }
-  }
+  // //   @Override
+  // //   public void execute() {
+  // //     shooterElevator.goToFourthLevel();
+  // //   }
+  // // }
 
-  public class IntakeCoral extends Command {
-    public IntakeCoral() {
-      addRequirements();
-    }
+  // public class IntakeCoral extends Command {
+  //   public IntakeCoral() {
+  //     addRequirements();
+  //   }
 
-    @Override
-    public void initialize() {}
+  //   @Override
+  //   public void initialize() {}
 
-    @Override
-    public void execute() {
-      shooterElevator.intakeCoral();
-    }
-  }
+  //   @Override
+  //   public void execute() {
+  //     shooterElevator.intakeCoral();
+  //   }
+  // }
 
-  public class OuttakeCoral extends Command {
-    public OuttakeCoral() {
-      addRequirements();
-    }
+  // public class OuttakeCoral extends Command {
+  //   public OuttakeCoral() {
+  //     addRequirements();
+  //   }
 
-    @Override
-    public void initialize() {}
+  //   @Override
+  //   public void initialize() {}
 
-    @Override
-    public void execute() {
-      shooterElevator.outtakeCoral();
-    }
-  }
+  //   @Override
+  //   public void execute() {
+  //     shooterElevator.outtakeCoral();
+  //   }
+  // }
 
-  public class SequenceIntake extends Command {
-    public SequenceIntake() {
-      addRequirements();
-    }
+  // public class SequenceIntake extends Command {
+  //   public SequenceIntake() {
+  //     addRequirements();
+  //   }
 
-    @Override
-    public void initialize() {}
+  //   @Override
+  //   public void initialize() {}
 
-    @Override
-    public void execute() {
-      shooterElevator.intakeSequence();
-    }
-  }
-}
+  //   @Override
+  //   public void execute() {
+  //     shooterElevator.intakeSequence();
+  //   }
+  // }
+// }

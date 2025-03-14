@@ -32,20 +32,29 @@ public class AlgaeAngleCommand extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    // System.out.println("AA: " + algaeAngle.getEncoder());
+
     if (stick.getRawButton(Constants.AlgaeConstants.ALGAE_ANGLE_STAY_MAX)) {
         algaeAngle.angleUp();
+        //algaeAngle.moveArm(0.2);
     }
 
     else if (stick.getRawButton(Constants.AlgaeConstants.ALGAE_ANGLE_STAY_MIN)) {
         algaeAngle.angleDown();
+        //algaeAngle.moveArm(-0.1);
     }
 
     else if (stick.getRawButton(Constants.AlgaeConstants.ALGAE_ANGLE_SCORING)) {
-      algaeAngle.goToScoringAngle();
+       algaeAngle.goToScoringAngle();
+    }
+
+    else if (stick.getRawButton(7)) {
+      algaeAngle.setLowPosition();
     }
 
     else {
       algaeAngle.stopAngle();
+      // algaeAngle.moveArm(0.02);
     }
   }
 

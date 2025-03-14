@@ -4,12 +4,14 @@
 
 package frc.robot.subsystems;
 
+import com.revrobotics.RelativeEncoder;
 import com.revrobotics.spark.SparkBase;
 import com.revrobotics.spark.SparkClosedLoopController;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
 import com.revrobotics.spark.SparkMax;
 
 import edu.wpi.first.wpilibj.DutyCycleEncoder; //on-shaft encoder/through bore encoder
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -18,12 +20,15 @@ public class AlgaeAngle extends SubsystemBase {
   private final SparkMax angleMotor;
   private final DutyCycleEncoder encoder;
   private final SparkClosedLoopController pidController;
+  private final RelativeEncoder motorEncoder;
 
   /** Creates a new AlgaeEffector. */
   public AlgaeAngle() {
     angleMotor = new SparkMax(Constants.AlgaeConstants.kAlgaeAngleMotorPort, MotorType.kBrushless);
-    encoder = new DutyCycleEncoder(1, 2*Math.PI, 0.0); // change according to this specification: https://github.wpilib.org/allwpilib/docs/release/java/edu/wpi/first/wpilibj/DutyCycleEncoder.html
-    
+    encoder = new DutyCycleEncoder(0, 2*Math.PI, 0.0); // change according to this specification: https://github.wpilib.org/allwpilib/docs/release/java/edu/wpi/first/wpilibj/DutyCycleEncoder.html
+    motorEncoder = angleMotor.getEncoder();
+    motorEncoder.setPosition(0);
+
     // first pass at PID
     pidController = angleMotor.getClosedLoopController();
 
@@ -33,9 +38,11 @@ public class AlgaeAngle extends SubsystemBase {
   public void angleUp() {
     if (getEncoder() <= (Constants.AlgaeConstants.kMaxEncoderValue - Constants.AlgaeConstants.kAlgaeDelta)) {
       angleMotor.set(Constants.AlgaeConstants.kAlgaeAngleSpeed);
+      
     }
     else {
       stopAngle();
+
     }
   }
 
@@ -75,28 +82,35 @@ public class AlgaeAngle extends SubsystemBase {
     }
   }
 
+  public void moveArm(double speed) {
+    angleMotor.set(speed);
+  }
+
   public void stopAngle()  {
+
 
     double angle = getEncoder();
 
     // gravity pulled below min
     if (angle < Constants.AlgaeConstants.kMinEncoderValue) {
-      angleMotor.set(0.02);
+      angleMotor.set(0.05);
     }
 
-    // Stay at top
-    else if (angle > 3.5 && angle < Constants.AlgaeConstants.kMaxEncoderValue) {
+    // // Stay at top
+    else if (angle < Constants.AlgaeConstants.kMaxEncoderValue) {
       angleMotor.set(0.02);
     }
     
     // otherwise, just stop
     else {
-      angleMotor.set(0);
+       angleMotor.set(0);
     }
+
   }
 
   public double getEncoder() {
-    return encoder.get();
+    // return encoder.get();
+    return motorEncoder.getPosition();
   }
 
   // public void angleUpToDefault() {
@@ -144,6 +158,7 @@ public class AlgaeAngle extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+    SmartDashboard.putNumber("Algae Angle Encoder: ", getEncoder());
   }
 
   double pos = 2.4;
@@ -151,6 +166,10 @@ public class AlgaeAngle extends SubsystemBase {
   public void positionDrive() {
     // Working on this - Mr. Z
     pidController.setReference(pos, SparkBase.ControlType.kPosition);
+  }
+
+  public void setLowPosition() {
+    motorEncoder.setPosition(Constants.AlgaeConstants.kMinEncoderValue);
   }
 
 }
