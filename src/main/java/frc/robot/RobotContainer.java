@@ -48,7 +48,7 @@ public class RobotContainer {
   // private final CommandXboxController m_driverController = new CommandXboxController(OIConstants.kDriverControllerPort);
   private final Joystick driverJoystick = new Joystick(OIConstants.kDriverControllerPort);
   private final Joystick operatorJoystick = new Joystick(OIConstants.kOperatorControllerPort);
-  private final Joystick buttonBox = new Joystick(OIConstants.kButtonBoxPort);
+  //private final Joystick buttonBox = new Joystick(OIConstants.kButtonBoxPort);
 
   public final SwerveSubsystem swerveSubsystem = new SwerveSubsystem();
 
@@ -60,7 +60,7 @@ public class RobotContainer {
   private final CoralPlateAngle coralPlateAngle = new CoralPlateAngle();
 
   // //CLIMBER
-  //private final Climber climber = new Climber();
+  private final Climber climber = new Climber();
 
   //SHOOTER-ELEVATOR
   private final ShooterElevator shooterElevator = new ShooterElevator();
@@ -149,7 +149,7 @@ public class RobotContainer {
 
     coralPlateAngle.setDefaultCommand(new CoralPlateAngleCommand(coralPlateAngle, operatorJoystick));
 
-    // // climber.setDefaultCommand(new ClimberCommand(climber, operatorJoystick));
+    climber.setDefaultCommand(new ClimberCommand(climber, operatorJoystick));
 
     shooterElevator.setDefaultCommand(new ShooterElevatorCommand(shooterElevator, operatorJoystick));
   

@@ -165,6 +165,7 @@ public final class Constants {
 
         
         public static final double kScoringEncoderValue = -14;//1.978;
+        public static final double kFloorIntakeValue = -16.45;//1.978;
         public static final double kMaxEncoderValue = -0.3;
         public static final double kMinEncoderValue = -19;
 
@@ -245,9 +246,7 @@ public final class Constants {
     // ------------ CLIMBER CONSTANTS (CAN IDS AND RESPECTIVE BUTTONS TO CONTROL THEM) ------------ //
     public static final class ClimberConstants {
         //CLIMBER CAN IDS
-        public static final int kClimberMotorPort = 37;
-            public static final int CLIMBER_UP = 13;
-            public static final int CLIMBER_DOWN = 14;
+        public static final int kClimberMotorPort = 23;
     }
 
 

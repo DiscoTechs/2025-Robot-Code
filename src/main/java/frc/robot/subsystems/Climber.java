@@ -15,15 +15,18 @@ public class Climber extends SubsystemBase{
         climbMotor = new SparkMax(Constants.ClimberConstants.kClimberMotorPort, MotorType.kBrushless);
     }
 
-    public void climberUp() {
-        climbMotor.set(0.5); //temporary --> have to change to closedLoop
+    public void moveClimber(double speed) {
+        climbMotor.set(speed);
     }
+    // public void climberUp() {
+    //     climbMotor.set(0.5); //temporary --> have to change to closedLoop
+    // }
 
-    public void climberDown() {
-        climbMotor.set(-0.5); //temporary --> have to change to closedLoop
-    }
+    // public void climberDown() {
+    //     climbMotor.set(-0.5); //temporary --> have to change to closedLoop
+    // }
 
-    public void climberStop() {
-        climbMotor.set(0);
-    }
+    // public void climberStop() {
+    //     climbMotor.set(0);
+    // }
 }

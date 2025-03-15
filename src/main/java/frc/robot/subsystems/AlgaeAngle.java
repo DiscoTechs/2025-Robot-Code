@@ -155,6 +155,24 @@ public class AlgaeAngle extends SubsystemBase {
 
   }
 
+  public void goToFloorIntake() {
+    // really hit
+    if (getEncoder() <= Constants.AlgaeConstants.kFloorIntakeValue - 0.05) {
+
+      angleMotor.set(Constants.AlgaeConstants.kSlowAlgaeAngleSpeed);
+    } 
+
+    else if (getEncoder() <= Constants.AlgaeConstants.kFloorIntakeValue + .1) {
+      angleMotor.set(0.02);
+    }
+
+    else {
+      angleMotor.set(-Constants.AlgaeConstants.kSlowAlgaeAngleSpeed);
+    }
+    
+
+  }
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run

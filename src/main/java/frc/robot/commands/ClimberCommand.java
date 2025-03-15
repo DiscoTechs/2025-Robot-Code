@@ -34,12 +34,14 @@ public class ClimberCommand extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (stick.getRawButton(Constants.ClimberConstants.CLIMBER_UP)) {
-      climber.climberUp();
-    } else if (stick.getRawButton(Constants.ClimberConstants.CLIMBER_DOWN)) {
-      climber.climberDown();
+    double spd = -stick.getRawAxis(5);
+    System.out.println(spd);
+    if (spd > .1) {
+      climber.moveClimber(6*spd / 10); //
+    } else if (spd < -.1) {
+      climber.moveClimber(6*spd / 10);
     } else {
-      climber.climberStop();
+      climber.moveClimber(0);
     }
   }
 
