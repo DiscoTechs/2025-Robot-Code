@@ -37,9 +37,9 @@ public class ClimberCommand extends Command {
     double spd = -stick.getRawAxis(5);
     System.out.println(spd);
     if (spd > .1) {
-      climber.moveClimber(6*spd / 10); //
+      climber.moveClimber(0.6); //
     } else if (spd < -.1) {
-      climber.moveClimber(6*spd / 10);
+      climber.moveClimber(-0.6);
     } else {
       climber.moveClimber(0);
     }

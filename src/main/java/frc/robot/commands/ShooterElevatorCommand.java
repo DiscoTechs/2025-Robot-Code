@@ -75,9 +75,9 @@ public class ShooterElevatorCommand extends Command {
     double spd = -stick.getRawAxis(1);
     
     if (spd > .1 && shooterElevator.getEncoder() < 55) {
-      shooterElevator.moveElevator(spd / 4); //
+      shooterElevator.moveElevator(spd / 2); //
     } else if (spd < -.1 && shooterElevator.getEncoder() > 1.5) {
-    shooterElevator.moveElevator(spd / 8);
+    shooterElevator.moveElevator(spd / 4);
     } else {
       shooterElevator.moveElevator(0.04);
     }
