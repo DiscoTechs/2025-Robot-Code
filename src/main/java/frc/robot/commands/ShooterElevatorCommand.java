@@ -5,6 +5,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
 import frc.robot.subsystems.ShooterElevator;
@@ -14,6 +15,9 @@ public class ShooterElevatorCommand extends Command {
 
   private final ShooterElevator shooterElevator;
   private final Joystick stick;
+  private int level = 0;
+
+  private final int[] targets = {0, 30, 40, 50};
 
   /** Creates a new AlgaeCommand. */
   public ShooterElevatorCommand(ShooterElevator shooterElevator, Joystick stick) {
@@ -28,13 +32,14 @@ public class ShooterElevatorCommand extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    SmartDashboard.putNumber("TARGET", 30);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
 
-    // System.out.println("Elevator Executing" + shooterElevator.getEncoder());
+    //System.out.println("Elevator Executing" + shooterElevator.getEncoder());
 
     //intake sequence
     // boolean exitOuterIf = false;
@@ -70,18 +75,68 @@ public class ShooterElevatorCommand extends Command {
       shooterElevator.stopShooter();
     }
 
-    
-    //stop elevator if coral blocked or reached top limit
-    double spd = -stick.getRawAxis(1);
-    
-    if (spd > .1 && shooterElevator.getEncoder() < 55) {
-      shooterElevator.moveElevator(spd / 2); //
-    } else if (spd < -.1 && shooterElevator.getEncoder() < 10) {
-      shooterElevator.moveElevator(spd / 8);
-    } else if (spd < -.1 && shooterElevator.getEncoder() > 1.5) {
-      shooterElevator.moveElevator(spd / 4);
-    } else {
-      shooterElevator.moveElevator(0.04);
+    if (stick.getPOV() >= 0) {
+      level = stick.getPOV() / 90;
+    }
+
+    SmartDashboard.putNumber("LEVEL", level);
+
+    // if (stick.getRawButton(8)) {  // 8 is start button 
+    //   // target control
+    //   double target = targets[level];
+
+    //   double diff = (target - shooterElevator.getEncoder()) * 0.05;  
+
+    //   System.out.println(target + " - " + shooterElevator.getEncoder() + " -> " + diff);
+
+    //   // quick speed limiter
+    //   if (diff < -0.3) {
+    //     diff = -0.3;
+    //   } else if (diff > 0.3) {
+    //     diff = 0.3;
+    //   }
+
+
+    //   shooterElevator.moveElevator(diff);
+
+    // } else {
+      // Joystick control
+
+      //stop elevator if coral blocked or reached top limit
+      double spd = -stick.getRawAxis(1);
+          
+      if (spd > .1 && shooterElevator.getEncoder() < 55) {
+        shooterElevator.moveElevator(spd / 2); //
+      } else if (spd < -.1 && shooterElevator.getEncoder() < 10) { //10 is the value that we might have to adjust, when slow speed starts
+        shooterElevator.moveElevator(spd / 8);
+      } else if (spd < -.1 && shooterElevator.getEncoder() > 1.5) {
+        shooterElevator.moveElevator(spd / 4);
+      } 
+      else {
+        shooterElevator.moveElevator(0.04);
+      }
+
+      if (stick.getRawButton(Constants.AlgaeConstants.GoBetweenL2AndL3)) {
+        if (shooterElevator.getEncoder() < (Constants.AlgaeConstants.EncoderBetweenL2AndL3 - Constants.AlgaeConstants.Delta)) {
+          shooterElevator.moveElevator(0.2);
+        }
+        else if (shooterElevator.getEncoder() > (Constants.AlgaeConstants.EncoderBetweenL2AndL3 + Constants.AlgaeConstants.Delta)) {
+         shooterElevator.moveElevator(-0.2);
+        }
+        else {
+           shooterElevator.moveElevator(0.04);
+        }
+     }
+     else if (stick.getRawButton(Constants.AlgaeConstants.GoBetweenL3AndL4)) {
+      if (shooterElevator.getEncoder() < (Constants.AlgaeConstants.EncoderBetweenL3AndL4 - Constants.AlgaeConstants.Delta)) {
+        shooterElevator.moveElevator(0.2);
+      }
+      else if (shooterElevator.getEncoder() > (Constants.AlgaeConstants.EncoderBetweenL3AndL4 + Constants.AlgaeConstants.Delta)) {
+        shooterElevator.moveElevator(-0.2);
+      }
+      else {
+        shooterElevator.moveElevator(0.04);
+      }
     }
   }
 }

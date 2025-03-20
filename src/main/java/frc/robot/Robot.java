@@ -29,7 +29,7 @@ public class Robot extends TimedRobot {
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
     PortForwarder.add(5800, "limelight.local", 5800);
-    CameraServer.startAutomaticCapture();
+    //CameraServer.startAutomaticCapture();
   }
 
   /**

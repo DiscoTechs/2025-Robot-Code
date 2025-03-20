@@ -164,12 +164,19 @@ public final class Constants {
             public static final int ALGAE_ANGLE_ESCAPE = 2;
 
         
-        public static final double kScoringEncoderValue = -14;//1.978;
-        public static final double kFloorIntakeValue = -16.45;//1.978;
+        public static final double kScoringEncoderValue = -15;//1.978;
+        public static final double kFloorIntakeValue = -15.3;//1.978;
         public static final double kMaxEncoderValue = -0.3;
         public static final double kMinEncoderValue = -19;
 
         public static final double kAlgaeDelta = 0.3;
+
+        public static final int GoBetweenL2AndL3 = 7;
+            public static final double EncoderBetweenL2AndL3 = 15;
+        public static final int GoBetweenL3AndL4 = 8;
+            public static final double EncoderBetweenL3AndL4 = 30;
+
+        public static final double Delta = 0.5;
 
         public static final double kAlgaeAngleSpeed = 0.2;
         public static final double kSlowAlgaeAngleSpeed = 0.07;

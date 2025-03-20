@@ -6,7 +6,11 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import com.revrobotics.spark.SparkMax;
+import com.revrobotics.spark.SparkBase.PersistMode;
+import com.revrobotics.spark.SparkBase.ResetMode;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
+import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
+import com.revrobotics.spark.config.SparkMaxConfig;
 
 
 public class ShooterElevator extends SubsystemBase {
@@ -34,6 +38,14 @@ public class ShooterElevator extends SubsystemBase {
 
         rightElevatorMotor = new SparkMax(Constants.ElavatorConstants.kRightElevatorMotorPort, MotorType.kBrushless);
         leftElevatorMotor = new SparkMax(Constants.ElavatorConstants.kLeftElevatorMotorPort, MotorType.kBrushless);  
+
+        SparkMaxConfig config = new SparkMaxConfig();
+        config.openLoopRampRate(0.2);
+        config.idleMode(IdleMode.kBrake);
+        config.smartCurrentLimit(50);
+
+        rightElevatorMotor.configure(config, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
+        leftElevatorMotor.configure(config, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
     }
 
     // public void goToFirstLevel() {

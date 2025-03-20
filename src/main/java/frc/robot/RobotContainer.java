@@ -22,7 +22,7 @@ import frc.robot.Constants.OIConstants;
 import frc.robot.commands.AlgaeAngleCommand;
 import frc.robot.commands.AlgaeEffectorCommand;
 import frc.robot.commands.ClimberCommand;
-import frc.robot.commands.CoralPlateAngleCommand;
+//import frc.robot.commands.CoralPlateAngleCommand;
 import frc.robot.commands.ShooterElevatorCommand;
 import frc.robot.commands.SwerveJoystickCmd;
 import frc.robot.commands.AutoCommands.AutoDrop;
@@ -32,8 +32,8 @@ import frc.robot.commands.AutoCommands.OutAndBack;
 import frc.robot.commands.AutoCommands.SimpleAuto;
 import frc.robot.subsystems.AlgaeAngle;
 import frc.robot.subsystems.AlgaeEffector;
-import frc.robot.subsystems.Climber;
-import frc.robot.subsystems.CoralPlateAngle;
+//import frc.robot.subsystems.Climber;
+//import frc.robot.subsystems.CoralPlateAngle;
 import frc.robot.subsystems.ShooterElevator;
 import frc.robot.subsystems.SwerveSubsystem;
 
@@ -57,10 +57,10 @@ public class RobotContainer {
   private final AlgaeAngle algaeAngle = new AlgaeAngle();
 
   // //CORAL
-  private final CoralPlateAngle coralPlateAngle = new CoralPlateAngle();
+  // private final CoralPlateAngle coralPlateAngle = new CoralPlateAngle();
 
   // //CLIMBER
-  private final Climber climber = new Climber();
+  // private final Climber climber = new Climber();
 
   //SHOOTER-ELEVATOR
   private final ShooterElevator shooterElevator = new ShooterElevator();
@@ -147,9 +147,9 @@ public class RobotContainer {
     algaeEffector.setDefaultCommand(new AlgaeEffectorCommand(algaeEffector, operatorJoystick));
     algaeAngle.setDefaultCommand(new AlgaeAngleCommand(algaeAngle, operatorJoystick));
 
-    coralPlateAngle.setDefaultCommand(new CoralPlateAngleCommand(coralPlateAngle, operatorJoystick));
+    // coralPlateAngle.setDefaultCommand(new CoralPlateAngleCommand(coralPlateAngle, operatorJoystick));
 
-    climber.setDefaultCommand(new ClimberCommand(climber, operatorJoystick));
+    // climber.setDefaultCommand(new ClimberCommand(climber, operatorJoystick));
 
     shooterElevator.setDefaultCommand(new ShooterElevatorCommand(shooterElevator, operatorJoystick));
   
@@ -163,9 +163,9 @@ public class RobotContainer {
 
     autoChooser.setDefaultOption("x--", auto1);
     autoChooser.addOption("-y-", auto2);
-    autoChooser.addOption("Coral Only", new CoralDrop(shooterElevator).withTimeout(1));
+    //autoChooser.addOption("Coral Only", new CoralDrop(shooterElevator).withTimeout(1));
     autoChooser.addOption("LimeLight Auto", limeLightAuto);
-    autoChooser.addOption("Coral Drop", new AutoDrop(swerveSubsystem, shooterElevator));
+    //autoChooser.addOption("Coral Drop", new AutoDrop(swerveSubsystem, shooterElevator));
     SmartDashboard.putData("Auto Choices", autoChooser);
 
     limelightFilterChooser.setDefaultOption("None", 0);
