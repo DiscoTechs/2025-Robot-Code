@@ -116,7 +116,7 @@ public class ShooterElevatorCommand extends Command {
         shooterElevator.moveElevator(0.04);
       }
 
-      if (stick.getRawButton(Constants.AlgaeConstants.GoBetweenL2AndL3)) {
+      if (stick.getPOV() == 180) {
         if (shooterElevator.getEncoder() < (Constants.AlgaeConstants.EncoderBetweenL2AndL3 - Constants.AlgaeConstants.Delta)) {
           shooterElevator.moveElevator(0.2);
         }
@@ -127,7 +127,7 @@ public class ShooterElevatorCommand extends Command {
            shooterElevator.moveElevator(0.04);
         }
      }
-     else if (stick.getRawButton(Constants.AlgaeConstants.GoBetweenL3AndL4)) {
+     else if (stick.getPOV() == 0) {
       if (shooterElevator.getEncoder() < (Constants.AlgaeConstants.EncoderBetweenL3AndL4 - Constants.AlgaeConstants.Delta)) {
         shooterElevator.moveElevator(0.2);
       }
