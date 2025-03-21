@@ -144,11 +144,24 @@ public final class Constants {
 
         public static int XBX_A = 1;
         public static int XBX_B = 2;
-        public static int XBX_C = 3;
-        public static int XBX_D = 4;
+        public static int XBX_X = 3;
+        public static int XBX_Y = 4;
+
         public static int LEFT_BUMPER = 5;
         public static int RIGHT_BUMPER = 6;
 
+        public static int POSITION_1_ANGLE = 300;
+        public static int POSITION_3_ANGLE = 120;
+        public static int POSITION_2_ANGLE = 240;
+        public static int POSITION_4_ANGLE = 60;
+
+        public static int FACE_FORWARD_ANGLE = 0;
+        public static int FACE_BACKWARDS_ANGLE = 180;
+
+        public static int UP_POV = 0;
+        public static int DOWN_POV = 180;
+        public static int LEFT_POV = 90; //adjust if needed
+        public static int RIGHT_POV = 270; //adjust if needed
     }
 
     // DOUBLE CECK ALL BUTTON IDS BELOW
@@ -172,9 +185,9 @@ public final class Constants {
         public static final double kAlgaeDelta = 0.3;
 
         public static final int GoBetweenL2AndL3 = 7;
-            public static final double EncoderBetweenL2AndL3 = 15;
+            public static final double EncoderBetweenL2AndL3 = 39;
         public static final int GoBetweenL3AndL4 = 8;
-            public static final double EncoderBetweenL3AndL4 = 30;
+            public static final double EncoderBetweenL3AndL4 = 54;
 
         public static final double Delta = 0.5;
 
