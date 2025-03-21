@@ -39,7 +39,7 @@ public class ShooterElevatorCommand extends Command {
   @Override
   public void execute() {
 
-    //System.out.println("Elevator Executing" + shooterElevator.getEncoder());
+    System.out.println("Elevator Executing" + shooterElevator.getEncoder());
 
     //intake sequence
     // boolean exitOuterIf = false;
@@ -104,6 +104,8 @@ public class ShooterElevatorCommand extends Command {
 
       //stop elevator if coral blocked or reached top limit
       double spd = -stick.getRawAxis(1);
+
+      //System.out.println(stick.getPOV());
           
       if (spd > .1 && shooterElevator.getEncoder() < 55) {
         shooterElevator.moveElevator(spd / 2); //

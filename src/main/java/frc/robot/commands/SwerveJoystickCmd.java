@@ -73,16 +73,23 @@ public class SwerveJoystickCmd extends Command {
             LimelightHelpers.setPipelineIndex("limelight", 1);
 
             tx = LimelightHelpers.getTX("limelight");
+            double ta = LimelightHelpers.getTX("limelight");
+            
             //System.out.println(tx);
             //MOVE ROBOT LEFT AND RIGHT IF ALGAE IS NOT IN THE CENTER OF LIMELIGHT VIEW
             if (tx < -7) {
-                ySpeed = 0.75; // -1.0 / limelightTA / 3;
+                ySpeed = 0.5; // -1.0 / limelightTA / 3;
             } else if (tx > 7) {
-                ySpeed = -0.75; // -1.0 / limelightTA / 3;
+                ySpeed = -0.5; // -1.0 / limelightTA / 3;
             }
             else {
                 ySpeed = 0;
             }
+
+            if (ta < 0.2) {
+                xSpeed = 0.5;
+            }
+            
 
             chassisSpeeds = new ChassisSpeeds(xSpeed, ySpeed, turningSpeed);
             discreteSpeeds = ChassisSpeeds.discretize(chassisSpeeds, 0.02);
