@@ -158,10 +158,15 @@ public final class Constants {
         public static int FACE_FORWARD_ANGLE = 0;
         public static int FACE_BACKWARDS_ANGLE = 180;
 
+        public static int FACE_LEFT_ANGLE = 90; 
+        public static int FACE_RIGHT_ANGLE = 270;
+
         public static int UP_POV = 0;
         public static int DOWN_POV = 180;
         public static int LEFT_POV = 90; //adjust if needed
         public static int RIGHT_POV = 270; //adjust if needed
+
+
     }
 
     // DOUBLE CECK ALL BUTTON IDS BELOW

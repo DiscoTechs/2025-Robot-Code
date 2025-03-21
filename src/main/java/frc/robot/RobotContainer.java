@@ -140,7 +140,7 @@ public class RobotContainer {
       () -> -driverJoystick.getRawAxis(OIConstants.kDriverRotAxis),
       () -> !driverJoystick.getRawButton(OIConstants.RIGHT_BUMPER),
       () -> driverJoystick.getRawButton(OIConstants.XBX_B),
-      () -> driverJoystick.getRawButton(OIConstants.XBX_A),
+      () -> driverJoystick.getRawButton(OIConstants.XBX_X),
       driverJoystick
     ));
 

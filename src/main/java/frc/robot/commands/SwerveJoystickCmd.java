@@ -109,6 +109,7 @@ public class SwerveJoystickCmd extends Command {
         }
         //IF NOT USING LIMELIGHT
         else {
+            //GO TO POSITION 1 CORRECT ANGLE
             if (driverJoystick.getPOV() == Constants.OIConstants.LEFT_POV) { // the button at the top, or “y”, button to face the wall
                 int t = Constants.OIConstants.POSITION_1_ANGLE;
                 if (swerveSubsystem.decideIfTurnLeft(t)) { // 0 degrees is the angle we have to go to
@@ -125,6 +126,7 @@ public class SwerveJoystickCmd extends Command {
                 }
             }
 
+            //GO TO POSITION 2 CORRECT ANGLE
             else if (driverJoystick.getPOV() == Constants.OIConstants.UP_POV) { // the button at the top, or “y”, button to face the wall
                 int t = Constants.OIConstants.POSITION_2_ANGLE;
                 if (swerveSubsystem.decideIfTurnLeft(t)) { // 0 degrees is the angle we have to go to
@@ -141,6 +143,7 @@ public class SwerveJoystickCmd extends Command {
                 }
             }
 
+            //GO TO POSITION 3 CORRECT ANGLE
             else if (driverJoystick.getPOV() == Constants.OIConstants.RIGHT_POV) { // the button at the top, or “y”, button to face the wall
                 int t = Constants.OIConstants.POSITION_3_ANGLE;
                 if (swerveSubsystem.decideIfTurnLeft(t)) { // 0 degrees is the angle we have to go to
@@ -157,8 +160,42 @@ public class SwerveJoystickCmd extends Command {
                 }
             }
 
+            //GO TO POSITION 4 CORRECT ANGLE
             else if (driverJoystick.getPOV() == Constants.OIConstants.DOWN_POV) { // the button at the top, or “y”, button to face the wall
                 int t = Constants.OIConstants.POSITION_4_ANGLE;
+                if (swerveSubsystem.decideIfTurnLeft(t)) { // 0 degrees is the angle we have to go to
+                    turningDirection = -1; //have to mess around with the signs
+                }
+                else {
+                    turningDirection = 1; //have to mess around with the signs
+                } 
+                if (swerveSubsystem.getHeading() > (t-7) && swerveSubsystem.getHeading() < (t+7)) { //range around target angle: need to make range on either side of 7 degrees to be smaller
+                    turningSpeed  = 0.6* turningDirection;
+                }
+                else {
+                    turningSpeed = 0;
+                }
+            } 
+
+            //GO TO FACE FORWARD CORRECT ANGLE
+            else if (driverJoystick.getRawButton(Constants.OIConstants.XBX_Y)) { // the button at the top, or “y”, button to face the wall
+                int t = Constants.OIConstants.FACE_FORWARD_ANGLE;
+                if (swerveSubsystem.decideIfTurnLeft(t)) { // 0 degrees is the angle we have to go to
+                    turningDirection = -1; //have to mess around with the signs
+                }
+                else {
+                    turningDirection = 1; //have to mess around with the signs
+                } 
+                if (swerveSubsystem.getHeading() > (t-7) && swerveSubsystem.getHeading() < (t+7)) { //range around target angle: need to make range on either side of 7 degrees to be smaller
+                    turningSpeed  = 0.6* turningDirection;
+                }
+                else {
+                    turningSpeed = 0;
+                }
+            } 
+            //GO TO FACE BACKWARD CORRECT ANGLE
+            else if (driverJoystick.getRawButton(Constants.OIConstants.XBX_A)) { // the button at the top, or “y”, button to face the wall
+                int t = Constants.OIConstants.FACE_BACKWARDS_ANGLE;
                 if (swerveSubsystem.decideIfTurnLeft(t)) { // 0 degrees is the angle we have to go to
                     turningDirection = -1; //have to mess around with the signs
                 }
@@ -174,7 +211,6 @@ public class SwerveJoystickCmd extends Command {
             }
             
             if (fieldOrientedFunction.get()) {
-
                 chassisSpeeds = ChassisSpeeds.fromFieldRelativeSpeeds(xSpeed, ySpeed, turningSpeed, swerveSubsystem.getRotation2d());
                 discreteSpeeds = ChassisSpeeds.discretize(chassisSpeeds, 0.02);
             } 
