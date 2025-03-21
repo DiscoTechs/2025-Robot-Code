@@ -107,9 +107,12 @@ public class ShooterElevatorCommand extends Command {
 
       //System.out.println(stick.getPOV());
           
-      if (spd > .1 && shooterElevator.getEncoder() < 55) {
+      if (spd > .1 && shooterElevator.getEncoder() < 47) {
         shooterElevator.moveElevator(spd / 2); //
-      } else if (spd < -.1 && shooterElevator.getEncoder() < 10) { //10 is the value that we might have to adjust, when slow speed starts
+      } else if (spd > .1 && shooterElevator.getEncoder() > 47) {
+        shooterElevator.moveElevator(spd / 6);
+      }
+      else if (spd < -.1 && shooterElevator.getEncoder() < 10) { //10 is the value that we might have to adjust, when slow speed starts
         shooterElevator.moveElevator(spd / 8);
       } else if (spd < -.1 && shooterElevator.getEncoder() > 1.5) {
         shooterElevator.moveElevator(spd / 4);
