@@ -92,8 +92,19 @@ public class SwerveSubsystem extends SubsystemBase {
     return -Math.IEEEremainder(gyro.getYaw().getValueAsDouble(), 360);
   }
 
+  public double getAngle() {
+    double angle;
+    if (getHeading() < 0) {
+      angle = getHeading() + 360;
+    }
+    else {
+      angle = getHeading();
+    }
+    return angle;
+  }
+
   public boolean decideIfTurnLeft(double targetAngle) {
-    double a = getHeading(); //being straight in field relative should be zero → print somewhere else too
+    double a = getAngle(); //being straight in field relative should be zero → print somewhere else too
     double t = targetAngle;
     double leftTurn = t-a;
     if (leftTurn < 0) {

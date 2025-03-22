@@ -39,7 +39,7 @@ public class ShooterElevatorCommand extends Command {
   @Override
   public void execute() {
 
-    System.out.println("Elevator Executing" + shooterElevator.getEncoder());
+    //System.out.println("Elevator Executing" + shooterElevator.getEncoder());
 
     //intake sequence
     // boolean exitOuterIf = false;
