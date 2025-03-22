@@ -21,6 +21,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.Constants.DriveConstants;
+import frc.robot.commands.SwerveJoystickCmd;
 
 
 // enum Module {
@@ -103,14 +104,33 @@ public class SwerveSubsystem extends SubsystemBase {
     return angle;
   }
 
-  public boolean decideIfTurnLeft(double targetAngle) {
+  public boolean decideIfTurnRight(double targetAngle) {
     double a = getAngle(); //being straight in field relative should be zero → print somewhere else too
     double t = targetAngle;
-    double leftTurn = t-a;
-    if (leftTurn < 0) {
-      leftTurn += 360;
+    double rightTurn = t-a;
+    if (rightTurn < 0) {
+      rightTurn += 360;
     }
-    return (leftTurn < 180);
+    return (rightTurn < 180);
+  }
+
+  public double getTurningSpeed(int target) {
+    int t = Constants.OIConstants.POSITION_1_ANGLE;
+    int turningDirection;
+    int turningSpeed;
+    if (decideIfTurnRight(t)) { // 0 degrees is the angle we have to go to
+        turningDirection = -1; //negtive turning speed is moving right
+    }
+    else {
+        turningDirection = 1; //positive moving speed is moving left
+    }
+    if (!(getAngle() > (t-2) && getAngle() < (t+2))) { //range around target angle: need to make range on either side of 7 degrees to be smaller
+        turningSpeed = turningDirection;
+    }
+    else {
+        turningSpeed = 0;
+    }
+    return turningSpeed;
   }
   
 

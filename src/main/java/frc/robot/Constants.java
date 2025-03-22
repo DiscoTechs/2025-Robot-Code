@@ -153,17 +153,19 @@ public final class Constants {
         public static int ADJUST_LEFT = 7;
         public static int ADJUST_RIGHT = 8;
 
-        public static int POSITION_1_ANGLE = 300;
-        public static int POSITION_3_ANGLE = 120;
-        public static int POSITION_2_ANGLE = 240;
-        public static int POSITION_4_ANGLE = 60;
+        public static int POSITION_1_ANGLE = 60;
+        public static int POSITION_3_ANGLE = 240;
+        public static int POSITION_2_ANGLE = 120;
+        public static int POSITION_4_ANGLE = 300;
 
         public static int FACE_FORWARD_ANGLE = 0;
         public static int FACE_BACKWARDS_ANGLE = 180;
 
-        public static int FACE_LEFT_ANGLE = 90; 
-        public static int FACE_RIGHT_ANGLE = 270;
+        public static int FACE_LEFT_ANGLE = 270; 
+        public static int FACE_RIGHT_ANGLE = 90;
 
+        
+        //Don't change unless needed --> Buttons
         public static int UP_POV = 0;
         public static int DOWN_POV = 180;
         public static int LEFT_POV = 90; //adjust if needed

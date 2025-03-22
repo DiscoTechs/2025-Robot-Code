@@ -116,152 +116,41 @@ public class SwerveJoystickCmd extends Command {
         else {
             //GO TO POSITION 1 CORRECT ANGLE
             if (driverJoystick.getPOV() == Constants.OIConstants.LEFT_POV) { // the button at the top button to face the wall
-                int t = Constants.OIConstants.POSITION_1_ANGLE;
-                if (swerveSubsystem.decideIfTurnLeft(t)) { // 0 degrees is the angle we have to go to
-                    turningDirection = 1; //have to mess around with the signs
-                }
-                else {
-                    turningDirection = -1; //have to mess around with the signs
-                }
-                if (!(swerveSubsystem.getAngle() > (t-7) && swerveSubsystem.getAngle() < (t+7))) { //range around target angle: need to make range on either side of 7 degrees to be smaller
-                    turningSpeed  = turningDirection;
-                }
-                else {
-                    turningSpeed = 0;
-                }
+                turningSpeed = swerveSubsystem.getTurningSpeed(Constants.OIConstants.POSITION_1_ANGLE);
             }
 
             //GO TO POSITION 2 CORRECT ANGLE
             else if (driverJoystick.getPOV() == Constants.OIConstants.UP_POV) { // the button at the top button to face the wall
-                int t = Constants.OIConstants.POSITION_2_ANGLE;
-                if (swerveSubsystem.decideIfTurnLeft(t)) { // 0 degrees is the angle we have to go to
-                    turningDirection = 1; //have to mess around with the signs
-                }
-                else {
-                    turningDirection = -1; //have to mess around with the signs
-                } 
-                if (!(swerveSubsystem.getAngle() > (t-7) && swerveSubsystem.getAngle() < (t+7))) { //range around target angle: need to make range on either side of 7 degrees to be smaller
-                    turningSpeed  = turningDirection;
-                }
-                else {
-                    turningSpeed = 0;
-                }
+                turningSpeed = swerveSubsystem.getTurningSpeed(Constants.OIConstants.POSITION_2_ANGLE);
             }
 
             //GO TO POSITION 3 CORRECT ANGLE
             else if (driverJoystick.getPOV() == Constants.OIConstants.RIGHT_POV) { // the button at the top button to face the wall
-                int t = Constants.OIConstants.POSITION_3_ANGLE;
-                if (swerveSubsystem.decideIfTurnLeft(t)) { // 0 degrees is the angle we have to go to
-                    turningDirection = 1; //have to mess around with the signs
-                }
-                else {
-                    turningDirection = -1; //have to mess around with the signs
-                } 
-                if (!(swerveSubsystem.getAngle() > (t-7) && swerveSubsystem.getAngle() < (t+7))) { //range around target angle: need to make range on either side of 7 degrees to be smaller
-                    turningSpeed  = turningDirection;
-                }
-                else {
-                    turningSpeed = 0;
-                }
+                turningSpeed = swerveSubsystem.getTurningSpeed(Constants.OIConstants.POSITION_3_ANGLE);
             }
 
             //GO TO POSITION 4 CORRECT ANGLE
             else if (driverJoystick.getPOV() == Constants.OIConstants.DOWN_POV) { // the button at the top button to face the wall
-                int t = Constants.OIConstants.POSITION_4_ANGLE;
-                if (swerveSubsystem.decideIfTurnLeft(t)) { // 0 degrees is the angle we have to go to
-                    turningDirection = 1; //have to mess around with the signs
-                }
-                else {
-                    turningDirection = -1; //have to mess around with the signs
-                } 
-                if (!(swerveSubsystem.getAngle() > (t-7) && swerveSubsystem.getAngle() < (t+7))) { //range around target angle: need to make range on either side of 7 degrees to be smaller
-                    turningSpeed  = turningDirection;
-                }
-                else {
-                    turningSpeed = 0;
-                }
-            } 
+                turningSpeed = swerveSubsystem.getTurningSpeed(Constants.OIConstants.POSITION_4_ANGLE);
+            }
 
             //GO TO FACE FORWARD CORRECT ANGLE
             else if (driverJoystick.getRawButton(Constants.OIConstants.XBX_Y)) { // the button at the top button to face the wall
-                int t = Constants.OIConstants.FACE_FORWARD_ANGLE;
-                if (swerveSubsystem.decideIfTurnLeft(t)) { // 0 degrees is the angle we have to go to
-                    turningDirection = 1; //have to mess around with the signs
-                }
-                else {
-                    turningDirection = -1; //have to mess around with the signs
-                } 
-                System.out.println(swerveSubsystem.getAngle());
-                if (!(swerveSubsystem.getAngle() > (t-7) && swerveSubsystem.getAngle() < (t+7))) { //range around target angle: need to make range on either side of 7 degrees to be smaller
-                    turningSpeed  = turningDirection;
-                }
-                else {
-                    turningSpeed = 0;
-                }
+                turningSpeed = swerveSubsystem.getTurningSpeed(Constants.OIConstants.FACE_FORWARD_ANGLE);
             } 
             //GO TO FACE BACKWARD CORRECT ANGLE
             else if (driverJoystick.getRawButton(Constants.OIConstants.XBX_A)) { // the button at the top, or 'y', button to face the wall
-                int t = Constants.OIConstants.FACE_BACKWARDS_ANGLE;
-                if (swerveSubsystem.decideIfTurnLeft(t)) { // 0 degrees is the angle we have to go to
-                    turningDirection = 1; //have to mess around with the signs
-                }
-                else {
-                    turningDirection = -1; //have to mess around with the signs
-                } 
-                if (!(swerveSubsystem.getAngle() > (t-7) && swerveSubsystem.getAngle() < (t+7))) { //range around target angle: need to make range on either side of 7 degrees to be smaller
-                    turningSpeed  = turningDirection;
-                }
-                else {
-                    turningSpeed = 0;
-                }
+                turningSpeed = swerveSubsystem.getTurningSpeed(Constants.OIConstants.FACE_BACKWARDS_ANGLE);
             }
             //GO TO FACE LEFT CORRECT ANGLE
             else if (driverJoystick.getRawButton(Constants.OIConstants.XBX_X)) { // the button at the top, or 'y', button to face the wall
-                int t = Constants.OIConstants.FACE_LEFT_ANGLE;
-                if (swerveSubsystem.decideIfTurnLeft(t)) { // 0 degrees is the angle we have to go to
-                    turningDirection = 1; //have to mess around with the signs
-                }
-                else {
-                    turningDirection = -1; //have to mess around with the signs
-                }
-
-                System.out.println(swerveSubsystem.getAngle() + " " + (t-7));
-
-                if (!(swerveSubsystem.getAngle() > (t-7) && swerveSubsystem.getAngle() < (t+7))) { //range around target angle: need to make range on either side of 7 degrees to be smaller
-                    turningSpeed  = turningDirection;
-                }
-                else {
-                    turningSpeed = 0;
-                }
+                turningSpeed = swerveSubsystem.getTurningSpeed(Constants.OIConstants.FACE_LEFT_ANGLE);
             }
             //GO TO FACE RIGHT CORRECT ANGLE
             else if (driverJoystick.getRawButton(Constants.OIConstants.XBX_B)) { // the button at the top, or 'y', button to face the wall
-                int t = Constants.OIConstants.FACE_RIGHT_ANGLE;
-                if (swerveSubsystem.decideIfTurnLeft(t)) { // 0 degrees is the angle we have to go to
-                    turningDirection = 1; //have to mess around with the signs
-                }
-                else {
-                    turningDirection = -1; //have to mess around with the signs
-                }
-                //System.out.println(turningDirection);
-
-                
-
-                
-                //System.out.println((swerveSubsystem.getAngle() > (t-7)));
-                
-                if (!(swerveSubsystem.getAngle() > (t-7) && swerveSubsystem.getAngle() < (t+7))) { //range around target angle: need to make range on either side of 7 degrees to be smaller
-                    turningSpeed  = turningDirection;
-                }
-                else {
-                    turningSpeed = 0;
-                }
-                //System.out.println(turningSpeed);
+                turningSpeed = swerveSubsystem.getTurningSpeed(Constants.OIConstants.FACE_RIGHT_ANGLE);
             }
 
-            //System.out.println("NOW: " + turningSpeed);
-
-            //Adjust left and right
 
             //Adjust left
             if (driverJoystick.getRawButton(Constants.OIConstants.ADJUST_LEFT)) {
