@@ -114,6 +114,7 @@ public class SwerveSubsystem extends SubsystemBase {
     return (rightTurn < 180);
   }
 
+  //make speedAdjustment slightly more accurate --> closer angles go a bit faster maybe
   public double getTurningSpeed(int target) {
     int t = target;
     int turningDirection;
@@ -177,6 +178,7 @@ public class SwerveSubsystem extends SubsystemBase {
     return turningSpeed;
   }
 
+  //make the speed value more precise
   public double getYSpeed(double txValue) {
     double ySpeed;
     double tx = txValue;

@@ -127,6 +127,16 @@ public class ShooterElevator extends SubsystemBase {
         motorEncoder.setPosition(0);
     }
 
+    public double speedSetter(double targetEncoder) {
+        double distance = Math.abs(targetEncoder - getEncoder());
+        if (distance < 7) {
+            return 0.2;
+        }
+        else {
+            return 0.5;
+        }
+    }
+
     // public boolean isTopLimitReached() {
     //     if (isSensorDetected(LimitSensor)) {
     //         return true;

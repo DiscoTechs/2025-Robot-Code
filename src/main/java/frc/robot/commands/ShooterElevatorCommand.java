@@ -109,31 +109,31 @@ public class ShooterElevatorCommand extends Command {
         shooterElevator.moveElevator(spd / 2); //
       } 
       else if (spd > .1 && shooterElevator.getEncoder() > 47) {
-        shooterElevator.moveElevator(spd / 6);
+        shooterElevator.moveElevator(spd / 4);
       }
       else if (spd < -.1 && shooterElevator.getEncoder() < 10) { //10 is the value that we might have to adjust, when slow speed starts
         shooterElevator.moveElevator(spd / 8);
       } 
       else if (spd < -.1 && shooterElevator.getEncoder() > 1.5) {
-        shooterElevator.moveElevator(spd / 4);
+        shooterElevator.moveElevator(spd / 2.5);
       } 
       else if (stick.getRawButton(8)) {
         shooterElevator.setLowPosition();
       }
       else if (stick.getPOV() == 180) {
         if (shooterElevator.getEncoder() < (Constants.AlgaeConstants.EncoderBetweenL2AndL3 - Constants.AlgaeConstants.Delta)) {
-          shooterElevator.moveElevator(0.2);
+          shooterElevator.moveElevator(shooterElevator.speedSetter(Constants.AlgaeConstants.EncoderBetweenL2AndL3));
         }
         else if (shooterElevator.getEncoder() > (Constants.AlgaeConstants.EncoderBetweenL2AndL3 + Constants.AlgaeConstants.Delta)) {
-         shooterElevator.moveElevator(-0.2);
+         shooterElevator.moveElevator(-shooterElevator.speedSetter(Constants.AlgaeConstants.EncoderBetweenL2AndL3));
         }
       }
       else if (stick.getPOV() == 0) {
         if (shooterElevator.getEncoder() < (Constants.AlgaeConstants.EncoderBetweenL3AndL4 - Constants.AlgaeConstants.Delta)) {
-          shooterElevator.moveElevator(0.2);
+          shooterElevator.moveElevator(shooterElevator.speedSetter(Constants.AlgaeConstants.EncoderBetweenL3AndL4));
         }
         else if (shooterElevator.getEncoder() > (Constants.AlgaeConstants.EncoderBetweenL3AndL4 + Constants.AlgaeConstants.Delta)) {
-          shooterElevator.moveElevator(-0.2);
+          shooterElevator.moveElevator(-shooterElevator.speedSetter(Constants.AlgaeConstants.EncoderBetweenL3AndL4));
         }
       }
       else {
