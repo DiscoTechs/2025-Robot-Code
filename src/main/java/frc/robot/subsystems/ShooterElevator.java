@@ -166,6 +166,6 @@ public class ShooterElevator extends SubsystemBase {
     }
 
     public double getEncoder() {
-        return rightElevatorMotor.getEncoder().getPosition();
+        return motorEncoder.getPosition();
     }
 }

@@ -69,12 +69,12 @@ public class SwerveJoystickCmd extends Command {
         Pose3d pose = LimelightHelpers.getBotPose3d_TargetSpace("limelight");
         // System.out.println("TARGET ROTATION: " + (pose.getRotation().getQuaternion().getY())*180/Math.PI); //rotation calc
 
-        boolean lefttTriggerPressed = false;
+        boolean leftTriggerPressed = false;
         if (driverJoystick.getRawAxis(Constants.OIConstants.XBX_L_TRIG) > 0.1) {
-            lefttTriggerPressed = true;
+            leftTriggerPressed = true;
         }
         
-        if (lefttTriggerPressed) {
+        if (leftTriggerPressed) {
             if (LimelightHelpers.getCurrentPipelineIndex("limelight") == 0) {
                 LimelightHelpers.setPipelineIndex("limelight", 1);
             }
@@ -99,47 +99,47 @@ public class SwerveJoystickCmd extends Command {
 
         //IF USING LIMELIGHT/IF LIMELIGHT IS PLUGGED IN AND WORKING
     
+        //For REEF april tag horizontal alignment
         if (LimelightHelpers.getTV("limelight") && LimelightHelpers.getCurrentPipelineIndex("limelight") == 0 && rightTriggerPressed) {
-            
-            //LimelightHelpers.setPipelineIndex("limelight", 1);
-
             tx = LimelightHelpers.getTX("limelight");
             double ta = LimelightHelpers.getTX("limelight");
             
             //System.out.println(tx);
             //MOVE ROBOT LEFT AND RIGHT IF ALGAE IS NOT IN THE CENTER OF LIMELIGHT VIEW
-            if (tx < -3) {
-                ySpeed = 0.3; // -1.0 / limelightTA / 3;
-            } else if (tx > 3) {
-                ySpeed = -0.3; // -1.0 / limelightTA / 3;
-            }
-            else {
-                ySpeed = 0;
-            }
-        
+            // if (tx < -3) {
+            //     ySpeed = 0.3; // -1.0 / limelightTA / 3;
+            // } else if (tx > 3) {
+            //     ySpeed = -0.3; // -1.0 / limelightTA / 3;
+            // }
+            // else {
+            //     ySpeed = 0;
+            // }
+            ySpeed = swerveSubsystem.getYSpeed(tx);
             xSpeed = 0.5;
 
             chassisSpeeds = new ChassisSpeeds(xSpeed, ySpeed, turningSpeed);
             discreteSpeeds = ChassisSpeeds.discretize(chassisSpeeds, 0.02);
         }
+        
+        //For FLOOR ALGAE april tag horizontal alignment
         else if (LimelightHelpers.getTV("limelight") && LimelightHelpers.getCurrentPipelineIndex("limelight") == 1 && rightTriggerPressed) {
-            
-            //LimelightHelpers.setPipelineIndex("limelight", 1);
-
             tx = LimelightHelpers.getTX("limelight");
             double ta = LimelightHelpers.getTX("limelight");
             
             //System.out.println(tx);
             //MOVE ROBOT LEFT AND RIGHT IF ALGAE IS NOT IN THE CENTER OF LIMELIGHT VIEW
-            if (tx < -7) {
-                ySpeed = 0.5; // -1.0 / limelightTA / 3;
-            } else if (tx > -7) {
-                ySpeed = -0.5; // -1.0 / limelightTA / 3;
-            }
-            else {
-                ySpeed = 0;
-            }
+            // if (tx < -7) {
+            //     ySpeed = 0.5; // -1.0 / limelightTA / 3;
+            // } else if (tx > -7) {
+            //     ySpeed = -0.5; // -1.0 / limelightTA / 3;
+            // }
+            // else {
+            //     ySpeed = 0;
+            // }
         
+            // xSpeed = 0.5;
+
+            ySpeed = swerveSubsystem.getYSpeed(tx);
             xSpeed = 0.5;
 
             chassisSpeeds = new ChassisSpeeds(xSpeed, ySpeed, turningSpeed);
@@ -201,10 +201,6 @@ public class SwerveJoystickCmd extends Command {
             else if (driverJoystick.getRawButton(Constants.OIConstants.ADJUST_RIGHT)) {
                 ySpeed = -0.3; //adjust value to exactly go into coral
             }
-
-            // if (driverJoystick.getRawButton(Constants.OIConstants.XBX_Y)) {
-            //     turningSpeed = 0.6;
-            // }
             
             if (fieldOrientedFunction.get()) {
                 chassisSpeeds = ChassisSpeeds.fromFieldRelativeSpeeds(xSpeed, ySpeed, turningSpeed, swerveSubsystem.getRotation2d());

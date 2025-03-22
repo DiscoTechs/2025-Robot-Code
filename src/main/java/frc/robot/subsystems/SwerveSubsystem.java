@@ -176,6 +176,48 @@ public class SwerveSubsystem extends SubsystemBase {
     turningSpeed = speedAdjustment * turningDirection;
     return turningSpeed;
   }
+
+  public double getYSpeed(double txValue) {
+    double ySpeed;
+    double tx = txValue;
+    //moving left
+    if (tx < -12) {
+      ySpeed = 1;
+    }
+    else if (tx < -6) {
+        ySpeed = 0.5;
+    }
+    else if (tx < -3) {
+        ySpeed = 0.17;
+    }
+    else if (tx < -1) {
+        ySpeed = 0.07;
+    }
+    else if (tx < -0.03) {
+        ySpeed = 0.03;
+    }
+    //moving right
+    else if (tx > 12) {
+        ySpeed = -1;
+    }
+    else if (tx > 6) {
+        ySpeed = -0.5;
+    }
+    else if (tx > 3) {
+        ySpeed = -0.17;
+    }
+    else if (tx > 1) {
+        ySpeed = -0.07;
+    }
+    else if (tx > 0.03) {
+        ySpeed = -0.03;
+    }
+    else {
+        ySpeed = 0;
+    }
+
+    return ySpeed;
+  }
   
 
   public void resetGyro() {

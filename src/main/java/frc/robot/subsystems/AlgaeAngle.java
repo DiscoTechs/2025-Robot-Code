@@ -186,6 +186,7 @@ public class AlgaeAngle extends SubsystemBase {
     pidController.setReference(pos, SparkBase.ControlType.kPosition);
   }
 
+  //change low posision to be actual low position so I can reset it
   public void setLowPosition() {
     motorEncoder.setPosition(Constants.AlgaeConstants.kMinEncoderValue);
   }

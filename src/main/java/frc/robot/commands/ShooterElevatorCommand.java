@@ -104,49 +104,41 @@ public class ShooterElevatorCommand extends Command {
 
       //stop elevator if coral blocked or reached top limit
       double spd = -stick.getRawAxis(1);
-
-      //System.out.println(stick.getPOV());
           
       if (spd > .1 && shooterElevator.getEncoder() < 47) {
         shooterElevator.moveElevator(spd / 2); //
-      } else if (spd > .1 && shooterElevator.getEncoder() > 47) {
+      } 
+      else if (spd > .1 && shooterElevator.getEncoder() > 47) {
         shooterElevator.moveElevator(spd / 6);
       }
       else if (spd < -.1 && shooterElevator.getEncoder() < 10) { //10 is the value that we might have to adjust, when slow speed starts
         shooterElevator.moveElevator(spd / 8);
-      } else if (spd < -.1 && shooterElevator.getEncoder() > 1.5) {
+      } 
+      else if (spd < -.1 && shooterElevator.getEncoder() > 1.5) {
         shooterElevator.moveElevator(spd / 4);
       } 
-      else {
-        shooterElevator.moveElevator(0.04);
-      }
-
-      if (stick.getRawButton(8)) {
+      else if (stick.getRawButton(8)) {
         shooterElevator.setLowPosition();
       }
-
-      if (stick.getPOV() == 180) {
+      else if (stick.getPOV() == 180) {
         if (shooterElevator.getEncoder() < (Constants.AlgaeConstants.EncoderBetweenL2AndL3 - Constants.AlgaeConstants.Delta)) {
           shooterElevator.moveElevator(0.2);
         }
         else if (shooterElevator.getEncoder() > (Constants.AlgaeConstants.EncoderBetweenL2AndL3 + Constants.AlgaeConstants.Delta)) {
          shooterElevator.moveElevator(-0.2);
         }
-        else {
-           shooterElevator.moveElevator(0.04);
-        }
-     }
-     else if (stick.getPOV() == 0) {
-      if (shooterElevator.getEncoder() < (Constants.AlgaeConstants.EncoderBetweenL3AndL4 - Constants.AlgaeConstants.Delta)) {
-        shooterElevator.moveElevator(0.2);
       }
-      else if (shooterElevator.getEncoder() > (Constants.AlgaeConstants.EncoderBetweenL3AndL4 + Constants.AlgaeConstants.Delta)) {
-        shooterElevator.moveElevator(-0.2);
+      else if (stick.getPOV() == 0) {
+        if (shooterElevator.getEncoder() < (Constants.AlgaeConstants.EncoderBetweenL3AndL4 - Constants.AlgaeConstants.Delta)) {
+          shooterElevator.moveElevator(0.2);
+        }
+        else if (shooterElevator.getEncoder() > (Constants.AlgaeConstants.EncoderBetweenL3AndL4 + Constants.AlgaeConstants.Delta)) {
+          shooterElevator.moveElevator(-0.2);
+        }
       }
       else {
         shooterElevator.moveElevator(0.04);
       }
-    }
   }
 }
 
