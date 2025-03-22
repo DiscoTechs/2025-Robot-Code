@@ -150,6 +150,9 @@ public final class Constants {
         public static int LEFT_BUMPER = 5;
         public static int RIGHT_BUMPER = 6;
 
+        public static int ADJUST_LEFT = 7;
+        public static int ADJUST_RIGHT = 8;
+
         public static int POSITION_1_ANGLE = 300;
         public static int POSITION_3_ANGLE = 120;
         public static int POSITION_2_ANGLE = 240;
@@ -190,15 +193,9 @@ public final class Constants {
         public static final double kAlgaeDelta = 0.3;
 
         public static final int GoBetweenL2AndL3 = 7;
-<<<<<<< HEAD
         public static final double EncoderBetweenL2AndL3 = 37;
         public static final int GoBetweenL3AndL4 = 8;
         public static final double EncoderBetweenL3AndL4 = 55;
-=======
-            public static final double EncoderBetweenL2AndL3 = 39;
-        public static final int GoBetweenL3AndL4 = 8;
-            public static final double EncoderBetweenL3AndL4 = 54;
->>>>>>> ce5aa557cac65606877a7badebb13bb5ded35355
 
         public static final double Delta = 0.5;
 

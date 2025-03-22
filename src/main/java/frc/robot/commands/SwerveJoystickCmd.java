@@ -18,7 +18,7 @@ import frc.robot.subsystems.SwerveSubsystem;
 public class SwerveJoystickCmd extends Command {
     private final SwerveSubsystem swerveSubsystem;
     private final Supplier<Double> xSpdFunction, ySpdFunction, turningSpdFunction;
-    private final Supplier<Boolean> fieldOrientedFunction, resetHeading, visionTurn;
+    private final Supplier<Boolean> fieldOrientedFunction, resetHeading;
     private final SlewRateLimiter xLimiter, yLimiter, turningLimiter;
     private final Joystick driverJoystick;
     private double tx;
@@ -27,14 +27,13 @@ public class SwerveJoystickCmd extends Command {
 
     public SwerveJoystickCmd(SwerveSubsystem swerveSubsystem,
             Supplier<Double> xSpdFunction, Supplier<Double> ySpdFunction, Supplier<Double> turningSpdFunction,
-            Supplier<Boolean> fieldOrientedFunction, Supplier<Boolean> resetHeading, Supplier<Boolean> visionTurn, Joystick driverJoystick) {
+            Supplier<Boolean> fieldOrientedFunction, Supplier<Boolean> resetHeading, Joystick driverJoystick) {
         this.swerveSubsystem = swerveSubsystem;
         this.xSpdFunction = xSpdFunction;
         this.ySpdFunction = ySpdFunction;
         this.turningSpdFunction = turningSpdFunction;
         this.fieldOrientedFunction = fieldOrientedFunction;
         this.resetHeading = resetHeading;
-        this.visionTurn = visionTurn;
         this.xLimiter = new SlewRateLimiter(DriveConstants.kTeleDriveMaxAccelerationUnitsPerSecond);
         this.yLimiter = new SlewRateLimiter(DriveConstants.kTeleDriveMaxAccelerationUnitsPerSecond);
         this.turningLimiter = new SlewRateLimiter(DriveConstants.kTeleDriveMaxAngularAccelerationUnitsPerSecond);
@@ -215,6 +214,49 @@ public class SwerveJoystickCmd extends Command {
                 else {
                     turningSpeed = 0;
                 }
+            }
+            //GO TO FACE LEFT CORRECT ANGLE
+            else if (driverJoystick.getRawButton(Constants.OIConstants.XBX_X)) { // the button at the top, or “y”, button to face the wall
+                int t = Constants.OIConstants.FACE_LEFT_ANGLE;
+                if (swerveSubsystem.decideIfTurnLeft(t)) { // 0 degrees is the angle we have to go to
+                    turningDirection = -1; //have to mess around with the signs
+                }
+                else {
+                    turningDirection = 1; //have to mess around with the signs
+                } 
+                if (swerveSubsystem.getHeading() > (t-7) && swerveSubsystem.getHeading() < (t+7)) { //range around target angle: need to make range on either side of 7 degrees to be smaller
+                    turningSpeed  = 0.6* turningDirection;
+                }
+                else {
+                    turningSpeed = 0;
+                }
+            }
+            //GO TO FACE RIGHT CORRECT ANGLE
+            else if (driverJoystick.getRawButton(Constants.OIConstants.XBX_B)) { // the button at the top, or “y”, button to face the wall
+                int t = Constants.OIConstants.FACE_RIGHT_ANGLE;
+                if (swerveSubsystem.decideIfTurnLeft(t)) { // 0 degrees is the angle we have to go to
+                    turningDirection = -1; //have to mess around with the signs
+                }
+                else {
+                    turningDirection = 1; //have to mess around with the signs
+                } 
+                if (swerveSubsystem.getHeading() > (t-7) && swerveSubsystem.getHeading() < (t+7)) { //range around target angle: need to make range on either side of 7 degrees to be smaller
+                    turningSpeed  = 0.6* turningDirection;
+                }
+                else {
+                    turningSpeed = 0;
+                }
+            }
+
+            //Adjust left and right
+
+            //Adjust left
+            if (driverJoystick.getRawButton(Constants.OIConstants.ADJUST_LEFT)) {
+                ySpeed = 0.3; //adjust value to exactly go into coral 
+            }
+            //Adjust right
+            else if (driverJoystick.getRawButton(Constants.OIConstants.ADJUST_RIGHT)) {
+                ySpeed = -0.3; //adjust value to exactly go into coral
             }
             
             if (fieldOrientedFunction.get()) {
