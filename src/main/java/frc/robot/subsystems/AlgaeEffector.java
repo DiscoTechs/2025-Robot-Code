@@ -27,8 +27,8 @@ public class AlgaeEffector extends SubsystemBase {
   }
 
   public void expel() {
-    leftIntakeMotor.set(0.6); //REMEMBER TO CHANGE THE SPEED BACK TO 0.6//
-    rightIntakeMotor.set(-0.6); //REMEMBER TO CHANGE THE SPEED BACK TO -0.6//
+    leftIntakeMotor.set(0.8); //REMEMBER TO CHANGE THE SPEED BACK TO 0.6//
+    rightIntakeMotor.set(-0.8); //REMEMBER TO CHANGE THE SPEED BACK TO -0.6//
   }
 
   public void stopIntake() {

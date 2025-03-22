@@ -168,8 +168,8 @@ public final class Constants {
         //Don't change unless needed --> Buttons
         public static int UP_POV = 0;
         public static int DOWN_POV = 180;
-        public static int LEFT_POV = 90; //adjust if needed
-        public static int RIGHT_POV = 270; //adjust if needed
+        public static int LEFT_POV = 270; //adjust if needed
+        public static int RIGHT_POV = 90; //adjust if needed
 
 
     }
@@ -197,7 +197,7 @@ public final class Constants {
         public static final int GoBetweenL2AndL3 = 7;
         public static final double EncoderBetweenL2AndL3 = 37;
         public static final int GoBetweenL3AndL4 = 8;
-        public static final double EncoderBetweenL3AndL4 = 55;
+        public static final double EncoderBetweenL3AndL4 = 53;
 
         public static final double Delta = 0.5;
 

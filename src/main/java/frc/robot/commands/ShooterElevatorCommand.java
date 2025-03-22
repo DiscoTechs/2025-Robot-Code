@@ -121,6 +121,10 @@ public class ShooterElevatorCommand extends Command {
         shooterElevator.moveElevator(0.04);
       }
 
+      if (stick.getRawButton(8)) {
+        shooterElevator.setLowPosition();
+      }
+
       if (stick.getPOV() == 180) {
         if (shooterElevator.getEncoder() < (Constants.AlgaeConstants.EncoderBetweenL2AndL3 - Constants.AlgaeConstants.Delta)) {
           shooterElevator.moveElevator(0.2);

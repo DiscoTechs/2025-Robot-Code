@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import com.revrobotics.spark.SparkMax;
+import com.revrobotics.RelativeEncoder;
 import com.revrobotics.spark.SparkBase.PersistMode;
 import com.revrobotics.spark.SparkBase.ResetMode;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
@@ -23,6 +24,7 @@ public class ShooterElevator extends SubsystemBase {
     // public final DigitalInput LimitSensor;
     public final SparkMax rightElevatorMotor;
     public final SparkMax leftElevatorMotor;
+    public final RelativeEncoder motorEncoder;
     
     public ShooterElevator() { 
         //CORAL EFFECTOR
@@ -37,7 +39,11 @@ public class ShooterElevator extends SubsystemBase {
         // LimitSensor = new DigitalInput(Constants.ElavatorConstants.ELAVATOR_LIMIT_SENSOR);
 
         rightElevatorMotor = new SparkMax(Constants.ElavatorConstants.kRightElevatorMotorPort, MotorType.kBrushless);
-        leftElevatorMotor = new SparkMax(Constants.ElavatorConstants.kLeftElevatorMotorPort, MotorType.kBrushless);  
+        leftElevatorMotor = new SparkMax(Constants.ElavatorConstants.kLeftElevatorMotorPort, MotorType.kBrushless); 
+        
+        motorEncoder = rightElevatorMotor.getEncoder();
+        motorEncoder.setPosition(0);
+        
 
         SparkMaxConfig config = new SparkMaxConfig();
         config.openLoopRampRate(0.2);
@@ -115,6 +121,10 @@ public class ShooterElevator extends SubsystemBase {
 
     public boolean isSensorDetected(DigitalInput x) {
         return !x.get();
+    }
+
+    public void setLowPosition() {
+        motorEncoder.setPosition(0);
     }
 
     // public boolean isTopLimitReached() {

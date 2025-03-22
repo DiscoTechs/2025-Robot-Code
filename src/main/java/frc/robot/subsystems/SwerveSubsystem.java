@@ -115,21 +115,65 @@ public class SwerveSubsystem extends SubsystemBase {
   }
 
   public double getTurningSpeed(int target) {
-    int t = Constants.OIConstants.POSITION_1_ANGLE;
+    int t = target;
     int turningDirection;
-    int turningSpeed;
+    double turningSpeed;
+    double speedAdjustment;
+    double angleMore;
+
     if (decideIfTurnRight(t)) { // 0 degrees is the angle we have to go to
         turningDirection = -1; //negtive turning speed is moving right
     }
     else {
         turningDirection = 1; //positive moving speed is moving left
     }
-    if (!(getAngle() > (t-2) && getAngle() < (t+2))) { //range around target angle: need to make range on either side of 7 degrees to be smaller
-        turningSpeed = turningDirection;
+
+    double a = getAngle(); //being straight in field relative should be zero → print somewhere else too
+    angleMore = t-a;
+    if (angleMore < 0) {
+      angleMore += 360;
     }
+    angleMore = Math.min(angleMore, 360-angleMore);
+
+    if (angleMore < 0.01) {
+      speedAdjustment = 0;
+    }
+    else if (angleMore < 0.1) {
+      speedAdjustment = 0.01;
+    }
+    else if (angleMore < 0.5) {
+      speedAdjustment = 0.06;
+    }
+
+    else if (angleMore < 5) {
+      speedAdjustment = 0.3;
+    }
+
+    else if (angleMore < 10) {
+      speedAdjustment = 0.5;
+    }
+
+    else if (angleMore < 20) {
+      speedAdjustment = 1;
+    }
+
+    else if (angleMore < 40) {
+      speedAdjustment = 1.5;
+    }
+
+    else if (angleMore < 60) {
+      speedAdjustment = 2;
+    }
+
+    else if (angleMore < 90) {
+      speedAdjustment = 3;
+    }
+
     else {
-        turningSpeed = 0;
+      speedAdjustment = 4;
     }
+
+    turningSpeed = speedAdjustment * turningDirection;
     return turningSpeed;
   }
   

@@ -7,6 +7,8 @@ import edu.wpi.first.math.geometry.Pose3d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.OIConstants;
@@ -39,6 +41,8 @@ public class SwerveJoystickCmd extends Command {
         this.yLimiter = new SlewRateLimiter(DriveConstants.kTeleDriveMaxAccelerationUnitsPerSecond);
         this.turningLimiter = new SlewRateLimiter(DriveConstants.kTeleDriveMaxAngularAccelerationUnitsPerSecond);
         this.driverJoystick = driverJoystick;
+
+        LimelightHelpers.setPipelineIndex("limelight", 0);
         
         addRequirements(swerveSubsystem);
     }
@@ -65,14 +69,22 @@ public class SwerveJoystickCmd extends Command {
         Pose3d pose = LimelightHelpers.getBotPose3d_TargetSpace("limelight");
         // System.out.println("TARGET ROTATION: " + (pose.getRotation().getQuaternion().getY())*180/Math.PI); //rotation calc
 
-        if (driverJoystick.getRawButton(Constants.OIConstants.RIGHT_BUMPER)) {
+        boolean lefttTriggerPressed = false;
+        if (driverJoystick.getRawAxis(Constants.OIConstants.XBX_L_TRIG) > 0.1) {
+            lefttTriggerPressed = true;
+        }
+        
+        if (lefttTriggerPressed) {
             if (LimelightHelpers.getCurrentPipelineIndex("limelight") == 0) {
                 LimelightHelpers.setPipelineIndex("limelight", 1);
             }
-            if (LimelightHelpers.getCurrentPipelineIndex("limelight") == 1) {
+            else if (LimelightHelpers.getCurrentPipelineIndex("limelight") == 1) {
                 LimelightHelpers.setPipelineIndex("limelight", 0);
             }
+            SmartDashboard.putNumber("Current Pipeline", (LimelightHelpers.getCurrentPipelineIndex("limelight")));
         }
+
+        
 
         //test for getCurrentPipelineIndex()
 
@@ -80,13 +92,37 @@ public class SwerveJoystickCmd extends Command {
 
         //test for current drive angle
 
-        boolean triggerPressed = false;
+        boolean rightTriggerPressed = false;
         if (driverJoystick.getRawAxis(Constants.OIConstants.XBX_R_TRIG) > 0.1) {
-            triggerPressed = true;
+            rightTriggerPressed = true;
         }
 
         //IF USING LIMELIGHT/IF LIMELIGHT IS PLUGGED IN AND WORKING
-        if (LimelightHelpers.getTV("limelight") && triggerPressed) {
+    
+        if (LimelightHelpers.getTV("limelight") && LimelightHelpers.getCurrentPipelineIndex("limelight") == 0 && rightTriggerPressed) {
+            
+            //LimelightHelpers.setPipelineIndex("limelight", 1);
+
+            tx = LimelightHelpers.getTX("limelight");
+            double ta = LimelightHelpers.getTX("limelight");
+            
+            //System.out.println(tx);
+            //MOVE ROBOT LEFT AND RIGHT IF ALGAE IS NOT IN THE CENTER OF LIMELIGHT VIEW
+            if (tx < -3) {
+                ySpeed = 0.3; // -1.0 / limelightTA / 3;
+            } else if (tx > 3) {
+                ySpeed = -0.3; // -1.0 / limelightTA / 3;
+            }
+            else {
+                ySpeed = 0;
+            }
+        
+            xSpeed = 0.5;
+
+            chassisSpeeds = new ChassisSpeeds(xSpeed, ySpeed, turningSpeed);
+            discreteSpeeds = ChassisSpeeds.discretize(chassisSpeeds, 0.02);
+        }
+        else if (LimelightHelpers.getTV("limelight") && LimelightHelpers.getCurrentPipelineIndex("limelight") == 1 && rightTriggerPressed) {
             
             //LimelightHelpers.setPipelineIndex("limelight", 1);
 
@@ -97,17 +133,14 @@ public class SwerveJoystickCmd extends Command {
             //MOVE ROBOT LEFT AND RIGHT IF ALGAE IS NOT IN THE CENTER OF LIMELIGHT VIEW
             if (tx < -7) {
                 ySpeed = 0.5; // -1.0 / limelightTA / 3;
-            } else if (tx > 7) {
+            } else if (tx > -7) {
                 ySpeed = -0.5; // -1.0 / limelightTA / 3;
             }
             else {
                 ySpeed = 0;
             }
-
-            if (ta < 0.2) {
-                xSpeed = 0.5;
-            }
-            
+        
+            xSpeed = 0.5;
 
             chassisSpeeds = new ChassisSpeeds(xSpeed, ySpeed, turningSpeed);
             discreteSpeeds = ChassisSpeeds.discretize(chassisSpeeds, 0.02);
@@ -117,38 +150,46 @@ public class SwerveJoystickCmd extends Command {
             //GO TO POSITION 1 CORRECT ANGLE
             if (driverJoystick.getPOV() == Constants.OIConstants.LEFT_POV) { // the button at the top button to face the wall
                 turningSpeed = swerveSubsystem.getTurningSpeed(Constants.OIConstants.POSITION_1_ANGLE);
+                System.out.println(swerveSubsystem.getAngle());
             }
 
             //GO TO POSITION 2 CORRECT ANGLE
             else if (driverJoystick.getPOV() == Constants.OIConstants.UP_POV) { // the button at the top button to face the wall
                 turningSpeed = swerveSubsystem.getTurningSpeed(Constants.OIConstants.POSITION_2_ANGLE);
+                System.out.println(swerveSubsystem.getAngle());
             }
 
             //GO TO POSITION 3 CORRECT ANGLE
             else if (driverJoystick.getPOV() == Constants.OIConstants.RIGHT_POV) { // the button at the top button to face the wall
                 turningSpeed = swerveSubsystem.getTurningSpeed(Constants.OIConstants.POSITION_3_ANGLE);
+                System.out.println(swerveSubsystem.getAngle());
             }
 
             //GO TO POSITION 4 CORRECT ANGLE
             else if (driverJoystick.getPOV() == Constants.OIConstants.DOWN_POV) { // the button at the top button to face the wall
                 turningSpeed = swerveSubsystem.getTurningSpeed(Constants.OIConstants.POSITION_4_ANGLE);
+                System.out.println(swerveSubsystem.getAngle());
             }
 
             //GO TO FACE FORWARD CORRECT ANGLE
             else if (driverJoystick.getRawButton(Constants.OIConstants.XBX_Y)) { // the button at the top button to face the wall
                 turningSpeed = swerveSubsystem.getTurningSpeed(Constants.OIConstants.FACE_FORWARD_ANGLE);
+                System.out.println(swerveSubsystem.getAngle());
             } 
             //GO TO FACE BACKWARD CORRECT ANGLE
             else if (driverJoystick.getRawButton(Constants.OIConstants.XBX_A)) { // the button at the top, or 'y', button to face the wall
                 turningSpeed = swerveSubsystem.getTurningSpeed(Constants.OIConstants.FACE_BACKWARDS_ANGLE);
+                System.out.println(swerveSubsystem.getAngle());
             }
             //GO TO FACE LEFT CORRECT ANGLE
             else if (driverJoystick.getRawButton(Constants.OIConstants.XBX_X)) { // the button at the top, or 'y', button to face the wall
                 turningSpeed = swerveSubsystem.getTurningSpeed(Constants.OIConstants.FACE_LEFT_ANGLE);
+                System.out.println(swerveSubsystem.getAngle());
             }
             //GO TO FACE RIGHT CORRECT ANGLE
             else if (driverJoystick.getRawButton(Constants.OIConstants.XBX_B)) { // the button at the top, or 'y', button to face the wall
                 turningSpeed = swerveSubsystem.getTurningSpeed(Constants.OIConstants.FACE_RIGHT_ANGLE);
+                System.out.println(swerveSubsystem.getAngle());
             }
 
 
