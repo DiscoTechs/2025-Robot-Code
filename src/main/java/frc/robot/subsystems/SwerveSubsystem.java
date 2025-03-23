@@ -145,33 +145,11 @@ public class SwerveSubsystem extends SubsystemBase {
     else if (angleMore < 0.5) {
       speedAdjustment = 0.06;
     }
-
     else if (angleMore < 5) {
       speedAdjustment = 0.3;
     }
-
-    else if (angleMore < 10) {
-      speedAdjustment = 0.5;
-    }
-
-    else if (angleMore < 20) {
-      speedAdjustment = 1;
-    }
-
-    else if (angleMore < 40) {
-      speedAdjustment = 1.5;
-    }
-
-    else if (angleMore < 60) {
-      speedAdjustment = 2;
-    }
-
-    else if (angleMore < 90) {
-      speedAdjustment = 3;
-    }
-
     else {
-      speedAdjustment = 4;
+      speedAdjustment = 7;
     }
 
     turningSpeed = speedAdjustment * turningDirection;
@@ -183,37 +161,33 @@ public class SwerveSubsystem extends SubsystemBase {
     double ySpeed;
     double tx = txValue;
     //moving left
-    if (tx < -12) {
-      ySpeed = 1;
-    }
-    else if (tx < -6) {
-        ySpeed = 0.5;
+    if (tx < -7) {
+      ySpeed = 4;
     }
     else if (tx < -3) {
-        ySpeed = 0.17;
+        ySpeed = 0.2;
     }
     else if (tx < -1) {
-        ySpeed = 0.07;
+        ySpeed = 0.05;
     }
     else if (tx < -0.03) {
-        ySpeed = 0.03;
+        ySpeed = 0;
     }
+
     //moving right
-    else if (tx > 12) {
-        ySpeed = -1;
-    }
-    else if (tx > 6) {
-        ySpeed = -0.5;
+    else if (tx > 7) {
+        ySpeed = -4;
     }
     else if (tx > 3) {
-        ySpeed = -0.17;
+        ySpeed = -0.2;
     }
     else if (tx > 1) {
-        ySpeed = -0.07;
+        ySpeed = -0.05;
     }
     else if (tx > 0.03) {
-        ySpeed = -0.03;
+        ySpeed = 0;
     }
+    
     else {
         ySpeed = 0;
     }
