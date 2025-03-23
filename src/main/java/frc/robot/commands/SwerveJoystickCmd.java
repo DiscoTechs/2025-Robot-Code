@@ -93,14 +93,28 @@ public class SwerveJoystickCmd extends Command {
         //test for current drive angle
 
         boolean rightTriggerPressed = false;
+        boolean angleButtonPressed = false;
         if (driverJoystick.getRawAxis(Constants.OIConstants.XBX_R_TRIG) > 0.1) {
             rightTriggerPressed = true;
+        }
+
+        if ((driverJoystick.getPOV() == Constants.OIConstants.LEFT_POV) ||
+        (driverJoystick.getPOV() == Constants.OIConstants.RIGHT_POV) ||
+        (driverJoystick.getPOV() == Constants.OIConstants.UP_POV) || 
+        (driverJoystick.getPOV() == Constants.OIConstants.DOWN_POV) ||
+        (driverJoystick.getPOV() == Constants.OIConstants.XBX_A) ||
+        (driverJoystick.getPOV() == Constants.OIConstants.XBX_B) ||
+        (driverJoystick.getPOV() == Constants.OIConstants.XBX_X) ||
+        (driverJoystick.getPOV() == Constants.OIConstants.XBX_Y)) {
+            angleButtonPressed = true;
         }
 
         //IF USING LIMELIGHT/IF LIMELIGHT IS PLUGGED IN AND WORKING
     
         //For REEF april tag horizontal alignment
-        if (LimelightHelpers.getTV("limelight") && LimelightHelpers.getCurrentPipelineIndex("limelight") == 0 && rightTriggerPressed) {
+        if (LimelightHelpers.getCurrentPipelineIndex("limelight") == 0 && 
+            (rightTriggerPressed || angleButtonPressed)) {
+            
             tx = LimelightHelpers.getTX("limelight");
             double ta = LimelightHelpers.getTX("limelight");
             
@@ -115,16 +129,23 @@ public class SwerveJoystickCmd extends Command {
             //     ySpeed = 0;
             // }
             ySpeed = swerveSubsystem.getYSpeed(tx);
-            xSpeed = 0.5;
+            if (ta < 0.2) {
+                xSpeed = 1;
+            }
+            else {
+                xSpeed = 0.25;
+            }
 
-            chassisSpeeds = new ChassisSpeeds(xSpeed, ySpeed, turningSpeed);
-            discreteSpeeds = ChassisSpeeds.discretize(chassisSpeeds, 0.02);
+            // chassisSpeeds = new ChassisSpeeds(xSpeed, ySpeed, turningSpeed);
+            // discreteSpeeds = ChassisSpeeds.discretize(chassisSpeeds, 0.02);
         }
         
         //For FLOOR ALGAE april tag horizontal alignment
-        else if (LimelightHelpers.getTV("limelight") && LimelightHelpers.getCurrentPipelineIndex("limelight") == 1 && rightTriggerPressed) {
+        if (LimelightHelpers.getCurrentPipelineIndex("limelight") == 1 && 
+            (rightTriggerPressed || angleButtonPressed)) {
+            
             tx = LimelightHelpers.getTX("limelight");
-            double ta = LimelightHelpers.getTX("limelight");
+            double ta = LimelightHelpers.getTA("limelight");
             
             //System.out.println(tx);
             //MOVE ROBOT LEFT AND RIGHT IF ALGAE IS NOT IN THE CENTER OF LIMELIGHT VIEW
@@ -140,8 +161,14 @@ public class SwerveJoystickCmd extends Command {
             // xSpeed = 0.5;
 
             ySpeed = swerveSubsystem.getYSpeed(tx);
-            xSpeed = 0.5;
 
+            if (ta < 0.2) {
+                xSpeed = 1;
+            }
+            else {
+                xSpeed = 0.25;
+            }
+            
             chassisSpeeds = new ChassisSpeeds(xSpeed, ySpeed, turningSpeed);
             discreteSpeeds = ChassisSpeeds.discretize(chassisSpeeds, 0.02);
         }
