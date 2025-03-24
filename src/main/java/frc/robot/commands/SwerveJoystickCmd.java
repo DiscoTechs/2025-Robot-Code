@@ -128,53 +128,7 @@ public class SwerveJoystickCmd extends Command {
             // else {
             //     ySpeed = 0;
             // }
-            ySpeed = swerveSubsystem.getYSpeed(tx);
-            if (ta < 0.2) {
-                xSpeed = 1;
-            }
-            else {
-                xSpeed = 0.25;
-            }
 
-            // chassisSpeeds = new ChassisSpeeds(xSpeed, ySpeed, turningSpeed);
-            // discreteSpeeds = ChassisSpeeds.discretize(chassisSpeeds, 0.02);
-        }
-        
-        //For FLOOR ALGAE april tag horizontal alignment
-        if (LimelightHelpers.getCurrentPipelineIndex("limelight") == 1 && 
-            (rightTriggerPressed || angleButtonPressed)) {
-            
-            tx = LimelightHelpers.getTX("limelight");
-            double ta = LimelightHelpers.getTA("limelight");
-            
-            //System.out.println(tx);
-            //MOVE ROBOT LEFT AND RIGHT IF ALGAE IS NOT IN THE CENTER OF LIMELIGHT VIEW
-            // if (tx < -7) {
-            //     ySpeed = 0.5; // -1.0 / limelightTA / 3;
-            // } else if (tx > -7) {
-            //     ySpeed = -0.5; // -1.0 / limelightTA / 3;
-            // }
-            // else {
-            //     ySpeed = 0;
-            // }
-        
-            // xSpeed = 0.5;
-
-            ySpeed = swerveSubsystem.getYSpeed(tx);
-
-            if (ta < 0.2) {
-                xSpeed = 1;
-            }
-            else {
-                xSpeed = 0.25;
-            }
-            
-            chassisSpeeds = new ChassisSpeeds(xSpeed, ySpeed, turningSpeed);
-            discreteSpeeds = ChassisSpeeds.discretize(chassisSpeeds, 0.02);
-        }
-        //IF NOT USING LIMELIGHT
-        else {
-            //GO TO POSITION 1 CORRECT ANGLE
             if (driverJoystick.getPOV() == Constants.OIConstants.LEFT_POV) { // the button at the top button to face the wall
                 turningSpeed = swerveSubsystem.getTurningSpeed(Constants.OIConstants.POSITION_1_ANGLE);
                 System.out.println(swerveSubsystem.getAngle());
@@ -208,6 +162,49 @@ public class SwerveJoystickCmd extends Command {
                 turningSpeed = swerveSubsystem.getTurningSpeed(Constants.OIConstants.FACE_BACKWARDS_ANGLE);
                 System.out.println(swerveSubsystem.getAngle());
             }
+
+            ySpeed = swerveSubsystem.getYSpeed(tx);
+            if (ta < 0.2) {
+                xSpeed = 1;
+            }
+            else {
+                xSpeed = 0.25;
+            }
+
+            chassisSpeeds = new ChassisSpeeds(xSpeed, ySpeed, turningSpeed);
+            discreteSpeeds = ChassisSpeeds.discretize(chassisSpeeds, 0.02);
+        }
+        
+        //For FLOOR ALGAE april tag horizontal alignment
+        else if (LimelightHelpers.getCurrentPipelineIndex("limelight") == 1 && 
+            (rightTriggerPressed || angleButtonPressed)) {
+            
+            tx = LimelightHelpers.getTX("limelight");
+            double ta = LimelightHelpers.getTA("limelight");
+            
+            //System.out.println(tx);
+            //MOVE ROBOT LEFT AND RIGHT IF ALGAE IS NOT IN THE CENTER OF LIMELIGHT VIEW
+            // if (tx < -7) {
+            //     ySpeed = 0.5; // -1.0 / limelightTA / 3;
+            // } else if (tx > -7) {
+            //     ySpeed = -0.5; // -1.0 / limelightTA / 3;
+            // }
+            // else {
+            //     ySpeed = 0;
+            // }
+        
+            // xSpeed = 0.5;
+
+            //GO TO FACE FORWARD CORRECT ANGLE
+            if (driverJoystick.getRawButton(Constants.OIConstants.XBX_Y)) { // the button at the top button to face the wall
+                turningSpeed = swerveSubsystem.getTurningSpeed(Constants.OIConstants.FACE_FORWARD_ANGLE);
+                System.out.println(swerveSubsystem.getAngle());
+            } 
+            //GO TO FACE BACKWARD CORRECT ANGLE
+            else if (driverJoystick.getRawButton(Constants.OIConstants.XBX_A)) { // the button at the top, or 'y', button to face the wall
+                turningSpeed = swerveSubsystem.getTurningSpeed(Constants.OIConstants.FACE_BACKWARDS_ANGLE);
+                System.out.println(swerveSubsystem.getAngle());
+            }
             //GO TO FACE LEFT CORRECT ANGLE
             else if (driverJoystick.getRawButton(Constants.OIConstants.XBX_X)) { // the button at the top, or 'y', button to face the wall
                 turningSpeed = swerveSubsystem.getTurningSpeed(Constants.OIConstants.FACE_LEFT_ANGLE);
@@ -219,7 +216,20 @@ public class SwerveJoystickCmd extends Command {
                 System.out.println(swerveSubsystem.getAngle());
             }
 
+            ySpeed = swerveSubsystem.getYSpeed(tx);
 
+            if (ta < 0.2) {
+                xSpeed = 1;
+            }
+            else {
+                xSpeed = 0.25;
+            }
+            
+            chassisSpeeds = new ChassisSpeeds(xSpeed, ySpeed, turningSpeed);
+            discreteSpeeds = ChassisSpeeds.discretize(chassisSpeeds, 0.02);
+        }
+        //IF NOT USING LIMELIGHT
+        else {
             //Adjust left
             if (driverJoystick.getRawButton(Constants.OIConstants.ADJUST_LEFT)) {
                 ySpeed = 0.3; //adjust value to exactly go into coral 
