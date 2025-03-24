@@ -105,7 +105,10 @@ public class ShooterElevatorCommand extends Command {
       //stop elevator if coral blocked or reached top limit
       double spd = -stick.getRawAxis(1);
           
-      if (spd > .1 && shooterElevator.getEncoder() < 47) {
+      if (spd > .1 && shooterElevator.getEncoder() > 55) {
+        shooterElevator.moveElevator(0.04);
+      }
+      else if (spd > .1 && shooterElevator.getEncoder() < 47) {
         shooterElevator.moveElevator(spd / 2); //
       } 
       else if (spd > .1 && shooterElevator.getEncoder() > 47) {
@@ -116,7 +119,10 @@ public class ShooterElevatorCommand extends Command {
       } 
       else if (spd < -.1 && shooterElevator.getEncoder() > 1.5) {
         shooterElevator.moveElevator(spd / 2.5);
-      } 
+      }
+      else if (spd < -.1  && shooterElevator.getEncoder() < 0.1) {
+        shooterElevator.moveElevator(0.04);
+      }
       else if (stick.getRawButton(8)) {
         shooterElevator.setLowPosition();
       }
