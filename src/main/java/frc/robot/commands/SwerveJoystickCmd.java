@@ -163,7 +163,48 @@ public class SwerveJoystickCmd extends Command {
                 System.out.println(swerveSubsystem.getAngle());
             }
 
-            ySpeed = swerveSubsystem.getYSpeed(tx);
+            //Adjust left
+            else if (driverJoystick.getRawButton(Constants.OIConstants.ADJUST_LEFT)) {
+                if (!LimelightHelpers.getTV("limelight"))  {
+                    xSpeed = -0.2; //move back until April tag is detected
+                }
+                else { //if april tag is detected
+                    //DEFINETLY add more sophisticated vertical movement
+                    //move faster if further away
+                    if (ta < 0.2) {
+                        xSpeed = 1;
+                    }
+                    //move slower if closer
+                    else {
+                        xSpeed = 0.25;
+                    }
+                    //need to add a feture where it doesn't move anymore if reached the right ta (or maybe ty) value
+                    ySpeed = swerveSubsystem.getYSpeed(tx, -7); //adjust -7 value if needed, including sign and magnitude
+                }
+            }
+            //Adjust right
+            else if (driverJoystick.getRawButton(Constants.OIConstants.ADJUST_RIGHT)) {
+                if (!LimelightHelpers.getTV("limelight"))  {
+                    xSpeed = -0.2; //move back until April tag is detected
+                }
+                else { //if april tag is detected
+                    //DEFINETLY add more sophisticated vertical movement
+                    //move faster if further away
+                    if (ta < 0.2) {
+                        xSpeed = 1;
+                    }
+                    //move slower if closer
+                    else {
+                        xSpeed = 0.25;
+                    }
+                    //need to add a feture where it doesn't move anymore if reached the right ta (or maybe ty) value
+                    ySpeed = swerveSubsystem.getYSpeed(tx, 7); //adjust 7 value if needed, including sign and magnitude
+                }
+            }
+
+            ySpeed = swerveSubsystem.getYSpeed(tx, 0);
+            
+            //add more sophisticated vertical movement
             if (ta < 0.2) {
                 xSpeed = 1;
             }
@@ -216,8 +257,9 @@ public class SwerveJoystickCmd extends Command {
                 System.out.println(swerveSubsystem.getAngle());
             }
 
-            ySpeed = swerveSubsystem.getYSpeed(tx);
+            ySpeed = swerveSubsystem.getYSpeed(tx, 0);
 
+            //add more sophisticated vertical movement
             if (ta < 0.2) {
                 xSpeed = 1;
             }
@@ -229,16 +271,7 @@ public class SwerveJoystickCmd extends Command {
             discreteSpeeds = ChassisSpeeds.discretize(chassisSpeeds, 0.02);
         }
         //IF NOT USING LIMELIGHT
-        else {
-            //Adjust left
-            if (driverJoystick.getRawButton(Constants.OIConstants.ADJUST_LEFT)) {
-                ySpeed = 0.3; //adjust value to exactly go into coral 
-            }
-            //Adjust right
-            else if (driverJoystick.getRawButton(Constants.OIConstants.ADJUST_RIGHT)) {
-                ySpeed = -0.3; //adjust value to exactly go into coral
-            }
-            
+        else { 
             if (fieldOrientedFunction.get()) {
                 chassisSpeeds = ChassisSpeeds.fromFieldRelativeSpeeds(xSpeed, ySpeed, turningSpeed, swerveSubsystem.getRotation2d());
                 discreteSpeeds = ChassisSpeeds.discretize(chassisSpeeds, 0.02);

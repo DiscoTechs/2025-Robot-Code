@@ -157,37 +157,38 @@ public class SwerveSubsystem extends SubsystemBase {
   }
 
   //make the speed value more precise
-  public double getYSpeed(double txValue) {
+  public double getYSpeed(double txValue, double centerValue) {
     double ySpeed;
     double tx = txValue;
+    double center = centerValue;
     //moving left
-    if (tx < -7) {
+    if (tx < (-7 + center)) {
       ySpeed = 4;
     }
-    else if (tx < -3) {
+    else if (tx < (-3 + center)) {
         ySpeed = 0.2;
     }
-    else if (tx < -1) {
+    else if (tx < (-1 + center)) {
         ySpeed = 0.05;
     }
-    else if (tx < -0.03) {
+    else if (tx < (-0.03 + center)) {
         ySpeed = 0;
     }
 
     //moving right
-    else if (tx > 7) {
+    else if (tx > (7 + center)) {
         ySpeed = -4;
     }
-    else if (tx > 3) {
+    else if (tx > (3 + center)) {
         ySpeed = -0.2;
     }
-    else if (tx > 1) {
+    else if (tx > (1 + center)) {
         ySpeed = -0.05;
     }
-    else if (tx > 0.03) {
+    else if (tx > (0.03 + center)) {
         ySpeed = 0;
     }
-    
+
     else {
         ySpeed = 0;
     }
