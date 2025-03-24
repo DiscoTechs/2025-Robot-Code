@@ -131,35 +131,101 @@ public class SwerveJoystickCmd extends Command {
 
             if (driverJoystick.getPOV() == Constants.OIConstants.LEFT_POV) { // the button at the top button to face the wall
                 turningSpeed = swerveSubsystem.getTurningSpeed(Constants.OIConstants.POSITION_1_ANGLE);
+                
+                ySpeed = swerveSubsystem.getYSpeed(tx, 0);
+            
+                //add more sophisticated vertical movement
+                if (ta < 0.2) {
+                    xSpeed = 1;
+                }
+                else {
+                    xSpeed = 0.25;
+                }
+                
                 System.out.println(swerveSubsystem.getAngle());
             }
 
             //GO TO POSITION 2 CORRECT ANGLE
             else if (driverJoystick.getPOV() == Constants.OIConstants.UP_POV) { // the button at the top button to face the wall
                 turningSpeed = swerveSubsystem.getTurningSpeed(Constants.OIConstants.POSITION_2_ANGLE);
+                
+                ySpeed = swerveSubsystem.getYSpeed(tx, 0);
+            
+                //add more sophisticated vertical movement
+                if (ta < 0.2) {
+                    xSpeed = 1;
+                }
+                else {
+                    xSpeed = 0.25;
+                }
+                
                 System.out.println(swerveSubsystem.getAngle());
             }
 
             //GO TO POSITION 3 CORRECT ANGLE
             else if (driverJoystick.getPOV() == Constants.OIConstants.RIGHT_POV) { // the button at the top button to face the wall
                 turningSpeed = swerveSubsystem.getTurningSpeed(Constants.OIConstants.POSITION_3_ANGLE);
+                
+                ySpeed = swerveSubsystem.getYSpeed(tx, 0);
+            
+                //add more sophisticated vertical movement
+                if (ta < 0.2) {
+                    xSpeed = 1;
+                }
+                else {
+                    xSpeed = 0.25;
+                }
+                
                 System.out.println(swerveSubsystem.getAngle());
             }
 
             //GO TO POSITION 4 CORRECT ANGLE
             else if (driverJoystick.getPOV() == Constants.OIConstants.DOWN_POV) { // the button at the top button to face the wall
                 turningSpeed = swerveSubsystem.getTurningSpeed(Constants.OIConstants.POSITION_4_ANGLE);
+                
+                ySpeed = swerveSubsystem.getYSpeed(tx, 0);
+            
+                //add more sophisticated vertical movement
+                if (ta < 0.2) {
+                    xSpeed = 1;
+                }
+                else {
+                    xSpeed = 0.25;
+                }
+                
                 System.out.println(swerveSubsystem.getAngle());
             }
 
             //GO TO FACE FORWARD CORRECT ANGLE
             else if (driverJoystick.getRawButton(Constants.OIConstants.XBX_Y)) { // the button at the top button to face the wall
                 turningSpeed = swerveSubsystem.getTurningSpeed(Constants.OIConstants.FACE_FORWARD_ANGLE);
+                
+                ySpeed = swerveSubsystem.getYSpeed(tx, 0);
+            
+                //add more sophisticated vertical movement
+                if (ta < 0.2) {
+                    xSpeed = 1;
+                }
+                else {
+                    xSpeed = 0.25;
+                }
+                
                 System.out.println(swerveSubsystem.getAngle());
             } 
             //GO TO FACE BACKWARD CORRECT ANGLE
             else if (driverJoystick.getRawButton(Constants.OIConstants.XBX_A)) { // the button at the top, or 'y', button to face the wall
                 turningSpeed = swerveSubsystem.getTurningSpeed(Constants.OIConstants.FACE_BACKWARDS_ANGLE);
+                
+                ySpeed = swerveSubsystem.getYSpeed(tx, 0);
+            
+                //add more sophisticated vertical movement
+                if (ta < 0.2) {
+                    xSpeed = 1;
+                }
+                else {
+                    xSpeed = 0.25;
+                }
+
                 System.out.println(swerveSubsystem.getAngle());
             }
 
@@ -179,7 +245,7 @@ public class SwerveJoystickCmd extends Command {
                         xSpeed = 0.25;
                     }
                     //need to add a feture where it doesn't move anymore if reached the right ta (or maybe ty) value
-                    ySpeed = swerveSubsystem.getYSpeed(tx, -7); //adjust -7 value if needed, including sign and magnitude
+                    ySpeed = swerveSubsystem.getYSpeed(tx, 7); //adjust -7 value if needed, including sign and magnitude
                 }
             }
             //Adjust right
@@ -198,18 +264,8 @@ public class SwerveJoystickCmd extends Command {
                         xSpeed = 0.25;
                     }
                     //need to add a feture where it doesn't move anymore if reached the right ta (or maybe ty) value
-                    ySpeed = swerveSubsystem.getYSpeed(tx, 7); //adjust 7 value if needed, including sign and magnitude
+                    ySpeed = swerveSubsystem.getYSpeed(tx, -7); //adjust 7 value if needed, including sign and magnitude
                 }
-            }
-
-            ySpeed = swerveSubsystem.getYSpeed(tx, 0);
-            
-            //add more sophisticated vertical movement
-            if (ta < 0.2) {
-                xSpeed = 1;
-            }
-            else {
-                xSpeed = 0.25;
             }
 
             chassisSpeeds = new ChassisSpeeds(xSpeed, ySpeed, turningSpeed);
