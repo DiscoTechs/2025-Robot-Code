@@ -116,8 +116,6 @@ public class SwerveJoystickCmd extends Command {
             else {
                 ySpeed = 0;
             }
-        
-            xSpeed = 0.5;
 
             chassisSpeeds = new ChassisSpeeds(xSpeed, ySpeed, turningSpeed);
             discreteSpeeds = ChassisSpeeds.discretize(chassisSpeeds, 0.02);
@@ -139,8 +137,6 @@ public class SwerveJoystickCmd extends Command {
             else {
                 ySpeed = 0;
             }
-        
-            xSpeed = 0.5;
 
             chassisSpeeds = new ChassisSpeeds(xSpeed, ySpeed, turningSpeed);
             discreteSpeeds = ChassisSpeeds.discretize(chassisSpeeds, 0.02);

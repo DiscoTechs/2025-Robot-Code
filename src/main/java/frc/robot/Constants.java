@@ -195,7 +195,7 @@ public final class Constants {
         public static final double kAlgaeDelta = 0.3;
 
         public static final int GoBetweenL2AndL3 = 7;
-        public static final double EncoderBetweenL2AndL3 = 37;
+        public static final double EncoderBetweenL2AndL3 = 34.6;
         public static final int GoBetweenL3AndL4 = 8;
         public static final double EncoderBetweenL3AndL4 = 53;
 
