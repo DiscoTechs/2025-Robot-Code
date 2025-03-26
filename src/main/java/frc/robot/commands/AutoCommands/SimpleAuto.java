@@ -8,6 +8,7 @@ import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants.DriveConstants;
+import frc.robot.LimelightHelpers;
 import frc.robot.subsystems.SwerveSubsystem;
 
 public class SimpleAuto extends Command {
@@ -35,9 +36,14 @@ public class SimpleAuto extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    chassisSpeeds = new ChassisSpeeds(x, y, theta);
+    
+    //chassisSpeeds = new ChassisSpeeds(x, y, theta);
+    chassisSpeeds = limelightFollow(0, 0, 0);
+
     discreteSpeeds = ChassisSpeeds.discretize(chassisSpeeds, 0.02);
     moduleStates = DriveConstants.kDriveKinematics.toSwerveModuleStates(discreteSpeeds);
+
+
 
     // 6. Output each module states to wheels
     swerveSubsystem.setModuleStates(moduleStates);
@@ -54,4 +60,34 @@ public class SimpleAuto extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() { return false; }
+
+  public ChassisSpeeds limelightFollow(double xSpeed, double ySpeed, double turningSpeed) {
+
+        //LimelightHelpers.setPipelineIndex("limelight", 1);
+
+        double tx = LimelightHelpers.getTX("limelight");
+        double ta = LimelightHelpers.getTA("limelight");
+
+        double[] botPose = LimelightHelpers.getBotPose_TargetSpace("limelight");
+
+        // Angle of the april tag
+        double offsetAngle = botPose[4];
+
+        // XSPEED
+        xSpeed = 1.0 - ta / 100 * 1.1;  //110% of proportional value
+
+        // YSPEED - slide left/right based on offset
+        if(Math.abs(offsetAngle) > 5.0) {
+            ySpeed = -(offsetAngle / 90) * 1.5; // 150% of proportional speed
+        } else {
+            ySpeed = 0;
+        }
+
+        // TURNING SPEED
+        if (Math.abs(tx) < 1) {tx = 0;} // lame deadband code
+        turningSpeed = -tx * 0.06;      // trial and error, kP
+
+       return new ChassisSpeeds(xSpeed, ySpeed, turningSpeed);
+   }
+
 }

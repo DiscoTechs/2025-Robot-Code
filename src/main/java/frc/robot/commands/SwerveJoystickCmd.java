@@ -54,19 +54,23 @@ public class SwerveJoystickCmd extends Command {
         double xSpeed = xSpdFunction.get();
         double ySpeed = ySpdFunction.get();
         double turningSpeed = turningSpdFunction.get();
+
         // 2. Apply deadband
         xSpeed = Math.abs(xSpeed) > OIConstants.kDeadband ? xSpeed : 0.0;
         ySpeed = Math.abs(ySpeed) > OIConstants.kDeadband ? ySpeed : 0.0;
         turningSpeed = Math.abs(turningSpeed) > OIConstants.kDeadband ? turningSpeed : 0.0;
+
         // 3. Make the driving smoother
         xSpeed = xLimiter.calculate(xSpeed) * DriveConstants.kTeleDriveMaxSpeedMetersPerSecond;
         ySpeed = yLimiter.calculate(ySpeed) * DriveConstants.kTeleDriveMaxSpeedMetersPerSecond;
         turningSpeed = turningLimiter.calculate(turningSpeed)
                 * DriveConstants.kTeleDriveMaxAngularSpeedRadiansPerSecond;
+
         // 4. Construct desired chassis speeds
         ChassisSpeeds chassisSpeeds;
         ChassisSpeeds discreteSpeeds;
         Pose3d pose = LimelightHelpers.getBotPose3d_TargetSpace("limelight");
+
         // System.out.println("TARGET ROTATION: " + (pose.getRotation().getQuaternion().getY())*180/Math.PI); //rotation calc
 
         boolean lefttTriggerPressed = false;
@@ -101,44 +105,13 @@ public class SwerveJoystickCmd extends Command {
     
         if (LimelightHelpers.getTV("limelight") && LimelightHelpers.getCurrentPipelineIndex("limelight") == 0 && rightTriggerPressed) {
             
-            //LimelightHelpers.setPipelineIndex("limelight", 1);
-
-            tx = LimelightHelpers.getTX("limelight");
-            double ta = LimelightHelpers.getTX("limelight");
-            
-            //System.out.println(tx);
-            //MOVE ROBOT LEFT AND RIGHT IF ALGAE IS NOT IN THE CENTER OF LIMELIGHT VIEW
-            if (tx < -3) {
-                ySpeed = 0.3; // -1.0 / limelightTA / 3;
-            } else if (tx > 3) {
-                ySpeed = -0.3; // -1.0 / limelightTA / 3;
-            }
-            else {
-                ySpeed = 0;
-            }
-
-            chassisSpeeds = new ChassisSpeeds(xSpeed, ySpeed, turningSpeed);
+            chassisSpeeds = limelightFollow();
             discreteSpeeds = ChassisSpeeds.discretize(chassisSpeeds, 0.02);
         }
         else if (LimelightHelpers.getTV("limelight") && LimelightHelpers.getCurrentPipelineIndex("limelight") == 1 && rightTriggerPressed) {
             
-            //LimelightHelpers.setPipelineIndex("limelight", 1);
-
-            tx = LimelightHelpers.getTX("limelight");
-            double ta = LimelightHelpers.getTX("limelight");
-            
-            //System.out.println(tx);
-            //MOVE ROBOT LEFT AND RIGHT IF ALGAE IS NOT IN THE CENTER OF LIMELIGHT VIEW
-            if (tx < -7) {
-                ySpeed = 0.5; // -1.0 / limelightTA / 3;
-            } else if (tx > -7) {
-                ySpeed = -0.5; // -1.0 / limelightTA / 3;
-            }
-            else {
-                ySpeed = 0;
-            }
-
             chassisSpeeds = new ChassisSpeeds(xSpeed, ySpeed, turningSpeed);
+            chassisSpeeds = limelightFollow();
             discreteSpeeds = ChassisSpeeds.discretize(chassisSpeeds, 0.02);
         }
         //IF NOT USING LIMELIGHT
@@ -228,4 +201,61 @@ public class SwerveJoystickCmd extends Command {
     public boolean isFinished() {
         return false;
     }
+
+    public ChassisSpeeds limelightFollow_old(double xSpeed, double ySpeed, double turningSpeed) {
+
+         //LimelightHelpers.setPipelineIndex("limelight", 1);
+
+         tx = LimelightHelpers.getTX("limelight");
+         double ta = LimelightHelpers.getTX("limelight");
+         
+         //System.out.println(tx);
+         //MOVE ROBOT LEFT AND RIGHT IF ALGAE IS NOT IN THE CENTER OF LIMELIGHT VIEW
+         if (tx < -7) {
+             ySpeed = 0.5; // -1.0 / limelightTA / 3;
+         } else if (tx > -7) {
+             ySpeed = -0.5; // -1.0 / limelightTA / 3;
+         }
+         else {
+             ySpeed = 0;
+         }
+
+        return new ChassisSpeeds(xSpeed, ySpeed, turningSpeed);
+    }
+
+    double ta = 0;
+
+    public ChassisSpeeds limelightFollow(double xSpeed, double ySpeed, double turningSpeed) {
+
+        //LimelightHelpers.setPipelineIndex("limelight", 1);
+
+        tx = LimelightHelpers.getTX("limelight");
+        ta = LimelightHelpers.getTA("limelight");
+
+        double[] botPose = LimelightHelpers.getBotPose_TargetSpace("limelight");
+
+        // Angle of the april tag
+        double offsetAngle = botPose[4];
+
+        // XSPEED
+        xSpeed = 1.0 - ta / 100 * 1.1;  //110% of proportional value
+
+        // YSPEED - slide left/right based on offset
+        if(Math.abs(offsetAngle) > 5.0) {
+            ySpeed = -(offsetAngle / 90) * 1.5; // 150% of proportional speed
+        } else {
+            ySpeed = 0;
+        }
+
+        // TURNING SPEED
+        if (Math.abs(tx) < 1) {tx = 0;} // lame deadband code
+        turningSpeed = -tx * 0.06;      // trial and error, kP
+
+       return new ChassisSpeeds(xSpeed, ySpeed, turningSpeed);
+   }
+
+   // helper method so we don't have to send x, y, and turn
+   public ChassisSpeeds limelightFollow() {
+    return limelightFollow(0, 0, 0);
+   }
 }

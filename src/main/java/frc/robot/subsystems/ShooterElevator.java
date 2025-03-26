@@ -46,9 +46,9 @@ public class ShooterElevator extends SubsystemBase {
         
 
         SparkMaxConfig config = new SparkMaxConfig();
-        config.openLoopRampRate(0.2);
+        config.openLoopRampRate(.4);
         config.idleMode(IdleMode.kBrake);
-        config.smartCurrentLimit(50);
+        config.smartCurrentLimit(40);
 
         rightElevatorMotor.configure(config, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
         leftElevatorMotor.configure(config, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
@@ -92,7 +92,7 @@ public class ShooterElevator extends SubsystemBase {
     }
 
     public void moveElevatorUp() {
-        moveElevator(0.2);
+        moveElevator(.2);
     }
 
     public void moveElevatorDown() {
