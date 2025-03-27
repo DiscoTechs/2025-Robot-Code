@@ -32,7 +32,7 @@ public class AlgaeAngleCommand extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    //System.out.println("AA: " + algaeAngle.getEncoder());
+    System.out.println("AA: " + algaeAngle.getEncoder());
 
     if (stick.getRawButton(Constants.AlgaeConstants.ALGAE_ANGLE_STAY_MAX)) {
         algaeAngle.angleUp();

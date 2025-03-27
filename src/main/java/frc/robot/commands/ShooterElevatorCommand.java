@@ -107,7 +107,7 @@ public class ShooterElevatorCommand extends Command {
 
       //System.out.println(stick.getPOV());
           
-      System.out.println(shooterElevator.getEncoder());
+      //System.out.println(shooterElevator.getEncoder());
       if (spd > .1 && shooterElevator.getEncoder() > 56.5) {
         shooterElevator.moveElevator(0.04);
       }

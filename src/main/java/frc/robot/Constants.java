@@ -187,10 +187,10 @@ public final class Constants {
             public static final int ALGAE_ANGLE_ESCAPE = 2;
 
         
-        public static final double kScoringEncoderValue = -15;//1.978;
-        public static final double kFloorIntakeValue = -15.3;//1.978;
+        public static final double kScoringEncoderValue = -14.38;//1.978;
+        public static final double kFloorIntakeValue = -15.3*1.2 - 0.3;//1.978;
         public static final double kMaxEncoderValue = -0.3;
-        public static final double kMinEncoderValue = -17.5;
+        public static final double kMinEncoderValue = -17.5*1.2 - 0.5;
 
         public static final double kAlgaeDelta = 0.3;
 
