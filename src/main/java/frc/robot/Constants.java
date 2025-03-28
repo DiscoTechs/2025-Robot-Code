@@ -124,6 +124,8 @@ public final class Constants {
 
     // ------------ OI CONSTANTS ------------ //
     public static final class OIConstants {
+
+        public static double DISTANCE_FROM_CENTER = 7;
         public static final int kDriverControllerPort = 0;
         public static final int kOperatorControllerPort = 1;
         public static final int kButtonBoxPort = 2;
