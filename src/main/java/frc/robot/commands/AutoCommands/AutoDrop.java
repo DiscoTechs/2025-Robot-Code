@@ -18,7 +18,11 @@ public class AutoDrop extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     
-    addCommands(new SimpleAuto(swerveSubsystem, 0.5, 0, 0).withTimeout(7));
+    addCommands(new AutoTurn(swerveSubsystem, 0));
+    addCommands(new SimpleAuto(swerveSubsystem, 0.5, 0, 0).withTimeout(9));
+
+    //if not working, comment out the next two lines and re-deploy
+
     addCommands(new CoralDrop(shooterElevator).withTimeout(1));
   }
 }

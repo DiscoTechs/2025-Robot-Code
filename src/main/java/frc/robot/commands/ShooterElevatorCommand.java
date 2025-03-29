@@ -81,24 +81,24 @@ public class ShooterElevatorCommand extends Command {
 
     SmartDashboard.putNumber("LEVEL", level);
 
-    if (stick.getRawButton(8)) { // 8 is start button
-      // target control
-      double target = 42;
+    // if (stick.getRawButton(8)) { // 8 is start button
+    //   // target control
+    //   double target = 42;
 
-      double diff = (target - shooterElevator.getEncoder()) * 0.05;
+    //   double diff = (target - shooterElevator.getEncoder()) * 0.05;
 
-      System.out.println(target + " - " + shooterElevator.getEncoder() + " -> " + diff);
+    //   System.out.println(target + " - " + shooterElevator.getEncoder() + " -> " + diff);
 
-      // quick speed limiter
-      if (diff < -0.3) {
-        diff = -0.3;
-      } else if (diff > 0.3) {
-        diff = 0.3;
-      }
+    //   // quick speed limiter
+    //   if (diff < -0.3) {
+    //     diff = -0.3;
+    //   } else if (diff > 0.3) {
+    //     diff = 0.3;
+    //   }
 
-      shooterElevator.moveElevator(diff);
+    //   shooterElevator.moveElevator(diff);
 
-    } else {
+    // } else {
       // Joystick control
 
       // stop elevator if coral blocked or reached top limit
@@ -120,10 +120,6 @@ public class ShooterElevatorCommand extends Command {
         shooterElevator.moveElevator(spd * 0.25);
       } else {
         shooterElevator.moveElevator(0.04); // holding voltage
-      }
-
-      if (stick.getRawButton(8)) {
-        shooterElevator.setLowPosition();
       }
 
       if (stick.getPOV() == 180) {
@@ -212,7 +208,7 @@ public class ShooterElevatorCommand extends Command {
           shooterElevator.moveElevator(0.04);
         }
       }
-    }
+    // }
   }
 }
 

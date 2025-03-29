@@ -190,4 +190,8 @@ public class AlgaeAngle extends SubsystemBase {
     motorEncoder.setPosition(Constants.AlgaeConstants.kMinEncoderValue);
   }
 
+  public void setAbsoluteLowPosition() {
+    motorEncoder.setPosition(Constants.AlgaeConstants.kAbsoluteMinEncoderValue);
+  }
+  
 }

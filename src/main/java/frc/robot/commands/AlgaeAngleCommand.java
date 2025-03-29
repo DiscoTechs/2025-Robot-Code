@@ -34,31 +34,45 @@ public class AlgaeAngleCommand extends Command {
   public void execute() {
     //System.out.println("AA: " + algaeAngle.getEncoder());
 
-    if (stick.getRawButton(Constants.AlgaeConstants.ALGAE_ANGLE_STAY_MAX)) {
-        algaeAngle.angleUp();
-        //algaeAngle.moveArm(0.2);
-    }
-
-    else if (stick.getRawButton(Constants.AlgaeConstants.ALGAE_ANGLE_STAY_MIN)) {
-        algaeAngle.angleDown();
-        //algaeAngle.moveArm(-0.1);
-    }
-
-    else if (stick.getRawButton(Constants.AlgaeConstants.ALGAE_ANGLE_SCORING)) {
-       algaeAngle.goToScoringAngle();
-    }
-
-    else if (stick.getRawButton(2)) {
-      algaeAngle.goToFloorIntake();
-    }
-
-    else if (stick.getRawButton(7)) {
-      algaeAngle.setLowPosition();
+    if (stick.getRawButton(8)) {
+      if (stick.getRawButton(Constants.AlgaeConstants.ALGAE_ANGLE_STAY_MIN)) {
+          algaeAngle.moveArm(-0.15);
+      }
+      else if (stick.getRawButton(Constants.AlgaeConstants.ALGAE_ANGLE_STAY_MAX)) {
+        algaeAngle.moveArm(0.15);
+      }
+      else if (stick.getRawButton(7)) {
+        algaeAngle.setAbsoluteLowPosition();
+      }
     }
 
     else {
-      algaeAngle.stopAngle();
-      // algaeAngle.moveArm(0.02);
+      if (stick.getRawButton(Constants.AlgaeConstants.ALGAE_ANGLE_STAY_MAX)) {
+        algaeAngle.angleUp();
+        //algaeAngle.moveArm(0.2);
+      }
+
+      else if (stick.getRawButton(Constants.AlgaeConstants.ALGAE_ANGLE_STAY_MIN)) {
+          algaeAngle.angleDown();
+          //algaeAngle.moveArm(-0.1);
+      }
+
+      else if (stick.getRawButton(Constants.AlgaeConstants.ALGAE_ANGLE_SCORING)) {
+        algaeAngle.goToScoringAngle();
+      }
+
+      else if (stick.getRawButton(2)) {
+        algaeAngle.goToFloorIntake();
+      }
+
+      else if (stick.getRawButton(7)) {
+        algaeAngle.setLowPosition();
+      }
+
+      else {
+        algaeAngle.stopAngle();
+        // algaeAngle.moveArm(0.02);
+      }
     }
   }
 

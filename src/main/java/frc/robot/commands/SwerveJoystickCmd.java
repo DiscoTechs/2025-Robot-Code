@@ -87,7 +87,6 @@ public class SwerveJoystickCmd extends Command {
             }
             SmartDashboard.putNumber("Current Pipeline", (LimelightHelpers.getCurrentPipelineIndex("limelight")));
         }
-
         
 
         //test for getCurrentPipelineIndex()
@@ -114,133 +113,153 @@ public class SwerveJoystickCmd extends Command {
             chassisSpeeds = limelightFollow();
             discreteSpeeds = ChassisSpeeds.discretize(chassisSpeeds, 0.02);
         }
-
-        else if (LimelightHelpers.getTV("limelight") && LimelightHelpers.getCurrentPipelineIndex("limelight") == 0 && (driverJoystick.getPOV() == 270)) {
-            //assumed that tx is currently very close to or equal to zero, that is, after we center align it with right trigger
-
-            //move left if pressed 270 (left pov)
-            if (tx < Constants.OIConstants.DISTANCE_FROM_CENTER) { //if this sign is positive, all the signs for the constant are positive below, including in the else statement, in Math.abs()
-                if (Math.abs(Constants.OIConstants.DISTANCE_FROM_CENTER - tx) >= 10) {
-                    ySpeed = -0.3;
-                }
-                else if ((Math.abs(Constants.OIConstants.DISTANCE_FROM_CENTER - tx) < 10) && (Math.abs(Constants.OIConstants.DISTANCE_FROM_CENTER - tx) >= 8)) {
-                    ySpeed = -0.3 * 0.8;
-                }
-                else if ((Math.abs(Constants.OIConstants.DISTANCE_FROM_CENTER - tx) < 8) && (Math.abs(Constants.OIConstants.DISTANCE_FROM_CENTER - tx) >= 6)) {
-                    ySpeed = -0.3 * 0.65;
-                }
-                else if ((Math.abs(Constants.OIConstants.DISTANCE_FROM_CENTER - tx) < 6) && (Math.abs(Constants.OIConstants.DISTANCE_FROM_CENTER - tx) >= 4)) {
-                    ySpeed = -0.3 * 0.5;
-                }
-                else if ((Math.abs(Constants.OIConstants.DISTANCE_FROM_CENTER - tx) < 4) && (Math.abs(Constants.OIConstants.DISTANCE_FROM_CENTER - tx) >= 2)) {
-                    ySpeed = -0.3 * 0.40;
-                }
-                else if ((Math.abs(Constants.OIConstants.DISTANCE_FROM_CENTER - tx) < 2) && (Math.abs(Constants.OIConstants.DISTANCE_FROM_CENTER - tx) >= 0.3)) {
-                    ySpeed = -0.3 * 0.25;
-                }
-                else {
-                    ySpeed = 0;
-                }
-
-                //comment out code above (and else statment below) and unncoment code below if it doesn't work
-                //ySpeed = -0.3
-            }
-
-            //if overshoot by acccident, move in opposite direction
-            else {
-                if (Math.abs(Constants.OIConstants.DISTANCE_FROM_CENTER - tx) >= 10) {
-                    ySpeed = 0.3;
-                }
-                else if ((Math.abs(Constants.OIConstants.DISTANCE_FROM_CENTER - tx) < 10) && (Math.abs(Constants.OIConstants.DISTANCE_FROM_CENTER - tx) >= 8)) {
-                    ySpeed = 0.3 * 0.8;
-                }
-                else if ((Math.abs(Constants.OIConstants.DISTANCE_FROM_CENTER - tx) < 8) && (Math.abs(Constants.OIConstants.DISTANCE_FROM_CENTER - tx) >= 6)) {
-                    ySpeed = 0.3 * 0.65;
-                }
-                else if ((Math.abs(Constants.OIConstants.DISTANCE_FROM_CENTER - tx) < 6) && (Math.abs(Constants.OIConstants.DISTANCE_FROM_CENTER - tx) >= 4)) {
-                    ySpeed = 0.3 * 0.5;
-                }
-                else if ((Math.abs(Constants.OIConstants.DISTANCE_FROM_CENTER - tx) < 4) && (Math.abs(Constants.OIConstants.DISTANCE_FROM_CENTER - tx) >= 2)) {
-                    ySpeed = 0.3 * 0.40;
-                }
-                else if ((Math.abs(Constants.OIConstants.DISTANCE_FROM_CENTER - tx) < 2) && (Math.abs(Constants.OIConstants.DISTANCE_FROM_CENTER - tx) >= 0.3)) {
-                    ySpeed = 0.3 * 0.25;
-                }
-                else {
-                    ySpeed = 0;
-                }
-            }
+        else if (driverJoystick.getPOV() == 0) {
+            xSpeed = 1.2;
+            chassisSpeeds = new ChassisSpeeds(xSpeed, ySpeed, turningSpeed);
+            discreteSpeeds = ChassisSpeeds.discretize(chassisSpeeds, 0.02);
+        }
+        else if (driverJoystick.getPOV() == 180) {
+            xSpeed = -1.2;
+            chassisSpeeds = new ChassisSpeeds(xSpeed, ySpeed, turningSpeed);
+            discreteSpeeds = ChassisSpeeds.discretize(chassisSpeeds, 0.02);
+        }
+        else if (driverJoystick.getPOV() == 270) {
+            ySpeed = -1.2;
+            chassisSpeeds = new ChassisSpeeds(xSpeed, ySpeed, turningSpeed);
+            discreteSpeeds = ChassisSpeeds.discretize(chassisSpeeds, 0.02);
+        }
+        else if (driverJoystick.getPOV() == 90) {
+            ySpeed = 1.2;
             chassisSpeeds = new ChassisSpeeds(xSpeed, ySpeed, turningSpeed);
             discreteSpeeds = ChassisSpeeds.discretize(chassisSpeeds, 0.02);
         }
 
-        else if (LimelightHelpers.getTV("limelight") && LimelightHelpers.getCurrentPipelineIndex("limelight") == 0 && (driverJoystick.getPOV() == 90)) {
-            //assumed that tx is currently very close to or equal to zero, that is, after we center align it with right trigger
+        // else if (LimelightHelpers.getTV("limelight") && LimelightHelpers.getCurrentPipelineIndex("limelight") == 0 && (driverJoystick.getPOV() == 270)) {
+        //     //assumed that tx is currently very close to or equal to zero, that is, after we center align it with right trigger
 
-            //move right if pressed 90 pov (right pov)
-            if (tx > -Constants.OIConstants.DISTANCE_FROM_CENTER) { //if this sign is negative, all the signs for the constant are negtive below, including in the else statement, in Math.abs()
-                if (Math.abs(-Constants.OIConstants.DISTANCE_FROM_CENTER - tx) >= 10) {
-                    ySpeed = 0.3;
-                }
-                else if ((Math.abs(-Constants.OIConstants.DISTANCE_FROM_CENTER - tx) < 10) && (Math.abs(-Constants.OIConstants.DISTANCE_FROM_CENTER - tx) >= 8)) {
-                    ySpeed = 0.3 * 0.8;
-                }
-                else if ((Math.abs(-Constants.OIConstants.DISTANCE_FROM_CENTER - tx) < 8) && (Math.abs(-Constants.OIConstants.DISTANCE_FROM_CENTER - tx) >= 6)) {
-                    ySpeed = 0.3 * 0.65;
-                }
-                else if ((Math.abs(-Constants.OIConstants.DISTANCE_FROM_CENTER - tx) < 6) && (Math.abs(-Constants.OIConstants.DISTANCE_FROM_CENTER - tx) >= 4)) {
-                    ySpeed = 0.3 * 0.50;
-                }
-                else if ((Math.abs(-Constants.OIConstants.DISTANCE_FROM_CENTER - tx) < 4) && (Math.abs(-Constants.OIConstants.DISTANCE_FROM_CENTER - tx) >= 2)) {
-                    ySpeed = 0.3 * 0.40;
-                }
-                else if ((Math.abs(-Constants.OIConstants.DISTANCE_FROM_CENTER - tx) < 2) && (Math.abs(-Constants.OIConstants.DISTANCE_FROM_CENTER - tx) >= 0.3)) {
-                    ySpeed = 0.3 * 0.25;
-                }
-                else {
-                    ySpeed = 0;
-                }
+        //     //move left if pressed 270 (left pov)
+        //     if (tx < Constants.OIConstants.DISTANCE_FROM_CENTER) { //if this sign is positive, all the signs for the constant are positive below, including in the else statement, in Math.abs()
+        //         if (Math.abs(Constants.OIConstants.DISTANCE_FROM_CENTER - tx) >= 10) {
+        //             ySpeed = -0.3;
+        //         }
+        //         else if ((Math.abs(Constants.OIConstants.DISTANCE_FROM_CENTER - tx) < 10) && (Math.abs(Constants.OIConstants.DISTANCE_FROM_CENTER - tx) >= 8)) {
+        //             ySpeed = -0.3 * 0.8;
+        //         }
+        //         else if ((Math.abs(Constants.OIConstants.DISTANCE_FROM_CENTER - tx) < 8) && (Math.abs(Constants.OIConstants.DISTANCE_FROM_CENTER - tx) >= 6)) {
+        //             ySpeed = -0.3 * 0.65;
+        //         }
+        //         else if ((Math.abs(Constants.OIConstants.DISTANCE_FROM_CENTER - tx) < 6) && (Math.abs(Constants.OIConstants.DISTANCE_FROM_CENTER - tx) >= 4)) {
+        //             ySpeed = -0.3 * 0.5;
+        //         }
+        //         else if ((Math.abs(Constants.OIConstants.DISTANCE_FROM_CENTER - tx) < 4) && (Math.abs(Constants.OIConstants.DISTANCE_FROM_CENTER - tx) >= 2)) {
+        //             ySpeed = -0.3 * 0.40;
+        //         }
+        //         else if ((Math.abs(Constants.OIConstants.DISTANCE_FROM_CENTER - tx) < 2) && (Math.abs(Constants.OIConstants.DISTANCE_FROM_CENTER - tx) >= 0.3)) {
+        //             ySpeed = -0.3 * 0.25;
+        //         }
+        //         else {
+        //             ySpeed = 0;
+        //         }
 
-                //comment out code above (and else statment below) and unncoment code below if it doesn't work
-                //ySpeed = -0.3
-            }
+        //         //comment out code above (and else statment below) and unncoment code below if it doesn't work
+        //         //ySpeed = -0.3
+        //     }
+
+        //     //if overshoot by acccident, move in opposite direction
+        //     else {
+        //         if (Math.abs(Constants.OIConstants.DISTANCE_FROM_CENTER - tx) >= 10) {
+        //             ySpeed = 0.3;
+        //         }
+        //         else if ((Math.abs(Constants.OIConstants.DISTANCE_FROM_CENTER - tx) < 10) && (Math.abs(Constants.OIConstants.DISTANCE_FROM_CENTER - tx) >= 8)) {
+        //             ySpeed = 0.3 * 0.8;
+        //         }
+        //         else if ((Math.abs(Constants.OIConstants.DISTANCE_FROM_CENTER - tx) < 8) && (Math.abs(Constants.OIConstants.DISTANCE_FROM_CENTER - tx) >= 6)) {
+        //             ySpeed = 0.3 * 0.65;
+        //         }
+        //         else if ((Math.abs(Constants.OIConstants.DISTANCE_FROM_CENTER - tx) < 6) && (Math.abs(Constants.OIConstants.DISTANCE_FROM_CENTER - tx) >= 4)) {
+        //             ySpeed = 0.3 * 0.5;
+        //         }
+        //         else if ((Math.abs(Constants.OIConstants.DISTANCE_FROM_CENTER - tx) < 4) && (Math.abs(Constants.OIConstants.DISTANCE_FROM_CENTER - tx) >= 2)) {
+        //             ySpeed = 0.3 * 0.40;
+        //         }
+        //         else if ((Math.abs(Constants.OIConstants.DISTANCE_FROM_CENTER - tx) < 2) && (Math.abs(Constants.OIConstants.DISTANCE_FROM_CENTER - tx) >= 0.3)) {
+        //             ySpeed = 0.3 * 0.25;
+        //         }
+        //         else {
+        //             ySpeed = 0;
+        //         }
+        //     }
+        //     chassisSpeeds = new ChassisSpeeds(xSpeed, ySpeed, turningSpeed);
+        //     discreteSpeeds = ChassisSpeeds.discretize(chassisSpeeds, 0.02);
+        // }
+
+        // else if (LimelightHelpers.getTV("limelight") && LimelightHelpers.getCurrentPipelineIndex("limelight") == 0 && (driverJoystick.getPOV() == 90)) {
+        //     //assumed that tx is currently very close to or equal to zero, that is, after we center align it with right trigger
+
+        //     //move right if pressed 90 pov (right pov)
+        //     if (tx > -Constants.OIConstants.DISTANCE_FROM_CENTER) { //if this sign is negative, all the signs for the constant are negtive below, including in the else statement, in Math.abs()
+        //         if (Math.abs(-Constants.OIConstants.DISTANCE_FROM_CENTER - tx) >= 10) {
+        //             ySpeed = 0.3;
+        //         }
+        //         else if ((Math.abs(-Constants.OIConstants.DISTANCE_FROM_CENTER - tx) < 10) && (Math.abs(-Constants.OIConstants.DISTANCE_FROM_CENTER - tx) >= 8)) {
+        //             ySpeed = 0.3 * 0.8;
+        //         }
+        //         else if ((Math.abs(-Constants.OIConstants.DISTANCE_FROM_CENTER - tx) < 8) && (Math.abs(-Constants.OIConstants.DISTANCE_FROM_CENTER - tx) >= 6)) {
+        //             ySpeed = 0.3 * 0.65;
+        //         }
+        //         else if ((Math.abs(-Constants.OIConstants.DISTANCE_FROM_CENTER - tx) < 6) && (Math.abs(-Constants.OIConstants.DISTANCE_FROM_CENTER - tx) >= 4)) {
+        //             ySpeed = 0.3 * 0.50;
+        //         }
+        //         else if ((Math.abs(-Constants.OIConstants.DISTANCE_FROM_CENTER - tx) < 4) && (Math.abs(-Constants.OIConstants.DISTANCE_FROM_CENTER - tx) >= 2)) {
+        //             ySpeed = 0.3 * 0.40;
+        //         }
+        //         else if ((Math.abs(-Constants.OIConstants.DISTANCE_FROM_CENTER - tx) < 2) && (Math.abs(-Constants.OIConstants.DISTANCE_FROM_CENTER - tx) >= 0.3)) {
+        //             ySpeed = 0.3 * 0.25;
+        //         }
+        //         else {
+        //             ySpeed = 0;
+        //         }
+
+        //         //comment out code above (and else statment below) and unncoment code below if it doesn't work
+        //         //ySpeed = -0.3
+        //     }
 
             //if overshoot by acccident, move in opposite direction
-            else {
-                if (Math.abs(-Constants.OIConstants.DISTANCE_FROM_CENTER - tx) >= 10) {
-                    ySpeed = -0.3;
-                }
-                else if ((Math.abs(-Constants.OIConstants.DISTANCE_FROM_CENTER - tx) < 10) && (Math.abs(-Constants.OIConstants.DISTANCE_FROM_CENTER - tx) >= 8)) {
-                    ySpeed = -0.3 * 0.8;
-                }
-                else if ((Math.abs(-Constants.OIConstants.DISTANCE_FROM_CENTER - tx) < 8) && (Math.abs(-Constants.OIConstants.DISTANCE_FROM_CENTER - tx) >= 6)) {
-                    ySpeed = -0.3 * 0.65;
-                }
-                else if ((Math.abs(-Constants.OIConstants.DISTANCE_FROM_CENTER - tx) < 6) && (Math.abs(-Constants.OIConstants.DISTANCE_FROM_CENTER - tx) >= 4)) {
-                    ySpeed = -0.3 * 0.5;
-                }
-                else if ((Math.abs(-Constants.OIConstants.DISTANCE_FROM_CENTER - tx) < 4) && (Math.abs(-Constants.OIConstants.DISTANCE_FROM_CENTER - tx) >= 2)) {
-                    ySpeed = -0.3 * 0.40;
-                }
-                else if ((Math.abs(-Constants.OIConstants.DISTANCE_FROM_CENTER - tx) < 2) && (Math.abs(-Constants.OIConstants.DISTANCE_FROM_CENTER - tx) >= 0.3)) {
-                    ySpeed = -0.3 * 0.25;
-                }
-                else {
-                    ySpeed = 0;
-                }
-            }
-            chassisSpeeds = new ChassisSpeeds(xSpeed, ySpeed, turningSpeed);
-            discreteSpeeds = ChassisSpeeds.discretize(chassisSpeeds, 0.02);
-        }
+        //     else {
+        //         if (Math.abs(-Constants.OIConstants.DISTANCE_FROM_CENTER - tx) >= 10) {
+        //             ySpeed = -0.3;
+        //         }
+        //         else if ((Math.abs(-Constants.OIConstants.DISTANCE_FROM_CENTER - tx) < 10) && (Math.abs(-Constants.OIConstants.DISTANCE_FROM_CENTER - tx) >= 8)) {
+        //             ySpeed = -0.3 * 0.8;
+        //         }
+        //         else if ((Math.abs(-Constants.OIConstants.DISTANCE_FROM_CENTER - tx) < 8) && (Math.abs(-Constants.OIConstants.DISTANCE_FROM_CENTER - tx) >= 6)) {
+        //             ySpeed = -0.3 * 0.65;
+        //         }
+        //         else if ((Math.abs(-Constants.OIConstants.DISTANCE_FROM_CENTER - tx) < 6) && (Math.abs(-Constants.OIConstants.DISTANCE_FROM_CENTER - tx) >= 4)) {
+        //             ySpeed = -0.3 * 0.5;
+        //         }
+        //         else if ((Math.abs(-Constants.OIConstants.DISTANCE_FROM_CENTER - tx) < 4) && (Math.abs(-Constants.OIConstants.DISTANCE_FROM_CENTER - tx) >= 2)) {
+        //             ySpeed = -0.3 * 0.40;
+        //         }
+        //         else if ((Math.abs(-Constants.OIConstants.DISTANCE_FROM_CENTER - tx) < 2) && (Math.abs(-Constants.OIConstants.DISTANCE_FROM_CENTER - tx) >= 0.3)) {
+        //             ySpeed = -0.3 * 0.25;
+        //         }
+        //         else {
+        //             ySpeed = 0;
+        //         }
+        //     }
+        //     chassisSpeeds = new ChassisSpeeds(xSpeed, ySpeed, turningSpeed);
+        //     discreteSpeeds = ChassisSpeeds.discretize(chassisSpeeds, 0.02);
+        // }
 
 
         //IF NOT USING LIMELIGHT
         else {
             //GO TO POSITION 1 CORRECT ANGLE
-            // if (driverJoystick.getPOV() == Constants.OIConstants.LEFT_POV) { // the button at the top button to face the wall
-            //     turningSpeed = swerveSubsystem.getTurningSpeed(Constants.OIConstants.POSITION_1_ANGLE);
-            //     System.out.println(swerveSubsystem.getAngle());
-            // }
+            if (driverJoystick.getPOV() == Constants.OIConstants.LEFT_POV) { // the button at the top button to face the wall
+                turningSpeed = swerveSubsystem.getTurningSpeed(Constants.OIConstants.POSITION_1_ANGLE);
+                System.out.println(swerveSubsystem.getAngle());
+            }
 
             // //GO TO POSITION 2 CORRECT ANGLE
             // else if (driverJoystick.getPOV() == Constants.OIConstants.UP_POV) { // the button at the top button to face the wall
@@ -248,7 +267,7 @@ public class SwerveJoystickCmd extends Command {
             //     System.out.println(swerveSubsystem.getAngle());
             // }
 
-            // //GO TO POSITION 3 CORRECT ANGLE
+            //GO TO POSITION 3 CORRECT ANGLE
             // else if (driverJoystick.getPOV() == Constants.OIConstants.RIGHT_POV) { // the button at the top button to face the wall
             //     turningSpeed = swerveSubsystem.getTurningSpeed(Constants.OIConstants.POSITION_3_ANGLE);
             //     System.out.println(swerveSubsystem.getAngle());
@@ -260,26 +279,26 @@ public class SwerveJoystickCmd extends Command {
             //     System.out.println(swerveSubsystem.getAngle());
             // }
 
-            // //GO TO FACE FORWARD CORRECT ANGLE
-            // else if (driverJoystick.getRawButton(Constants.OIConstants.XBX_Y)) { // the button at the top button to face the wall
-            //     turningSpeed = swerveSubsystem.getTurningSpeed(Constants.OIConstants.FACE_FORWARD_ANGLE);
-            //     System.out.println(swerveSubsystem.getAngle());
-            // } 
-            // //GO TO FACE BACKWARD CORRECT ANGLE
-            // else if (driverJoystick.getRawButton(Constants.OIConstants.XBX_A)) { // the button at the top, or 'y', button to face the wall
-            //     turningSpeed = swerveSubsystem.getTurningSpeed(Constants.OIConstants.FACE_BACKWARDS_ANGLE);
-            //     System.out.println(swerveSubsystem.getAngle());
-            // }
-            // //GO TO FACE LEFT CORRECT ANGLE
-            // else if (driverJoystick.getRawButton(Constants.OIConstants.XBX_X)) { // the button at the top, or 'y', button to face the wall
-            //     turningSpeed = swerveSubsystem.getTurningSpeed(Constants.OIConstants.FACE_LEFT_ANGLE);
-            //     System.out.println(swerveSubsystem.getAngle());
-            // }
-            // //GO TO FACE RIGHT CORRECT ANGLE
-            // else if (driverJoystick.getRawButton(Constants.OIConstants.XBX_B)) { // the button at the top, or 'y', button to face the wall
-            //     turningSpeed = swerveSubsystem.getTurningSpeed(Constants.OIConstants.FACE_RIGHT_ANGLE);
-            //     System.out.println(swerveSubsystem.getAngle());
-            // }
+            //GO TO FACE FORWARD CORRECT ANGLE
+            else if (driverJoystick.getRawButton(Constants.OIConstants.XBX_Y)) { // the button at the top button to face the wall
+                turningSpeed = swerveSubsystem.getTurningSpeed(Constants.OIConstants.FACE_FORWARD_ANGLE);
+                System.out.println(swerveSubsystem.getAngle());
+            }
+            //GO TO FACE BACKWARD CORRECT ANGLE
+            else if (driverJoystick.getRawButton(Constants.OIConstants.XBX_A)) { // the button at the top, or 'y', button to face the wall
+                turningSpeed = swerveSubsystem.getTurningSpeed(Constants.OIConstants.FACE_BACKWARDS_ANGLE);
+                System.out.println(swerveSubsystem.getAngle());
+            }
+            //GO TO FACE LEFT CORRECT ANGLE
+            else if (driverJoystick.getRawButton(Constants.OIConstants.XBX_X)) { // the button at the top, or 'y', button to face the wall
+                turningSpeed = swerveSubsystem.getTurningSpeed(Constants.OIConstants.FACE_LEFT_ANGLE);
+                System.out.println(swerveSubsystem.getAngle());
+            }
+            //GO TO FACE RIGHT CORRECT ANGLE
+            else if (driverJoystick.getRawButton(Constants.OIConstants.XBX_B)) { // the button at the top, or 'y', button to face the wall
+                turningSpeed = swerveSubsystem.getTurningSpeed(Constants.OIConstants.FACE_RIGHT_ANGLE);
+                System.out.println(swerveSubsystem.getAngle());
+            }
             
             if (fieldOrientedFunction.get()) {
                 chassisSpeeds = ChassisSpeeds.fromFieldRelativeSpeeds(xSpeed, ySpeed, turningSpeed, swerveSubsystem.getRotation2d());
