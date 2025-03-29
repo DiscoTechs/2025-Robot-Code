@@ -43,6 +43,10 @@ public class AlgaeEffectorCommand extends Command {
     else if (stick.getPOV() == 270) {
       algaeEffector.slowExpel();
     }
+
+    else if (stick.getPOV() == 90) {
+      algaeEffector.fastExpel();
+    }
     
     else {
       algaeEffector.stopIntake();

@@ -201,6 +201,11 @@ public final class Constants {
         public static final int GoBetweenL3AndL4 = 8;
         public static final double EncoderBetweenL3AndL4 = 53;
 
+        public static final double l1 = 0;
+        public static final double l2 = 20;
+        public static final double l3 = 35;
+        public static final double l4 = 50;
+
         public static final double Delta = 0.5;
 
         public static final double kAlgaeAngleSpeed = 0.2;
